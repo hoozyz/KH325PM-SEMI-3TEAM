@@ -1,14 +1,14 @@
 package vo;
 
 public class HallVO {
-	private String hall_id;
-	private String fcltynm;
-	private int seatscale;
-	private String telno;
-	private String relateurl;
-	private String adres;
-	private String la;
-	private String lo;
+	private String hall_id;			// 공연시설ID
+	private String fcltynm;			// 공연시설명
+	private int seatscale;			// 객석수
+	private String telno;			// 전화번호
+	private String relateurl;		// 홈페이지
+	private String adres;			// 주소
+	private String la;				// 위도
+	private String lo;				// 경도
 
 	public HallVO() {
 		super();

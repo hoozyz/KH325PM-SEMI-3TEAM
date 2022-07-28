@@ -1,18 +1,18 @@
 package vo;
 
 public class RankVO {
-	private String show_id;
-	private String thea_id;
-	private String area;
-	private String prfdtcnt;
-	private String prfpd;
-	private String cate;
-	private String prfplcnm;
-	private String prfnm;
-	private int rnum;
-	private int seatcnt;
-	private String poster;
-	private String date_range;
+	private String show_id;			// 공연ID
+	private String thea_id;			// 공연시설ID
+	private String area;			// 지역
+	private String prfdtcnt;		// 상연횟수
+	private String prfpd;			// 공연기간
+	private String cate;			// 장르
+	private String prfplcnm;		// 공연장
+	private String prfnm;			// 공연명
+	private int rnum;				// 순위
+	private int seatcnt;			// 좌석수
+	private String poster;			// 포스터
+	private String date_range;		// 순위기간
 	private String date;
 
 	public RankVO() {

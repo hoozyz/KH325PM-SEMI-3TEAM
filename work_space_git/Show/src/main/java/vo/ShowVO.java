@@ -1,22 +1,22 @@
 package vo;
 
 public class ShowVO {
-	private String show_id;
-	private String thea_id;
-	private String prfnm;
-	private String prfpdfrom;
-	private String prfpdto;
-	private String genrenm;
-	private String fcltynm;
-	private String poster;
-	private String prfcast;
-	private String prfruntime;
-	private String prfage;
-	private String entrpsnm;
-	private String pcseguidance;
-	private String dtguidance;
-	private String awards;
-	private String show_star;
+	private String show_id;			// 공연ID
+	private String thea_id;			// 공연시설ID
+	private String prfnm;			// 공연명
+	private String prfpdfrom;		// 공연시작일
+	private String prfpdto;			// 공연종료일
+	private String genrenm;			// 공연 장르
+	private String fcltynm;			// 공연시설명
+	private String poster;			// 포스터
+	private String prfcast;			// 출연진
+	private String prfruntime;		// 런타임
+	private String prfage;			// 연령
+	private String entrpsnm;		// 제작사
+	private String pcseguidance;	// 가격
+	private String dtguidance;		// 공연시간
+	private String awards;			// 수상작
+	private String show_star;		// 별점
 
 	public ShowVO() {
 		super();
