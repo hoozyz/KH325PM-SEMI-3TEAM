@@ -106,7 +106,7 @@ public class UserDAO {
 	}
 
 	// 유저 삭제
-	public int updateStatus(Connection conn, String userId) {
+	public int deleteUser(Connection conn, String userId) {
 		PreparedStatement pstmt = null;
 		String query = "DELETE FROM TBL_USER WHERE \"user_id\"=?";
 		int result = 0;
