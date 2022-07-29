@@ -3,12 +3,12 @@ package show.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import vo.ShowVO;
+import vo.Show;
 
 public class ShowDAO {
 	String query;
 	
-	public int insert(Connection con, ShowVO show) {
+	public int insert(Connection con, Show show) {
 
 		try {
 			query = "INSERT INTO TBL_SHOW VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";

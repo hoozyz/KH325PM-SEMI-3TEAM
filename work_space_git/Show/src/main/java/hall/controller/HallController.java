@@ -4,7 +4,7 @@ import java.util.List;
 
 import api.ApiManager;
 import hall.service.HallService;
-import vo.HallVO;
+import vo.Hall;
 
 public class HallController {
 	ApiManager api = new ApiManager();
@@ -12,9 +12,9 @@ public class HallController {
 	
 	
 	public void initShow() {
-		List<HallVO> list = api.hallApi();
+		List<Hall> list = api.hallApi();
 	
-		for(HallVO hall : list) {
+		for(Hall hall : list) {
 			hs.insert(hall);
 		}
 	}

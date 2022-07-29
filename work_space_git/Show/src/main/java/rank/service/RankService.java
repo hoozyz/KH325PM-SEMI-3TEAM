@@ -1,19 +1,17 @@
 package rank.service;
 
-import static common.JDBCTemplate.commit;
-import static common.JDBCTemplate.connect;
-import static common.JDBCTemplate.rollback;
+import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
 
 import rank.dao.RankDAO;
-import vo.RankVO;
+import vo.Rank;
 
 public class RankService {
 	RankDAO dao = new RankDAO();
-	private Connection con = connect();
+	private Connection con = getConnection();
 	
-	public int insertRank(RankVO rank) {
+	public int insertRank(Rank rank) {
 		int result = dao.insertRank(con, rank);
 		if(result > 0) {
 			commit(con);
@@ -23,7 +21,7 @@ public class RankService {
 		return result;
 	}
 	
-	public int insertGenreRank(RankVO rank) {
+	public int insertGenreRank(Rank rank) {
 		int result = dao.insertGenreRank(con, rank);
 		if(result > 0) {
 			commit(con);

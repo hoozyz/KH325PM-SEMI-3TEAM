@@ -3,12 +3,12 @@ package hall.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import vo.HallVO;
+import vo.Hall;
 
 public class HallDAO {
 	String query;
 	
-	public int insert(Connection con, HallVO hall) {
+	public int insert(Connection con, Hall hall) {
 
 		try {
 			query = "INSERT INTO TBL_HALL VALUES(?, ?, ?, ?, ?, ?, ?, ?)";

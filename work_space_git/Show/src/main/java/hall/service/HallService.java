@@ -5,13 +5,13 @@ import static common.JDBCTemplate.*;
 import java.sql.Connection;
 
 import hall.dao.HallDAO;
-import vo.HallVO;
+import vo.Hall;
 
 public class HallService {
 	HallDAO dao = new HallDAO();
-	private Connection con = connect();
+	private Connection con = getConnection();
 	
-	public int insert(HallVO hall) {
+	public int insert(Hall hall) {
 		int result = dao.insert(con, hall);
 		if(result > 0) {
 			commit(con);

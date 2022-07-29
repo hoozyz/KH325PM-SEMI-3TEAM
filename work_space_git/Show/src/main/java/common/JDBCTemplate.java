@@ -22,7 +22,7 @@ public class JDBCTemplate {
 		}
 	}
 
-	public static Connection connect() {
+	public static Connection getConnection() {
 		try {
 			con = DriverManager.getConnection(url, user, password);
 			con.setAutoCommit(false);

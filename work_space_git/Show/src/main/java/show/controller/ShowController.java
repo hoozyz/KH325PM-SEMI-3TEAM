@@ -4,7 +4,7 @@ import java.util.List;
 
 import api.ApiManager;
 import show.service.ShowService;
-import vo.ShowVO;
+import vo.Show;
 
 public class ShowController {
 	ApiManager api = new ApiManager();
@@ -12,11 +12,11 @@ public class ShowController {
 	
 	
 	public void initShow() {
-		String startDate = "20210601";
+		String startDate = "20170101";
 		String endDate = "20220701";
-		List<ShowVO> list = api.showApi(startDate, endDate);
+		List<Show> list = api.showApi(startDate, endDate);
 	
-		for(ShowVO show : list) {
+		for(Show show : list) {
 			ss.insert(show);
 		}
 	}

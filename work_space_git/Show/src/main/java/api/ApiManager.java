@@ -14,14 +14,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import vo.HallVO;
-import vo.RankVO;
-import vo.ShowVO;
+import vo.Hall;
+import vo.Rank;
+import vo.Show;
 
 public class ApiManager {
 	
-	public List<ShowVO> showApi(String startDate, String endDate) {
-		List<ShowVO> list = new ArrayList<>();
+	public List<Show> showApi(String startDate, String endDate) {
+		List<Show> list = new ArrayList<>();
 		try {
 			int page = 1;
 			while (true) {
@@ -92,7 +92,7 @@ public class ApiManager {
 									}
 								}
 								
-								ShowVO show = new ShowVO(show_id, thea_id, prfnm, prfpdfrom, prfpdto, genrenm,
+								Show show = new Show(show_id, thea_id, prfnm, prfpdfrom, prfpdto, genrenm,
 										fcltynm, poster, prfcast, prfruntime, prfage, entrpsnm, pcseguidance,
 										dtguidance, awards,"");
 								
@@ -102,7 +102,7 @@ public class ApiManager {
 					}
 				}
 				page++;
-				if (page > 4) {
+				if (page > 10) {
 					System.out.println("파싱 성공!!");
 					break;
 				}
@@ -115,8 +115,8 @@ public class ApiManager {
 		return list;
 	}
 	
-	public List<HallVO> hallApi() {
-		List<HallVO> list = new ArrayList<>();
+	public List<Hall> hallApi() {
+		List<Hall> list = new ArrayList<>();
 		try {
 			int page = 1;
 			while (true) {
@@ -156,7 +156,7 @@ public class ApiManager {
 								String la          =    getTagValue("la", eElement2);
 								String lo          =    getTagValue("lo", eElement2);
 								
-								HallVO hall = new HallVO(hall_id, fcltynm, seatscale, telno, relateurl, adres, la, lo);
+								Hall hall = new Hall(hall_id, fcltynm, seatscale, telno, relateurl, adres, la, lo);
 
 								list.add(hall);
 							}
@@ -177,8 +177,8 @@ public class ApiManager {
 		return list;
 	}
 
-	public List<RankVO> rankApi(String date) {
-		List<RankVO> list = new ArrayList<>();
+	public List<Rank> rankApi(String date) { // 전체 랭킹 탑10 파싱
+		List<Rank> list = new ArrayList<>();
 		List<String> rangeList = new ArrayList<>();
 		
 		rangeList.add("day");
@@ -227,7 +227,7 @@ public class ApiManager {
 								Element eElement2 = (Element) node2;
 								String thea_id	=  getTagValue("mt10id", eElement2);
 								
-								RankVO rankVO = new RankVO(show_id, thea_id, area, prfdtcnt, prfpd, 
+								Rank rankVO = new Rank(show_id, thea_id, area, prfdtcnt, prfpd, 
 										cate, prfplcnm, prfnm, rnum, seatcnt, poster, date_range, date);
 								
 								list.add(rankVO);
@@ -245,8 +245,8 @@ public class ApiManager {
 		return list;
 	}
 	
-	public List<RankVO> rankGenreApi(String date) { // 장르별 탑10 파싱
-		List<RankVO> list = new ArrayList<>();
+	public List<Rank> rankGenreApi(String date) { // 장르별 탑10 파싱
+		List<Rank> list = new ArrayList<>();
 		List<String> genreList = new ArrayList<>(); 
 		List<String> rangeList = new ArrayList<>();
 		
@@ -312,7 +312,7 @@ public class ApiManager {
 									Element eElement2 = (Element) node2;
 									String thea_id	=  getTagValue("mt10id", eElement2);
 									
-									RankVO rankVO = new RankVO(show_id, thea_id, area, prfdtcnt, prfpd, 
+									Rank rankVO = new Rank(show_id, thea_id, area, prfdtcnt, prfpd, 
 											cate, prfplcnm, prfnm, rnum, seatcnt, poster, date_range, date);
 									
 									list.add(rankVO);

@@ -3,12 +3,12 @@ package rank.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import vo.RankVO;
+import vo.Rank;
 
 public class RankDAO {
 	String query;
 	
-	public int insertRank(Connection con, RankVO rank) {
+	public int insertRank(Connection con, Rank rank) {
 
 		try {
 			query = "INSERT INTO TBL_RANK VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -39,7 +39,7 @@ public class RankDAO {
 		return -1;
 	}
 	
-	public int insertGenreRank(Connection con, RankVO rank) {
+	public int insertGenreRank(Connection con, Rank rank) {
 
 		try {
 			query = "INSERT INTO TBL_GENRERANK VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
