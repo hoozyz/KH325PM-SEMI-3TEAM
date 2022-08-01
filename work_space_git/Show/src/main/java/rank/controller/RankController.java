@@ -13,7 +13,7 @@ public class RankController {
 	
 	public void initShow() { 
 		// 전체 랭킹 10위 파싱
-		String date = "20220726";
+		String date = "20220731";
 		List<Rank> listRank = api.rankApi(date);
 	
 		for(Rank rank : listRank) {

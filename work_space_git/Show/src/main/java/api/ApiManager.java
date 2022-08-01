@@ -102,7 +102,7 @@ public class ApiManager {
 					}
 				}
 				page++;
-				if (page > 10) {
+				if (page > 4) {
 					System.out.println("파싱 성공!!");
 					break;
 				}
@@ -273,10 +273,16 @@ public class ApiManager {
 					DocumentBuilder dBuilder1 = dbFactoty1.newDocumentBuilder();
 					Document doc1 = dBuilder1.parse(url);
 					
+					int count = 10;
+					
 					// boxof 태그안에만
 					NodeList nList1 = doc1.getElementsByTagName("boxof");
+					
+					if(nList1.getLength() < 10) {
+						count = nList1.getLength();
+					}
 			
-					for (int k = 0; k < 10; k++) { // 상위 10개만
+					for (int k = 0; k < count; k++) { // 상위 10개만
 						Node node1 = nList1.item(k);
 						if (node1.getNodeType() == Node.ELEMENT_NODE) {
 							Element eElement1 = (Element) node1;

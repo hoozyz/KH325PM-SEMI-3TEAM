@@ -1,0 +1,84 @@
+#header_tbl {
+    background: #f0f0f0;
+    color: #767676;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+thead {
+    vertical-align: middle;
+    border-color: inherit;
+    background: #f0f0f0;
+    color: #767676;
+    text-align: center;
+}
+
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+    border-top-color: inherit;
+    border-right-color: inherit;
+    border-bottom-color: inherit;
+    border-left-color: inherit;
+}
+
+.basic_tbl {
+    border-bottom: 1px solid #c7c7c7;
+}
+
+.rank_tbl {
+    margin-top: 15px;
+}
+
+th,
+td {
+    vertical-align: middle;
+}
+
+btn {
+    justify-items: center
+}
+
+.atag {
+    text-align: center;
+}
+
+.rankNumber {
+    text-align: center;
+    font-size: 50px;
+}
+
+.btn_lst {
+    bottom: 0;
+}
+
+.detailTopMid {
+    float: left;
+    font-size: 25px
+}
+
+.detailTopMid a {
+    text-decoration: none;
+}
+
+.btn_lst {
+    float: right;
+}
+
+.btn_lst a {
+    text-decoration: none;
+    color: gray;
+}
+
+.btn_lst a.on,
+.fi-chevron-down {
+    color: #fd5631;
+}
+
+.rankTop {
+    height: 30px;
+}

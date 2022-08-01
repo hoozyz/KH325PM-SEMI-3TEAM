@@ -64,7 +64,7 @@
     --bs-dark: #1f1b2d;
     --bs-primary-rgb: 253, 86, 49;
     --bs-accent-rgb: 93, 60, 242;
-    --bs-secondary-rgb: 245, 244, 248;
+    --bs-secondary-rgb: 84, 82, 86;
     --bs-success-rgb: 7, 201, 139;
     --bs-info-rgb: 60, 118, 242;
     --bs-warning-rgb: 253, 188, 49;
@@ -279,8 +279,7 @@ sup {
 }
 
 a {
-    color: #fd5631;
-    text-decoration: underline
+    text-decoration: none;
 }
 
 a:hover {
@@ -8748,7 +8747,6 @@ fieldset:disabled .btn {
 
 .bg-secondary {
     --bs-bg-opacity: 1;
-    background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important
 }
 
 .bg-success {
@@ -12739,14 +12737,6 @@ button:focus {
     }
 }
 
-@font-face {
-    font-family: "finder-icons";
-    src: url("../fonts/finder-icons.ttf?7648j3") format("truetype"), url("../fonts/finder-icons.woff?7648j3") format("woff"), url("../fonts/finder-icons.svg?7648j3#finder-icons") format("svg");
-    font-weight: normal;
-    font-style: normal;
-    font-display: block
-}
-
 [class^=fi-],
 [class*=" fi-"] {
     display: inline-block;
@@ -16615,6 +16605,10 @@ a.card {
     text-decoration: none
 }
 
+a.card-rank {
+    text-decoration: none;
+}
+
 .card[data-bs-toggle=collapse] {
     transition: border-color .2s ease-in-out, background-color .2s ease-in-out, box-shadow .2s ease-in-out;
     cursor: pointer
@@ -17805,10 +17799,7 @@ h6 .dropdown-toggle::after,
 
 @media(min-width: 768px) {
     .tns-center .tns-inner {
-        margin: 0 30% 0 25% !important
-    }
-    .tns-center .tns-inner1 {
-        margin: 0 30% 0 25% !important
+        margin: 0 15% 0 16.5% !important
     }
     .tns-center .tns-item {
         transition: opacity .15s ease-in-out;

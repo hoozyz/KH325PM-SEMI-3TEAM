@@ -10,7 +10,7 @@
 	    	alert('${msg}');
 	    </script>
 <%} %>
-	
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,20 +28,33 @@
     <meta name="theme-color" content="#ffffff">
     <!-- Page loading styles-->
     <style>
-        .page-loading {
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
+    	/* 아이콘 */
+    	@font-face {
+    	font-family: "finder-icons";
+    	src: url("<%=path%>/resources/fonts/finder-icons.ttf?7648j3") format("truetype"), url("<%=path%>/resources/fonts/finder-icons.woff?7648j3") format("woff"), url("<%=path%>/resources/fonts/finder-icons.svg?7648j3#finder-icons") format("svg");
+    	font-weight: normal;
+    	font-style: normal;
+    	font-display: block
+		}
+    
+    	.swiper-container .img-container a>.shadow1,
+        .swiper-container .img-container a>.shadow2,
+        .swiper-container .img-container a>.shadow3,
+        .swiper-container .img-container a>.shadow4,
+        .swiper-container .img-container a>.shadow5,
+        .swiper-container .img-container a>.shadow6,
+        .swiper-container .img-container a>.shadow7,
+        .swiper-container .img-container a>.shadow8,
+        .swiper-container .img-container a>.shadow9,
+        .swiper-container .img-container a>.shadow10 {
+            text-align: center;
+            position: absolute;
+            left: 0px;
             width: 100%;
             height: 100%;
-            -webkit-transition: all .4s .2s ease-in-out;
-            transition: all .4s .2s ease-in-out;
-            background-color: #fff;
-            opacity: 0;
-            visibility: hidden;
-            z-index: 9999;
+            background: url(resources/images/shadow.png) center;
+            transition: 0.2s all ease-in-out;
+            border-radius: 5%;
         }
         
         .page-loading.active {
@@ -100,6 +113,7 @@
                 transform: rotate(360deg);
             }
         }
+        
     </style>
     <!-- Page loading scripts-->
     <script>
@@ -113,18 +127,51 @@
             };
         })();
     </script>
+    <!-- 제이쿼리 -->
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    
+    <!-- swiper -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="<%=path %>/resources/css/swiper.css" id="theme-stylesheet">
+    
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" media="screen" href="<%=path %>/resources/css/theme.min.css">
+    
+    <link rel="stylesheet" href="<%=path %>/resources/css/directory/style.default.css" id="theme-stylesheet">
 
     <!-- Google fonts - Poppins-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700">
 
     <!-- Vendor Styles-->
+    
+    <meta name="description" content="Finder - Directory &amp; Listings Bootstrap Template">
+    <meta name="keywords" content="bootstrap, business, directory, listings, e-commerce, car dealer, city guide, real estate, job board, user account, multipurpose, ui kit, html5, css3, javascript, gallery, slider, touch">
+    <meta name="author" content="Createx Studio">
+
     <link rel="stylesheet" media="screen" href="<%=path %>/resources/css/simplebar.min.css" />
     <link rel="stylesheet" media="screen" href="<%=path %>/resources/css/tiny-slider.css" />
     <link rel="stylesheet" media="screen" href="<%=path %>/resources/css/flatpickr.min.css" />
+    <!-- Vendor Styles-->
+    <link rel="stylesheet" media="screen" href="<%=path %>/resources/vendor/prismjs/themes/prism.css" />
+    <link rel="stylesheet" media="screen" href="<%=path %>/resources/vendor/prismjs/plugins/toolbar/prism-toolbar.css" />
+    <link rel="stylesheet" media="screen" href="<%=path %>/resources/vendor/prismjs/plugins/line-numbers/prism-line-numbers.css" />
+    <link rel="stylesheet" media="screen" href="<%=path %>/resources/vendor/nouislider/dist/nouislider.min.css" />
 
-
+    
+    <!-- Vendor scripts: js libraries and plugins-->
+    <script src="<%=path %>/resources/vendor/prismjs/components/prism-core.min.js"></script>
+    <script src="<%=path %>/resources/vendor/prismjs/components/prism-markup.min.js"></script>
+    <script src="<%=path %>/resources/vendor/prismjs/components/prism-clike.min.js"></script>
+    <script src="<%=path %>/resources/vendor/prismjs/components/prism-javascript.min.js"></script>
+    <script src="<%=path %>/resources/vendor/prismjs/components/prism-pug.min.js"></script>
+    <script src="<%=path %>/resources/vendor/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+    <script src="<%=path %>/resources/vendor/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+    <script src="<%=path %>/resources/vendor/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="<%=path %>/resources/vendor/nouislider/dist/nouislider.min.js"></script>
+    <!-- Vendor scripts: js libraries and plugins (calendar)-->
+    <script src="<%=path %>/resources/vendor/flatpickr/dist/plugins/rangePlugin.js"></script>
+    
 
     <!-- @@@@@@@@@@@@@@@헤더부분@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 
@@ -160,13 +207,29 @@
             font-weight: 800;
         }
     </style>
+    
+    <!-- @@@ 수정본 스타일 @@@-->
+    <style>
+        h1 {
+            color: #D9E2F2;
+        }
+        
+        .per {
+            text-decoration-line: none;
+            color: #201627;
+            font-family: 'NanumSquareRound', sans-serif;
+            font-size: 12pt;
+        }
+        .text-info1 {
+            color: #DBAB34;
+        }
+    </style>
 	
-	<script src="<%=path%>/resources/js/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/resources/js/simplebar.min.js"></script>
     <script type="text/javascript" src="<%=path %>/resources/js/smooth-scroll.polyfills.min.js"></script>
     <script type="text/javascript" src="<%=path %>/resources/js/tiny-slider.js"></script>
     <script type="text/javascript" src="<%=path %>/resources/js/flatpickr.min.js"></script>
-
+    
 </head>
 <!-- Body-->
 
@@ -286,7 +349,7 @@
         <!-- Navbar-->
         <header class="navbar navbar-expand-lg navbar-light bg-light fixed-top" data-scroll-header>
             <div class="container">
-                <a class="navbar-brand me-3 me-xl-4" href="<%=path %>/"><img class="d-block" src="" width="120" alt="SCENE"></a>
+                <a class="navbar-brand me-3 me-xl-4" href="<%=path %>/showHome.jsp"><img class="d-block" src="<%=path %>/resources/img/logo/logo-dark.svg" width="120" alt="SCENE"></a>
                 <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 				<% if (loginUser == null) { %>
 				<!-- 로그인 아닐 때 -->
@@ -305,25 +368,25 @@
                         <!-- Menu items-->
                         <li class="nav-item dropdown px-3 "><a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="NSR">공연</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="city-guide-home-v1.html">연극</a></li>
-                                <li><a class="dropdown-item" href="city-guide-home-v2.html">뮤지컬</a></li>
-                                <li><a class="dropdown-item" href="city-guide-home-v2.html">무용</a></li>
-                                <li><a class="dropdown-item" href="city-guide-home-v2.html">복합</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/showSearch?category=연극&rad_date=1개월">연극</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/showSearch?category=뮤지컬&rad_date=1개월">뮤지컬</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/showSearch?category=무용&rad_date=1개월">무용</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/showSearch?category=복합&rad_date=1개월">복합</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown pe-1"><a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="NSR">음악</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="city-guide-catalog.html">클래식</a></li>
-                                <li><a class="dropdown-item" href="city-guide-single.html">국악</a></li>
-                                <li><a class="dropdown-item" href="city-guide-single.html">오페라</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/musicSearch?category=클래식&rad_date=1개월">클래식</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/musicSearch?category=국악&rad_date=1개월">국악</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/musicSearch?category=오페라&rad_date=1개월">오페라</a></li>
                             </ul>
                         </li>
-                        <a class="nav-item pe-3"><a class="nav-link" href="#" role="button" aria-expanded="false" id="NSR">공연장</a>
-                        <a class="nav-item pe-3"><a class="nav-link" href="#" role="button" aria-expanded="false" id="NSR">랭킹</a>
+                        <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/hall" role="button" aria-expanded="false" id="NSR">공연장</a></a>
+                        <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/rank" role="button" aria-expanded="false" id="NSR">랭킹</a></a>
                         <li class="nav-item dropdown ps-3"><a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="NSR">게시판</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="city-guide-about.html">소식</a></li>
-                                <li><a class="dropdown-item" href="city-guide-contacts.html">자유</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/news">소식</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/board">자유</a></li>
                             </ul>
                         </li>
                         <li class="nav-item d-lg-none"><a class="nav-link" href="#signin-modal" data-bs-toggle="modal"><i class="fi-user me-2"></i>로그인</a></li>
@@ -333,10 +396,4 @@
         </header>
         <!-- @@@@@@@@헤더끝@@@@@@@@@@@@@@@@@@@ -->
 
-		<script type="text/javascript" src="<%=path%>/resources/js/bootstrap.bundle.min.js"></script>
-		<script type="text/javascript" src="<%=path%>/resources/js/simplebar.min.js"></script>
-		<script type="text/javascript" src="<%=path%>/resources/js/smooth-scroll.polyfills.min.js"></script>
-		<script type="text/javascript" src="<%=path%>/resources/js/tiny-slider.js"></script>
-		<script type="text/javascript" src="<%=path%>/resources/js/flatpickr.min.js"></script>
-		<script type="text/javascript" src="<%=path%>/resources/js/theme.min.js"></script>
 	</main>

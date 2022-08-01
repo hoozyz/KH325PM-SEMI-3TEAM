@@ -30,7 +30,7 @@ public class UserDeleteServlet extends HttpServlet {
 			User loginUser = (User) session.getAttribute("loginUser");
 			if(loginUser == null) {
 				req.setAttribute("msg", "잘못된 접근입니다.");
-				req.getRequestDispatcher("/").forward(req, resp);
+				req.getRequestDispatcher("/showHome.jsp").forward(req, resp);
 				return;
 			}
 			

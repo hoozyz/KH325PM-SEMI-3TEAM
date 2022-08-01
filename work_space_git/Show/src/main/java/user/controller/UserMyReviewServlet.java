@@ -29,7 +29,7 @@ public class UserMyReviewServlet extends HttpServlet {
 		System.out.println(userId);
 
 		// 나의 리뷰목록 가져오기
-		List<Review> revList = service.findReviewById(userId);
+		List<Review> revList = service.findReviewByUserId(userId);
 		
 		if (revList != null) {
 			String msg = (String) req.getAttribute("msg");

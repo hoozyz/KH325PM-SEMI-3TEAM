@@ -11,8 +11,8 @@ import java.util.List;
 import vo.Review;
 
 public class ReviewDao {
-	// 리뷰 목록 조회
-	public List<Review> findReviewById(Connection conn, String id) {
+	// 나의 리뷰 목록 조회
+	public List<Review> findReviewByUserId(Connection conn, String id) {
 		List<Review> revList = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -23,6 +23,47 @@ public class ReviewDao {
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			
+			if (rs.next() == false) {
+				return null;
+			}
+
+			while (rs.next()) {
+				Review rev = new Review();
+				rev.setRev_no(rs.getString("rev_no"));
+				rev.setShow_id(rs.getString("show_id"));
+				rev.setUser_id(rs.getString("user_id"));
+				rev.setRev_content(rs.getString("rev_content"));
+				rev.setPrfnm(rs.getString("prfnm"));
+				rev.setPrfpdfrom(rs.getString("prfpdfrom"));
+				rev.setPrfpdto(rs.getString("prfpdto"));
+				rev.setRev_star(rs.getString("rev_star"));
+				rev.setRev_like(rs.getInt("rev_like"));
+				rev.setRev_date(rs.getString("rev_date"));
+
+				revList.add(rev);
+			}
+			return revList;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return null;
+	}
+	
+	// 나의 리뷰 목록 조회
+	public List<Review> findReviewByShowId(Connection conn, String id) {
+		List<Review> revList = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "SELECT * FROM TBL_REVIEW WHERE show_id = ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+
 			if (rs.next() == false) {
 				return null;
 			}

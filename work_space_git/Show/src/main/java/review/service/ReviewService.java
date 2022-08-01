@@ -14,9 +14,16 @@ import vo.Review;
 public class ReviewService {
 	ReviewDao dao = new ReviewDao();
 	
-	public List<Review> findReviewById(String id) {
+	public List<Review> findReviewByUserId(String id) {
 		Connection conn = getConnection();
-		List<Review> revList = dao.findReviewById(conn, id);
+		List<Review> revList = dao.findReviewByUserId(conn, id);
+		
+		return revList;
+	}
+	
+	public List<Review> findReviewByShowId(String id) {
+		Connection conn = getConnection();
+		List<Review> revList = dao.findReviewByShowId(conn, id);
 		
 		return revList;
 	}

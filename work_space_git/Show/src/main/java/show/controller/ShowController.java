@@ -11,9 +11,9 @@ public class ShowController {
 	ShowService ss = new ShowService();
 	
 	
-	public void initShow() {
-		String startDate = "20170101";
-		String endDate = "20220701";
+	public void initShow() { // 2000개
+		String startDate = "20200101";
+		String endDate = "20220930";
 		List<Show> list = api.showApi(startDate, endDate);
 	
 		for(Show show : list) {

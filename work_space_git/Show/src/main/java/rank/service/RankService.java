@@ -1,8 +1,11 @@
 package rank.service;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.commit;
+import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import rank.dao.RankDAO;
 import vo.Rank;
@@ -29,5 +32,15 @@ public class RankService {
 			rollback(con);
 		}
 		return result;
+	}
+	
+	public List<Rank> findRankByCategory(String category, String dateRange, String date) {
+		List<Rank> rankList = dao.findRankByCategory(con, category, dateRange, date);
+		
+		if(rankList != null) {
+			return rankList;
+		}
+		
+		return null;
 	}
 }

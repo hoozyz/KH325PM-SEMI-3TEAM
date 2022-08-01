@@ -1,9 +1,16 @@
 package rank.dao;
 
+import static common.JDBCTemplate.close;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
+import java.util.List;
 
 import vo.Rank;
+import vo.Show;
 
 public class RankDAO {
 	String query;
@@ -68,5 +75,51 @@ public class RankDAO {
 			 e.printStackTrace();
 		}
 		return -1;
+	}
+	
+	public List<Rank> findRankByCategory(Connection conn, String category, String dateRange, String endDate) {
+		List<Rank> rankList = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query;
+
+		try {
+			query = "SELECT * FROM \r\n"
+					+ "(SELECT poster, prfnm, prfplcnm, prfpd, show_id, cate, date_range, genrerank_date FROM TBL_GENRERANK \r\n"
+					+ "WHERE cate=? AND date_range=?) \r\n"
+					+ "WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 5";
+
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, category);
+			pstmt.setString(2, dateRange);
+			pstmt.setString(3, endDate);
+			rs = pstmt.executeQuery();
+
+			if (rs.next() == false) {
+				return null;
+			}
+
+			while (rs.next()) {
+				Rank rank = new Rank();
+				rank.setPoster(rs.getString("poster"));
+				rank.setPrfpd(rs.getString("prfpd"));
+				rank.setPrfplcnm(rs.getString("prfplcnm"));
+				rank.setPrfnm(rs.getString("prfnm"));
+				rank.setShow_id(rs.getString("show_id"));
+				rank.setCate(rs.getString("cate"));
+				rank.setDate(endDate);
+				rank.setDate_range(dateRange);
+
+				rankList.add(rank);
+			}
+			return rankList;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+
+		return null;
 	}
 }
