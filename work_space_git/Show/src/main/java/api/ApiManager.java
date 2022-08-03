@@ -92,7 +92,7 @@ public class ApiManager {
 	public List<Show> showApi(String startDate, String endDate) {
 		List<Show> list = new ArrayList<>();
 		try {
-			int page = 10;
+			int page = 1;
 			while (true) {
 				String url1 = "http://kopis.or.kr/openApi/restful/pblprfr?service=b3e488556abe4df29d325f391436027c&rows=500&stdate="
 				+ startDate + "&eddate=" + endDate + "&cpage=" + page;
@@ -171,7 +171,7 @@ public class ApiManager {
 					}
 				}
 				page++;
-				if (page > 13) {
+				if (page > 4) {
 					System.out.println("파싱 성공!!");
 					break;
 				}
@@ -336,7 +336,7 @@ public class ApiManager {
 				for (int j = 0; j < rangeList.size(); j++) {
 					String url = "http://kopis.or.kr/openApi/restful/boxoffice?"
 							+ "service=b3e488556abe4df29d325f391436027c&ststype=" + rangeList.get(j) + "&"
-							+ "date=" + date + "&shcate=" + genreList.get(i);
+							+ "date=" + date + "&catecode=" + genreList.get(i);
 					
 					DocumentBuilderFactory dbFactoty1 = DocumentBuilderFactory.newInstance();
 					DocumentBuilder dBuilder1 = dbFactoty1.newDocumentBuilder();

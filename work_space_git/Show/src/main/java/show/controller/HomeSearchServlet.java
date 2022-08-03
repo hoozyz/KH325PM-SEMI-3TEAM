@@ -21,6 +21,8 @@ public class HomeSearchServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String keyword = req.getParameter("keyword");
 		String category = req.getParameter("category");
+		System.out.println(keyword);
+		System.out.println(category);
 		
 		if(category == null || keyword == null) {
 			req.setAttribute("msg", "항목을 다 작성해주세요.");
@@ -31,13 +33,13 @@ public class HomeSearchServlet extends HttpServlet{
 		if (category.equals("공연")) {
 			req.setAttribute("keyword", keyword);
 			req.setAttribute("category", category);
-			req.getRequestDispatcher("/views/show/showMain.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/show/showSearch.jsp").forward(req, resp);
 			return;
 		}
 		if (category.equals("음악")) {
 			req.setAttribute("keyword", keyword);
 			req.setAttribute("category", category);
-			req.getRequestDispatcher("/views/show/musicMain.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/show/musicSearch.jsp").forward(req, resp);
 			return;
 		}
 		if (category.equals("기타")) {

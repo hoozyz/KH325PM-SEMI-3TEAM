@@ -39,7 +39,7 @@
 
                         <!-- Search form-->
                         <div class="me-lg-n5">
-                            <form class="form-group d-block d-md-flex position-relative rounded-md-pill me-lg-n5" action="<%=path %>/homeSearch" method="GET">
+                            <form class="form-group d-block d-md-flex position-relative rounded-md-pill me-lg-n5" action="<%=path %>/showSearch" method="GET">
                                 <div class="input-group input-group-lg border-end-md"><span class="input-group-text text-muted rounded-pill ps-3"><i class="fi-search"></i></span>
                                     <input class="form-control" name="keyword" type="text" placeholder="무엇을 찾으시나요?">
                                 </div>
@@ -50,7 +50,7 @@
                                         <input type="hidden" name="category">
                                         <ul class="dropdown-menu">
                                             <li><a class="dropdown-item" href="#"><i class="fi-museum fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">공연</span></a></li>
-                                            <li><a class="dropdown-item" href="#"><i class="fi-music  opacity-60 me-2"></i><span class="dropdown-item-label"> 음악</span></a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="fi-music  opacity-60 me-2"></i><span class="dropdown-item-label">음악</span></a></li>
                                             <li><a class="dropdown-item" href="#"><i class="fi-dots-horisontal fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">기타</span></a></li>
                                         </ul>
                                     </div>

@@ -39,6 +39,7 @@
 	} else {
 		rankList = null;
 	}
+	
 %>
     
     
@@ -91,6 +92,42 @@
         </div>
     </section>
     <!--@@@ hero End @@@-->
+    
+    <div class="modal fade" id="ticket-result-modal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered p-2 my-0 mx-auto" style="max-width: 950px;">
+                <div class="modal-content">
+                    <div class="modal-body px-0 py-2 py-sm-0">
+                        <button class="btn-close position-absolute top-0 end-0 mt-3 me-3" type="button" data-bs-dismiss="modal"></button>
+                        <div class="row mx-0 align-items-center">
+                            <div class="col-md-6 border-end-md p-4 p-sm-5">
+                                <h2 class="h3 mb-4 mb-sm-5">Hey there!<br>Welcome back.</h2><img class="d-block mx-auto" src="<%=path %>/resources/etc/signin.svg" width="344" alt="Illustartion">
+                                <div class="mt-4 mt-sm-5">계정이 없으신가요? <a href="#signup-modal" data-bs-toggle="modal" data-bs-dismiss="modal">회원가입</a></div>
+                            </div>
+                            <div class="col-md-6 px-4 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5">
+                                <form class="needs-validation" action="<%=path %>/login" method="POST" novalidate>
+                                    <div class="mb-4">
+                                        <label class="form-label mb-2" for="signin-email">아이디</label>
+                                        <input class="form-control" type="text" name="userId" id="signin-id" placeholder="아이디를 입력해주세요." required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="d-flex align-items-center justify-content-between mb-2">
+                                            <label class="form-label mb-0" for="signin-password">비밀번호</label>
+                                        </div>
+                                        <div class="password-toggle">
+                                            <input class="form-control" type="password" name="userPw" id="signin-password" placeholder="비밀번호를 입력해주세요" required>
+                                            <label class="password-toggle-btn" aria-label="Show/hide password">
+                          <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                        </label>
+                                        </div>
+                                    </div>
+                                    <input class="btn btn-primary btn-lg rounded-pill w-100" type="submit" value="로그인"></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     
     <section class="container py-1 mt-1 mb-1 ">
         <form class="form-group d-block d-md-flex rounded-md-pill" style="width:85%;float:left;">

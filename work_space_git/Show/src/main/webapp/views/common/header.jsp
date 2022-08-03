@@ -270,7 +270,7 @@
                         </label>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary btn-lg rounded-pill w-100" type="submit">로그인</button>
+                                    <input class="btn btn-primary btn-lg rounded-pill w-100" type="submit" value="로그인"></button>
                                 </form>
                             </div>
                         </div>
@@ -349,7 +349,7 @@
         <!-- Navbar-->
         <header class="navbar navbar-expand-lg navbar-light bg-light fixed-top" data-scroll-header>
             <div class="container">
-                <a class="navbar-brand me-3 me-xl-4" href="<%=path %>/showHome.jsp"><img class="d-block" src="<%=path %>/resources/img/logo/logo-dark.svg" width="120" alt="SCENE"></a>
+                <a class="navbar-brand me-3 me-xl-4" href="<%=path %>/showHome.jsp"><img class="d-block" src="<%=path %>/resources/images/pjlogo.JPG" width="120" alt="SCENE"></a>
                 <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 				<% if (loginUser == null) { %>
 				<!-- 로그인 아닐 때 -->
@@ -368,17 +368,17 @@
                         <!-- Menu items-->
                         <li class="nav-item dropdown px-3 "><a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="NSR">공연</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="<%=path%>/showSearch?category=연극&rad_date=1개월">연극</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/showSearch?category=뮤지컬&rad_date=1개월">뮤지컬</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/showSearch?category=무용&rad_date=1개월">무용</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/showSearch?category=복합&rad_date=1개월">복합</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/showMain?category=연극&rad_date=1개월">연극</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/showMain?category=뮤지컬&rad_date=1개월">뮤지컬</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/showMain?category=무용&rad_date=1개월">무용</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/showMain?category=복합&rad_date=1개월">복합</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown pe-1"><a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="NSR">음악</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="<%=path%>/musicSearch?category=클래식&rad_date=1개월">클래식</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/musicSearch?category=국악&rad_date=1개월">국악</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/musicSearch?category=오페라&rad_date=1개월">오페라</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/musicMain?category=클래식&rad_date=1개월">클래식</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/musicMain?category=국악&rad_date=1개월">국악</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/musicMain?category=오페라&rad_date=1개월">오페라</a></li>
                             </ul>
                         </li>
                         <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/hallList" role="button" aria-expanded="false" id="NSR">공연장</a></a>

@@ -11,9 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import rank.service.RankService;
 import vo.Rank;
+import vo.User;
 
 @WebServlet(name = "rankList", urlPatterns = "/rankList")
 public class RankListServlet extends HttpServlet{
@@ -24,6 +26,9 @@ public class RankListServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			HttpSession session = req.getSession();
+			User user = (User) session.getAttribute("loginUser");
+			
 			String category = "";
 			String range = "day";
 			Date today = new Date();
@@ -50,6 +55,7 @@ public class RankListServlet extends HttpServlet{
 				date = AddDate(date, 0, -1);
 				rankList = service.findRankByCategory(category, range , date);
 				
+				req.setAttribute("loginUser", user);
 				req.setAttribute("range", range);
 				req.setAttribute("rankList", rankList);
 				req.setAttribute("today", todayFormat);
@@ -58,6 +64,7 @@ public class RankListServlet extends HttpServlet{
 				return;
 			}
 			
+			req.setAttribute("loginUser", user);
 			req.setAttribute("range", range);
 			req.setAttribute("rankList", rankList);
 			req.setAttribute("today", todayFormat);
