@@ -85,9 +85,9 @@ public class RankDAO {
 
 		try {
 			query = "SELECT * FROM \r\n"
-					+ "(SELECT poster, prfnm, prfplcnm, prfpd, show_id, cate, date_range, genrerank_date FROM TBL_GENRERANK \r\n"
-					+ "WHERE cate=? AND date_range=?) \r\n"
-					+ "WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 5";
+					+ "(SELECT poster, prfnm, prfplcnm, prfpd, show_id, cate, date_range, rnum, genrerank_date FROM TBL_GENRERANK \r\n"
+					+ "WHERE cate=? AND date_range=? AND genrerank_date = ?) \r\n"
+					+ "WHERE rnum BETWEEN 1 AND 10";
 
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, category);

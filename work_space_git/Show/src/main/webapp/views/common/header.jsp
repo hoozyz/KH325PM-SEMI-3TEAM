@@ -128,7 +128,7 @@
         })();
     </script>
     <!-- 제이쿼리 -->
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="<%=path %>/resources/js/jquery-3.6.0.min.js"></script>
     
     <!-- swiper -->
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
@@ -261,7 +261,7 @@
                                     </div>
                                     <div class="mb-4">
                                         <div class="d-flex align-items-center justify-content-between mb-2">
-                                            <label class="form-label mb-0" for="signin-password">비밀번호</label><a class="fs-sm" href="#">비밀번호를 잊으셧나요?</a>
+                                            <label class="form-label mb-0" for="signin-password">비밀번호</label>
                                         </div>
                                         <div class="password-toggle">
                                             <input class="form-control" type="password" name="userPw" id="signin-password" placeholder="비밀번호를 입력해주세요" required>
@@ -381,12 +381,12 @@
                                 <li><a class="dropdown-item" href="<%=path%>/musicSearch?category=오페라&rad_date=1개월">오페라</a></li>
                             </ul>
                         </li>
-                        <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/hall" role="button" aria-expanded="false" id="NSR">공연장</a></a>
-                        <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/rank" role="button" aria-expanded="false" id="NSR">랭킹</a></a>
-                        <li class="nav-item dropdown ps-3"><a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="NSR">게시판</a>
+                        <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/hallList" role="button" aria-expanded="false" id="NSR">공연장</a></a>
+                        <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/rankList" role="button" aria-expanded="false" id="NSR">랭킹</a></a>
+                        <li class="nav-item dropdown ps-3"><a class="nav-link dropdown" href="<%=path %>/board/news" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="NSR">게시판</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="<%=path%>/news">소식</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/board">자유</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/board/list">자유</a></li>
                             </ul>
                         </li>
                         <li class="nav-item d-lg-none"><a class="nav-link" href="#signin-modal" data-bs-toggle="modal"><i class="fi-user me-2"></i>로그인</a></li>

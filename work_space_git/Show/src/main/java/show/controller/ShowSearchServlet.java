@@ -69,8 +69,9 @@ public class ShowSearchServlet extends HttpServlet {
 			}
 			
 			
-			List<Rank> rankList = new ArrayList<>();
+			List<Rank> list = new ArrayList<>();
 			List<Show> showList = new ArrayList<>();
+			List<Rank> rankList = new ArrayList<>();
 
 			if (keyword != null) {
 				showList = showService.findByKeyword(keyword, category, startDate, endDate);
@@ -92,7 +93,11 @@ public class ShowSearchServlet extends HttpServlet {
 				return;
 			} else {
 				showList = showService.findByCategory(category, startDate, endDate);
-				rankList = rankService.findRankByCategory(category, dateRange, AddDate(endDate, 0, -1).replace(".", ""));
+				list = rankService.findRankByCategory(category, dateRange, AddDate(endDate, 0, -1).replace(".", ""));
+				
+				for(int i = 0; i < 5; i++) {
+					rankList.add(list.get(i));
+				}
 				
 				if (showList == null) {
 					req.setAttribute("msg", "검색 결과가 없습니다.");

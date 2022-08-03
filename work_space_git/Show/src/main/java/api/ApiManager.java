@@ -20,10 +20,79 @@ import vo.Show;
 
 public class ApiManager {
 	
+	public Show showIdApi(String id) {
+		try {
+			String url2 = "http://www.kopis.or.kr/openApi/restful/pblprfr/" + id + "?service=b3e488556abe4df29d325f391436027c";
+
+					DocumentBuilderFactory dbFactoty2 = DocumentBuilderFactory.newInstance();
+					DocumentBuilder dBuilder2 = dbFactoty2.newDocumentBuilder();
+					Document doc2 = dBuilder2.parse(url2);
+					
+					NodeList nList2 = doc2.getElementsByTagName("db");
+
+					for (int j = 0; j < nList2.getLength(); j++) {
+						Node node2 = nList2.item(j);
+						if (node2.getNodeType() == Node.ELEMENT_NODE) {
+							Element eElement2 = (Element) node2;
+							String thea_id = getTagValue("mt10id", eElement2);
+							String prfnm = getTagValue("prfnm", eElement2);
+							String prfpdfrom = getTagValue("prfpdfrom", eElement2);
+							String prfpdto = getTagValue("prfpdto", eElement2);
+							String genrenm = getTagValue("genrenm", eElement2);
+							String fcltynm = getTagValue("fcltynm", eElement2);
+							String poster = getTagValue("poster", eElement2);
+							String prfcast = getTagValue("prfcast", eElement2);
+							String prfruntime = getTagValue("prfruntime", eElement2);
+							String prfage = getTagValue("prfage", eElement2);
+							String entrpsnm = getTagValue("entrpsnm", eElement2);
+							String pcseguidance = getTagValue("pcseguidance", eElement2);
+							String dtguidance = "";
+							if (getTagValue("dtguidance", eElement2).length() > 8) {
+								dtguidance = String.valueOf(parsingTime(getTagValue("dtguidance", eElement2)).entrySet());
+							}
+							
+							// 문자열 인코딩
+							String awardName = URLEncoder.encode(prfnm, "utf-8");
+							
+							String url3 = "https://kopis.or.kr/openApi/restful/prfawad?service=b3e488556abe4df29d325f391436027c&cpage=1&rows=5&stdate="
+							+ prfpdfrom.replace(".", "") +"&eddate=" + prfpdto.replace(".", "") + "&shprfnm=" + awardName;
+
+							DocumentBuilderFactory dbFactoty3 = DocumentBuilderFactory.newInstance();
+							DocumentBuilder dBuilder3 = dbFactoty3.newDocumentBuilder();
+							Document doc3 = dBuilder3.parse(url3);
+							
+							NodeList nList3 = doc3.getElementsByTagName("db");
+							
+							String awards = "";
+							for (int k = 0; k < nList3.getLength(); k++) {
+								Node node3 = nList3.item(k);
+								if (node3.getNodeType() == Node.ELEMENT_NODE) {
+									Element eElement3 = (Element) node3;
+									awards = getTagValue("awards", eElement3);
+								}
+							}
+							
+							Show show = new Show(id, thea_id, prfnm, prfpdfrom, prfpdto, genrenm,
+									fcltynm, poster, prfcast, prfruntime, prfage, entrpsnm, pcseguidance,
+									dtguidance, awards,"");
+							
+							if(show != null) {
+								System.out.println("파싱 완료!");
+							}
+							return show;
+						}
+					}
+		} catch (Exception e) {
+		}
+		return null;
+	}
+	
+	
+	
 	public List<Show> showApi(String startDate, String endDate) {
 		List<Show> list = new ArrayList<>();
 		try {
-			int page = 1;
+			int page = 10;
 			while (true) {
 				String url1 = "http://kopis.or.kr/openApi/restful/pblprfr?service=b3e488556abe4df29d325f391436027c&rows=500&stdate="
 				+ startDate + "&eddate=" + endDate + "&cpage=" + page;
@@ -102,7 +171,7 @@ public class ApiManager {
 					}
 				}
 				page++;
-				if (page > 4) {
+				if (page > 13) {
 					System.out.println("파싱 성공!!");
 					break;
 				}
@@ -267,7 +336,7 @@ public class ApiManager {
 				for (int j = 0; j < rangeList.size(); j++) {
 					String url = "http://kopis.or.kr/openApi/restful/boxoffice?"
 							+ "service=b3e488556abe4df29d325f391436027c&ststype=" + rangeList.get(j) + "&"
-							+ "date=" + date + "&catecode=" + genreList.get(i);
+							+ "date=" + date + "&shcate=" + genreList.get(i);
 					
 					DocumentBuilderFactory dbFactoty1 = DocumentBuilderFactory.newInstance();
 					DocumentBuilder dBuilder1 = dbFactoty1.newDocumentBuilder();

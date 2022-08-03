@@ -9,10 +9,10 @@
 <!-- Page content-->
         <!-- Hero-->
         <main>
-       <section class="container-fluid py-5 mt-5 mb-5" style="height:470px; background-image: url(<%=path%>/resources/images/heroBg.png)">
+       <section class="container-fluid py-5 mt-5 mb-5" style="height:470px; background-image: url(resources/images/heroBg.png)">
             <section class="container py-0 mt-0 mb-3">
                 <div class="row align-items-center mt-md-2 ms-5">
-                    <div class="col-lg-7 order-lg-2 mb-lg-0 mb-4 pb-2 pb-lg-0"><img class="d-block mx-auto" src="<%=path %>/resources/images/heroPoster.png" width="450" alt="Hero image"></div>
+                    <div class="col-lg-7 order-lg-2 mb-lg-0 mb-4 pb-2 pb-lg-0"><img class="d-block mx-auto" src="resources/images/heroPoster.png" width="450" alt="Hero image"></div>
                     <div class="col-lg-5 order-lg-1 pe-lg-0">
                         <div style="padding-left : 40px;">
                             <h1 class="display-3 mb-2 me-lg-n5 text-lg-start text-center mb-2" style="font-size: 40pt; font-weight:normal">지금 바로,</h1>

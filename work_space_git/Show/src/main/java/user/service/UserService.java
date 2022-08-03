@@ -37,6 +37,7 @@ public class UserService {
 		Connection conn = getConnection();
 		
 		if(findUserById(user.getUser_id()) == null) {
+			System.out.println("-----------------");
 			result = dao.insertUser(conn, user);
 		} else {
 			result = dao.updateUser(conn, user);

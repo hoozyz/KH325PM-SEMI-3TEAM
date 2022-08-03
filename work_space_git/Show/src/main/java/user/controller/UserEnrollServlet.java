@@ -45,6 +45,7 @@ public class UserEnrollServlet extends HttpServlet{
 			System.out.println("가입 요청 : " + user);
 			
 			int result = service.save(user);
+			System.out.println(result);
 			
 			if(result > 0) {
 				req.setAttribute("msg", "회원가입에 성공 하였습니다!!");

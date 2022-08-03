@@ -173,7 +173,7 @@
             <!--@@ rank 1 End@@-->
 
             <!--@@ rank 2 @@-->
-           <a class="card shadow-sm card-hover border-0" href="<%=path%>/showDetail?showId=<%=rankList.get(1).getShow_id()%>" style="max-width: 306px; float: left; margin-left: 2%; margin-right: 2%;">
+           <a class="card shadow-sm card-hover border-0" href="<%=path%>/showDetail?showId=<%=rankList.get(1).getShow_id()%>" style="width: 306px; float: left; margin-left: 2%; margin-right: 2%;">
                 <div class="card-img-top card-img-hover" style="background-image: url(http://www.kopis.or.kr<%=rankList.get(1).getPoster() %>); text-align: center;"><span class="img-overlay opacity-65"></span><img src="http://www.kopis.or.kr<%=rankList.get(1).getPoster() %>" alt="" style="width:60%;">
                     <div class="content-overlay start-0 top-0 d-flex align-items-center justify-content-center w-100 h-100 p-3">
                         <button type="button" class="btn btn-warning">상세보기</button>
@@ -189,7 +189,7 @@
 
             <!--@@ rank 3 @@-->
             <a class="card shadow-sm card-hover border-0 " href="<%=path%>/showDetail?showId=<%=rankList.get(2).getShow_id()%>" style="max-width: 306px; float: left; margin-right: 2%;">
-                <div class="card-img-top card-img-hover " style="background-image: url(http://www.kopis.or.kr<%=rankList.get(2).getPoster() %>); text-align: center; "><span class="img-overlay opacity-65 "></span><img src="http://www.kopis.or.kr<%=rankList.get(2).getPoster() %>" alt="
+                <div class="card-img-top card-img-hover " style="background-image: url(http://www.kopis.or.kr<%=rankList.get(2).getPoster() %>); height:255px; text-align: center; "><span class="img-overlay opacity-65 "></span><img src="http://www.kopis.or.kr<%=rankList.get(2).getPoster() %>" alt="
                                     " style="width:60%; ">
                     <div class="content-overlay start-0 top-0 d-flex align-items-center justify-content-center w-100 h-100 p-3">
                         <button type="button" class="btn btn-warning">상세보기</button>

@@ -603,28 +603,6 @@ SELECT * FROM
 WHERE NUM BETWEEN 1 AND 10;
 */
 
--- 게시글 검색
-/*
-SELECT *  FROM
-(SELECT ROWNUM NUM, board_no, user_id, title, cont, readcount FROM
-(SELECT * FROM TBL_BOARD 
-WHERE 1 = 1
-AND user_id LIKE ?
-AND title LIKE ?
-AND cont LIKE ?))
-WHERE NUM BETWEEN 1 AND 10;
-*/
-
--- 검색 결과 개수
-/*
-SELECT COUNT(*) FROM TBL_BOARD 
-WHERE 1 = 1
-AND user_id LIKE ?
-AND title LIKE ?
-AND cont LIKE ?;
-*/
-
-
 ----------------- 예매페이지
 -- 가격, 요일 가져오기 -> 요일, 시간, 가격 파싱 
 --SELECT dtguidance, pcseguidance FROM TBL_SHOW WHERE show_id = ?;

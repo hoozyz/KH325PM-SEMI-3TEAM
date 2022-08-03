@@ -10,6 +10,14 @@ public class ShowController {
 	ApiManager api = new ApiManager();
 	ShowService ss = new ShowService();
 	
+	public void showIdParse(String id) {
+		Show show = api.showIdApi(id);
+		
+		if(show != null) {
+			ss.insert(show);
+		}
+	}
+	
 	
 	public void initShow() { // 2000개
 		String startDate = "20200101";
@@ -24,6 +32,7 @@ public class ShowController {
 	public static void main(String[] args) {
 		ShowController sc = new ShowController();
 		
-		sc.initShow();
+//		sc.initShow(); // 전체 파싱
+		sc.showIdParse(""); // 안에 showid 적으면 파싱
 	}
 }
