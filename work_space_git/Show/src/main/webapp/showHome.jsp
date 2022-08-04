@@ -77,7 +77,7 @@
                     <h2 style="font-size: 40px; color: #dbab34; display:inline;">랭킹</h2>
                     <h6 style=" display:inline; margin-left : 10px; ">기간별 인기작품을 만나보세요!</h6>
                 </div> -->
-                <a class="btn btn-link fw-normal ms-sm-3 p-0" href="city-guide-catalog.html" style="margin-top: 15px;">더보기<i class="fi-arrow-long-right ms-1"></i></a>
+                <a class="btn btn-link fw-normal ms-sm-3 p-0" href="<%=path %>/rankList" style="margin-top: 15px;">더보기<i class="fi-arrow-long-right ms-1"></i></a>
             </div>
             <div style="width: 1200px; margin: 0 auto; display:inline-block; height: 35px;">
                 <div style="position: relative; margin-bottom: 0px; display:inline-block; height: 35px;">

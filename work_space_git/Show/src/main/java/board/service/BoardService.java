@@ -58,7 +58,7 @@ public class BoardService {
 			}else {
 				rollback(conn);
 			}
-		}
+		} 
 		
 		close(conn);
 		return board;

@@ -312,17 +312,17 @@
                         <!-- Menu items-->
                         <li class="nav-item dropdown px-3 "><a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="NSR">공연</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="<%=path%>/showSearch?category=연극&rad_date=1개월">연극</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/showSearch?category=뮤지컬&rad_date=1개월">뮤지컬</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/showSearch?category=무용&rad_date=1개월">무용</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/showSearch?category=복합&rad_date=1개월">복합</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/showMain?category=연극&rad_date=1개월">연극</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/showMain?category=뮤지컬&rad_date=1개월">뮤지컬</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/showMain?category=무용&rad_date=1개월">무용</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/showMain?category=복합&rad_date=1개월">복합</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown pe-1"><a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="NSR">음악</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="<%=path%>/musicSearch?category=클래식&rad_date=1개월">클래식</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/musicSearch?category=국악&rad_date=1개월">국악</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/musicSearch?category=오페라&rad_date=1개월">오페라</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/musicMain?category=클래식&rad_date=1개월">클래식</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/musicMain?category=국악&rad_date=1개월">국악</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/musicMain?category=오페라&rad_date=1개월">오페라</a></li>
                             </ul>
                         </li>
                         <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/hallList" role="button" aria-expanded="false" id="NSR">공연장</a></a>

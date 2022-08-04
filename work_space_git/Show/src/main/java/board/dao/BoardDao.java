@@ -19,9 +19,9 @@ public class BoardDao {
 		ResultSet rs = null;
 		List<Board> list = new ArrayList<Board>();
 
-		String query = "SELECT board_no, cont, title, user_id, create_date, modify_date, readcount FROM \r\n"
-				+ "(SELECT board_no, cont, title, user_id, create_date, modify_date, readcount, ROWNUM NUM FROM \r\n"
-				+ "(SELECT board_no, cont,  title, user_id, create_date, modify_date, readcount FROM TBL_BOARD ORDER BY board_no DESC)) WHERE NUM BETWEEN ? and ?";
+		String query = "SELECT board_no, cont, name, title, user_id, create_date, modify_date, readcount FROM \r\n"
+				+ "(SELECT board_no, cont, name, title, user_id, create_date, modify_date, readcount, ROWNUM NUM FROM \r\n"
+				+ "(SELECT board_no, cont, name, title, user_id, create_date, modify_date, readcount FROM TBL_BOARD ORDER BY board_no DESC)) WHERE NUM BETWEEN ? and ?";
 
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -37,8 +37,10 @@ public class BoardDao {
 				board.setReadcount(rs.getInt("readcount"));
 				board.setCont(rs.getString("cont"));
 				board.setModify_date(rs.getString("modify_date"));
+				board.setName(rs.getString("name"));
 				list.add(board);
 			}
+			System.out.println(list.get(0));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -76,14 +78,15 @@ public class BoardDao {
 	// 글쓰기 기능 완성
 	public int insertBoard(Connection conn, Board board) {
 		PreparedStatement pstmt = null;
-		String query = "INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL,?,?,?,DEFAULT,DEFAULT,DEFAULT)";
+		String query = "INSERT INTO TBL_BOARD VALUES(SEQ_BOARD_NO.NEXTVAL,?,?,?,?,DEFAULT,DEFAULT,DEFAULT)";
 		int result = 0;
 
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, board.getUser_id());
-			pstmt.setString(2, board.getTitle());
-			pstmt.setString(3, board.getCont());
+			pstmt.setString(2, board.getName());
+			pstmt.setString(3, board.getTitle());
+			pstmt.setString(4, board.getCont());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -109,6 +112,7 @@ public class BoardDao {
 				board = new Board();
 				board.setBoard_no(rs.getInt("board_no"));
 				board.setTitle(rs.getString("title"));
+				board.setName(rs.getString("name"));
 				board.setUser_id(rs.getString("user_id"));
 				board.setReadcount(rs.getInt("readcount"));
 				board.setCont(rs.getString("cont"));

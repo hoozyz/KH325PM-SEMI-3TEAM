@@ -3,6 +3,7 @@ package vo;
 public class Board {
 	private int board_no;
 	private String user_id;
+	private String name;
 	private String title;
 	private String cont;
 	private int readcount;
@@ -13,11 +14,12 @@ public class Board {
 		super();
 	}
 
-	public Board(int board_no, String user_id, String title, String cont, int readcount, String create_date,
-			String modify_date) {
+	public Board(int board_no, String user_id, String name, String title, String cont, int readcount,
+			String create_date, String modify_date) {
 		super();
 		this.board_no = board_no;
 		this.user_id = user_id;
+		this.name = name;
 		this.title = title;
 		this.cont = cont;
 		this.readcount = readcount;
@@ -27,8 +29,9 @@ public class Board {
 
 	@Override
 	public String toString() {
-		return "Board [board_no=" + board_no + ", user_id=" + user_id + ", title=" + title + ", cont=" + cont
-				+ ", readcount=" + readcount + ", create_date=" + create_date + ", modify_date=" + modify_date + "]";
+		return "Board [board_no=" + board_no + ", user_id=" + user_id + ", name=" + name + ", title=" + title
+				+ ", cont=" + cont + ", readcount=" + readcount + ", create_date=" + create_date + ", modify_date="
+				+ modify_date + "]";
 	}
 
 	public int getBoard_no() {
@@ -45,6 +48,14 @@ public class Board {
 
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getTitle() {
@@ -86,5 +97,4 @@ public class Board {
 	public void setModify_date(String modify_date) {
 		this.modify_date = modify_date;
 	}
-
 }

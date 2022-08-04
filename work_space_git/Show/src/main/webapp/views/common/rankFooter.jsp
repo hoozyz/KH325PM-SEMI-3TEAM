@@ -59,6 +59,7 @@
 
     <!-- Main theme script-->
     <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/rank.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

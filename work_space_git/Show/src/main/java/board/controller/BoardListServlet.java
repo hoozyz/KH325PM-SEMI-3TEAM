@@ -48,10 +48,8 @@ public class BoardListServlet extends HttpServlet{
 		
 		if(req.getParameter("pageNo") != null) {
 			page =  Integer.parseInt(req.getParameter("pageNo"));
-			System.out.println(page+"--------------");
 			
 			JSONArray arrayObj = new JSONArray();
-			JSONObject obj1 = new JSONObject();
 			
 			pageInfo = new PageInfo(page, 5, boardCount, 10);
 			boardList = service.getBoardList(pageInfo);
@@ -59,29 +57,41 @@ public class BoardListServlet extends HttpServlet{
 			for(int i = 0; i < boardList.size() ; i++) {                  //게시판 글 수의 사이즈 만큼 담는다.
 				
 				String title = boardList.get(i).getTitle();
-				String content = boardList.get(i).getCont();
-				String user_id = boardList.get(i).getUser_id();
+				int readcount = boardList.get(i).getReadcount();
+				String name = boardList.get(i).getName();
 				int board_no = boardList.get(i).getBoard_no();
 				String date = boardList.get(i).getModify_date();
 				
-				JSONObject obj2 = new JSONObject();
-				obj2.put("title", title);
-				obj2.put("content", content);
-				obj2.put("user_id", user_id);
-				obj2.put("board_no", board_no);
-				obj2.put("date", date);
+				JSONObject obj = new JSONObject();
+				obj.put("title", title);
+				obj.put("readcount", readcount);
+				obj.put("name", name);
+				obj.put("board_no", board_no);
+				obj.put("date", date);
 				
-				if(i == boardList.size() - 1) {
-					obj2.put("pageInfo", pageInfo);
-				}
-				arrayObj.add(obj2);
-				System.out.println(arrayObj.toJSONString());
+				int maxPage = pageInfo.getMaxPage();
+				int startPage = pageInfo.getStartPage();
+				int endPage = pageInfo.getEndPage();
+				int currentPage = pageInfo.getCurrentPage();
+				int prevPage = pageInfo.getPrevPage();
+				int nextPage = pageInfo.getNextPage();
+				int startList = pageInfo.getStartList();
+				int endList = pageInfo.getEndList();
+				
+				obj.put("maxPage", maxPage);
+				obj.put("startPage", startPage);
+				obj.put("endPage", endPage);
+				obj.put("currentPage", currentPage);
+				obj.put("prevPage", prevPage);
+				obj.put("nextPage", nextPage);
+				obj.put("startList", startList);
+				obj.put("endList", endList);
+				
+				arrayObj.add(obj);
 			}
 			
 			PrintWriter out = resp.getWriter();
-			obj1.put("data", arrayObj);
-			
-			out.println(obj1);
+			out.println(arrayObj.toJSONString());
 			out.flush();
 			out.close();
 			return;

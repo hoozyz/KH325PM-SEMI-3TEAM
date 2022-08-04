@@ -66,3 +66,52 @@ public class test {
 		System.out.println(map.values());
 	}
 }
+
+$.each(list, (i, obj) => {
+	str += '<tr>'
+    str += '<td class="td-no">'+obj.board_no +'</td>';
+    str += '<td class="td-title"><a href>'+ obj.title +'</a></td>';
+    str += '<td class="td-writer">'+obj.user_id +'</td>';
+    str += '<td class="td-date">'+obj.date +'</td>';
+    str += '<td class="td-count">'+obj.readcount +'</td>';
+	str += '</tr>'
+});
+
+$('.board-data').html(str);
+
+var maxPage =     list[0].maxPage     ;
+var startPage =   list[0].startPage   ;
+var endPage =     list[0].endPage     ;
+var currentPage   list[0].currentPage ;
+var prevPage =    list[0].prevPage    ;
+var nextPage =    list[0].nextPage    ;
+var startList =   list[0].startList   ;
+var endList =     list[0].endList     ;  
+
+str = "";
+
+<a class="page-first" onclick="goPage(1); return false;"><i class="fi-chevrons-left align-middle"></i></a>
+<a class="page-prev" onclick="goPage(${pageInfo.getPrevPage()}); return false;"><i class="fi-chevron-left align-middle"></i></a>
+<c:forEach var="pageNum" begin="${pageInfo.getStartPage()}" end="${pageInfo.getEndPage()}">
+	<a class="page${currentPage eq pageNum ? '-on' : ''}" id="page${pageNum}" onclick="goPage(${pageNum}); return false;">${pageNum}</a>
+</c:forEach>
+<a class="page-next" onclick="goPage(${pageInfo.getNextPage()}); return false;"><i class="fi-chevron-right align-middle"></i></a>
+<a class="page-end" onclick="goPage(${pageInfo.getMaxPage()}); return false;"><i class="fi-chevrons-right align-middle"></i></a>
+
+if(currentPage != 1) {
+	str += '<a class="page-first" onclick="goPage(1); return false;"><i class="fi-chevrons-left align-middle"></i></a>';
+	str += '<a class="page-prev" onclick="goPage('+ list.prevPage +'); return false;"><i class="fi-chevron-left align-middle"></i></a>';
+}
+
+for (var i = 1; i <= endpage; i++) {
+	if(i == currentPage) {
+		str += '<a class="page-on" id="page('+ i +')" onclick="goPage('+ i +'); return false;">'+ i +'</a>';
+	} else {
+		str += '<a class="page" id="page'+ i +'" onclick="goPage('+ i +'); return false;">'+ i +'</a>';
+	}
+}
+
+if(currentPage != maxPage) {
+	str += '<a class="page-next" onclick="goPage('+ list.nextPage +'); return false;"><i class="fi-chevron-right align-middle"></i></a>';
+	str += '<a class="page-end" onclick="goPage('+ list.maxPage +'); return false;"><i class="fi-chevrons-right align-middle"></i></a>';
+}

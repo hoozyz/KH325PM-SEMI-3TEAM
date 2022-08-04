@@ -40,6 +40,7 @@
 %>
 	<%@ include file="/views/common/rankHeader.jsp"%>
 
+
         <!-- Page header-->
         <section class="container" style="margin-top: 150px; margin-bottom: 20px;">
             <div class="d-sm-flex align-items-center justify-content-between mb-2 pb-sm-2 mt-5">
