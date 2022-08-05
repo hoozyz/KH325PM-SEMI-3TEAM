@@ -19,7 +19,7 @@ public class UserLogoutServlet extends HttpServlet{
 		if(session != null) {
 			session.invalidate(); // 세션 없애는 코드
 		}
-		resp.sendRedirect(req.getContextPath() +"/showHome.jsp");
+		resp.sendRedirect(req.getContextPath() +"/");
 	}
 	
 	@Override

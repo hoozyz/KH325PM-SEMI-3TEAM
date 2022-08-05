@@ -227,6 +227,10 @@
             	<div class="board-write" style="padding-top: 20px; height: 60px; margin: 0 auto; width: 1300px;">
                 	<a href="#write-modal" data-bs-toggle="modal" data-bs-dismiss="modal" style="float: right;">글쓰기</a>
             	</div>
+            <% } else { %>
+            		<div class="board-write" style="padding-top: 20px; height: 60px; margin: 0 auto; width: 1300px;">
+                	<a href="#signin-modal" data-bs-toggle="modal" data-bs-dismiss="modal" style="float: right;">글쓰기</a>
+            	</div>
             <% } %>
             <div class="board-bottom" style="width:1300px; margin: 0 auto; padding-top: 25px;">
                 <div class="board-page" style="text-align: center;">

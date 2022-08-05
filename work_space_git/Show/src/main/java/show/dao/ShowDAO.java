@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import board.controller.PageInfo;
+import vo.Board;
 import vo.Like;
 import vo.Show;
 
@@ -87,13 +89,62 @@ public class ShowDAO {
 
 		return null;
 	}
+	
+	public List<Show> findByHome(Connection conn, String keyword, String category) {
+		List<Show> showList = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "";
+	
+		try {
+			if(category.equals("음악")) {
+				query = "SELECT * FROM \r\n"
+						+ "(SELECT genrenm, show_id, poster, prfnm, prfpdfrom, prfpdto, fcltynm FROM tbl_show WHERE prfnm LIKE ?) \r\n"
+						+ "WHERE genrenm = '클래식' OR genrenm = '국악' OR genrenm = '오페라'";
+				
+			} else if(category.equals("공연")) {
+				query = "SELECT * FROM \r\n"
+						+ "(SELECT genrenm, show_id, poster, prfnm, prfpdfrom, prfpdto, fcltynm FROM tbl_show WHERE prfnm LIKE ?) \r\n"
+						+ "WHERE genrenm = '뮤지컬' OR genrenm = '연극' OR genrenm = '무용' OR genrenm = '복합'";
+			}
+		
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%" + keyword + "%");
+			rs = pstmt.executeQuery();
+
+			if (rs.next() == false) {
+				return null;
+			}
+
+			while (rs.next()) {
+				Show show = new Show();
+				show.setShow_id(rs.getString("show_id"));
+				show.setPoster(rs.getString("poster"));
+				show.setPrfnm(rs.getString("prfnm"));
+				show.setPrfpdfrom(rs.getString("prfpdfrom"));
+				show.setPrfpdto(rs.getString("prfpdto"));
+				show.setGenrenm(rs.getString("genrenm"));
+				show.setFcltynm(rs.getString("fcltynm"));
+
+				showList.add(show);
+			}
+			return showList;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+
+		return null;
+	}
 
 	public List<Show> findByKeyword(Connection conn, String keyword, String category, String startDate,
 			String endDate) {
 		List<Show> showList = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT poster, prfnm, prfpdfrom, prfpdto, fcltynm FROM tbl_show WHERE prfnm LIKE ? AND genrenm = ? AND prfpdfrom BETWEEN TO_DATE(?, 'YYYY.MM.DD') AND TO_DATE(?, 'YYYY.MM.DD')";
+		String query = "SELECT show_id, poster, prfnm, prfpdfrom, prfpdto, genrenm, fcltynm FROM tbl_show WHERE prfnm LIKE ? AND genrenm = ? AND prfpdfrom BETWEEN TO_DATE(?, 'YYYY.MM.DD') AND TO_DATE(?, 'YYYY.MM.DD')";
 
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -114,10 +165,12 @@ public class ShowDAO {
 				show.setPrfpdto(rs.getString("prfpdto"));
 				show.setFcltynm(rs.getString("fcltynm"));
 				show.setPrfnm(rs.getString("prfnm"));
+				show.setShow_id(rs.getString("show_id"));
+				show.setGenrenm(rs.getString("genrenm"));
 
 				showList.add(show);
-				return showList;
 			}
+			return showList;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -168,4 +221,40 @@ public class ShowDAO {
 
 		return null;
 	}
+	
+	public List<Show> selectShowByCategory(Connection conn,String category, PageInfo pageInfo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Show> list = new ArrayList<>();
+
+		String query = "SELECT show_id, hall_id, prfnm, prfpdfrom, prfpdto, genrenm, poster FROM \r\n"
+				+ "(SELECT show_id, hall_id, prfnm, prfpdfrom, prfpdto, genrenm, poster, ROWNUM NUM FROM \r\n"
+				+ "(SELECT show_id, hall_id, prfnm, prfpdfrom, prfpdto, genrenm, poster FROM TBL_SHOW WHERE genrenm = ? ORDER BY show_id DESC)) WHERE NUM BETWEEN ? and ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, category);
+			pstmt.setInt(2, pageInfo.getStartList());
+			pstmt.setInt(3, pageInfo.getEndList());
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Show show = new Show();
+				show.setShow_id(rs.getString("show_id"));
+				show.setThea_id(rs.getString("hall_id"));
+				show.setPrfnm(rs.getString("prfnm"));
+				show.setPrfpdfrom(rs.getString("prfpdfrom"));
+				show.setPrfpdto(rs.getString("prfpdto"));
+				show.setGenrenm(rs.getString("genrenm"));
+				show.setPoster(rs.getString("poster"));
+				list.add(show);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return list;
+	}
+	
 }

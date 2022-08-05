@@ -293,7 +293,7 @@
         <!-- Navbar-->
         <header class="navbar navbar-expand-lg navbar-light bg-light fixed-top" data-scroll-header>
             <div class="container">
-                <a class="navbar-brand me-3 me-xl-4" href="<%=path %>/showHome.jsp"><img class="d-block" src="<%=path %>/resources/img/logo/logo-dark.svg" width="120" alt="SCENE"></a>
+                <a class="navbar-brand me-3 me-xl-4" href="<%=path %>/"><img class="d-block" src="<%=path %>/resources/images/pjlogo.JPG" width="120" alt="SCENE"></a>
                 <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 				<% if (loginUser == null) { %>
 				<!-- 로그인 아닐 때 -->

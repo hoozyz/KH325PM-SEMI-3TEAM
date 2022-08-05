@@ -1,0 +1,131 @@
+    .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        /* 숨기기 */
+        z-index: -1;
+        opacity: 0;
+    }
+    
+    .show {
+        opacity: 1;
+        z-index: 1000;
+        transition: all 0.5s;
+    }
+    
+    .window {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .popup {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #ffffff;
+        box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+        /* 임시 지정 */
+        width: 1400px;
+        /* 초기에 약간 아래에 배치 */
+        transform: translate(-50%, -40%);
+    }
+    
+    .show .popup {
+        transform: translate(-50%, -50%);
+        transition: all 0.5s;
+    }
+    
+    .popup_tit {
+        color: #dbab34;
+        text-align: left
+    }
+    
+    .popup_left {
+        background-color: #201627;
+    }
+    
+    .popup_left_detail {
+        margin-top: 20px;
+    }
+    
+    .popup_right {
+        text-align: left;
+        color: black;
+        font-size: 24px;
+        font-family: 'NanumSquareRound', sans-serif;
+        font-weight: 300;
+        margin-top: 30px;
+    }
+    
+   
+    .popup_date,
+    .popup_seat,
+    .popup_count,
+    .popup_price {
+        margin-top: 10px;
+        font-weight: 700;
+    }
+    
+    .final_price {
+        font-size: 40px;
+        color: #ab69dd;
+    }
+    
+     .ticketing {
+        margin-left: 100px;
+        margin-top: 40px;
+        margin-right: 100px;
+        padding-top : 50px;
+        padding-left : 20px;
+    }
+    
+    .ticketing_body {
+        margin-bottom: 20px;
+       
+    }
+    
+    .ticketing_result {
+        margin-top: 20px;
+        font-size: 28px;
+        font-family: 'NanumSquareRound', sans-serif;
+        font-weight: 300;
+    }
+    
+    .ticketing_check {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    
+    .info_tit {
+        /* 상세설명 */
+        font-weight: 700;
+        font-family: 'NanumSquareRound', sans-serif;
+        margin-bottom: 10px;
+        color: black;
+         font-size: 18px;
+    }
+    
+    .info_txt {
+        /* 상세내용 */
+        margin-bottom: 10px;
+        font-family: 'NanumSquareRound', sans-serif;
+        margin-left: 15px;
+    }
+    
+    .show_titie {
+        font-size: 60px;
+        color: black;
+        margin-left: 10px;
+        font-weight: 700;
+        font-family: 'NanumSquareRound', sans-serif;
+    }
+    /* <!-- 공연자세히css -->
+    <link rel="stylesheet" type="text/css" href="<%=path %>/resources/css/showDetail/showDetail.css"> */

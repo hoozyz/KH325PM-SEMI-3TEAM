@@ -8,7 +8,6 @@
     pageEncoding="UTF-8"%>
     
 <%
-	User user = (User) session.getAttribute("loginUser"); 
 	Show show = (Show) request.getAttribute("show");
 	List<Review> revList = new ArrayList<>();
 	
@@ -25,6 +24,9 @@
 		revList = null;
 	}		
 	
+	List<String> slist = (List<String>) request.getAttribute("slist");
+	List<String> priceList = (List<String>) request.getAttribute("priceLists");
+	
 	String[] priceArr = show.getPcseguidance().split(", ");
 	
 	int count1 = 0;
@@ -32,6 +34,8 @@
 	int count3 = 0;
 	int count4 = 0;
 	int count5 = 0;
+	
+	
 	int i = 0;
 	
 	if(revList != null) {
@@ -58,8 +62,11 @@
 			}
 		}
 	}
+	
 %>    
  
+  <!-- 공연자세히css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/showDetail/showDetail.css">
 
 <%@include file="/views/common/header.jsp"%>
     
@@ -105,16 +112,58 @@
             </div>
         </div>
         </form>
+        
+        <!-- 예매결과 팝업 -->
+         <form name="writeForm" action="<%=path%>/Review/writeReview" method="POST">
+        	<div class="modal fade" id="modal-ticket" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header d-block position-relative border-0 pb-0 px-sm-5 px-4">
+                        <h3 class="modal-title mt-4 text-center">관람후기 등록 </h3>
+                        <button class="btn-close position-absolute top-0 end-0 mt-3 me-3" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body px-sm-5 px-4">
+                        <form class="needs-validation" novalidate>
+                            <div class="mb-3">
+                                <label class="form-label" for="review-name">아이디 <span class='text-danger'>*</span></label>
+                                <input class="form-control" name="revId" type="text" id="review-name" placeholder="이름" required>
+                                <div class="invalid-feedback">아이디를 입력해주세요.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="review-rating">별점 <span class='text-danger'>*</span></label>
+                                <select class="form-control form-select" name="revStar" id="review-rating" required>
+                    <option value="" selected disabled hidden>별점 선택</option>
+                    <option value="5 stars">별점 5</option>
+                    <option value="4 stars">별점 4</option>
+                    <option value="3 stars">별점 3</option>
+                    <option value="2 stars">별점 2</option>
+                    <option value="1 star">별점 1</option>
+                  </select>
+                                <div class="invalid-feedback">별점을 선택해주세요.</div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label" for="review-text">관람후기 <span class='text-danger'>*</span></label>
+                                <textarea class="form-control" name="revContent" id="review-text" rows="5" placeholder="공연은 어떠셨나요?" required></textarea>
+                                <div class="invalid-feedback">관람후기를 등록해주세요</div>
+                            </div>
+                            <input class="btn btn-primary d-block rounded-pill w-100 mb-4" type="submit" value="리뷰 등록">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+        
 
         <!-- Page header-->
         <section class="container pt-5 mt-5" style="margin-bottom: 20px;">
             <!-- Breadcrumb-->
-            <div class="d-sm-flex align-items-center justify-content-between mb-2 pb-sm-2">
+            <div class="d-sm-flex align-items-center justify-content-between mb-0">
                 <span class="show_titie"><%=show.getPrfnm() %><span class="badge bg-accent" style="font-size: 20px; margin-left: 10px;"><%=show.getGenrenm() %></span></span>
                 <div class="text-nowrap">
-                    <button class="btn btn-icon btn-light-primary btn-xs shadow-sm rounded-circle" type="button" data-bs-toggle="tooltip" title="Add to Wishlist"><i class="fi-heart"></i></button>
-                    <div class="dropdown d-inline-block" data-bs-toggle="tooltip" title="Share">
-                        <button class="btn btn-icon btn-light-primary btn-xs shadow-sm rounded-circle ms-2" type="button" data-bs-toggle="dropdown"><i class="fi-share"></i></button>
+                    <button class="btn btn-icon btn-light-primary btn shadow-sm rounded-circle" type="button" data-bs-toggle="tooltip" title="찜하기"><i class="fi-heart"></i></button>
+                    <div class="dropdown d-inline-block" data-bs-toggle="tooltip" title="공유하기">
+                        <button class="btn btn-icon btn-light-primary btn shadow-sm rounded-circle ms-2" type="button" data-bs-toggle="dropdown"><i class="fi-share"></i></button>
                         <div class="dropdown-menu dropdown-menu-end my-1">
                             <button class="dropdown-item" type="button"><i class="fi-facebook fs-base opacity-75 me-2"></i>Facebook</button>
                             <button class="dropdown-item" type="button"><i class="fi-twitter fs-base opacity-75 me-2"></i>Twitter</button>
@@ -137,60 +186,238 @@
                                 <div class="info_tit">기간</div>
                             </div>
                             <div class="col-9">
-                                <div class="info_txt"><%=show.getPrfpdfrom() %> &nbsp;&nbsp; ~ &nbsp;&nbsp; <%=show.getPrfpdto() %></div><br>
+                                <div class="info_txt"><%=show.getPrfpdfrom() %> &nbsp;&nbsp; ~ &nbsp;&nbsp; <%=show.getPrfpdto() %></div>
                             </div>
                             <div class="col-3">
                                 <div class="info_tit">장소</div>
                             </div>
                             <div class="col-9">
-                                <div class="info_txt"><%=show.getFcltynm() %></div><br>
+                                <div class="info_txt"><%=show.getFcltynm() %></div>
                             </div>
                             <div class="col-3">
                                 <div class="info_tit">런타임</div>
                             </div>
                             <div class="col-9">
-                                <div class="info_txt"><%=show.getPrfruntime() %></div><br>
+                                <div class="info_txt"><%=show.getPrfruntime() %></div>
                             </div>
                             <div class="col-3">
                                 <div class="info_tit">관람 연령</div>
                             </div>
                             <div class="col-9">
-                                <div class="info_txt"><%=show.getPrfage() %></div><br>
+                                <div class="info_txt"><%=show.getPrfage() %></div>
                             </div>
                             <div class="col-3">
                                 <div class="info_tit">출연진</div>
                             </div>
                             <div class="col-9">
-                                <div class="info_txt"><%=show.getPrfcast() %></div><br>
+                                <div class="info_txt"><%=show.getPrfcast() %></div>
                             </div>
                             <div class="col-3">
                                 <div class="info_tit">제작사</div>
                             </div>
                             <div class="col-9">
-                                <div class="info_txt"><%=show.getEntrpsnm() %></div><br>
+                                <div class="info_txt"><%=show.getEntrpsnm() %></div>
                             </div>
                             <hr>
-                            <div class="col-3 mt-4">
+                            <div class="col-3 mt-3">
                                 <div class="info_tit">가격</div>
                             </div>
-                            <div class="col-9 mt-4">
-                                <div style="background-color: #f6f6f6; ">
+                            <div class="col-9 mt-3" style="background-color: #f6f6f6;">
+                                <div>
                                     <% for (int j = 0; j < priceArr.length; j++) { %>
-                                    	<div class="info_txt"><%=priceArr[j].trim() %></div><br>
+                                    	<div class="info_txt"><%=priceArr[j].trim() %></div>
                                     <% } %>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div style="text-align: end; margin-right: 10px;">
-                        <a class="btn btn-outline-primary rounded ms-5" href="#modal-ticketing" data-bs-toggle="modal" data-bs-dismiss="modal" style="display: inline-block; width: 230px; height: 60px;">
+                   <% if(loginUser != null) { %>
+                   			 <div style="text-align: end; margin-right: 10px;">
+                        <div class="btn btn-outline-primary rounded ms-5" href="#modal-ticketing" data-bs-toggle="modal" data-bs-dismiss="modal" style="display: inline-block; width: 230px; height: 60px;">
                             <div style="font-size: 24px;">예매 하기</div>
-                        </a>
-                    </div>
+                        </div>
+                   <% } else {%>
+                   		 <div style="text-align: end; margin-right: 10px;">
+                        <div class="btn btn-outline-primary rounded ms-5" href="#signin-modal" data-bs-toggle="modal" data-bs-dismiss="modal" style="display: inline-block; width: 230px; height: 60px;">
+                            <div style="font-size: 24px;">예매 하기</div>
+                        </div>
+                   <% } %>
+                        
+                       <!-- 팝업시작 -->
+                      <%--   <form name="ticketingForm" action="<%=path%>/showDetail/Ticketing" method="POST"> --%>
+                        <div class="background">
+                            <div class="window">
+                                <div class="popup">
+                                    <div class="row" style="margin: 0; bottom: 0;">
+                                        <div class="popup_left col-6">
+                                            <div style="text-align: left; margin-top: 10px; margin-left: 10px;margin-bottom: 20px;">
+                                                <h1 class="display-2" style=" color: #dbab34">예매하기</h1>
+                                                <div class="popup_left">
+                                                	<img src=<%=show.getPoster() %> alt="image" style="width: 400; height: 500; margin-left:120px;">
+                                                </div>
+                                                <div class="popup_left_detail">
+                                                    <h2 style="color: #d9e2f2"><%=show.getPrfnm() %></h2>
+                                                    <h4 style="color: #d9e2f2"><%=show.getFcltynm() %></h4>
+                                                    <h4 style="color: #d9e2f2"><%=show.getPrfpdfrom() %> &nbsp;&nbsp; ~ &nbsp;&nbsp; <%=show.getPrfpdto() %></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="popup_right col-6">
+                                            <div class="ticketing">
+                                                <div class="ticketing_body">
+                                                    <span class="popup_date">날짜선택<i class="fi-calendar ps-1"></i></span>
+                                                    <div>
+                                                        <input class="form-control date-picker rounded-pill pi-5 " id="datepicker" type="date" placeholder="날짜를 선택해주세요 " data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;Y. m. d &quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;, &quot;language&quot;: &quot;ko&quot;} ">
+                                                    </div>
+                                                    <div class="popup_count">인원선택</div>
+                                                    <div class="row">
+                                                        <div class="col-2" style="text-align: right;">
+                                                            <select id="headcnt" required>
+                                                            <option value="" selected disabled hidden></option>
+                                                            <option value= "1명">1</option>
+                                                            <option value= "2명">2</option>
+                                                            <option value= "3명">3</option>
+                                                            <option value= "4명">4</option>
+                                                            <option value= "5명">5</option>
+                                                            <option value= "6명">6</option>
+                                                            <option value= "7명">7</option>
+                                                            <option value= "8명">8</option>
+                                                            <option value= "9명">9</option>
+                                                        </select>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div>명</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="popup_seat">좌석선택</div>
+                                                    <div class="row">
+                                                        <div class="col-2" style="text-align: right;">
+                                                            <select id="selectSeat" onchange="changeSeat()" required>
+                                                            <option value="" selected disabled hidden></option>
+						                                    <% for (int j = 0; j < priceArr.length; j++) { %>
+				                                    		<option><%= priceArr[j].trim() %></option>
+						                                    <% } %>
+                                                        </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr> 
+
+                                                <div class="ticketing_result">
+                                                    <div>관람일 :&nbsp;<span id="viewDataPicker"></span></div>
+                                                    <div>인원 :&nbsp;<span id="viewCnt"></span></div>
+                                                    <div>좌석 :&nbsp;<span id="viewSeat"></span></div>
+                                                    
+                                                    <div class="popup_price">
+                                                        <span class="final_price" id="total-price">0</span> <span>원</span>
+                                                    </div>
+
+
+                                                    <div class="ticketing_check">선택하신 정보가 맞으시다면,</div>
+                                                    <div style="margin-left: 30px;">
+                                                    <a href="#modal-ticket" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="ticketView('<%=show.getShow_id()%>')">
+                                                    	<button class="btn btn-outline-accent rounded ms-5" style="width:130px;height:60px;background-color:#201627" id="ticketing">
+                                                            <div style="color: #d9e2f2; font-size: 20px;">예매하기</div>
+                                                    	</button>
+                                                    </a>
+                                                    <button class="btn btn-outline-accent rounded ms-5" style="width:130px;height:60px;background-color:#201627" id="close">
+                                                         <div style="color: #d9e2f2; font-size: 20px;">취소하기</div>
+                                                    </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<!--                         </form>  -->       
+		             </div>
                 </div>
             </div>
-            </div>
-            </div>
+            <script>
+            	function ticketView(showId) {
+            		var date = document.getElementById("viewDataPicker").innerText;
+            		var people = document.getElementById("viewCnt").innerText;
+            		var seat = document.getElementById("viewSeat").innerText;
+            		var total = document.getElementById("total-price").innerText;
+            		
+            		$.ajax({
+	         			url: "<%=path%>/ticketing/view",
+	         			type: "POST",
+	         			dataType: "text",
+	         			data: { "date" : date, "people" : people , "seat" : seat , "total" : total , "showId" : showId },
+	         			progress: true,
+	             	
+	         			success: function(list) {
+            				var tic = JSON.parse(list);
+            				console.log(tic);
+            				
+            				var str = "";
+            				
+            				str += '<div>'+ tic[0].date +'</div>';
+            				str += '<div>'+ tic[0].seat +'</div>';
+            				str += '<div>'+ tic[0].fcltynm +'</div>';
+            				str += '<div>'+ tic[0].show_id +'</div>';
+            				str += '<div>'+ tic[0].user_id +'</div>';
+            				str += '<div>'+ tic[0].price +'</div>';
+            				str += '<div>'+ tic[0].count +'</div>';
+            				str += '<div>'+ tic[0].pfrnm +'</div>';
+            				
+            				$('#modal-ticket').html(str);
+	         			},
+	         			
+	         			error: function(e) {
+	         				console.log(e);			
+            			}
+            		});
+            	}
+            
+            
+                function show() {
+                    document.querySelector(".background").className = "background show";
+                };
+
+                function close() {
+                    document.querySelector(".background").className = "background";
+                };
+
+                document.querySelector("#show").addEventListener("click", show);
+                document.querySelector("#close").addEventListener("click", close);
+                
+                /* <select id="selectSeat" onchange="changeSeat()" required> */
+                function changeSeat(){
+                	var seatSelect = document.getElementById("selectSeat").value;
+                	var headcnt = document.getElementById("headcnt").value;
+                	var datepicker = document.getElementById("datepicker").value;
+                	
+                	console.log(datepicker);
+                	var seat = "";
+                	var price = "";
+                	
+                	var total = "";
+                	
+                    var splitStr = seatSelect.split(' ');
+                    
+                    if(splitStr.length == 2) {
+                    	seat = splitStr[0];
+                    	price = splitStr[1].replace(",","").replace("원","");
+                    } else {
+                    	seat = splitStr[0] + "-" + splitStr[1];
+                    	price = splitStr[2].replace(",","").replace("원","");
+                    }
+                    
+                    total = parseInt(price) * parseInt(headcnt.replace("명",""));
+                    
+                    
+                	document.getElementById("viewDataPicker").innerHTML = datepicker;
+                	document.getElementById("viewCnt").innerHTML = headcnt;
+                	document.getElementById("viewSeat").innerHTML = seat;
+                	document.getElementById("total-price").innerHTML = total;
+                };
+            	
+            	
+            </script>
         </section>
         <!-- Page content-->
         <section class="container pb-5 mb-md-4 mt-5 ">
@@ -207,7 +434,7 @@
                             <div class="d-flex align-items-center mb-2 fs-sm ">
                                 <div class="text-nowrap ">5<i class="fi-star mt-n1 ms-1 align-middle opacity-70 "></i></div>
                                 <div class="progress w-100 mx-3 ">
-                                    <div class="progress-bar bg-warning " role="progressbar " style="width: 80% " aria-valuenow="80 " aria-valuemin="0 " aria-valuemax="100 "></div>
+                                    <div class="progress-bar bg-warning " role="progressbar " style="width: 80% " aria-valuenow="80" aria-valuemin="0 " aria-valuemax="100 "></div>
                                 </div><span style="min-width: 48px; "><%=count5 %></span>
                             </div>
                             <div class="d-flex align-items-center mb-2 fs-sm ">
@@ -231,7 +458,7 @@
                             <div class="d-flex align-items-center mb-2 fs-sm ">
                                 <div class="text-nowrap ">1<i class="fi-star mt-n1 ms-1 align-middle opacity-70 "></i></div>
                                 <div class="progress w-100 mx-3 ">
-                                    <div class="progress-bar bg-warning " role="progressbar " style="width: 10% " aria-valuenow="10 " aria-valuemin="0 " aria-valuemax="100 "></div>
+                                    <div class="progress-bar bg-warning " role="progressbar " style="width: 0% " aria-valuenow="0" aria-valuemin="0 " aria-valuemax="100 "></div>
                                 </div><span style="min-width: 48px; "><%=count1 %></span>
                             </div>
                         </div>

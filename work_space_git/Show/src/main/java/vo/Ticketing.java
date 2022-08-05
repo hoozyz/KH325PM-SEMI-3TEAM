@@ -5,19 +5,18 @@ public class Ticketing {
 	private String show_id;
 	private String user_id;
 	private String prfnm;
-	private String ticket_viewdate;
-	private String ticket_date;
+	private String ticket_viewdate; // 공연일
+	private String ticket_date; // 구매일
 	private String fcltynm;
 	private int count;
 	private int price;
-	private String view_time;
 
 	public Ticketing() {
 		super();
 	}
 
 	public Ticketing(int tic_no, String show_id, String user_id, String prfnm, String ticket_viewdate,
-			String ticket_date, String fcltynm, int count, int price, String viewTime) {
+			String ticket_date, String fcltynm, int count, int price) {
 		super();
 		this.tic_no = tic_no;
 		this.show_id = show_id;
@@ -28,14 +27,13 @@ public class Ticketing {
 		this.fcltynm = fcltynm;
 		this.count = count;
 		this.price = price;
-		this.view_time = view_time;
 	}
 
 	@Override
 	public String toString() {
 		return "Ticketing [tic_no=" + tic_no + ", show_id=" + show_id + ", user_id=" + user_id + ", prfnm=" + prfnm
 				+ ", ticket_viewdate=" + ticket_viewdate + ", ticket_date=" + ticket_date + ", fcltynm=" + fcltynm
-				+ ", count=" + count + ", price=" + price + ", viewTime=" + view_time + "]";
+				+ ", count=" + count + ", price=" + price + "]";
 	}
 
 	public int getTic_no() {
@@ -108,14 +106,6 @@ public class Ticketing {
 
 	public void setPrice(int price) {
 		this.price = price;
-	}
-
-	public String getView_time() {
-		return view_time;
-	}
-
-	public void setView_time(String view_time) {
-		this.view_time = view_time;
 	}
 
 }

@@ -28,7 +28,7 @@ public class UserEnrollServlet extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.sendRedirect(req.getContextPath()+"/showHome.jsp"); // get 요청 튕겨내기!
+		resp.sendRedirect(req.getContextPath()+"/"); // get 요청 튕겨내기!
 	}
 	
 	@Override
@@ -49,10 +49,10 @@ public class UserEnrollServlet extends HttpServlet{
 			
 			if(result > 0) {
 				req.setAttribute("msg", "회원가입에 성공 하였습니다!!");
-				req.getRequestDispatcher("/showHome.jsp").forward(req, resp);
+				req.getRequestDispatcher("/").forward(req, resp);
 			}else{
 				req.setAttribute("msg", "회원가입 실패!! (code:101=DB이슈)");
-				req.getRequestDispatcher("/showHome.jsp").forward(req, resp);
+				req.getRequestDispatcher("/").forward(req, resp);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

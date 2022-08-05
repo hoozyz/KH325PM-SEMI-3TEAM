@@ -130,13 +130,13 @@
         </div>
     
     <section class="container py-1 mt-1 mb-1 ">
-        <form class="form-group d-block d-md-flex rounded-md-pill" style="width:85%;float:left;">
+        <form class="form-group d-block d-md-flex rounded-md-pill" style="width:85%;float:left;" action="<%=path%>/showSearch">
             <div class="input-group input-group-lg border-end-md">
                 <!--calendar-->
                 <div class="mb-3" style="max-width: 30rem;">
                     <div class="input-group" style="padding-top: 15px;"><span class="input-group-text"><i class="fi-calendar"></i></span>
                         <input class="form-control date-picker date-range" name="startDate" type="text" placeholder="From date" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}" data-linked-input="#end-date">
-                        <input class="form-control date-picker" name="endDate" type="text" placeholder="To date" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}" id="end-date">
+                        <input class="form-control date-picker" type="text" placeholder="To date" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}" id="end-date">
                     </div>
                 </div>
                 <!-- calendar End-->
@@ -155,7 +155,7 @@
                     	카테고리
                     <% } %>
                     </span></button>
-                    <input type="hidden">
+                    <input type="hidden" name="category">
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#"><i class="fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">연극</span></a></li>
                         <li><a class="dropdown-item" href="#"><i class="fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">뮤지컬</span></a></li>

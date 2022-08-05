@@ -22,7 +22,7 @@ public class UserAdminServlet extends HttpServlet{
 		
 		if(user.getRole().equals("ROLE_USER")) {
 			req.setAttribute("msg", "관리자가 아닙니다!");
-			resp.sendRedirect(req.getContextPath() + "/showHome.jsp");
+			resp.sendRedirect(req.getContextPath() + "/");
 			return;
 		} else {
 			req.setAttribute("msg", "소식 관리페이지 입니다.");

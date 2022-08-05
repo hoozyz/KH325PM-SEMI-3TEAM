@@ -39,7 +39,6 @@ public class TicketingDao {
 				tic.setFcltynm(rs.getString("fcltynm"));
 				tic.setCount(rs.getInt("ticket_count"));
 				tic.setPrice(rs.getInt("price"));
-				tic.setView_time(rs.getString("view_time"));
 
 				ticList.add(tic);
 			}
@@ -56,7 +55,7 @@ public class TicketingDao {
 	// 예매하기
 	public int save(Connection conn, Ticketing tic) {
 		PreparedStatement pstmt = null;
-		String query = "INSERT INTO TBL_TICKETING VALUES(SEQ_ticketing_NO.nextval, ?, ?, ?, ?, SYSDATE, ?,?, ?,?)";
+		String query = "INSERT INTO TBL_TICKETING VALUES(SEQ_TIC_NO.nextval, ?, ?, ?, ?, SYSDATE, ?,?, ?)";
 		int result = 0;
 
 		try {
@@ -68,7 +67,6 @@ public class TicketingDao {
 			pstmt.setString(5, tic.getFcltynm());
 			pstmt.setInt(6, tic.getCount());
 			pstmt.setInt(7, tic.getPrice());
-			pstmt.setString(8, tic.getView_time());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

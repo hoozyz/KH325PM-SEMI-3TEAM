@@ -21,7 +21,7 @@ public class UserLoginServlet extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.sendRedirect(req.getContextPath()+"/showHome.jsp"); // get 요청 튕겨내기!
+		resp.sendRedirect(req.getContextPath()+"/"); // get 요청 튕겨내기!
 	}
 
 	@Override
@@ -34,10 +34,10 @@ public class UserLoginServlet extends HttpServlet{
 		if(loginUser != null) { // 로그인 성공한 경우
 			HttpSession session = req.getSession();
 			session.setAttribute("loginUser", loginUser); // 세션에 loginUser 정보 저장 
-			resp.sendRedirect(req.getContextPath() + "/showHome.jsp"); 
+			resp.sendRedirect(req.getContextPath() + "/"); 
 		}else { // 로그인 실패한 경우
 			req.setAttribute("msg", "사용자의 아이디나 비밀번호가 맞지 않습니다.");
-			req.getRequestDispatcher("/showHome.jsp").forward(req, resp);
+			req.getRequestDispatcher("/").forward(req, resp);
 		}
 	}
 }
