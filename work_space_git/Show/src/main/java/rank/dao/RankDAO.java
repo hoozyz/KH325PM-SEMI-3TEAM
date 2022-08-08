@@ -95,10 +95,6 @@ public class RankDAO {
 			pstmt.setString(3, endDate);
 			rs = pstmt.executeQuery();
 
-			if (rs.next() == false) {
-				return null;
-			}
-
 			while (rs.next()) {
 				Rank rank = new Rank();
 				rank.setPoster(rs.getString("poster"));

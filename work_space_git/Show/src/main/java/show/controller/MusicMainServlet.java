@@ -20,7 +20,6 @@ import org.json.simple.JSONObject;
 
 import board.controller.PageInfo;
 import show.service.ShowService;
-import vo.Rank;
 import vo.Show;
 
 @WebServlet(name = "musicMain", urlPatterns = "/musicMain")
@@ -37,31 +36,35 @@ public class MusicMainServlet extends HttpServlet {
 
 			int page = 1;
 			int musicCnt = 100;
-			PageInfo pageInfo = new PageInfo(page, 5, musicCnt, 5);
+			PageInfo pageInfo = null;
+			String category = "클래식";
+			pageInfo =  new PageInfo(page, 5, musicCnt, 5);
+			if(req.getParameter("category") != null) {
+				category = req.getParameter("category");
+			}
 
-			String category = req.getParameter("category");
-			String period = "1개월";
-
-			Date date = new Date();
-
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
-			String endDate = dateFormat.format(date);
-			String startDate = "AddDate(endDate, -1, 0)";
-			String dateRange = "month";
-
-			List<Rank> list = new ArrayList<>();
 			List<Show> showList = new ArrayList<>();
+			List<Show> openList = new ArrayList<>();
 			
-
-			req.setAttribute("pageInfo", pageInfo);
+			showList = null;
+			
 			showList = showService.selectShowByCategory(category, pageInfo);
-
+			openList = showService.comingSoon(category);
+			
+			req.setAttribute("pageInfo", pageInfo);
 			req.setAttribute("category", category);
 			req.setAttribute("showList", showList);
+			req.setAttribute("openList", openList);
+			
+			
+
 			if(req.getParameter("pageNo") != null) {
+				
 				page =  Integer.parseInt(req.getParameter("pageNo"));
 				
 				JSONArray arrayObj = new JSONArray();
+				pageInfo =  new PageInfo(page, 5, musicCnt, 5);
+				showList = showService.selectShowByCategory(category, pageInfo);
 				
 				for(int i = 0; i < showList.size() ; i++) {                  //게시판 글 수의 사이즈 만큼 담는다.
 					
@@ -103,8 +106,6 @@ public class MusicMainServlet extends HttpServlet {
 					arrayObj.add(obj);
 				}
 				
-				System.out.println(arrayObj.toJSONString());
-				
 				PrintWriter out = resp.getWriter();
 				out.println(arrayObj.toJSONString());
 				out.flush();
@@ -119,125 +120,6 @@ public class MusicMainServlet extends HttpServlet {
 			req.setAttribute("msg", "검색에 실패하였습니다.");
 			req.getRequestDispatcher("/");
 		}
-	}
-
-	private static String AddDate(String strDate, int month, int day) throws Exception {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
-
-		Calendar cal = Calendar.getInstance();
-
-		Date date = dateFormat.parse(strDate);
-
-		cal.setTime(date);
-
-		cal.add(Calendar.MONTH, month);
-		cal.add(Calendar.DATE, day);
-
-		return dateFormat.format(cal.getTime());
-	}
-
-	private static String parseDate(String date) throws ParseException {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
-		Calendar cal = Calendar.getInstance();
-		String parseDate = "";
-		String[] strArr = new String[2];
-		if (date.contains("January")) {
-			date = date.replace("January", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".01." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("February")) {
-			date = date.replace("February", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".02." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("March")) {
-			date = date.replace("March", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".03." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("April")) {
-			date = date.replace("April", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".04." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("May")) {
-			date = date.replace("May", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".05." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("June")) {
-			date = date.replace("June", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".06." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("July")) {
-			date = date.replace("July", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".70." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("August")) {
-			date = date.replace("August", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".08." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("September")) {
-			date = date.replace("September", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".09." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("October")) {
-			date = date.replace("October", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".10." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("November")) {
-			date = date.replace("November", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".11." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("December")) {
-			date = date.replace("December", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".12." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		return parseDate;
 	}
 
 	@Override

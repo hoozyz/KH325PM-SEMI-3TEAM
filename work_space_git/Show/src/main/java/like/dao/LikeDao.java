@@ -24,10 +24,6 @@ public class LikeDao {
 			pstmt.setString(1, id); 
 			rs = pstmt.executeQuery(); 
 			
-			if (rs.next() == false) {
-				return null;
-			}
-			
 			while(rs.next()) {
 				Like like = new Like();
 				like.setLike_no(rs.getInt("like_no"));

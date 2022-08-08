@@ -53,10 +53,6 @@ public class HallDAO {
 
 			rs = pstmt.executeQuery();
 			
-			if (rs.next() == false) {
-				return null;
-			}
-			
 			while (rs.next()) {
 				Hall hall = new Hall();
 				hall.setHall_id(rs.getString("hall_id"));

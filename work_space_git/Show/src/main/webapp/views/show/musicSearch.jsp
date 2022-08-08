@@ -12,7 +12,7 @@
 	String rad_date = "";
 	
 	if(request.getAttribute("rad_date") != null) {
-		keyword = (String)request.getAttribute("rad_date");
+		rad_date = (String)request.getAttribute("rad_date");
 	}
 	if(request.getAttribute("keyword") != null) {
 		keyword = (String)request.getAttribute("keyword");
@@ -44,6 +44,58 @@
 	int count = 5;
 
 %>
+
+  <style>
+	    .board-page>a {
+	        display: inline-block;
+	        width: 30px;
+	        height: 30px;
+	        color: #222;
+	        line-height: 30px;
+	        text-align: center;
+	        background: #fff;
+	        margin-right: 8px;
+	        text-decoration: none;
+	        cursor: pointer;
+	    }
+	    
+	    .board-page>.page-on {
+	        border: 1px solid #293243;
+	        background: #222;
+	        color: #fff;
+	        cursor: pointer;
+	    }
+	    
+	    .board-page>.page-prev {
+	        background-color: #fff;
+	    }
+	    
+	    .board-page>.page-next {
+	        background-color: #fff;
+	    }
+        .cat {
+            text-decoration-line: none;
+            color: #D9E2F2;
+        }
+        
+        .hero_category {
+            font-family: 'Gugi', cursive;
+            color: #D9E2F2;
+            font-size: 20pt;
+        }
+        
+        .hero_category a:hover {
+            color: #AB69DD;
+            ;
+        }
+        
+        .title1 {
+            font-family: 'NanumSquareRound', sans-serif;
+            font-size: 35pt;
+            font-weight: 800;
+            color: #201627;
+        }
+    </style>
  <!-- Page content-->
         <!--@@@@@@@@@ hero @@@@@@@@@-->
         <section class="container-fluid pt-1 mt-5 mb-3" style="height: 320px; background-image: url(<%=path%>/resources/images/performHeroBg.png);">
@@ -51,9 +103,9 @@
                 <div style="position:relative;">
                     <img src="<%=path %>/resources/images/music/musicHeroImg.png" alt="" style=" width:100%; position:relative;">
                     <div class="hero_category" style="position:absolute; top: 40%; left: 8%">
-                        <a class="cat" href="#">클래식&nbsp;</a>|
-                        <a class="cat" href="#">&nbsp;국악&nbsp;</a>|
-                        <a class="cat" href="#">&nbsp;오페라&nbsp;</a>
+                        <a class="cat" href="<%=path%>/showSearch?category=클래식&rad_date=1개월&keyword=클래식">클래식&nbsp;</a>|
+                        <a class="cat" href="<%=path%>/showSearch?category=국악&rad_date=1개월&keyword=국악">&nbsp;국악&nbsp;</a>|
+                        <a class="cat" href="<%=path%>/showSearch?category=오페라&rad_date=1개월&keyword=오페라">&nbsp;오페라&nbsp;</a>
                     </div>
                 </div>
             </section>
@@ -68,9 +120,9 @@
                         <!--calendar-->
                         <div class="mb-3" style="max-width: 30rem;">
                             <div class="input-group" style="padding-top: 15px;"><span class="input-group-text"><i class="fi-calendar"></i></span>
-                                <input class="form-control date-picker date-range" type="text" name="startDate" placeholder="From date" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}" data-linked-input="#end-date">
-                                <input class="form-control date-picker" type="text" name="endDate" placeholder="To date" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}" id="end-date">
-                            </div>
+	                            <input class="form-control date-picker startDate" type="text" name="startDate"placeholder="From date" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
+	                            <input class="form-control date-picker endDate" type="text" name="endDate" placeholder="To date" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
+                        	</div>
                         </div>
                         <!-- calendar End-->
                     </div>
@@ -80,7 +132,7 @@
                     <hr class="d-md-none my-2">
                     <div class="d-sm-flex">
                         <div class="dropdown w-100 mb-sm-0 mb-3" data-bs-toggle="select">
-                            <button class="btn btn-link btn-lg dropdown-toggle ps-2 ps-sm-3" type="button" data-bs-toggle="dropdown"><i class="fi-list me-2"></i><span class="dropdown-toggle-label">카테고리</span></button>
+                            <button class="btn btn-link btn-lg dropdown-toggle ps-2 ps-sm-3" name="category" type="button" data-bs-toggle="dropdown"><i class="fi-list me-2"></i><span class="dropdown-toggle-label">카테고리</span></button>
                             <input type="hidden" name="category">
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#"><i class="fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">클래식</span></a></li>
@@ -92,9 +144,9 @@
                     </div>
                 </form>
 	            <div class="position-relative py-4" style="width:15%;height:80px;float:right; padding-left: 3%;">
-	                <input type="radio" name="rad_date" id="rad_day" value="rad_day">오늘
-	                <input type="radio" name="rad_date" id="rad_week" value="rad_week" >1주
-	                <input type="radio" name="rad_date" id="rad_month" value="rad_month"checked>1개월
+	                <input type="radio" name="rad_date" id="rad_day" value="rad_day" onclick="radDate('day')">오늘
+	                <input type="radio" name="rad_date" id="rad_week" value="rad_week" onclick="radDate('week')">1주
+	                <input type="radio" name="rad_date" id="rad_month" value="rad_month" onclick="radDate('month')" checked>1개월
 	            </div>
             </div>
         </section>
@@ -113,7 +165,15 @@
             <div class="d-flex flex-sm-row flex-column align-items-sm-center align-items-stretch my-5 ">
                 <hr class="d-none d-sm-block w-100 mx-4 ">
 
-                <div class="d-none d-sm-flex align-items-center flex-shrink-0 text-muted "><i class="fi-check-circle me-2 "></i><span class="fs-sm mt-n1 ">총 2건</span></div>
+                <div class="d-none d-sm-flex align-items-center flex-shrink-0 text-muted "><i class="fi-check-circle me-2 "></i>
+                <span class="fs-sm mt-n1 ">
+                <% if (showList != null) { %>
+            	총 <%= showList.size()%>건
+	            <% } else {%>
+	            	총 0건
+	            <% } %>
+                </span>
+                </div>
             </div>
             <!-- Item-->
             <!-- @@@ Card-1 @@@ -->
@@ -162,14 +222,59 @@
             </div>
             <% } %>
             <!-- @@@ Card-1 end @@@ -->
-             <script>
+           	<script>
         	$(document).ready(function() {
         		// 기간 on 변경
         		var rad_date = '${rad_date}';
-        		$("'input:radio[name=rad_date]").attr("checked", false);	// 선택	
-        		$("'input:radio[name=rad_date]:input[value='rad_" + rad_date + "']").attr("checked", true);	// 선택	
+        		$("'input:radio[name=rad_date]'").attr("checked", false);	// 선택	
+        		$("'input:radio[name=rad_date]:input[value='rad_" + rad_date + "']").attr("checked", true);	// 선택
         	});
-        </script>
+        	
+        	function radDate(range) {
+        		var endDay = new Date();
+        		var startDay = "";
+        		if(range == 'day') {
+        			startDay = new Date(endDay);
+        			startDay = dateFormat(startDay);
+        		}
+        		if(range == 'week') {
+        			startDay = lastWeek();
+        		}
+        		if(range == 'month') {
+        			startDay = lastMonth();
+        		}
+        		console.log(startDay);
+        		console.log(dateFormat(endDay));
+        		
+        		$('.input-group .startDate').val(startDay);
+        		$('.input-group .endDate').val(dateFormat(endDay));
+
+        		
+        		function lastWeek() {
+                    var d = new Date(endDay);
+                    var day = d.getDate();
+                    d.setDate(day - 6);
+                    return dateFormat(d);
+                }
+
+                function lastMonth() {
+                    var d = new Date(endDay);
+                    var month = d.getMonth();
+                    var day = d.getDate();
+                    d.setMonth(month - 1);
+                    return dateFormat(d);
+                }
+                
+                function dateFormat(date) {
+                    var yyyy = date.getFullYear();
+                    var mm = date.getMonth() + 1;
+                    mm = mm >= 10 ? mm : "0" + mm;
+                    var dd = date.getDate();
+                    dd = dd >= 10 ? dd : "0" + dd;
+                    return yyyy + "-" + mm + "-" + dd;
+                }
+        	}
+        </script>   
 <%@ include file="/views/common/footer.jsp"%>
 
 

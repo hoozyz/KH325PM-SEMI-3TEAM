@@ -2,7 +2,6 @@ package show.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.controller.PageInfo;
 import review.service.ReviewService;
 import show.service.ShowService;
 import vo.Review;
@@ -30,37 +30,50 @@ public class ShowDetailServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String showId =  (String) req.getParameter("showId");
-		
 		Show show = showService.findShowById(showId);
-		Map<String, String> map = parse(show.getPcseguidance());
-		
-		Set<String> set = map.keySet();
-		List<String> sList = new ArrayList<>(set);
+		Set<String> set = null;
+		List<String> sList = null;
+		Map<String, String> map = null;
 		
 		List<String> priceList = new ArrayList<>();
 		
-		for (String key : map.values()) {
-			  priceList.add(key);
+		if(show.getPcseguidance().equals("전석무료")) {
+			map = parse(show.getPcseguidance());
+			
+			set = map.keySet();
+			sList = new ArrayList<>(set);
+			
+			for (String key : map.values()) {
+				  priceList.add(key);
+			}
 		}
-		
+		// 별점
+		String result = revService.getStar(showId);
+		show.setShow_star(result);
+		System.out.println(show);
 		if(show != null) {
 			req.setAttribute("show", show);
 			req.setAttribute("sList",sList);
 			req.setAttribute("priceList", priceList);
+		} 
+		
+		int page = 1;
+		int revCount = 0;
+		String sort = "";
+		if (req.getParameter("sort") == null) {
+			sort = "new";
 		} else {
-			req.setAttribute("msg", "공연 id 오류입니다.");
-			req.getRequestDispatcher("/showHome.jsp").forward(req, resp);
-			return;
+			sort = req.getParameter("sort");
 		}
-		
-		
-//		req.getRequestDispatcher("/views/show/showDetail.jsp").forward(req, resp);
-		
-		
+		PageInfo pageInfo = null;
 		List<Review> revList = new ArrayList<>();
 		
+		revCount = revService.getRevCount(showId);
+		pageInfo = new PageInfo(page, 5, revCount, 5);
 		
-		revList = revService.findReviewByShowId(showId);
+		revList = revService.findAllByShowId(showId, pageInfo, sort);
+		
+		req.setAttribute("pageInfo", pageInfo);
 		
 		if(revList != null) {
 			req.setAttribute("revList", revList);
@@ -71,8 +84,6 @@ public class ShowDetailServlet extends HttpServlet{
 			req.getRequestDispatcher("/views/show/showDetail.jsp").forward(req, resp);
 			return;
 		}
-		
-			
 	} 
 	public List<Seat> parsing(String str){
 		String[] array = str.split(", ");
@@ -95,6 +106,7 @@ public class ShowDetailServlet extends HttpServlet{
 	}
 	
 	public Map<String, String> parse(String test) {
+		
 		test = test.replace("원", "");
 		int result = 0;
 		List<Integer> list = new ArrayList<>();
@@ -145,11 +157,5 @@ public class ShowDetailServlet extends HttpServlet{
 		}
 		
 		return map;
-//		Set<String> seat = map.keySet();
-//		List<String> seatList = new ArrayList<>(seat);
-//		
-//		System.out.println(map);
-//		System.out.println(seatList.get(0)); 
-//		System.out.println(map.values());
 	}
 }

@@ -36,22 +36,21 @@ public class ShowMainServlet extends HttpServlet {
 
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
 			String endDate = dateFormat.format(date);
-			String startDate = "AddDate(endDate, -1, 0)";
+			String startDate = AddDate(endDate, -1, 0);
 			String dateRange = "month";
 			
-			List<Rank> list = new ArrayList<>();
 			List<Show> showList = new ArrayList<>();
 			List<Rank> rankList = new ArrayList<>();
 
 			showList = showService.findByCategory(category, startDate, endDate);
-			list = rankService.findRankByCategory(category, dateRange, AddDate(endDate, 0, -1).replace(".", ""));
+			rankList = rankService.findRankByCategory(category, dateRange, AddDate(endDate, 0, -1).replace(".", ""));
 
-			if (list == null) {
-				list = rankService.findRankByCategory(category, dateRange, AddDate(endDate, 0, -2).replace(".", ""));
+			if (rankList == null) {
+				rankList = rankService.findRankByCategory(category, dateRange, AddDate(endDate, 0, -2).replace(".", ""));
 			}
 
 			for (int i = 0; i < 5; i++) {
-				rankList.add(list.get(i));
+				rankList.add(rankList.get(i));
 			}
 
 			if (showList == null) {

@@ -8,6 +8,7 @@ import static common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
+import board.controller.PageInfo;
 import review.dao.ReviewDao;
 import vo.Review;
 
@@ -21,11 +22,18 @@ public class ReviewService {
 		return revList;
 	}
 	
-	public List<Review> findReviewByShowId(String id) {
+	public List<Review> findAllByShowId(String id, PageInfo pageInfo, String sort) {
 		Connection conn = getConnection();
-		List<Review> revList = dao.findReviewByShowId(conn, id);
+		List<Review> revList = dao.findAllByShowId(conn, id, pageInfo, sort);
 		
 		return revList;
+	}
+	
+	public String getStar(String id) {
+		Connection conn = getConnection();
+		String result = dao.getStar(conn, id);
+		
+		return result;
 	}
 	
 	
@@ -39,7 +47,6 @@ public class ReviewService {
 		}else {
 			rollback(conn);
 		}
-		close(conn);
 		return result;
 	}
 	
@@ -52,7 +59,6 @@ public class ReviewService {
 		}else {
 			rollback(conn);
 		}
-		close(conn);
 		return result;
 	}
 	
@@ -65,7 +71,19 @@ public class ReviewService {
 		}else {
 			rollback(conn);
 		}
-		close(conn);
 		return result;
+	}
+
+	public int getRevCount(String id) {
+		Connection conn = getConnection();
+		int result = dao.getRevCount(conn, id);
+		return result;
+	}
+
+	public List<Review> findReviewByShowId(String showId) {
+		Connection conn = getConnection();
+		List<Review> revList = dao.findReviewByShowId(conn, showId);
+		
+		return revList;
 	}
 }

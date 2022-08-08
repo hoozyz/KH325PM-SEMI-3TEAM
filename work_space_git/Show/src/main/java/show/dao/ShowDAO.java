@@ -12,10 +12,11 @@ import board.controller.PageInfo;
 import vo.Board;
 import vo.Like;
 import vo.Show;
+import vo.news;
 
 public class ShowDAO {
 	String query;
-
+	
 	public int insert(Connection con, Show show) {
 
 		try {
@@ -77,9 +78,7 @@ public class ShowDAO {
 				show.setGenrenm(rs.getString("genrenm"));
 
 				return show;
-			} else {
-				return null;
-			}
+			} 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -111,10 +110,6 @@ public class ShowDAO {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "%" + keyword + "%");
 			rs = pstmt.executeQuery();
-
-			if (rs.next() == false) {
-				return null;
-			}
 
 			while (rs.next()) {
 				Show show = new Show();
@@ -154,10 +149,6 @@ public class ShowDAO {
 			pstmt.setString(4, endDate);
 			rs = pstmt.executeQuery();
 
-			if (rs.next() == false) {
-				return null;
-			}
-
 			while (rs.next()) {
 				Show show = new Show();
 				show.setPoster(rs.getString("poster"));
@@ -196,10 +187,6 @@ public class ShowDAO {
 			pstmt.setString(3, endDate);
 			rs = pstmt.executeQuery();
 
-			if (rs.next() == false) {
-				return null;
-			}
-
 			while (rs.next()) {
 				Show show = new Show();
 				show.setPoster(rs.getString("poster"));
@@ -222,16 +209,50 @@ public class ShowDAO {
 		return null;
 	}
 	
+	public List<Show> findByOpenDate(Connection conn, String category){
+		List<Show> openList = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "SELECT poster, prfpdfrom, prfpdto, fcltynm, prfnm, show_id FROM TBL_SHOW where genrenm = ? AND prfpdfrom BETWEEN (TO_CHAR(SYSDATE+1, 'YYYY.MM.DD')) AND (TO_CHAR(SYSDATE+8, 'YYYY.MM.DD'))";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, category);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Show show = new Show();
+				show.setPoster(rs.getString("poster"));
+				show.setPrfpdfrom(rs.getString("prfpdfrom"));
+				show.setPrfpdto(rs.getString("prfpdto"));
+				show.setFcltynm(rs.getString("fcltynm"));
+				show.setPrfnm(rs.getString("prfnm"));
+				show.setShow_id(rs.getString("show_id"));
+				
+				openList.add(show);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		return openList;
+	}
+
+	
 	public List<Show> selectShowByCategory(Connection conn,String category, PageInfo pageInfo) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<Show> list = new ArrayList<>();
-
+		
 		String query = "SELECT show_id, hall_id, prfnm, prfpdfrom, prfpdto, genrenm, poster FROM \r\n"
 				+ "(SELECT show_id, hall_id, prfnm, prfpdfrom, prfpdto, genrenm, poster, ROWNUM NUM FROM \r\n"
-				+ "(SELECT show_id, hall_id, prfnm, prfpdfrom, prfpdto, genrenm, poster FROM TBL_SHOW WHERE genrenm = ? ORDER BY show_id DESC)) WHERE NUM BETWEEN ? and ?";
+				+ "(SELECT show_id, hall_id, prfnm, prfpdfrom, prfpdto, genrenm, poster \r\n"
+				+ "FROM TBL_SHOW where genrenm = ? ORDER BY show_id DESC)) WHERE NUM BETWEEN ? and ?";
 
 		try {
+			List<Show> list = new ArrayList<>();
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, category);
 			pstmt.setInt(2, pageInfo.getStartList());
@@ -246,6 +267,41 @@ public class ShowDAO {
 				show.setPrfpdto(rs.getString("prfpdto"));
 				show.setGenrenm(rs.getString("genrenm"));
 				show.setPoster(rs.getString("poster"));
+				list.add(show);
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return null;
+	}
+
+//	-- 전체 공연 -> 공연시작날이 최근
+//	SELECT * FROM (SELECT * FROM TBL_SHOW WHERE hall_id = ? ORDER BY prfpdfrom DESC);
+	public List<Show> getShowView(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Show> list = new ArrayList<>();
+		
+		String query = "SELECT * FROM TBL_SHOW WHERE hall_id = ? ORDER BY prfpdfrom DESC";
+				
+		try {
+			pstmt = conn.prepareStatement(query); 
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				System.out.println("-------------------");
+				Show show = new Show();
+				show.setShow_id(rs.getString("show_id"));
+				show.setPrfnm(rs.getString("prfnm"));
+				show.setPrfpdfrom(rs.getString("prfpdfrom"));
+				show.setPrfpdto(rs.getString("prfpdto"));
+				show.setGenrenm(rs.getString("genrenm"));
+				show.setPoster(rs.getString("poster"));
+				show.setPrfcast(rs.getString("prfcast"));
 				list.add(show);
 			}
 		} catch (Exception e) {

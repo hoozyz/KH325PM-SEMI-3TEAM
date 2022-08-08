@@ -40,7 +40,6 @@ public class BoardDao {
 				board.setName(rs.getString("name"));
 				list.add(board);
 			}
-			System.out.println(list.get(0));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -60,7 +59,6 @@ public class BoardDao {
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(query);
-			int count = 1;
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {

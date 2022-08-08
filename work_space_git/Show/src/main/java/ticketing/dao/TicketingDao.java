@@ -24,10 +24,6 @@ public class TicketingDao {
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 
-			if (rs.next() == false) {
-				return null;
-			}
-
 			while (rs.next()) {
 				Ticketing tic = new Ticketing();
 				tic.setTic_no(rs.getInt("tic_no"));

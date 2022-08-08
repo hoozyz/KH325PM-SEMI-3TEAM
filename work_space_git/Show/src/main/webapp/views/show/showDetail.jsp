@@ -1,8 +1,8 @@
+<%@page import="board.controller.PageInfo"%>
+<%@page import="vo.Review"%>
+<%@page import="vo.Show"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="vo.Show"%>
-<%@page import="vo.User"%>
-<%@page import="vo.Review"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -24,10 +24,21 @@
 		revList = null;
 	}		
 	
-	List<String> slist = (List<String>) request.getAttribute("slist");
-	List<String> priceList = (List<String>) request.getAttribute("priceLists");
+	List<String> slist = null;
+	List<String> priceList = null;
 	
-	String[] priceArr = show.getPcseguidance().split(", ");
+	if (request.getAttribute("slist") != null) {
+		slist = (List<String>) request.getAttribute("slist");
+	}
+	
+	if (request.getAttribute("priceLists") != null) {
+		priceList = (List<String>) request.getAttribute("priceLists");
+	}
+	
+	String[] priceArr = null;
+	if(show.getPcseguidance().equals("전석무료") == false) {
+		priceArr = show.getPcseguidance().split(", ");
+	} 
 	
 	int count1 = 0;
 	int count2 = 0;
@@ -35,36 +46,108 @@
 	int count4 = 0;
 	int count5 = 0;
 	
+	double total1 = 0;
+	double total2 = 0;
+	double total3 = 0;
+	double total4 = 0;
+	double total5 = 0;
 	
 	int i = 0;
 	
 	if(revList != null) {
 		while(i < revList.size()) {
-			if(revList.get(i).getRev_star() == "1") {
+			if(revList.get(i).getRev_star() == 1) {
 				count1++;
 				i++;
-			}
-			if(revList.get(i).getRev_star() == "2") {
+			} else if(revList.get(i).getRev_star() == 2) {
 				count2++;
 				i++;
-			}
-			if(revList.get(i).getRev_star() == "3") {
+			} else if(revList.get(i).getRev_star() == 3) {
 				count3++;
 				i++;
-			}
-			if(revList.get(i).getRev_star() == "4") {
+			} else if(revList.get(i).getRev_star() == 4) {
 				count4++;
 				i++;
-			}
-			if(revList.get(i).getRev_star() == "5") {
+			} else {
 				count5++;
 				i++;
 			}
 		}
 	}
+	int total = count1 + count2 + count3 + count4 + count5;
+	if(total != 0) {
+		total1 = ((double)count1 / total) * 100;
+		total2 = ((double)count2 / total) * 100;
+		total3 = ((double)count3 / total) * 100;
+		total4 = ((double)count4 / total) * 100;
+		total5 = ((double)count5 / total) * 100;
+	}
 	
+	request.setAttribute("show", show);
+	
+	PageInfo pageInfo = null;
+	if(request.getAttribute("pageInfo") != null) {
+		pageInfo = (PageInfo) request.getAttribute("pageInfo");
+	}
+	
+	int count = 5;
 %>    
- 
+
+<style>
+	.board tr {
+        cursor: pointer;
+    }
+    
+    .td-no,
+    .td-title,
+    .td-writer,
+    .td-date {
+        border-right: 1px solid lightgray;
+    }
+    
+    .board-page>a {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        color: #222;
+        line-height: 30px;
+        text-align: center;
+        background: #fff;
+        margin-right: 8px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    .board-page>.page-on {
+        border: 1px solid #293243;
+        background: #222;
+        color: #fff;
+        cursor: pointer;
+    }
+    
+    .board-page>.page-prev {
+        background-color: #fff;
+    }
+    
+    .board-page>.page-next {
+        background-color: #fff;
+    }
+    
+    .board-write>a {
+        background: #2a2a4e;
+        color: #fff;
+        padding: 3px 15px 3px;
+        display: inline-block;
+        text-align: center;
+        border-radius: 50px;
+        text-decoration: none;
+    }
+    
+    .board-data > tr {
+    	border-bottom: 1px solid lightgray; height: 70px;
+    }
+</style>
+
   <!-- 공연자세히css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/showDetail/showDetail.css">
 
@@ -73,19 +156,20 @@
     <!-- Page content-->
 
         <!-- Review modal 리뷰남기기-->
-        <form name="writeForm" action="<%=path%>/Review/writeReview" method="POST">
+        <form name="writeForm" action="<%=path%>/writeReview" method="POST">
         	<div class="modal fade" id="modal-review" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
+            	<input name="showId" value="<%=show.getShow_id()%>" type="hidden">
+            	<input name="page" value="<%=pageInfo.getCurrentPage()%>" type="hidden">
                 <div class="modal-content">
                     <div class="modal-header d-block position-relative border-0 pb-0 px-sm-5 px-4">
                         <h3 class="modal-title mt-4 text-center">관람후기 등록 </h3>
                         <button class="btn-close position-absolute top-0 end-0 mt-3 me-3" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body px-sm-5 px-4">
-                        <form class="needs-validation" novalidate>
                             <div class="mb-3">
                                 <label class="form-label" for="review-name">아이디 <span class='text-danger'>*</span></label>
-                                <input class="form-control" name="revId" type="text" id="review-name" placeholder="이름" required>
+                                <input class="form-control" name="revId" type="text" id="review-name" placeholder="아이디" required>
                                 <div class="invalid-feedback">아이디를 입력해주세요.</div>
                             </div>
                             <div class="mb-3">
@@ -106,7 +190,6 @@
                                 <div class="invalid-feedback">관람후기를 등록해주세요</div>
                             </div>
                             <input class="btn btn-primary d-block rounded-pill w-100 mb-4" type="submit" value="리뷰 등록">
-                        </form>
                     </div>
                 </div>
             </div>
@@ -224,8 +307,12 @@
                             </div>
                             <div class="col-9 mt-3" style="background-color: #f6f6f6;">
                                 <div>
-                                    <% for (int j = 0; j < priceArr.length; j++) { %>
+                                    <% if (show.getPcseguidance().equals("전석무료")) { %>
+                                    	전석무료
+                                    <% } else { %>
+                                    	<% for (int j = 0; j < priceArr.length; j++) { %>
                                     	<div class="info_txt"><%=priceArr[j].trim() %></div>
+                                    	<% } %>
                                     <% } %>
                                 </div>
                             </div>
@@ -233,7 +320,7 @@
                     </div>
                    <% if(loginUser != null) { %>
                    			 <div style="text-align: end; margin-right: 10px;">
-                        <div class="btn btn-outline-primary rounded ms-5" href="#modal-ticketing" data-bs-toggle="modal" data-bs-dismiss="modal" style="display: inline-block; width: 230px; height: 60px;">
+                        <div class="btn btn-outline-primary rounded ms-5" href="#modal-ticket" data-bs-toggle="modal" data-bs-dismiss="modal" style="display: inline-block; width: 230px; height: 60px;">
                             <div style="font-size: 24px;">예매 하기</div>
                         </div>
                    <% } else {%>
@@ -294,8 +381,12 @@
                                                         <div class="col-2" style="text-align: right;">
                                                             <select id="selectSeat" onchange="changeSeat()" required>
                                                             <option value="" selected disabled hidden></option>
-						                                    <% for (int j = 0; j < priceArr.length; j++) { %>
-				                                    		<option><%= priceArr[j].trim() %></option>
+						                                    <% if (show.getPcseguidance().equals("전석무료")) { %>
+						                                    	<option>전석무료</option>
+						                                    <% } else { %>
+						                                    	<% for (int j = 0; j < priceArr.length; j++) { %>
+				                                    			<option><%= priceArr[j].trim() %></option>
+						                                    	<% } %>
 						                                    <% } %>
                                                         </select>
                                                         </div>
@@ -415,9 +506,9 @@
                 	document.getElementById("viewSeat").innerHTML = seat;
                 	document.getElementById("total-price").innerHTML = total;
                 };
-            	
-            	
             </script>
+            
+            
         </section>
         <!-- Page content-->
         <section class="container pb-5 mb-md-4 mt-5 ">
@@ -434,37 +525,43 @@
                             <div class="d-flex align-items-center mb-2 fs-sm ">
                                 <div class="text-nowrap ">5<i class="fi-star mt-n1 ms-1 align-middle opacity-70 "></i></div>
                                 <div class="progress w-100 mx-3 ">
-                                    <div class="progress-bar bg-warning " role="progressbar " style="width: 80% " aria-valuenow="80" aria-valuemin="0 " aria-valuemax="100 "></div>
+                                    <div class="progress-bar bg-warning " role="progressbar " style="width: <%=total5 %>% " aria-valuenow="80" aria-valuemin="0 " aria-valuemax="100 "></div>
                                 </div><span style="min-width: 48px; "><%=count5 %></span>
                             </div>
                             <div class="d-flex align-items-center mb-2 fs-sm ">
                                 <div class="text-nowrap ">4<i class="fi-star mt-n1 ms-1 align-middle opacity-70 "></i></div>
                                 <div class="progress w-100 mx-3 ">
-                                    <div class="progress-bar bg-warning " role="progressbar " style="width: 10% " aria-valuenow="10 " aria-valuemin="0 " aria-valuemax="100 "></div>
+                                    <div class="progress-bar bg-warning " role="progressbar " style="width: <%=total4 %>% " aria-valuenow="10 " aria-valuemin="0 " aria-valuemax="100 "></div>
                                 </div><span style="min-width: 48px; "><%=count4 %></span>
                             </div>
                             <div class="d-flex align-items-center mb-2 fs-sm ">
                                 <div class="text-nowrap ">3<i class="fi-star mt-n1 ms-1 align-middle opacity-70 "></i></div>
                                 <div class="progress w-100 mx-3 ">
-                                    <div class="progress-bar bg-warning " role="progressbar " style="width: 0% " aria-valuenow="0 " aria-valuemin="0 " aria-valuemax="100 "></div>
+                                    <div class="progress-bar bg-warning " role="progressbar " style="width: <%=total3 %>% " aria-valuenow="0 " aria-valuemin="0 " aria-valuemax="100 "></div>
                                 </div><span style="min-width: 48px; "><%=count3 %></span>
                             </div>
                             <div class="d-flex align-items-center mb-2 fs-sm ">
                                 <div class="text-nowrap ">2<i class="fi-star mt-n1 ms-1 align-middle opacity-70 "></i></div>
                                 <div class="progress w-100 mx-3 ">
-                                    <div class="progress-bar bg-warning " role="progressbar " style="width: 0% " aria-valuenow="0 " aria-valuemin="0 " aria-valuemax="100 "></div>
+                                    <div class="progress-bar bg-warning " role="progressbar " style="width: <%=total2 %>% " aria-valuenow="0 " aria-valuemin="0 " aria-valuemax="100 "></div>
                                 </div><span style="min-width: 48px; "><%=count2 %></span>
                             </div>
                             <div class="d-flex align-items-center mb-2 fs-sm ">
                                 <div class="text-nowrap ">1<i class="fi-star mt-n1 ms-1 align-middle opacity-70 "></i></div>
                                 <div class="progress w-100 mx-3 ">
-                                    <div class="progress-bar bg-warning " role="progressbar " style="width: 0% " aria-valuenow="0" aria-valuemin="0 " aria-valuemax="100 "></div>
+                                    <div class="progress-bar bg-warning " role="progressbar " style="width: <%=total1 %>% " aria-valuenow="0" aria-valuemin="0 " aria-valuemax="100 "></div>
                                 </div><span style="min-width: 48px; "><%=count1 %></span>
                             </div>
                         </div>
                         <!-- Score-->
                         <div class="col-sm-4 order-sm-2 order-1 mb-sm-0 mb-3 text-center ">
-                            <h5 class="display-2 mb-1 ">4.7</h5>
+                            <h5 class="display-2 mb-1 ">
+                            <% if (show.getShow_star() != null) { %>
+                            	<%=show.getShow_star() %>
+                            <% } else {%>
+                            	0.0
+                            <% } %>
+							</h5>
                             <div><span class="star-rating "><i class="star-rating-icon fi-star-filled active "></i><i class="star-rating-icon fi-star-filled active "></i><i class="star-rating-icon fi-star-filled active "></i><i class="star-rating-icon
                     fi-star-filled active "></i><i class="star-rating-icon fi-star-filled active "></i></span>
                             </div><span style="font-size: 20px; margin-top: 10px; ">
@@ -477,98 +574,258 @@
                         </div>
                     </div>
                     <!-- Add review btn + Reviews sort-->
-                    <div class="d-flex flex-sm-row flex-column align-items-sm-center justify-content-between mb-4 pb-4 border-bottom "><a class="btn btn-outline-primary rounded-pill mb-sm-0 mb-3 " href="#modal-review " data-bs-toggle="modal" data-bs-dismiss="modal"><i class="fi-edit mt-n1 me-2 align-middle "></i>후기 등록</a>
+                    <% if (loginUser != null) { %>
+                    	<div class="d-flex flex-sm-row flex-column align-items-sm-center justify-content-between mb-4 pb-4 border-bottom ">
+                    	<a class="btn btn-outline-primary rounded-pill mb-sm-0 mb-3 " href="#modal-review" data-bs-toggle="modal" data-bs-dismiss="modal">
+                    	<i class="fi-edit mt-n1 me-2 align-middle "></i>후기 등록</a>
+                    <% } else { %>
+                    	<div class="d-flex flex-sm-row flex-column align-items-sm-center justify-content-between mb-4 pb-4 border-bottom ">
+                    	<a class="btn btn-outline-primary rounded-pill mb-sm-0 mb-3 " href="#signin-modal" data-bs-toggle="modal" data-bs-dismiss="modal">
+                    	<i class="fi-edit mt-n1 me-2 align-middle "></i>후기 등록</a>
+                    <% } %>
                         <div class="d-flex align-items-center ms-sm-4 ">
                             <label class="d-inline-block me-2 pe-1 text-muted text-nowrap " for="reviews-sort "><i class="fi-arrows-sort mt-n1 me-1 align-middle opacity-80"></i>정렬순:</label>
-                            <select class="form-select " id="reviews-sort " style="min-width: 180px; ">
-                  <option>최신순</option>
-                  <option>오래된순</option>
-                  <option>인기순</option>
-                  <option>별점 높은순</option>
-                  <option>별점 낮은순</option>
-                </select>
+                            <select class="form-select" id="reviews-sort" onchange="reviewSort('<%=show.getShow_id() %>');" style="min-width: 180px; ">
+                  				<option value="new">최신순</option>
+                  				<option value="old">오래된순</option>
+                  				<option value="like">좋아요순</option>
+                  				<option value="star">별점 높은순</option>
+                			</select>
                         </div>
                     </div>
+                    
                     <!-- Review-->
-                    <div class="mb-4 pb-4 border-bottom ">
-                        <div class="d-flex justify-content-between mb-3 ">
-                            <div class="d-flex align-items-center pe-2 "><img class="rounded-circle me-1 " src="img/avatars/03.jpg " width="48 " alt="Avatar ">
+                    <div class="mb-4 pb-4 border-bottom review-page">
+                    <% if (revList != null) { %>
+	                    <% if (revList.size() < count) { %>
+	                    	<% count = revList.size(); %>
+	                    <% } %>
+                        <% for (int j = 0; j < count; j++) { %>
+                        	<div class="d-flex justify-content-between mb-3 ">
+                            <div class="d-flex align-items-center pe-2 "><img class="rounded-circle me-1 " src="<%=path %>/resources/img/avatars/03.jpg " width="48 " alt="Avatar ">
                                 <div class="ps-2 ">
-                                    <h6 class="fs-base mb-0 ">Annette Black</h6><span class="star-rating "><i class="star-rating-icon fi-star-filled active "></i><i class="star-rating-icon fi-star-filled active "></i><i class="star-rating-icon fi-star-filled
-                    active "></i><i class="star-rating-icon fi-star-filled active "></i><i class="star-rating-icon fi-star-filled active "></i></span>
+                                    <h6 class="fs-base mb-0 "><%=revList.get(j).getUser_id() %></h6>
+                                    <span class="star-rating ">
+                                    <% for (int k = 0; k < 5; k++) {%>
+                                    	<% if (k < revList.get(j).getRev_star()) { %>
+                                    		<i class="star-rating-icon fi-star-filled active"></i>
+                                    	<% } else {%>
+                                    		<i class="star-rating-icon fi-star"></i>
+                                    	<% } %>
+                                    <% } %>
+                                    </span>
                                 </div>
-                            </div><span class="text-muted fs-sm ">Jan 17, 2021</span>
+                            </div><span class="text-muted fs-sm "><%=revList.get(j).getRev_date() %></span>
                         </div>
-                        <p>Elementum ut quam tincidunt egestas vitae elit, hendrerit. Ullamcorper nulla amet lobortis elit, nibh condimentum enim. Aliquam felis nisl tellus sodales lectus dictum tristique proin vitae. Odio fermentum viverra tortor quis.</p>
+                        <p><%=revList.get(j).getRev_content() %></p>
                         <div class="d-flex align-items-center ">
-                            <button class="btn-like " type="button "><i class="fi-like "></i><span>(3)</span></button>
+                            <button class="heart" type="button" style="border: none;" onclick="heart();"><i class="fi-heart"></i><span>(<%=revList.get(j).getRev_like() %>)</span></button>
                         </div>
+                        	<% if (j != count - 1) { %>
+                        		<hr><br>
+                        	<% } %>
+                        <% } %>
+                    <% } else {%>
+                    	<div style="text-align: center;">
+                   		<h2>리뷰내역이 없습니다.</h2>
+                   		</div>
+                    <% } %>
                     </div>
-                    <!-- Review-->
-                    <div class="mb-4 pb-4 border-bottom ">
-                        <div class="d-flex justify-content-between mb-3 ">
-                            <div class="d-flex align-items-center pe-2 "><img class="rounded-circle me-1 " src="img/avatars/13.png " width="48 " alt="Avatar ">
-                                <div class="ps-2 ">
-                                    <h6 class="fs-base mb-0 ">Darrell Steward</h6><span class="star-rating "><i class="star-rating-icon fi-star-filled active "></i><i class="star-rating-icon fi-star-filled active "></i><i class="star-rating-icon fi-star-filled
-                    active "></i><i class="star-rating-icon fi-star-filled active "></i><i class="star-rating-icon fi-star "></i></span>
-                                </div>
-                            </div><span class="text-muted fs-sm ">Dec 1, 2020</span>
-                        </div>
-                        <p>Vel dictum nunc ut tristique. Egestas diam amet, ut proin hendrerit. Dui accumsan at phasellus tempus consequat dignissim.</p>
-                        <div class="d-flex align-items-center ">
-                            <button class="btn-like " type="button "><i class="fi-like "></i><span>(0)</span></button>
-                        </div>
-                    </div>
-                    <!-- Review-->
-                    <div class="mb-4 pb-4 border-bottom ">
-                        <div class="d-flex justify-content-between mb-3 ">
-                            <div class="d-flex align-items-center pe-2 "><img class="rounded-circle me-1 " src="img/avatars/13.png " width="48 " alt="Avatar ">
-                                <div class="ps-2 ">
-                                    <h6 class="fs-base mb-0 ">Floyd Miles</h6><span class="star-rating "><i class="star-rating-icon fi-star-filled active "></i><i class="star-rating-icon fi-star-filled active "></i><i class="star-rating-icon fi-star-filled
-                    active "></i><i class="star-rating-icon fi-star-filled active "></i><i class="star-rating-icon fi-star-filled active "></i></span>
-                                </div>
-                            </div><span class="text-muted fs-sm ">Oct  28, 2020</span>
-                        </div>
-                        <p>Viverra nunc blandit sapien non imperdiet sit. Purus tempus elementum aliquam eu urna. A aenean duis non egestas at libero porttitor integer eget. Sed dictum lobortis laoreet gravida.</p>
-                        <div class="d-flex align-items-center ">
-                            <button class="btn-like " type="button "><i class="fi-like "></i><span>(2)</span></button>
-                        </div>
-                    </div>
-                    <!-- Review-->
-                    <div class="mb-4 pb-4 border-bottom ">
-                        <div class="d-flex justify-content-between mb-3 ">
-                            <div class="d-flex align-items-center pe-2 "><img class="rounded-circle me-1 " src="img/avatars/04.jpg " width="48 " alt="Avatar ">
-                                <div class="ps-2 ">
-                                    <h6 class="fs-base mb-0 ">Ralph Edwards</h6><span class="star-rating "><i class="star-rating-icon fi-star-filled active "></i><i class="star-rating-icon fi-star-filled active "></i><i class="star-rating-icon fi-star-filled
-                    active "></i><i class="star-rating-icon fi-star-filled active "></i><i class="star-rating-icon fi-star "></i></span>
-                                </div>
-                            </div><span class="text-muted fs-sm ">Sep 14, 2020</span>
-                        </div>
-                        <p>Elementum nisl, egestas nam consectetur nisl, at pellentesque cras. Non sed ac vivamus dolor dignissim ut. Nisl sapien blandit pulvinar sagittis donec sociis ipsum arcu est. Tempus, rutrum morbi scelerisque tempor mi. Etiam urna,
-                            cras bibendum leo nec faucibus velit. Tempor lectus dignissim at auctor integer neque quam amet.</p>
-                        <div class="d-flex align-items-center ">
-                            <button class="btn-like " type="button "><i class="fi-like "></i><span>(0)</span></button>
-                        </div>
-                    </div>
-                    <!-- Review pagination + Add review btn-->
-                    <div class="d-flex align-items-center justify-content-between ">
-                        <nav aria-label="Reviews pagination ">
-                            <ul class="pagination mb-0 ">
-                                <li class="page-item d-sm-none "><span class="page-link page-link-static ">1 / 8</span></li>
-                                <li class="page-item active d-none d-sm-block " aria-current="page "><span class="page-link ">1<span class="visually-hidden ">(current)</span></span>
-                                </li>
-                                <li class="page-item d-none d-sm-block "><a class="page-link " href="# ">2</a></li>
-                                <li class="page-item d-none d-sm-block "><a class="page-link " href="# ">3</a></li>
-                                <li class="page-item d-none d-sm-block ">...</li>
-                                <li class="page-item d-none d-sm-block "><a class="page-link " href="# ">8</a></li>
-                                <li class="page-item "><a class="page-link " href="# " aria-label="Next "><i class="fi-chevron-right "></i></a></li>
-                            </ul>
-                        </nav><a class="btn btn-outline-primary rounded-pill ms-4 " href="#modal-review " data-bs-toggle="modal" data-bs-dismiss="modal"><i class="fi-edit mt-n1 me-1 align-middle "></i>후기 등록</a>
-                    </div>
+                    
+                    <div class="board-bottom" style="width:1300px; margin: 0 auto; padding-top: 15px;">
+                	<div class="board-page" style="text-align: center;">
+		                <% for (int j = pageInfo.getStartPage(); j <= pageInfo.getEndPage(); j++) { %>
+		                	<% if (j == pageInfo.getCurrentPage()) { %>
+		                		<a class="page-on" id="page(<%=j %>)" onclick="goPage(<%=j %>); return false;"><%=j %></a>
+		                	<% } else {%>
+		                		<a class="page" id="page(<%=j %>)" onclick="goPage(<%=j %>); return false;"><%=j %></a>
+		                	<% } %>
+		                <% } %>
+		                <a class="page-next" onclick="goPage(<%=pageInfo.getNextPage() %>); return false;"><i class="fi-chevron-right align-middle"></i></a>
+		                <a class="page-end" onclick="goPage(<%=pageInfo.getMaxPage() %>); return false;"><i class="fi-chevrons-right align-middle"></i></a>
+		            </div>    
+		            </div>
+		            <br><hr>
+		          </div>
                 </div>
-                <!-- Sidebar-->
             </div>
         </section>
+        
+        <script>
+        function heart() {
+        	
+        }
+        
+        function reviewSort(showId) {
+    		var sortVal = $('#reviews-sort').val();
+    		var pageNo = 1;
+    		console.log(sortVal);
+    		$.ajax({
+     			url: "<%=path%>/review/list",
+     			type: "POST",
+     			dataType: "text",
+     			data: { "sort" : sortVal , "showId" : showId , "pageNo" : pageNo },
+     			progress: true,
+         	
+     			success: function(list) {
+    				var rev = JSON.parse(list);
+    				console.log(rev);
+    				
+    				var str = "";
+    				var url = "<%=path %>/resources/img/avatars/03.jpg";
+    				
+    				$.each(rev, (i, obj) => {
+        				str += '<div class="d-flex justify-content-between mb-3 ">'
+        				str += '    <div class="d-flex align-items-center pe-2 "><img class="rounded-circle me-1 " src="'+ url +'" width="48 " alt="Avatar ">'
+        				str += '        <div class="ps-2 ">'
+        				str += '            <h6 class="fs-base mb-0 ">'+ obj.user_id +'</h6>'
+        				str += '            <span class="star-rating ">'
+        				
+        				for (var k = 0; k < 5; k++) {
+            					if(k < obj.star) {
+            						str += '<i class="star-rating-icon fi-star-filled active"></i>'
+            					} else {
+            						str += '<i class="star-rating-icon fi-star"></i>'
+            					}
+        				    }
+        				
+        				str += '            </span>'
+        				str += '        </div>'
+        				str += '    </div><span class="text-muted fs-sm ">'+ obj.date +'</span>'
+        				str += '</div>'
+        				str += '<p>'+ obj.content +'</p>'
+        				str += '<div class="d-flex align-items-center ">'
+        				str += '    <button class="heart" type="button" style="border: none;"><i class="fi-heart"></i><span>('+ obj.like +')</span></button>'
+        				str += '</div>'
+        				str += '<hr><br>'
+    				});
+    				
+    				$('.review-page').html(str);
+    				
+    				var maxPage =     rev[0].maxPage     ;
+         			var startPage =   rev[0].startPage   ;
+         			var endPage =     rev[0].endPage     ;
+         			var currentPage = rev[0].currentPage ;
+         			var prevPage =    rev[0].prevPage    ;
+         			var nextPage =    rev[0].nextPage    ;
+         			var startList =   rev[0].startList   ;
+         			var endList =     rev[0].endList     ;  
+
+         			str = ""; 
+
+ 	        		if(currentPage != 1) {
+ 	            		str += '<a class="page-first" onclick="goPage(1); return false;"><i class="fi-chevrons-left align-middle"></i></a>';
+ 	            		str += '<a class="page-prev" onclick="goPage('+ prevPage +'); return false;"><i class="fi-chevron-left align-middle"></i></a>';
+ 	            	}
+ 	
+ 	            	for (var i = startPage; i <= endPage; i++) { // 페이지 5개마다 페이지 바뀜
+ 	            		if(i == currentPage) {
+ 	            			str += '<a class="page-on" id="page('+ i +')" onclick="goPage('+ i +'); return false;">'+ i +'</a>';
+ 	            		} else {
+ 	            			str += '<a class="page" id="page'+ i +'" onclick="goPage('+ i +'); return false;">'+ i +'</a>';
+ 	            		}
+ 	            	}
+ 	
+ 	            	if(currentPage != maxPage) {
+ 	            		str += '<a class="page-next" onclick="goPage('+ nextPage +'); return false;"><i class="fi-chevron-right align-middle"></i></a>';
+ 	            		str += '<a class="page-end" onclick="goPage('+ maxPage +'); return false;"><i class="fi-chevrons-right align-middle"></i></a>';
+ 	            	}
+ 	            	
+ 	            	$('.board-page').html(str);
+     			},
+     			
+     			error: function(e) {
+     				console.log(e);			
+    			}
+    		});
+    	};
+        
+        function goPage(pageNo) {
+        	var sortVal = $('#reviews-sort').val();
+        	var showId = '<%=show.getShow_id()%>';
+     		$.ajax({
+     			url: "<%=path%>/review/list",
+     			type: "POST",
+     			dataType: "text",
+     			data: { "pageNo" : pageNo , "sort" : sortVal , "showId" : showId },
+     			progress: true,
+     			
+     			// 성공시
+         		success: function(list) {
+         			var rev = JSON.parse(list);
+         			var str = "";
+         			console.log(rev)
+         			
+         			var url = "<%=path %>/resources/img/avatars/03.jpg";
+         			
+         			$.each(rev, (i, obj) => {
+	            		str += '<div class="d-flex justify-content-between mb-3 ">'
+	            		str += '    <div class="d-flex align-items-center pe-2 "><img class="rounded-circle me-1 " src="'+ url +'" width="48 " alt="Avatar ">'
+	            		str += '        <div class="ps-2 ">'
+	            		str += '            <h6 class="fs-base mb-0 ">'+ obj.user_id +'</h6>'
+	            		str += '            <span class="star-rating ">'
+	            		
+	            		for (var k = 0; k < 5; k++) {
+		            			if(k < obj.star) {
+		            				str += '<i class="star-rating-icon fi-star-filled active"></i>'
+		            			} else {
+		            				str += '<i class="star-rating-icon fi-star"></i>'
+		            			}
+	            		    }
+	            		
+	            		str += '            </span>'
+	            		str += '        </div>'
+	            		str += '    </div><span class="text-muted fs-sm ">'+ obj.date +'</span>'
+	            		str += '</div>'
+	            		str += '<p>'+ obj.content +'</p>'
+	            		str += '<div class="d-flex align-items-center ">'
+	            		str += '    <button class="heart" type="button" style="border: none;"><i class="fi-heart"></i><span>('+ obj.like +')</span></button>'
+	            		str += '</div>'
+	            		str += '<hr><br>'
+            		});
+
+         			$('.review-page').html(str);
+
+         			var maxPage =     rev[0].maxPage     ;
+         			var startPage =   rev[0].startPage   ;
+         			var endPage =     rev[0].endPage     ;
+         			var currentPage = rev[0].currentPage ;
+         			var prevPage =    rev[0].prevPage    ;
+         			var nextPage =    rev[0].nextPage    ;
+         			var startList =   rev[0].startList   ;
+         			var endList =     rev[0].endList     ;  
+
+         			str = ""; 
+         			var prevEndPage = endPage;
+
+ 	        		if(currentPage != 1) {
+ 	            		str += '<a class="page-first" onclick="goPage(1); return false;"><i class="fi-chevrons-left align-middle"></i></a>';
+ 	            		str += '<a class="page-prev" onclick="goPage('+ prevPage +'); return false;"><i class="fi-chevron-left align-middle"></i></a>';
+ 	            	}
+ 	
+ 	            	for (var i = startPage; i <= endPage; i++) { // 페이지 5개마다 페이지 바뀜
+ 	            		if(i == currentPage) {
+ 	            			str += '<a class="page-on" id="page('+ i +')" onclick="goPage('+ i +'); return false;">'+ i +'</a>';
+ 	            		} else {
+ 	            			str += '<a class="page" id="page'+ i +'" onclick="goPage('+ i +'); return false;">'+ i +'</a>';
+ 	            		}
+ 	            	}
+ 	
+ 	            	if(currentPage != maxPage) {
+ 	            		str += '<a class="page-next" onclick="goPage('+ nextPage +'); return false;"><i class="fi-chevron-right align-middle"></i></a>';
+ 	            		str += '<a class="page-end" onclick="goPage('+ maxPage +'); return false;"><i class="fi-chevrons-right align-middle"></i></a>';
+ 	            	}
+         			
+         			$('.board-page').html(str);
+         			
+         		},	
+     			
+     			error: function(e) {
+         			console.log(e);
+         		}
+     		})
+     	}
+        </script>
 
         <!-- Recently viewed-->
         <section class="container pb-5 mb-lg-4 ">

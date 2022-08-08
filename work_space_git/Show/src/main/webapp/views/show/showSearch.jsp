@@ -44,16 +44,50 @@
 	int count = 5;
 
 %>
+
+<Style>
+        .title1 {
+            font-family: 'NanumSquareRound', sans-serif;
+            font-size: 35pt;
+            font-weight: 800;
+            color: #201627;
+        }
+        
+        .cat {
+            text-decoration-line: none;
+            color: #D9E2F2;
+        }
+        
+        .hero_category {
+            font-family: 'Gugi', cursive;
+            color: #D9E2F2;
+            font-size: 15pt;
+        }
+        
+        .hero_category a:hover {
+            color: #AB69DD;
+            ;
+        }
+        .card-rank {
+        	width: 304px;
+        }
+        .card-body, .text-body {
+        	text-decoration: none;
+        }
+        .card-rank-img-top {
+        	height: 260px;
+        }
+    </Style> 
  <!--@@@@@@@@@ hero @@@@@@@@@-->
     <section class="container-fluid pt-0 mt-5 mb-3" style="height: 350px; background-image: url(<%=path%>resources/images/performHeroBg.png);">
         <section class="container pt-0 mt-5 my-0 ">
             <div style="position:relative;">
                 <img src="<%=path%>/resources/img/myimg/perform1.png" alt="" style=" width:100%; position:relative;">
                 <div class="hero_category" style="position:absolute; top: 40%; left: 8%">
-                    <a class="cat" href="#">연극&nbsp;</a>|
-                    <a class="cat" href="#">&nbsp;뮤지컬&nbsp;</a>|
-                    <a class="cat" href="#">&nbsp;무용&nbsp;</a>|
-                    <a class="cat" href="#">&nbsp;복합&nbsp;</a>
+                    <a class="cat" href="<%=path%>/showSearch?category=연극&rad_date=1개월&keyword=연극">연극&nbsp;</a>|
+                    <a class="cat" href="<%=path%>/showSearch?category=뮤지컬&rad_date=1개월keyword=뮤지컬">&nbsp;뮤지컬&nbsp;</a>|
+                    <a class="cat" href="<%=path%>/showSearch?category=무용&rad_date=1개월keyword=무용">&nbsp;무용&nbsp;</a>|
+                    <a class="cat" href="<%=path%>/showSearch?category=복합&rad_date=1개월keyword=복합">&nbsp;복합&nbsp;</a>
                 </div>
             </div>
         </section>
@@ -66,7 +100,6 @@
             <form class="form-group d-block d-md-flex py-0 mb-3 rounded-md-pill" style="width:85%;float:left;" method="GET" action="<%=path %>/showSearch">
                 <div class="input-group input-group-lg border-end-md">
                     <!--calendar-->
-
                     <div class="mb-3" style="max-width: 30rem;">
                         <div class="input-group" style="padding-top: 15px;"><span class="input-group-text"><i class="fi-calendar"></i></span>
                             <input class="form-control date-picker startDate" type="text" name="startDate"placeholder="From date" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
@@ -81,7 +114,7 @@
                 <hr class="d-md-none my-2">
                 <div class="d-sm-flex">
                     <div class="dropdown w-100 mb-sm-0 mb-3" data-bs-toggle="select">
-                        <button class="btn btn-link btn-lg dropdown-toggle ps-2 ps-sm-3" type="button" data-bs-toggle="dropdown"><i class="fi-list me-2"></i><span class="dropdown-toggle-label">카테고리</span></button>
+                        <button class="btn btn-link btn-lg dropdown-toggle ps-2 ps-sm-3" name="category" type="button" data-bs-toggle="dropdown"><i class="fi-list me-2"></i><span class="dropdown-toggle-label">카테고리</span></button>
                         <input type="hidden" name="category">
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#"><i class="fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">연극</span></a></li>

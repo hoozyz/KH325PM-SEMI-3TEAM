@@ -8,7 +8,7 @@ public class Review {
 	private String prfnm;
 	private String prfpdfrom;
 	private String prfpdto;
-	private String rev_star;
+	private int rev_star;
 	private int rev_like;
 	private String rev_date;
 
@@ -17,7 +17,7 @@ public class Review {
 	}
 
 	public Review(String rev_no, String show_id, String user_id, String rev_content, String prfnm, String prfpdfrom,
-			String prfpdto, String rev_star, int rev_like, String rev_date) {
+			String prfpdto, int rev_star, int rev_like, String rev_date) {
 		super();
 		this.rev_no = rev_no;
 		this.show_id = show_id;
@@ -94,11 +94,11 @@ public class Review {
 		this.prfpdto = prfpdto;
 	}
 
-	public String getRev_star() {
+	public int getRev_star() {
 		return rev_star;
 	}
 
-	public void setRev_star(String rev_star) {
+	public void setRev_star(int rev_star) {
 		this.rev_star = rev_star;
 	}
 

@@ -71,7 +71,7 @@ public class ShowSearchServlet extends HttpServlet{
 			
 			if(rad_date != null && (category.equals("뮤지컬") ||
 				category.equals("연극") || category.equals("무용") || category.equals("복합"))) {
-				
+
 				keyword = req.getParameter("keyword");
 				category = req.getParameter("category");
 				showList = showService.findByKeyword(keyword, category, startDate, endDate);
@@ -84,15 +84,12 @@ public class ShowSearchServlet extends HttpServlet{
 				req.setAttribute("showList", showList);
 				req.getRequestDispatcher("/views/show/showSearch.jsp").forward(req, resp);
 				return;
-			} else if(req.getParameter("rad_date") != null && (category.equals("클래식") ||
+			} else if(rad_date != null && (category.equals("클래식") ||
 					category.equals("국악") || category.equals("오페라"))){
-				startDate = (String)req.getParameter("startDate");
-				startDate = AddDate(startDate, 0, -1);
-				endDate = (String)req.getParameter("endDate");
 				keyword = req.getParameter("keyword");
 				category = req.getParameter("category");
 				showList = showService.findByKeyword(keyword, category, startDate, endDate);
-				
+				System.out.println(showList);
 				req.setAttribute("startDate", startDate);
 				req.setAttribute("endDate", endDate);
 				req.setAttribute("rad_date", rad_date);
@@ -103,19 +100,20 @@ public class ShowSearchServlet extends HttpServlet{
 				return;
 			}
 			
-			if(category.equals("음악")) {
-				showList = showService.findByHome(keyword, category);
-				req.setAttribute("showList", showList);
-				req.setAttribute("keyword", keyword);
-				req.setAttribute("category", category);
-				req.getRequestDispatcher("/views/show/musicSearch.jsp").forward(req, resp);
-				return;
-			} else if(category.equals("공연")) {
+			
+			if(category.equals("공연")) {
 				showList = showService.findByHome(keyword, category);
 				req.setAttribute("showList", showList);
 				req.setAttribute("keyword", keyword);
 				req.setAttribute("category", category);
 				req.getRequestDispatcher("/views/show/showSearch.jsp").forward(req, resp);
+				return;
+			} else if(category.equals("음악")) {
+				showList = showService.findByHome(keyword, category);
+				req.setAttribute("showList", showList);
+				req.setAttribute("keyword", keyword);
+				req.setAttribute("category", category);
+				req.getRequestDispatcher("/views/show/musicSearch.jsp").forward(req, resp);
 				return;
 			}
 			

@@ -1,6 +1,6 @@
+<%@page import="vo.Board"%>
 <%@page import="board.controller.PageInfo"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="vo.Board"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -232,10 +232,8 @@
                 	<a href="#signin-modal" data-bs-toggle="modal" data-bs-dismiss="modal" style="float: right;">글쓰기</a>
             	</div>
             <% } %>
-            <div class="board-bottom" style="width:1300px; margin: 0 auto; padding-top: 25px;">
+            <div class="board-bottom" style="width:1300px; margin: 0 auto; padding-top: 15px;">
                 <div class="board-page" style="text-align: center;">
-                   	<a class="page-first" onclick="goPage(1); return false;"><i class="fi-chevrons-left align-middle"></i></a>
-	                <a class="page-prev" onclick="goPage($<%=pageInfo.getPrevPage() %>}); return false;"><i class="fi-chevron-left align-middle"></i></a>
 	                <% for (int i = pageInfo.getStartPage(); i <= pageInfo.getEndPage(); i++) { %>
 	                	<% if (i == pageInfo.getCurrentPage()) { %>
 	                		<a class="page-on" id="page(<%=i %>)" onclick="goPage(<%=i %>); return false;"><%=i %></a>
@@ -273,6 +271,8 @@
              		success: function(list) {
              			data = JSON.parse(list);
              			var str = "";
+             			console.log(data)
+             			console.log(data[0].board_no)
              			
              			$.each(data, (i, obj) => {
              				str += '<tr style="width: 100%; height: 70px;  background-color: #f1f1f1;">'

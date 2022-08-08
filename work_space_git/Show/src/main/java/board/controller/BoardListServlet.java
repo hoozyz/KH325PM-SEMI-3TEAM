@@ -3,9 +3,7 @@ package board.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -89,6 +87,8 @@ public class BoardListServlet extends HttpServlet{
 				
 				arrayObj.add(obj);
 			}
+			
+			System.out.println(arrayObj.toJSONString());
 			
 			PrintWriter out = resp.getWriter();
 			out.println(arrayObj.toJSONString());

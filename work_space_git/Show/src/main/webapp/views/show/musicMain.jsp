@@ -28,6 +28,20 @@
 		showList = null;
 	}
 	
+	List<Show> openList = new ArrayList<>();
+	if(request.getAttribute("openList") != null){
+		Object open = request.getAttribute("openList");
+		if(open instanceof ArrayList<?>){
+			for(Object obj : (ArrayList<?>) open){
+				if(obj instanceof Show){
+					openList.add((Show) obj);
+				}
+			}
+		}
+	}else{
+		openList = null;
+	}
+	
 	PageInfo pageInfo = null;
 	if(request.getAttribute("pageInfo") != null) {
 		pageInfo = (PageInfo) request.getAttribute("pageInfo");
@@ -35,6 +49,33 @@
 %>
     
     <style>
+	    .board-page>a {
+	        display: inline-block;
+	        width: 30px;
+	        height: 30px;
+	        color: #222;
+	        line-height: 30px;
+	        text-align: center;
+	        background: #fff;
+	        margin-right: 8px;
+	        text-decoration: none;
+	        cursor: pointer;
+	    }
+	    
+	    .board-page>.page-on {
+	        border: 1px solid #293243;
+	        background: #222;
+	        color: #fff;
+	        cursor: pointer;
+	    }
+	    
+	    .board-page>.page-prev {
+	        background-color: #fff;
+	    }
+	    
+	    .board-page>.page-next {
+	        background-color: #fff;
+	    }
         .cat {
             text-decoration-line: none;
             color: #D9E2F2;
@@ -65,9 +106,9 @@
                 <div style="position:relative;">
                     <img src="<%=path %>/resources/images/music/musicHeroImg.png" alt="" style=" width:100%; position:relative;">
                     <div class="hero_category" style="position:absolute; top: 40%; left: 8%">
-                        <a class="cat" href="#">클래식&nbsp;</a>|
-                        <a class="cat" href="#">&nbsp;국악&nbsp;</a>|
-                        <a class="cat" href="#">&nbsp;오페라&nbsp;</a>
+                        <a class="cat" href="<%=path%>/showSearch?category=클래식&rad_date=1개월&keyword=클래식">클래식&nbsp;</a>|
+                        <a class="cat" href="<%=path%>/showSearch?category=국악&rad_date=1개월&keyword=국악">&nbsp;국악&nbsp;</a>|
+                        <a class="cat" href="<%=path%>/showSearch?category=오페라&rad_date=1개월&keyword=오페라">&nbsp;오페라&nbsp;</a>
                     </div>
                 </div>
             </section>
@@ -76,13 +117,13 @@
         
         <!--@@@ search @@@-->
         <section class="container py-1 mt-1 mb-1 ">
-            <form class="form-group d-block d-md-flex py-0 mb-3 rounded-md-pill" style="width:85%;float:left;">
+            <form class="form-group d-block d-md-flex py-0 mb-3 rounded-md-pill" style="width:85%;float:left;" method="GET" action="<%=path %>/showSearch">
                 <div class="input-group input-group-lg border-end-md">
                      <!--calendar-->
                 <div class="mb-3" style="max-width: 30rem;">
                     <div class="input-group" style="padding-top: 15px;"><span class="input-group-text"><i class="fi-calendar"></i></span>
-                        <input class="form-control date-picker date-range" name="startDate" type="text" placeholder="From date" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}" data-linked-input="#end-date">
-                        <input class="form-control date-picker" name="endDate" type="text" placeholder="To date" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}" id="end-date">
+                        <input class="form-control date-picker startDate" type="text" name="startDate"placeholder="From date" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
+                        <input class="form-control date-picker endDate" type="text" name="endDate" placeholder="To date" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
                     </div>
                 </div>
                 <!-- calendar End-->
@@ -101,21 +142,21 @@
                         카테고리
                         <%} %>
                     	</span></button>
-                        <input type="hidden">
+                        <input type="hidden" name="category">
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#"><i class="fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">클래식</span></a></li>
                             <li><a class="dropdown-item" href="#"><i class="fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">국악</span></a></li>
                             <li><a class="dropdown-item" href="#"><i class="fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">오페라</span></a></li>
                         </ul>
                     </div>
-                    <button class="btn btn-warning btn-lg rounded-pill w-100 w-md-auto ms-sm-3" type="button" style="background-color:#DBAB34;">검색</button>
+                   	<input class="btn btn-primary btn-lg rounded-pill w-100 w-md-auto ms-sm-3" type="submit" value="검색" style="background-color:#DBAB34;"/>
                 </div>
             </form>
-            <div class="position-relative py-4" style="width:15%;height:80px;float:right; padding-left: 3%;">
-                <input type="radio" name="rad_date" id="rad_day" value="rad_day" checked="">오늘
-                <input type="radio" name="rad_date" id="rad_week" value="rad_week">1주
-                <input type="radio" name="rad_date" id="rad_month" value="rad_month">1개월
-            </div>
+            <div class="position-relative" style="width:15%;height:80px;float:right; padding-top: 3%; padding-left: 3%;">
+	            <input type="radio" name="rad_date" id="rad_day" value="rad_day" onclick="radDate('day')">오늘
+	            <input type="radio" name="rad_date" id="rad_week" value="rad_week" onclick="radDate('week')">1주
+	            <input type="radio" name="rad_date" id="rad_month" value="rad_month" onclick="radDate('month')" checked>1개월
+        	</div>
         </section>
         <!--@@@ search End @@@-->
         
@@ -167,234 +208,24 @@
                 <div class="tns-carousel-inner " data-carousel-options="{&quot;items&quot;: 1, &quot;edgePadding&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;controls&quot;: false, &quot;gutter&quot;: 16},&quot;500&quot;:{&quot;controls&quot;:
                         true, &quot;gutter&quot;: 16}, &quot;768&quot;: {&quot;gutter&quot;: 24}}} ">
                     <!-- Item-->
-                    <div>
-                        <div class="card border-0 bg-size-cover pt-5 " style="background-image: url(<%=path%>/resources/images/perform/ex_poster4.png); ">
+                    <% if (openList != null) { %>
+                    	<% for (int i = 0; i < openList.size(); i++) { %>
+                    		<div styLE="height: 350px;">
+                        	<div class="card border-0 bg-size-cover pt-5 " style="background-image: url(<%=openList.get(i).getPoster()%>); height: 100%;">
                             <div class="d-none d-md-block " style="height: 13rem; "></div>
-                            <div class="card-body text-center text-md-start pt-4 pt-xl-0 ">
+                            <div class="card-body">
                                 <div class="d-md-flex justify-content-between align-items-end ">
                                     <div class="me-2 mb-4 mb-md-0 ">
-                                        <div class="d-flex justify-content-center justify-content-md-start text-light fs-sm mb-2 ">
-                                            <div class="text-nowrap me-3 "><i class="fi-calendar-alt me-1 opacity-70 "></i><span class="align-middle ">Nov 15</span></div>
-                                            <div class="text-nowrap "><i class="fi-clock me-1 opacity-70 "></i><span class="align-middle ">21:00</span></div>
-                                        </div>
-                                        <h3 class="h5 text-light mb-0 ">Simon Rock Concert</h3>
                                     </div>
                                     <div class="btn-group ">
-                                        <a class=" btn btn-translucent-warning rounded-pill rounded-end-0 px-3 " href="# ">상세보기</a>
+                                        <a class=" btn btn-translucent-warning rounded-pill rounded-end-0 px-3" style="background-color: black;" href="<%=path%>/showDetail?showId=<%=openList.get(i).getShow_id()%>">상세보기</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Item-->
-                    <div>
-                        <div class="card border-0 bg-size-cover pt-5 " style="background-image: url(<%=path%>/resources/images/perform/ex_poster3.png); ">
-                            <div class="d-none d-md-block " style="height: 14.5rem; "></div>
-                            <div class="card-body text-center text-md-start pt-4 pt-xl-0 ">
-                                <div class="d-md-flex justify-content-between align-items-end ">
-                                    <div class="me-2 mb-4 mb-md-0 ">
-                                        <div class="d-flex justify-content-center justify-content-md-start text-light fs-sm mb-2 ">
-                                            <div class="text-nowrap me-3 "><i class="fi-calendar-alt me-1 opacity-70 "></i><span class="align-middle ">Dec 2</span></div>
-                                            <div class="text-nowrap "><i class="fi-clock me-1 opacity-70 "></i><span class="align-middle ">10:00</span></div>
-                                        </div>
-                                        <h3 class="h5 text-light mb-0 ">Holi Festival</h3>
-                                    </div>
-                                    <div class="btn-group "><a class=" btn btn-translucent-warning rounded-pill rounded-end-0 px-3 " href="# ">상세보기</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Item-->
-                    <div>
-                        <div class="card border-0 bg-size-cover pt-5 " style="background-image: url(<%=path%>/resources/images/perform/ex_poster2.png); ">
-                            <div class="d-none d-md-block " style="height: 14.5rem; "></div>
-                            <div class="card-body text-center text-md-start pt-4 pt-xl-0 ">
-                                <div class="d-md-flex justify-content-between align-items-end ">
-                                    <div class="me-2 mb-4 mb-md-0 ">
-                                        <div class="d-flex justify-content-center justify-content-md-start text-light fs-sm mb-2 ">
-                                            <div class="text-nowrap me-3 "><i class="fi-calendar-alt me-1 opacity-70 "></i><span class="align-middle ">No 11</span></div>
-                                            <div class="text-nowrap "><i class="fi-clock me-1 opacity-70 "></i><span class="align-middle ">18:00</span></div>
-                                        </div>
-                                        <h3 class="h5 text-light mb-0 ">Football Match</h3>
-                                    </div>
-                                    <div class="btn-group "><a class=" btn btn-translucent-warning rounded-pill rounded-end-0 px-3 " href="# ">상세보기</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="card border-0 bg-size-cover pt-5 " style="background-image: url(<%=path%>/resources/images/perform/ex_poster5.png); ">
-                            <div class="d-none d-md-block " style="height: 13rem; "></div>
-                            <div class="card-body text-center text-md-start pt-4 pt-xl-0 ">
-                                <div class="d-md-flex justify-content-between align-items-end ">
-                                    <div class="me-2 mb-4 mb-md-0 ">
-                                        <div class="d-flex justify-content-center justify-content-md-start text-light fs-sm mb-2 ">
-                                            <div class="text-nowrap me-3 "><i class="fi-calendar-alt me-1 opacity-70 "></i><span class="align-middle ">Nov 15</span></div>
-                                            <div class="text-nowrap "><i class="fi-clock me-1 opacity-70 "></i><span class="align-middle ">21:00</span></div>
-                                        </div>
-                                        <h3 class="h5 text-light mb-0 ">Simon Rock Concert</h3>
-                                    </div>
-                                    <div class="btn-group ">
-                                        <a class=" btn btn-translucent-warning rounded-pill rounded-end-0 px-3 " href="# ">상세보기</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Item-->
-                    <div>
-                        <div class="card border-0 bg-size-cover pt-5 " style="background-image: url(<%=path%>/resources/images/perform/ex_poster4.png); ">
-                            <div class="d-none d-md-block " style="height: 14.5rem; "></div>
-                            <div class="card-body text-center text-md-start pt-4 pt-xl-0 ">
-                                <div class="d-md-flex justify-content-between align-items-end ">
-                                    <div class="me-2 mb-4 mb-md-0 ">
-                                        <div class="d-flex justify-content-center justify-content-md-start text-light fs-sm mb-2 ">
-                                            <div class="text-nowrap me-3 "><i class="fi-calendar-alt me-1 opacity-70 "></i><span class="align-middle ">Dec 2</span></div>
-                                            <div class="text-nowrap "><i class="fi-clock me-1 opacity-70 "></i><span class="align-middle ">10:00</span></div>
-                                        </div>
-                                        <h3 class="h5 text-light mb-0 ">Holi Festival</h3>
-                                    </div>
-                                    <div class="btn-group "><a class=" btn btn-translucent-warning rounded-pill rounded-end-0 px-3 " href="# ">상세보기</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Item-->
-                    <div>
-                        <div class="card border-0 bg-size-cover pt-5 " style="background-image: url(<%=path%>/resources/images/perform/ex_poster3.png); ">
-                            <div class="d-none d-md-block " style="height: 14.5rem; "></div>
-                            <div class="card-body text-center text-md-start pt-4 pt-xl-0 ">
-                                <div class="d-md-flex justify-content-between align-items-end ">
-                                    <div class="me-2 mb-4 mb-md-0 ">
-                                        <div class="d-flex justify-content-center justify-content-md-start text-light fs-sm mb-2 ">
-                                            <div class="text-nowrap me-3 "><i class="fi-calendar-alt me-1 opacity-70 "></i><span class="align-middle ">No 11</span></div>
-                                            <div class="text-nowrap "><i class="fi-clock me-1 opacity-70 "></i><span class="align-middle ">18:00</span></div>
-                                        </div>
-                                        <h3 class="h5 text-light mb-0 ">Football Match</h3>
-                                    </div>
-                                    <div class="btn-group "><a class=" btn btn-translucent-warning rounded-pill rounded-end-0 px-3 " href="# ">상세보기</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="card border-0 bg-size-cover pt-5 " style="background-image: url(<%=path%>/resources/images/perform/ex_poster2.png); ">
-                            <div class="d-none d-md-block " style="height: 13rem; "></div>
-                            <div class="card-body text-center text-md-start pt-4 pt-xl-0 ">
-                                <div class="d-md-flex justify-content-between align-items-end ">
-                                    <div class="me-2 mb-4 mb-md-0 ">
-                                        <div class="d-flex justify-content-center justify-content-md-start text-light fs-sm mb-2 ">
-                                            <div class="text-nowrap me-3 "><i class="fi-calendar-alt me-1 opacity-70 "></i><span class="align-middle ">Nov 15</span></div>
-                                            <div class="text-nowrap "><i class="fi-clock me-1 opacity-70 "></i><span class="align-middle ">21:00</span></div>
-                                        </div>
-                                        <h3 class="h5 text-light mb-0 ">Simon Rock Concert</h3>
-                                    </div>
-                                    <div class="btn-group ">
-                                        <a class=" btn btn-translucent-warning rounded-pill rounded-end-0 px-3 " href="# ">상세보기</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Item-->
-                    <div>
-                        <div class="card border-0 bg-size-cover pt-5 " style="background-image: url(<%=path%>/resources/images/perform/ex_poster5.png); ">
-                            <div class="d-none d-md-block " style="height: 14.5rem; "></div>
-                            <div class="card-body text-center text-md-start pt-4 pt-xl-0 ">
-                                <div class="d-md-flex justify-content-between align-items-end ">
-                                    <div class="me-2 mb-4 mb-md-0 ">
-                                        <div class="d-flex justify-content-center justify-content-md-start text-light fs-sm mb-2 ">
-                                            <div class="text-nowrap me-3 "><i class="fi-calendar-alt me-1 opacity-70 "></i><span class="align-middle ">Dec 2</span></div>
-                                            <div class="text-nowrap "><i class="fi-clock me-1 opacity-70 "></i><span class="align-middle ">10:00</span></div>
-                                        </div>
-                                        <h3 class="h5 text-light mb-0 ">Holi Festival</h3>
-                                    </div>
-                                    <div class="btn-group "><a class=" btn btn-translucent-warning rounded-pill rounded-end-0 px-3 " href="# ">상세보기</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Item-->
-                    <div>
-                        <div class="card border-0 bg-size-cover pt-5 " style="background-image: url(<%=path%>/resources/images/perform/ex_poster4.png); ">
-                            <div class="d-none d-md-block " style="height: 14.5rem; "></div>
-                            <div class="card-body text-center text-md-start pt-4 pt-xl-0 ">
-                                <div class="d-md-flex justify-content-between align-items-end ">
-                                    <div class="me-2 mb-4 mb-md-0 ">
-                                        <div class="d-flex justify-content-center justify-content-md-start text-light fs-sm mb-2 ">
-                                            <div class="text-nowrap me-3 "><i class="fi-calendar-alt me-1 opacity-70 "></i><span class="align-middle ">No 11</span></div>
-                                            <div class="text-nowrap "><i class="fi-clock me-1 opacity-70 "></i><span class="align-middle ">18:00</span></div>
-                                        </div>
-                                        <h3 class="h5 text-light mb-0 ">Football Match</h3>
-                                    </div>
-                                    <div class="btn-group "><a class=" btn btn-translucent-warning rounded-pill rounded-end-0 px-3 " href="# ">상세보기</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="card border-0 bg-size-cover pt-5 " style="background-image: url(<%=path%>/resources/images/perform/ex_poster3.png); ">
-                            <div class="d-none d-md-block " style="height: 13rem; "></div>
-                            <div class="card-body text-center text-md-start pt-4 pt-xl-0 ">
-                                <div class="d-md-flex justify-content-between align-items-end ">
-                                    <div class="me-2 mb-4 mb-md-0 ">
-                                        <div class="d-flex justify-content-center justify-content-md-start text-light fs-sm mb-2 ">
-                                            <div class="text-nowrap me-3 "><i class="fi-calendar-alt me-1 opacity-70 "></i><span class="align-middle ">Nov 15</span></div>
-                                            <div class="text-nowrap "><i class="fi-clock me-1 opacity-70 "></i><span class="align-middle ">21:00</span></div>
-                                        </div>
-                                        <h3 class="h5 text-light mb-0 ">Simon Rock Concert</h3>
-                                    </div>
-                                    <div class="btn-group ">
-                                        <a class=" btn btn-translucent-warning rounded-pill rounded-end-0 px-3 " href="# ">상세보기</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Item-->
-                    <div>
-                        <div class="card border-0 bg-size-cover pt-5 " style="background-image: url(<%=path%>/resources/images/perform/ex_poster2.png); ">
-                            <div class="d-none d-md-block " style="height: 14.5rem; "></div>
-                            <div class="card-body text-center text-md-start pt-4 pt-xl-0 ">
-                                <div class="d-md-flex justify-content-between align-items-end ">
-                                    <div class="me-2 mb-4 mb-md-0 ">
-                                        <div class="d-flex justify-content-center justify-content-md-start text-light fs-sm mb-2 ">
-                                            <div class="text-nowrap me-3 "><i class="fi-calendar-alt me-1 opacity-70 "></i><span class="align-middle ">Dec 2</span></div>
-                                            <div class="text-nowrap "><i class="fi-clock me-1 opacity-70 "></i><span class="align-middle ">10:00</span></div>
-                                        </div>
-                                        <h3 class="h5 text-light mb-0 ">Holi Festival</h3>
-                                    </div>
-                                    <div class="btn-group "><a class=" btn btn-translucent-warning rounded-pill rounded-end-0 px-3 " href="# ">상세보기</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Item-->
-                    <div>
-                        <div class="card border-0 bg-size-cover pt-5 " style="background-image: url(<%=path%>/resources/images/perform/ex_poster5.png); ">
-                            <div class="d-none d-md-block " style="height: 14.5rem; "></div>
-                            <div class="card-body text-center text-md-start pt-4 pt-xl-0 ">
-                                <div class="d-md-flex justify-content-between align-items-end ">
-                                    <div class="me-2 mb-4 mb-md-0 ">
-                                        <div class="d-flex justify-content-center justify-content-md-start text-light fs-sm mb-2 ">
-                                            <div class="text-nowrap me-3 "><i class="fi-calendar-alt me-1 opacity-70 "></i><span class="align-middle ">No 11</span></div>
-                                            <div class="text-nowrap "><i class="fi-clock me-1 opacity-70 "></i><span class="align-middle ">18:00</span></div>
-                                        </div>
-                                        <h3 class="h5 text-light mb-0 ">Football Match</h3>
-                                    </div>
-                                    <div class="btn-group "><a class=" btn btn-translucent-warning rounded-pill rounded-end-0 px-3 " href="# ">상세보기</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        	</div>
+                    	</div>
+                    	<% } %>
+                    <% } %>
                 </div>
             </div>
         </section>
@@ -418,12 +249,12 @@
                 </div>
                 <!-- Item-->
                 <!-- @@@ Card-1 @@@ -->
-                <% if (showList != null) { %>
+                	<div class="card card-flush card-stretched-vertical allMusic" style="margin-bottom: 30px; ">
+                	<% if (showList != null) { %>
                 	<% for (int i = 0; i < showList.size(); i++) { %>
-                		<div class="card card-flush card-stretched-vertical " style="margin-bottom: 30px; ">
                     <div class="row ">
                         <div class="col-sm-3 ">
-                            <img class="card-img " src="<%=path %>/resources/images/perform/ex_poster5.png " alt="Image Description " id="music_id_2" name="music_id_2 " style="width:200px; ">
+                            <img class="card-img " src="<%=showList.get(i).getPoster() %>" alt="Image Description " id="music_id_2" name="music_id_2 " style="width:200px; ">
                         </div>
                         <div class="col-sm-9 ">
                             <div class="card-body row " style="height:100%; ">
@@ -445,12 +276,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
                 	<% } %>
               	<% } %>
+                </div>
                 <div class="board-bottom" style="width:1300px; margin: 0 auto; padding-top: 25px;">
                 <div class="board-page" style="text-align: center;">
-	                <a class="page-prev" onclick="goPage($<%=pageInfo.getPrevPage() %>}); return false;"><i class="fi-chevron-left align-middle"></i></a>
 	                <% for (int i = pageInfo.getStartPage(); i <= pageInfo.getEndPage(); i++) { %>
 	                	<% if (i == pageInfo.getCurrentPage()) { %>
 	                		<a class="page-on" id="page(<%=i %>)" onclick="goPage(<%=i %>); return false;"><%=i %></a>
@@ -459,48 +289,10 @@
 	                	<% } %>
 	                <% } %>
 	                <a class="page-next" onclick="goPage(<%=pageInfo.getNextPage() %>); return false;"><i class="fi-chevron-right align-middle"></i></a>
+	                <a class="page-end" onclick="goPage(<%=pageInfo.getMaxPage() %>); return false;"><i class="fi-chevrons-right align-middle"></i></a>
                 </div>
             </div>
-                
-                
-                
-                
 
-                <!-- Pagination: with icons -->
-                <!-- <nav aria-label="Page navigation ">
-                    <ul class="pagination pagination-lg ">
-                        <li style="width:40%; "></li>
-                        <li class="page-item ">
-                            <a href="# " class="page-link " aria-label="Previous ">
-                                <i class="fi-chevron-left "></i>
-                            </a>
-                        </li>
-                        <li class="page-item d-sm-none ">
-                            <span class="page-link page-link-static ">2 / 5</span>
-                        </li>
-                        <li class="page-item d-none d-sm-block ">
-                            <a href="# " class="page-link ">1</a>
-                        </li>
-                        <li class="page-item active d-none d-sm-block " aria-current="page ">
-                            <span class="page-link ">2<span class="visually-hidden ">(current)</span>
-                            </span>
-                        </li>
-                        <li class="page-item d-none d-sm-block ">
-                            <a href="# " class="page-link ">3</a>
-                        </li>
-                        <li class="page-item d-none d-sm-block ">
-                            <a href="# " class="page-link ">4</a>
-                        </li>
-                        <li class="page-item d-none d-sm-block ">
-                            <a href="# " class="page-link ">5</a>
-                        </li>
-                        <li class="page-item ">
-                            <a href="# " class="page-link " aria-label="Next ">
-                                <i class="fi-chevron-right "></i>
-                            </a>
-                        </li>
-                    </ul>
-                </nav> -->
             </div>
         </section>
         <!-- @@@ 전체 음악공연 끝 @@@ -->
@@ -519,17 +311,40 @@
          			data = JSON.parse(list);
          			var str = "";
          			
+         			var url2 = "<%=path%>/showDetail?showId=";
+         			var url3 = "<%=path%>/hallDetail?hallId=";
+         			console.log(data[0].poster)
+         			
          			$.each(data, (i, obj) => {
-         				str += '<tr style="width: 100%; height: 70px;  background-color: #f1f1f1;">'
-         			    str += '<td class="td-no">'+obj.board_no +'</td>';
-         			    str += '<td class="td-title"><a href="#view-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="goView('+ obj.boar_no +'); return false;">'+ obj.title +'</a></td>';
-         			    str += '<td class="td-writer">'+obj.name +'</td>';
-         			    str += '<td class="td-date">'+obj.date +'</td>';
-         			    str += '<td class="td-count">'+obj.readcount +'</td>';
-         				str += '</tr>'
-         			});
-
-         			$('.board-data').html(str);
+         				str += '<div class="row ">'
+         			    str += '<div class="col-sm-3 ">'
+         			    str += '    <img class="card-img" src="'+ obj.poster +'" alt="Image Description " id="music_id_2" name="music_id_2 " style="width:200px; ">'
+         			    str += '</div>'
+         			    str += '<div class="col-sm-9 ">'
+         			    str += '    <div class="card-body row " style="height:100%; ">'         				
+         			    str += '        <div>'
+         				str += '            <div style="width: 50%;float:left; ">'
+         				str += '                <span class="badge bg-faded-primary ">'+obj.genrenm+'</span>'
+         				str += '                <h3 class="card-title " style="margin-top: 1%;margin-bottom: 1%; ">'
+         				str += '                    <a class="text-dark " href="'+ url2 + obj.show_id +'" id="title_2 " name="title_2 " style="text-decoration: none; ">'+ obj.prfnm +'</a>'
+         				str += '                </h3>'
+         				str += '            </div>'
+         				str += '        </div>'
+         				str += '        <div class="musicInfo">'
+         				str += '            <p id="cost_2 " name="cost_2 " style="margin-bottom: 1%; ">'+ obj.prfpdfrom +" ~ " + obj.prfpdto +'</p>'
+         				str += '            <div><a href="'+ url3 + obj.hall_id +'" name="hall_info_2 " style="color: black;text-decoration: none; ">공연장 가기</a></div>'
+         				str += '        </div>'
+         				str += '        <div class="card-footer " style="text-align: right; ">'
+         				str += '            <a class="btn btn-translucent-info rounded-pill px-3 " href="'+ url2 + obj.show_id +'" id="detail_2 " name="detail_2 ">공연 보러가기</a>'
+         				str += '        </div>'
+         				str += '    </div>'
+         				str += '</div>'
+         				str += '</div>'
+         				str += '</div>'
+         				
+         			
+         			});                            
+         			$('.allMusic').html(str);
 
          			var maxPage =     data[0].maxPage     ;
          			var startPage =   data[0].startPage   ;
@@ -569,8 +384,52 @@
          			console.log(e);
          		}
      		})
-     	}
-        
+     	};
+     	
+     	function radDate(range) {
+    		var endDay = new Date();
+    		var startDay = "";
+    		if(range == 'day') {
+    			startDay = new Date(endDay);
+    			startDay = dateFormat(startDay);
+    		}
+    		if(range == 'week') {
+    			startDay = lastWeek();
+    		}
+    		if(range == 'month') {
+    			startDay = lastMonth();
+    		}
+    		console.log(startDay);
+    		console.log(dateFormat(endDay));
+    		
+    		$('.input-group .startDate').val(startDay);
+    		$('.input-group .endDate').val(dateFormat(endDay));
+
+    		
+    		function lastWeek() {
+                var d = new Date(endDay);
+                var day = d.getDate();
+                d.setDate(day - 6);
+                return dateFormat(d);
+            }
+
+            function lastMonth() {
+                var d = new Date(endDay);
+                var month = d.getMonth();
+                var day = d.getDate();
+                d.setMonth(month - 1);
+                return dateFormat(d);
+            }
+            
+            function dateFormat(date) {
+                var yyyy = date.getFullYear();
+                var mm = date.getMonth() + 1;
+                mm = mm >= 10 ? mm : "0" + mm;
+                var dd = date.getDate();
+                dd = dd >= 10 ? dd : "0" + dd;
+                return yyyy + "-" + mm + "-" + dd;
+            }
+    	}
         </script>
 
 	<%@include file="/views/common/footer.jsp"%>

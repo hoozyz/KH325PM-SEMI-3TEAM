@@ -100,7 +100,7 @@
                                         <h4 class="text-white text-shadow"><%=list.get(i).getFcltynm() %></h4>
                                     </div>
                                     <div class="card-img-overlay-top justify-content-between align-items-center">
-                                        <a class="card-fav-icon position-relative z-index-40" onclick="goMap('<%=list.get(i).getLa() %>', '<%=list.get(i).getLo() %>')" href="javascript:void(0);" style="float: right; border: none; background: none; cursor: pointer; z-index: 100;"><i class="fi-map-pin fs-5"></i></a>
+                                        <a class="card-fav-icon position-relative z-index-40" onclick="goMap('<%=list.get(i).getLa() %>', '<%=list.get(i).getLo() %>', '<%=list.get(i).getFcltynm() %>')" href="javascript:void(0);" style="float: right; border: none; background: none; cursor: pointer; z-index: 100;"><i class="fi-map-pin fs-5"></i></a>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -113,26 +113,10 @@
                     	<% } %>
                     	</div>
                     <% } %>
-                    
-                    <!-- Pagination -->
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination pagination-template d-flex justify-content-center">
-                            <li class="page-item">
-                                <a class="page-link" href="#"> <i class="fa fa-angle-left"></i></a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#"> <i class="fa fa-angle-right"></i></a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
                 <div class="col-lg-6">
-                    <div id="map" style="width:100%;height:90%;"></div>
-                    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=1c1e51b427ea6bc49c8cd6877c234c7f"></script>
-f                    
+                    <div id="map" style="width:100%;height:1050px;"></div>
+                    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=1c1e51b427ea6bc49c8cd6877c234c7f"></script>           
                     <script>
 						var container = document.getElementById('map');
 						var options = {
@@ -141,8 +125,8 @@ f
 						};
 						
 						var map = new kakao.maps.Map(container, options);
-                    
-                    	function goMap(la, lo) {
+                    	
+                    	function goMap(la, lo, name) {
                     		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                             mapOption = {
                                 center: new kakao.maps.LatLng(la, lo), // 지도의 중심좌표
@@ -162,7 +146,7 @@ f
 	                        // 마커가 지도 위에 표시되도록 설정합니다
 	                        marker.setMap(map);
 	
-	                        var iwContent = '<div style="padding:5px;">Hello World! <br><a href="https://map.kakao.com/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+	                        var iwContent = '<div style="padding:5px;"><a href="https://map.kakao.com/link/map/'+ name +',' +la+','+lo +'" style="color:blue" target="_blank">큰지도보기<br></a> <a href="https://map.kakao.com/link/to/'+ name +',' +la+','+lo +'" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 	                            iwPosition = new kakao.maps.LatLng(la, lo); //인포윈도우 표시 위치입니다
 	
 	                        // 인포윈도우를 생성합니다
