@@ -46,6 +46,8 @@
 	if(request.getAttribute("pageInfo") != null) {
 		pageInfo = (PageInfo) request.getAttribute("pageInfo");
 	}
+	
+	int count = 12;
 %>
     
     <style>
@@ -209,7 +211,10 @@
                         true, &quot;gutter&quot;: 16}, &quot;768&quot;: {&quot;gutter&quot;: 24}}} ">
                     <!-- Item-->
                     <% if (openList != null) { %>
-                    	<% for (int i = 0; i < openList.size(); i++) { %>
+                    	<% if (count > openList.size()) { %>
+                    		<% count = openList.size(); %>
+                    	<% } %>
+                    	<% for (int i = 0; i < count; i++) { %>
                     		<div styLE="height: 350px;">
                         	<div class="card border-0 bg-size-cover pt-5 " style="background-image: url(<%=openList.get(i).getPoster()%>); height: 100%;">
                             <div class="d-none d-md-block " style="height: 13rem; "></div>

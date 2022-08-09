@@ -183,27 +183,54 @@
         	<div class="modal fade" id="modal-ticket" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-                    <div class="modal-header d-block position-relative border-0 pb-0 px-sm-5 px-4">
-                        <h3 class="modal-title mt-4 text-center">관람후기 등록 </h3>
-                        <button class="btn-close position-absolute top-0 end-0 mt-3 me-3" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body px-sm-5 px-4">
-                        <form class="needs-validation" novalidate>
-                            <div class="mb-3">
-                                <label class="form-label" for="review-name">아이디 <span class='text-danger'>*</span></label>
-                                <div class="invalid-feedback">아이디를 입력해주세요.</div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="review-rating">별점 <span class='text-danger'>*</span></label>
-                                <div class="invalid-feedback">별점을 선택해주세요.</div>
-                            </div>
-                            <div class="mb-4">
-                                <label class="form-label" for="review-text">관람후기 <span class='text-danger'>*</span></label>
-                                <div class="invalid-feedback">관람후기를 등록해주세요</div>
-                            </div>
-                            <input class="btn btn-primary d-block rounded-pill w-100 mb-4" type="submit" value="리뷰 등록">
-                        </form>
-                    </div>
+                     <div class="window">
+                         <div class="popup">
+                             <div class="row" style="margin: 0; bottom: 0;">
+                                 <div class="popup_left col-6">
+                                     <div style="text-align: left; margin-top: 10px; margin-left: 10px;margin-bottom: 20px;">
+                                         <h1 class="display-2" style=" color: #dbab34">예매하기</h1>
+                                         <div class="popup_left">
+                                         	<img src=<%=show.getPoster() %> alt="image" style="width: 400; height: 500; margin-left:120px;">
+                                         </div>
+                                         <div class="popup_left_detail">
+                                             <h2 style="color: #d9e2f2"><%=show.getPrfnm() %></h2>
+                                             <h4 style="color: #d9e2f2"><%=show.getFcltynm() %></h4>
+                                             <h4 style="color: #d9e2f2"><%=show.getPrfpdfrom() %> &nbsp;&nbsp; ~ &nbsp;&nbsp; <%=show.getPrfpdto() %></h4>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="popup_right col-6">
+                                     <div class="ticketing">
+                                         <div class="ticketing_body">
+                                             <span class="popup_date">날짜선택<i class="fi-calendar ps-1"></i></span>
+                                             <div class="popup_count">인원선택</div>
+                                             <div class="row">
+                                                 <div class="col-2" style="text-align: right;">
+                                                 </div>
+                                             </div>
+                                             <div class="popup_seat">좌석선택</div>
+                                             <div class="row">
+                                                 <div class="col-2" style="text-align: right;">
+                                                 </div>
+                                             </div>
+                                         </div>
+                                         <hr> 
+
+                                         <div class="ticketing_result">
+                                             <div>관람일 :&nbsp;<span ></span></div>
+                                             <div>인원 :&nbsp;<span ></span></div>
+                                             <div>좌석 :&nbsp;<span ></span></div>
+                                             
+                                             <div class="popup_price">
+                                                 <span class="final_price">0</span> <span>원</span>
+                                             </div>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
                 </div>
             </div>
         </div>
@@ -359,7 +386,7 @@
 				                                    			<option><%= priceArr[j].trim() %></option>
 						                                    	<% } %>
 						                                    <% } %>
-                                                        </select>
+                                                        </select> 
                                                         </div>
                                                     </div>
                                                 </div>
@@ -377,7 +404,7 @@
 
                                                     <div class="ticketing_check">선택하신 정보가 맞으시다면,</div>
                                                     <div style="margin-left: 30px;">
-                                                    <a href="#modal-ticket" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="ticketView('<%=show.getShow_id()%>')">
+                                                    <a href="#modal-ticket" data-bs-toggle="modal" id="show" data-bs-dismiss="modal" onclick="ticketView('<%=show.getShow_id()%>')">
                                                     	<button class="btn btn-outline-accent rounded ms-5" style="width:130px;height:60px;background-color:#201627" id="ticketing">
                                                             <div style="color: #d9e2f2; font-size: 20px;">예매하기</div>
                                                     	</button>
@@ -393,7 +420,68 @@
                                 </div>
                             </div>
                         </div>
-<!--                         </form>  -->       
+<!--                         </form>  -->      
+
+
+
+						<div class="background">
+                            <div class="window">
+                                <div class="popup">
+                                    <div class="row" style="margin: 0; bottom: 0;">
+                                        <div class="popup_left col-6">
+                                            <div style="text-align: left; margin-top: 10px; margin-left: 10px;margin-bottom: 20px;">
+                                                <h1 class="display-2" style=" color: #dbab34">예매하기</h1>
+                                                <div class="popup_left">
+                                                	<img src=<%=show.getPoster() %> alt="image" style="width: 400; height: 500; margin-left:120px;">
+                                                </div>
+                                                <div class="popup_left_detail">
+                                                    <h2 style="color: #d9e2f2"><%=show.getPrfnm() %></h2>
+                                                    <h4 style="color: #d9e2f2"><%=show.getFcltynm() %></h4>
+                                                    <h4 style="color: #d9e2f2"><%=show.getPrfpdfrom() %> &nbsp;&nbsp; ~ &nbsp;&nbsp; <%=show.getPrfpdto() %></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="popup_right col-6">
+                                            <div class="ticketing">
+                                                <div class="ticketing_body">
+                                                    <span class="popup_date">날짜선택<i class="fi-calendar ps-1"></i></span>
+                                                    <div class="popup_count">인원선택</div>
+                                                    <div class="row">
+                                                        <div class="col-2" style="text-align: right;">
+                                                        </div>
+                                                    </div>
+                                                    <div class="popup_seat">좌석선택</div>
+                                                    <div class="row">
+                                                        <div class="col-2" style="text-align: right;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr> 
+
+                                                <div class="ticketing_result">
+                                                    <div>관람일 :&nbsp;<span id="viewDataPicker"></span></div>
+                                                    <div>인원 :&nbsp;<span id="viewCnt"></span></div>
+                                                    <div>좌석 :&nbsp;<span id="viewSeat"></span></div>
+                                                    
+                                                    <div class="popup_price">
+                                                        <span class="final_price" id="total-price">0</span> <span>원</span>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+
+
+
+
+
+
+ 
 		             </div>
                 </div>
             </div>
@@ -439,7 +527,7 @@
             				str +=  '    <div class="invalid-feedback">관람후기를 등록해주세요</div>                                  '
             				str +=  '</div>                                                                                           '
             				
-            				$('#modal-ticket').html(str);
+            				$('.needs-validation').html(str);
 	         			},
 	         			
 	         			error: function(e) {
