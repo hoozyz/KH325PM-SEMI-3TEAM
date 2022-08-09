@@ -19,9 +19,9 @@ import vo.Show;
 import vo.User;
 
 @WebServlet("/writeReview")
-public class ReviewWriteServlet extends HttpServlet{
+public class ReviewWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	ReviewService revService = new ReviewService();
 	ShowService showService = new ShowService();
 
@@ -29,40 +29,60 @@ public class ReviewWriteServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.sendRedirect("/");
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		User loginUser = (User) session.getAttribute("loginUser");
-		if(loginUser == null) {
+		if (loginUser == null) {
 			req.setAttribute("msg", "잘못된 접근입니다.");
 			req.getRequestDispatcher("/").forward(req, resp);
 			return;
 		}
-		
+
 		int page = Integer.parseInt(req.getParameter("page"));
 		String showId = req.getParameter("showId");
 		int revCount = revService.getRevCount(showId);
 		PageInfo pageInfo = new PageInfo(page, 5, revCount, 5);
-		
-		
+
+		int count1 = revService.getCount1(showId);
+		int count2 = revService.getCount2(showId);
+		int count3 = revService.getCount3(showId);
+		int count4 = revService.getCount4(showId);
+		int count5 = revService.getCount5(showId);
+
+		req.setAttribute("count1", count1);
+		req.setAttribute("count2", count2);
+		req.setAttribute("count3", count3);
+		req.setAttribute("count4", count4);
+		req.setAttribute("count5", count5);
+		req.setAttribute("revCount", revCount);
+
 		String userId = req.getParameter("revId");
 		String starStr = req.getParameter("revStar");
 		int star = Integer.parseInt(String.valueOf(starStr.charAt(0)));
 		String content = req.getParameter("revContent");
-		
+
 		Show show = showService.findShowById(showId);
-		
-		Review rev = new Review("", showId, userId, content, show.getPrfnm(), show.getPrfpdfrom(), show.getPrfpdto(), star, 0, "");
-		
-		if(userId == null || star == 0 || content == null) {
+		Review rev = new Review("", showId, userId, content, show.getPrfnm(), show.getPrfpdfrom(), show.getPrfpdto(),
+				star, 0, "");
+
+		// 별점
+		String stars = revService.getStar(showId);
+		if (stars.length() == 1) {
+			show.setShow_star(stars + ".0");
+		} else {
+			show.setShow_star(stars);
+		}
+
+		if (userId == null || star == 0 || content == null) {
 			req.setAttribute("msg", "모든 내용을 작성해주세요.");
 			req.getRequestDispatcher("/views/show/showDetail.jsp").forward(req, resp);
 			return;
-		} 
-		
+		}
+
 		int result = revService.save(rev);
-		
+
 		List<Review> revList = new ArrayList<>();
 		revList = revService.findReviewByShowId(showId);
 		req.setAttribute("pageInfo", pageInfo);

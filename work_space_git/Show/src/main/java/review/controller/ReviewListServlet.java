@@ -56,6 +56,7 @@ public class ReviewListServlet extends HttpServlet {
 			String content = revList.get(i).getRev_content();
 			String date = revList.get(i).getRev_date();
 			int like = revList.get(i).getRev_like();
+			int revNo = Integer.parseInt(revList.get(i).getRev_no());
 
 			JSONObject obj = new JSONObject();
 			obj.put("user_id", user_id);
@@ -63,6 +64,7 @@ public class ReviewListServlet extends HttpServlet {
 			obj.put("content", content);
 			obj.put("date", date);
 			obj.put("like", like);
+			obj.put("revNo", revNo);
 
 			int maxPage = pageInfo.getMaxPage();
 			int startPage = pageInfo.getStartPage();

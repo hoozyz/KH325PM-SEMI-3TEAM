@@ -176,26 +176,6 @@ public class ReviewDao {
 		return result;
 	}
 
-	// 리뷰 좋아요 1개 추가
-	public int changeLikeOfReview(Connection conn, Review rev) {
-		PreparedStatement pstmt = null;
-		String query = "UPDATE TBL_USER SET rev_like=? WHERE rev_no=?";
-		int result = 0;
-
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, rev.getRev_like() + 1);
-			pstmt.setString(2, rev.getRev_no());
-
-			result = pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		return result;
-	}
-
 	public int getRevCount(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -251,5 +231,190 @@ public class ReviewDao {
 			close(rs);
 		}
 		return null;
+	}
+	
+	public int getCount1(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "SELECT COUNT(*) FROM tbl_review where show_id = ? and rev_star = ?";
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, 1);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return result;		
+	}
+	
+	public int getCount2(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "SELECT COUNT(*) FROM tbl_review where show_id = ? and rev_star = ?";
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, 2);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return result;		
+	}
+	
+	public int getCount3(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "SELECT COUNT(*) FROM tbl_review where show_id = ? and rev_star = ?";
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, 3);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return result;		
+	}
+	
+	public int getCount4(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "SELECT COUNT(*) FROM tbl_review where show_id = ? and rev_star = ?";
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, 4);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return result;		
+	}
+	
+	public int getCount5(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "SELECT COUNT(*) FROM tbl_review where show_id = ? and rev_star = ?";
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, 5);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return result;		
+	}
+
+	public int plusLike(Connection conn, Review rev) {
+		PreparedStatement pstmt = null;
+		String query = "UPDATE TBL_REVIEW SET rev_like=? WHERE rev_no=?";
+		int result = 0;
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, rev.getRev_like() + 1);
+			pstmt.setString(2, rev.getRev_no());
+
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int minusLike(Connection conn, Review rev) {
+		PreparedStatement pstmt = null;
+		String query = "UPDATE TBL_REVIEW SET rev_like=? WHERE rev_no=?";
+		int result = 0;
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, rev.getRev_like() - 1);
+			pstmt.setString(2, rev.getRev_no());
+
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public Review findReviewByNo(Connection conn, int revNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "SELECT * FROM TBL_REVIEW WHERE rev_no = ?";
+		Review rev = new Review();
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, revNo);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				rev.setRev_no(rs.getString("rev_no"));
+				rev.setShow_id(rs.getString("show_id"));
+				rev.setUser_id(rs.getString("user_id"));
+				rev.setRev_content(rs.getString("rev_content"));
+				rev.setPrfnm(rs.getString("prfnm"));
+				rev.setPrfpdfrom(rs.getString("prfpdfrom"));
+				rev.setPrfpdto(rs.getString("prfpdto"));
+				rev.setRev_star(rs.getInt("rev_star"));
+				rev.setRev_like(rs.getInt("rev_like"));
+				rev.setRev_date(rs.getString("rev_date"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return rev;
 	}
 }

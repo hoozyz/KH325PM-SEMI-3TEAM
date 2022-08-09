@@ -40,11 +40,11 @@
 		priceArr = show.getPcseguidance().split(", ");
 	} 
 	
-	int count1 = 0;
-	int count2 = 0;
-	int count3 = 0;
-	int count4 = 0;
-	int count5 = 0;
+	int count1 = (Integer) request.getAttribute("count1");
+	int count2 = (Integer) request.getAttribute("count2");
+	int count3 = (Integer) request.getAttribute("count3");
+	int count4 = (Integer) request.getAttribute("count4");
+	int count5 = (Integer) request.getAttribute("count5");
 	
 	double total1 = 0;
 	double total2 = 0;
@@ -54,27 +54,8 @@
 	
 	int i = 0;
 	
-	if(revList != null) {
-		while(i < revList.size()) {
-			if(revList.get(i).getRev_star() == 1) {
-				count1++;
-				i++;
-			} else if(revList.get(i).getRev_star() == 2) {
-				count2++;
-				i++;
-			} else if(revList.get(i).getRev_star() == 3) {
-				count3++;
-				i++;
-			} else if(revList.get(i).getRev_star() == 4) {
-				count4++;
-				i++;
-			} else {
-				count5++;
-				i++;
-			}
-		}
-	}
 	int total = count1 + count2 + count3 + count4 + count5;
+	
 	if(total != 0) {
 		total1 = ((double)count1 / total) * 100;
 		total2 = ((double)count2 / total) * 100;
@@ -82,6 +63,8 @@
 		total4 = ((double)count4 / total) * 100;
 		total5 = ((double)count5 / total) * 100;
 	}
+	
+	int revCount = (Integer) request.getAttribute("revCount");
 	
 	request.setAttribute("show", show);
 	
@@ -197,7 +180,6 @@
         </form>
         
         <!-- 예매결과 팝업 -->
-         <form name="writeForm" action="<%=path%>/Review/writeReview" method="POST">
         	<div class="modal fade" id="modal-ticket" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -209,24 +191,14 @@
                         <form class="needs-validation" novalidate>
                             <div class="mb-3">
                                 <label class="form-label" for="review-name">아이디 <span class='text-danger'>*</span></label>
-                                <input class="form-control" name="revId" type="text" id="review-name" placeholder="이름" required>
                                 <div class="invalid-feedback">아이디를 입력해주세요.</div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="review-rating">별점 <span class='text-danger'>*</span></label>
-                                <select class="form-control form-select" name="revStar" id="review-rating" required>
-                    <option value="" selected disabled hidden>별점 선택</option>
-                    <option value="5 stars">별점 5</option>
-                    <option value="4 stars">별점 4</option>
-                    <option value="3 stars">별점 3</option>
-                    <option value="2 stars">별점 2</option>
-                    <option value="1 star">별점 1</option>
-                  </select>
                                 <div class="invalid-feedback">별점을 선택해주세요.</div>
                             </div>
                             <div class="mb-4">
                                 <label class="form-label" for="review-text">관람후기 <span class='text-danger'>*</span></label>
-                                <textarea class="form-control" name="revContent" id="review-text" rows="5" placeholder="공연은 어떠셨나요?" required></textarea>
                                 <div class="invalid-feedback">관람후기를 등록해주세요</div>
                             </div>
                             <input class="btn btn-primary d-block rounded-pill w-100 mb-4" type="submit" value="리뷰 등록">
@@ -235,7 +207,6 @@
                 </div>
             </div>
         </div>
-        </form>
         
 
         <!-- Page header-->
@@ -320,7 +291,7 @@
                     </div>
                    <% if(loginUser != null) { %>
                    			 <div style="text-align: end; margin-right: 10px;">
-                        <div class="btn btn-outline-primary rounded ms-5" href="#modal-ticket" data-bs-toggle="modal" data-bs-dismiss="modal" style="display: inline-block; width: 230px; height: 60px;">
+                        <div class="btn btn-outline-primary rounded ms-5" id="show" data-bs-toggle="modal" data-bs-dismiss="modal" style="display: inline-block; width: 230px; height: 60px;">
                             <div style="font-size: 24px;">예매 하기</div>
                         </div>
                    <% } else {%>
@@ -446,14 +417,27 @@
             				
             				var str = "";
             				
-            				str += '<div>'+ tic[0].date +'</div>';
+            				/* str += '<div>'+ tic[0].date +'</div>';
             				str += '<div>'+ tic[0].seat +'</div>';
             				str += '<div>'+ tic[0].fcltynm +'</div>';
             				str += '<div>'+ tic[0].show_id +'</div>';
             				str += '<div>'+ tic[0].user_id +'</div>';
             				str += '<div>'+ tic[0].price +'</div>';
             				str += '<div>'+ tic[0].count +'</div>';
-            				str += '<div>'+ tic[0].pfrnm +'</div>';
+            				str += '<div>'+ tic[0].pfrnm +'</div>'; */
+            				
+            				str +=  '<div class="mb-3">                                                                               '
+            				str +=  '    <label class="form-label" for="review-name">아이디 <span class="text-danger">'+ tic[0].date +'</span></label>'
+            				str +=  '    <div class="invalid-feedback">아이디를 입력해주세요.</div>                                   '
+            				str +=  '</div>                                                                                           '
+            				str +=  '<div class="mb-3">                                                                               '
+            				str +=  '    <label class="form-label" for="review-rating">별점 <span class="text-danger">'+ tic[0].seat +'</span></label>'
+            				str +=  '    <div class="invalid-feedback">별점을 선택해주세요.</div>                                     '
+            				str +=  '</div>                                                                                           '
+            				str +=  '<div class="mb-4">                                                                               '
+            				str +=  '    <label class="form-label" for="review-text">관람후기 <span class="text-danger">' +tic[0].fcltynm  +'</span></label>'
+            				str +=  '    <div class="invalid-feedback">관람후기를 등록해주세요</div>                                  '
+            				str +=  '</div>                                                                                           '
             				
             				$('#modal-ticket').html(str);
 	         			},
@@ -562,14 +546,18 @@
                             	0.0
                             <% } %>
 							</h5>
-                            <div><span class="star-rating "><i class="star-rating-icon fi-star-filled active "></i><i class="star-rating-icon fi-star-filled active "></i><i class="star-rating-icon fi-star-filled active "></i><i class="star-rating-icon
-                    fi-star-filled active "></i><i class="star-rating-icon fi-star-filled active "></i></span>
+                            <div>
+                            <span class="star-rating ">
+                             <% for (int k = 0; k < 5; k++) {%>
+                                    	<% if (k < Character.getNumericValue(show.getShow_star().charAt(0))) { %>
+                                    		<i class="star-rating-icon fi-star-filled active"></i>
+                                    	<% } else {%>
+                                    		<i class="star-rating-icon fi-star"></i>
+                                    	<% } %>
+                                    <% } %>
+                            </span>
                             </div><span style="font-size: 20px; margin-top: 10px; ">
-                            <%if (revList != null) { %>
-                            	<%=revList.size() %>개
-                            <% } else { %>
-                            	0개
-                            <% } %>								
+                            <%=revCount %>개							
                             </span>
                         </div>
                     </div>
@@ -618,8 +606,8 @@
                             </div><span class="text-muted fs-sm "><%=revList.get(j).getRev_date() %></span>
                         </div>
                         <p><%=revList.get(j).getRev_content() %></p>
-                        <div class="d-flex align-items-center ">
-                            <button class="heart" type="button" style="border: none;" onclick="heart();"><i class="fi-heart"></i><span>(<%=revList.get(j).getRev_like() %>)</span></button>
+                        <div class="d-flex align-items-center" id="revLike<%=revList.get(j).getRev_no()%>">
+                            <button class="heart" type="button" style="border: none;" onclick="likePlus(<%=revList.get(j).getRev_no()%>);"><i class="fi-heart"></i><span>(<%=revList.get(j).getRev_like() %>)</span></button>
                         </div>
                         	<% if (j != count - 1) { %>
                         		<hr><br>
@@ -652,9 +640,51 @@
         </section>
         
         <script>
-        function heart() {
-        	
+        function likePlus(revNo) {
+        	$.ajax({
+     			url: "<%=path%>/review/heart",
+     			type: "POST",
+     			dataType: "text",
+     			data: { "revNo" : revNo , "like" : 1},
+     			progress: true,
+         	
+     			success: function(list) {
+    				var rev = JSON.parse(list);
+     				console.log(rev[0].like);
+     				console.log(rev[0].no);
+     				
+     				str = "";
+					$.each(rev, (i, obj) => {
+						str += '<button class="heart" type="button" style="border: none;" onclick="likeMinus('+ obj.no +');"><i class="fi-heart-filled"></i><span>('+ obj.like +')</span></button>'
+         			});
+     				
+     				$('#revLike' + rev[0].no).html(str);
+     			}
+        	});	
         }
+        
+       	function likeMinus(revNo) {
+           	$.ajax({
+	        	url: "<%=path%>/review/heart",
+	        	type: "POST",
+	        	dataType: "text",
+	        	data: { "revNo" : revNo , "like" : 0},
+	        	progress: true,
+	            	
+	        	success: function(list) {
+	       			var rev = JSON.parse(list);
+	       			console.log(rev[0].like);
+     				console.log(rev[0].no);
+	        		
+					str = "";
+					$.each(rev, (i, obj) => {
+						str += '<button class="heart" type="button" style="border: none;" onclick="likePlus('+ obj.no +');"><i class="fi-heart"></i><span>('+ obj.like +')</span></button>'
+         			});
+     				
+     				$('#revLike' + rev[0].no).html(str);
+	        	}
+           	});	
+       	}
         
         function reviewSort(showId) {
     		var sortVal = $('#reviews-sort').val();
@@ -694,8 +724,8 @@
         				str += '    </div><span class="text-muted fs-sm ">'+ obj.date +'</span>'
         				str += '</div>'
         				str += '<p>'+ obj.content +'</p>'
-        				str += '<div class="d-flex align-items-center ">'
-        				str += '    <button class="heart" type="button" style="border: none;"><i class="fi-heart"></i><span>('+ obj.like +')</span></button>'
+        				str += '<div class="d-flex align-items-center " id="revLike'+ obj.revNo +'">'
+        				str += '    <button class="heart" type="button" style="border: none;" onclick="likePlus('+ obj.revNo +');"><i class="fi-heart"></i><span>('+ obj.like +')</span></button>'
         				str += '</div>'
         				str += '<hr><br>'
     				});
@@ -778,8 +808,8 @@
 	            		str += '    </div><span class="text-muted fs-sm ">'+ obj.date +'</span>'
 	            		str += '</div>'
 	            		str += '<p>'+ obj.content +'</p>'
-	            		str += '<div class="d-flex align-items-center ">'
-	            		str += '    <button class="heart" type="button" style="border: none;"><i class="fi-heart"></i><span>('+ obj.like +')</span></button>'
+	            		str += '<div class="d-flex align-items-center " id="revLike'+ obj.revNo +'">'
+	            		str += '    <button class="heart" type="button" style="border: none;" onclick="likePlus('+ obj.revNo +');"><i class="fi-heart"></i><span>('+ obj.like +')</span></button>'
 	            		str += '</div>'
 	            		str += '<hr><br>'
             		});
