@@ -93,10 +93,10 @@
 						<div class="card-body">
 							<div class="d-flex justify-content-between">
 								<div class="d-flex align-items-start">
-									<img class="d-none d-sm-block" src="img/avatars/38.png" width="100" alt="<%=likeList.get(i-1).getPoster()%>">
+									<img class="d-none d-sm-block" src="<%=likeList.get(i-1).getPoster()%>" width="100">
 									<div class="ps-sm-3">
 										<h3 class="h6 card-title pb-1 mb-2">
-											<a class="text-nav text-decoration-none" href="<%=path%>/Like?showId=<%=likeList.get(i-1).getShow_id()%>"><%=likeList.get(i-1).getPrfnm()%></a>
+											<a class="text-nav text-decoration-none" href="<%=path%>/showDetail?showId=<%=likeList.get(i-1).getShow_id()%>"><%=likeList.get(i-1).getPrfnm()%></a>
 										</h3>
 										<div class="fs-sm">
 											<div class="text-nowrap mb-2">
@@ -115,10 +115,10 @@
 						<div class="card-body">
 							<div class="d-flex justify-content-between">
 								<div class="d-flex align-items-start">
-									<img class="d-none d-sm-block" src="img/avatars/38.png" width="100" alt="<%=likeList.get(i-1).getPoster()%>">
+									<img class="d-none d-sm-block" src="<%=likeList.get(i-1).getPoster()%>" width="100">
 									<div class="ps-sm-3">
 										<h3 class="h6 card-title pb-1 mb-2">
-											<a class="stretched-link text-nav text-decoration-none" href="<%=path%>/Like?showId=<%=likeList.get(i-1).getShow_id()%>"><%=likeList.get(i-1).getPrfnm()%></a>
+											<a class="stretched-link text-nav text-decoration-none" href="<%=path%>/showDetail?showId=<%=likeList.get(i-1).getShow_id()%>"><%=likeList.get(i-1).getPrfnm()%></a>
 										</h3>
 										<div class="fs-sm">
 											<div class="text-nowrap mb-2">

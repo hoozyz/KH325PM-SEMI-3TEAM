@@ -12,13 +12,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import board.controller.PageInfo;
+import like.service.LikeService;
 import review.service.ReviewService;
 import show.service.ShowService;
 import vo.Review;
 import vo.Seat;
 import vo.Show;
+import vo.User;
 
 @WebServlet(name = "showDetail", urlPatterns = "/showDetail")
 public class ShowDetailServlet extends HttpServlet {
@@ -26,9 +29,13 @@ public class ShowDetailServlet extends HttpServlet {
 
 	ShowService showService = new ShowService();
 	ReviewService revService = new ReviewService();
+	LikeService likeService = new LikeService();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		User user = (User) session.getAttribute("loginUser");
+		String userId = user.getUser_id();
 		String showId = (String) req.getParameter("showId");
 		Show show = showService.findShowById(showId);
 		Set<String> set = null;
@@ -36,6 +43,9 @@ public class ShowDetailServlet extends HttpServlet {
 		Map<String, String> map = null;
 
 		List<String> priceList = new ArrayList<>();
+		
+		int likeCheck = likeService.likeCheck(showId, userId);
+		req.setAttribute("likeCheck", likeCheck);
 
 		if (show.getPcseguidance().equals("전석무료")) {
 			map = parse(show.getPcseguidance());
@@ -48,31 +58,22 @@ public class ShowDetailServlet extends HttpServlet {
 			}
 		}
 
-		// 별점 당 개수
-		int count1 = revService.getCount1(showId);
-		int count2 = revService.getCount2(showId);
-		int count3 = revService.getCount3(showId);
-		int count4 = revService.getCount4(showId);
-		int count5 = revService.getCount5(showId);
-
-		req.setAttribute("count1", count1);
-		req.setAttribute("count2", count2);
-		req.setAttribute("count3", count3);
-		req.setAttribute("count4", count4);
-		req.setAttribute("count5", count5);
-
 		if (show != null) {
 			req.setAttribute("show", show);
 			req.setAttribute("sList", sList);
 			req.setAttribute("priceList", priceList);
 		}
-		
+
 		// 별점
-		String result = revService.getStar(showId);
-		if(result.length() == 1) {
-			show.setShow_star(result+".0");
+		if (revService.getStar(showId) != null) {
+			String stars = revService.getStar(showId);
+			if (stars.length() == 1) {
+				show.setShow_star(stars + ".0");
+			} else {
+				show.setShow_star(stars);
+			}
 		} else {
-			show.setShow_star(result);
+			show.setShow_star("0");
 		}
 
 		int page = 1;
@@ -93,7 +94,20 @@ public class ShowDetailServlet extends HttpServlet {
 
 		req.setAttribute("pageInfo", pageInfo);
 		req.setAttribute("revCount", revCount);
-		
+
+		// 별점 당 개수
+		int count1 = revService.getCount1(showId);
+		int count2 = revService.getCount2(showId);
+		int count3 = revService.getCount3(showId);
+		int count4 = revService.getCount4(showId);
+		int count5 = revService.getCount5(showId);
+
+		req.setAttribute("count1", count1);
+		req.setAttribute("count2", count2);
+		req.setAttribute("count3", count3);
+		req.setAttribute("count4", count4);
+		req.setAttribute("count5", count5);
+
 		if (revList != null) {
 			req.setAttribute("revList", revList);
 			req.getRequestDispatcher("/views/show/showDetail.jsp").forward(req, resp);

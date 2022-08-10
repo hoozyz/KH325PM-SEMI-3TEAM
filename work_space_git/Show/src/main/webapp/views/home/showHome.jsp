@@ -269,7 +269,7 @@
                 <h2 style="display:inline">전국 </h2>
                 <h2 style="display:inline; color: #0B398E; ">공연장</h2>
                 <h6 style=" display:inline; margin-left : 10px; ">전국 주요 공연장을 빠르게 찾아보세요!</h6>
-                <a class="btn btn-link fw-normal ms-sm-3 p-0" href="<%=path %>/hall/search" style="margin-top: 20px; float:right;">더보기<i class="fi-arrow-long-right ms-1"></i></a>
+                <a class="btn btn-link fw-normal ms-sm-3 p-0" href="<%=path %>/hallMain" style="margin-top: 20px; float:right;">더보기<i class="fi-arrow-long-right ms-1"></i></a>
             </div>
             <!-- No image-->
             <div class="card border-0 shadow-sm">
@@ -296,12 +296,11 @@
                                 </div>
                             </div>
 
-
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" id="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='#'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="resources/images/perform/ex_poster3.png">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">공연 이름</p>
-                                    <p class="card-text fs-sm m-0 p-0">날짜</p>
+                                <div class="card-body" id="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195255'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195255_220727_094226.jpg">
+                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">해리 포터와 아즈카반의 죄수™ 인 콘서트</p>
+                                    <p class="card-text fs-sm m-0 p-0">2022.10.07 ~ 2022.10.09</p>
                                 </div>
                             </div>
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
@@ -325,8 +324,6 @@
                                     <p class="card-text fs-sm m-0 p-0">날짜</p>
                                 </div>
                             </div>
-
-
 
                         </div>
                         <div class="tab-pane fade row" id="lotte" role="tabpanel">
@@ -503,11 +500,7 @@
                                     <p class="card-text fs-sm m-0 p-0">날짜</p>
                                 </div>
                             </div>
-
-
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -659,41 +652,41 @@
         <!-- Blog: Latest posts-->
         <section class="container my-2 py-lg-4">
             <div class="d-sm-flex align-items-center justify-content-center mb-3">
-                <h2 style="color: #0B398E;">공연 소식</h2><a class="btn btn-link fw-normal ms-sm-3 p-0" href="city-guide-blog.html">더보기<i class="fi-arrow-long-right ms-2"></i></a>
+                <h2 style="color: #0B398E;">공연 소식</h2><a class="btn btn-link fw-normal ms-sm-3 p-0" href="<%=path%>/news">더보기<i class="fi-arrow-long-right ms-2"></i></a>
             </div>
             <!-- Carousel-->
             <div class="tns-carousel-wrapper tns-nav-outside mb-md-2">
                 <div class="tns-carousel-inner d-block" data-carousel-options="{&quot;controls&quot;: false, &quot;gutter&quot;: 24, &quot;autoHeight&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1,&quot;nav&quot;:true},&quot;500&quot;:{&quot;items&quot;:2},&quot;850&quot;:{&quot;items&quot;:3},&quot;1200&quot;:{&quot;items&quot;:3}}}">
                     <!-- Item-->
-                    <article>
-                        <a class="d-block mb-3" href="city-guide-blog-single.html"><img class="rounded-3" src="resources/images/new1.jpg" alt="Post image"></a><a class="fs-xs text-uppercase text-decoration-none" href="#">Travelling</a>
-                        <h3 class="fs-base pt-1"><a class="nav-link" href="city-guide-blog-single.html">Air Travel in the Time of COVID-19</a></h3>
+                    <article style="height: 350px;">
+                        <a class="d-block mb-3" href="city-guide-blog-single.html"><img class="rounded-3" src="<%=path%>/resources/images/news/big2.png" style="height:200px;" alt="Post image"></a>
+                        <h3 class="fs-base pt-1"><a class="nav-link" href="https://www.segye.com/newsView/20220807511675?OutUrl=naver">남자들을 위한 80㎝ 부츠?…2년 만에 돌아온 쇼뮤지컬 ‘킹키부츠’</a></h3>
                         <a class="d-flex align-items-center text-decoration-none" href="#"><img class="rounded-circle" src="resources/img/avatars/16.png" width="44" alt="Avatar">
                             <div class="ps-2">
-                                <h6 class="fs-sm text-nav lh-base mb-1">Bessie Cooper</h6>
-                                <div class="d-flex text-body fs-xs"><span class="me-2 pe-1"><i class="fi-calendar-alt opacity-70 mt-n1 me-1 align-middle"></i>May 24</span><span><i class="fi-chat-circle opacity-70 mt-n1 me-1 align-middle"></i>No comments</span></div>
+                                <h6 class="fs-sm text-nav lh-base mb-1">이강은 기자</h6>
+                                <div class="d-flex text-body fs-xs"><span class="me-2 pe-1"><i class="fi-calendar-alt opacity-70 mt-n1 me-1 align-middle"></i>2022-08-08</span></div>
                             </div>
                         </a>
                     </article>
                     <!-- Item-->
-                    <article>
-                        <a class="d-block mb-3" href="city-guide-blog-single.html"><img class="rounded-3" src="resources/img/city-guide/blog/02.jpg" alt="Post image"></a><a class="fs-xs text-uppercase text-decoration-none" href="#">Entertainment</a>
-                        <h3 class="fs-base pt-1"><a class="nav-link" href="city-guide-blog-single.html">10 World-Class Museums You Can Visit Online</a></h3>
+                    <article style="height: 350px;">
+                        <a class="d-block mb-3" href="<%=path%>/resources/images/news/big1.png"><img class="rounded-3" src="resources/img/city-guide/blog/02.jpg" alt="Post image"></a>
+                        <h3 class="fs-base pt-1" style="margin-bottom: 32px;"><a class="nav-link" href="https://www.nocutnews.co.kr/news/5798033">해상왕 장보고 삶, 뮤지컬로 만든다…'오션스' 쇼케이스</a></h3>
                         <a class="d-flex align-items-center text-decoration-none" href="#"><img class="rounded-circle" src="resources/img/avatars/18.png" width="44" alt="Avatar">
                             <div class="ps-2">
-                                <h6 class="fs-sm text-nav lh-base mb-1">Annette Black</h6>
-                                <div class="d-flex text-body fs-xs"><span class="me-2 pe-1"><i class="fi-calendar-alt opacity-70 mt-n1 me-1 align-middle"></i>Apr 28</span><span><i class="fi-chat-circle opacity-70 mt-n1 me-1 align-middle"></i>4 comments</span></div>
+                                <h6 class="fs-sm text-nav lh-base mb-1">문수경 기자</h6>
+                                <div class="d-flex text-body fs-xs"><span class="me-2 pe-1"><i class="fi-calendar-alt opacity-70 mt-n1 me-1 align-middle"></i>2022-08-05</span></div>
                             </div>
                         </a>
                     </article>
                     <!-- Item-->
-                    <article>
-                        <a class="d-block mb-3" href="city-guide-blog-single.html"><img class="rounded-3" src="resources/img/city-guide/blog/03.jpg" alt="Post image"></a><a class="fs-xs text-uppercase text-decoration-none" href="#">Travelling</a>
-                        <h3 class="fs-base pt-1"><a class="nav-link" href="city-guide-blog-single.html">7 Tips for Solo Travelers in Africa</a></h3>
+                    <article style="height: 350px;">
+                        <a class="d-block mb-3" href="city-guide-blog-single.html"><img class="rounded-3" src="<%=path%>/resources/images/news/small2.png" style="width:416px; height: 200px;" alt="Post image"></a>
+                        <h3 class="fs-base pt-1" style="margin-bottom: 32px;"><a class="nav-link" href="city-guide-blog-single.html">'160년이 지나도 살아있는 고전의 힘…연극 '레 미제라블'</a></h3>
                         <a class="d-flex align-items-center text-decoration-none" href="#"><img class="rounded-circle" src="resources/img/avatars/17.png" width="44" alt="Avatar">
                             <div class="ps-2">
-                                <h6 class="fs-sm text-nav lh-base mb-1">Ralph Edwards</h6>
-                                <div class="d-flex text-body fs-xs"><span class="me-2 pe-1"><i class="fi-calendar-alt opacity-70 mt-n1 me-1 align-middle"></i>Apr 15</span><span><i class="fi-chat-circle opacity-70 mt-n1 me-1 align-middle"></i>2 comments</span></div>
+                                <h6 class="fs-sm text-nav lh-base mb-1">임지우 기자</h6>
+                                <div class="d-flex text-body fs-xs"><span class="me-2 pe-1"><i class="fi-calendar-alt opacity-70 mt-n1 me-1 align-middle"></i>2022-08-05</span></div>
                             </div>
                         </a>
                     </article>

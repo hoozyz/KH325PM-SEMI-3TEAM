@@ -62,6 +62,10 @@ public class TicketingViewServlet extends HttpServlet{
 			JSONObject obj = new JSONObject();
 			JSONArray objArr = new JSONArray();
 			
+			String poster = show.getPoster();
+			String from = show.getPrfpdfrom();
+			String to = show.getPrfpdto();
+			
 			obj.put("date", date);
 			obj.put("count", count);
 			obj.put("seat", seat);
@@ -70,8 +74,13 @@ public class TicketingViewServlet extends HttpServlet{
 			obj.put("user_id", user_id);
 			obj.put("prfnm", prfnm);
 			obj.put("fcltynm", fcltynm);
+			obj.put("poster", poster);
+			obj.put("from", from);
+			obj.put("to", to);
 			
 			objArr.add(obj);
+			
+			System.out.println(objArr.toJSONString());
 			
 			PrintWriter out = resp.getWriter();
 			out.println(objArr.toJSONString());

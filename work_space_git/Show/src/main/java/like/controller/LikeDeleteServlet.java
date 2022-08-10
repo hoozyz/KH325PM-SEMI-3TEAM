@@ -23,7 +23,7 @@ public class LikeDeleteServlet extends HttpServlet{
 		System.out.println(likeNo);
 		
 		// 예매내역 삭제
-		int result = service.delete(likeNo);
+		int result = service.deleteByNo(likeNo);
 		
 		if(result > 0) {
 			req.setAttribute("msg", "찜을 삭제했습니다.");

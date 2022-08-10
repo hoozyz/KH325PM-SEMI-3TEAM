@@ -20,7 +20,7 @@ public class ShowDAO {
 	public int insert(Connection con, Show show) {
 
 		try {
-			query = "INSERT INTO TBL_SHOW VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
+			query = "INSERT INTO TBL_SHOW VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,DEFAULT)";
 
 			PreparedStatement pstmt = con.prepareStatement(query);
 
@@ -40,7 +40,6 @@ public class ShowDAO {
 			pstmt.setString(count++, show.getPcseguidance());
 			pstmt.setString(count++, show.getDtguidance());
 			pstmt.setString(count++, show.getAwards());
-			pstmt.setString(count++, show.getShow_star());
 
 			int result = pstmt.executeUpdate();
 			pstmt.close();
@@ -61,8 +60,8 @@ public class ShowDAO {
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 
+			Show show = new Show();
 			if (rs.next()) {
-				Show show = new Show();
 				show.setPoster(rs.getString("poster"));
 				show.setPrfpdfrom(rs.getString("prfpdfrom"));
 				show.setPrfpdto(rs.getString("prfpdto"));
@@ -77,8 +76,8 @@ public class ShowDAO {
 				show.setPrfnm(rs.getString("prfnm"));
 				show.setGenrenm(rs.getString("genrenm"));
 
-				return show;
 			} 
+			return show;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

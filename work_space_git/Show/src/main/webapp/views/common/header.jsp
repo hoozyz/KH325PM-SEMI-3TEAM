@@ -357,9 +357,9 @@
                 <a class="btn btn-sm text-primary d-none d-lg-block order-lg-3" href="#signup-modal" data-bs-toggle="modal"><i class="fi-user me-2"></i>회원가입</a>
                 <% } else {%>
                		 <% if (loginUser != null && loginUser.getRole().equals("ROLE_USER")) { %>
-               		 <button class="btn btn-sm text-primary d none d-lg-block order-lg-3" onclick="location.href='<%=path %>/myInfo'" data-bs-toggle="modal">마이페이지</button>
+               		 <button class="btn btn-sm text-primary d none d-lg-block order-lg-3" onclick="location.href='<%=path %>/myInfo'" data-bs-toggle="modal"><i class="fi-user me-2"></i>마이페이지</button>
                 	 <% } %>
-                	 <button class="btn btn-sm text-primary d-none d-lg-block order-lg-3" onclick="location.href='<%=path %>/logout'" data-bs-toggle="modal">로그아웃</button>
+                	 <button class="btn btn-sm text-primary d-none d-lg-block order-lg-3" onclick="location.href='<%=path %>/logout'" data-bs-toggle="modal"><i class="fi-user me-2"></i>로그아웃</button>
                 <% } %>
                 <div class="collapse navbar-collapse order-lg-2 justify-content-center" id="navbarNav">
                     <ul class="navbar-nav navbar-nav-scroll" style="max-height: 35rem;">
@@ -379,7 +379,7 @@
                                 <li><a class="dropdown-item" href="<%=path%>/musicMain?category=오페라&rad_date=1개월">오페라</a></li>
                             </ul>
                         </li>
-                        <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/hallList" role="button" aria-expanded="false" id="NSR">공연장</a></a>
+                        <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/hallMain" role="button" aria-expanded="false" id="NSR">공연장</a></a>
                         <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/rankList" role="button" aria-expanded="false" id="NSR">랭킹</a></a>
                         <li class="nav-item dropdown ps-3"><a class="nav-link dropdown" href="<%=path %>/board/news" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="NSR">게시판</a>
                             <ul class="dropdown-menu">

@@ -29,20 +29,40 @@ public class LikeService {
 		}else {
 			rollback(conn);
 		}
-		close(conn);
 		return result;
 	}
 	
-	public int delete(int likeNo) {
+	public int deleteById(String showId, String userId) {
 		Connection conn = getConnection();
-		int result = dao.deleteLike(conn, likeNo);
+		int result = dao.deleteById(conn, showId, userId);
 		
 		if(result > 0) {
 			commit(conn);
 		}else {
 			rollback(conn);
 		}
-		close(conn);
+		return result;
+	}
+
+
+	public int deleteByNo(int likeNo) {
+		Connection conn = getConnection();
+		int result = dao.deleteByNo(conn, likeNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		return result;
+	}
+
+
+	public int likeCheck(String showId, String userId) {
+		Connection conn = getConnection();
+		int result = -1;
+		result = dao.likeCheck(conn, showId, userId);
+		
 		return result;
 	}
 }

@@ -24,6 +24,8 @@
 		revList = null;
 	}		
 	
+	int likeCheck = (Integer) request.getAttribute("likeCheck");
+	
 	List<String> slist = null;
 	List<String> priceList = null;
 	
@@ -185,64 +187,42 @@
                 <div class="modal-content">
                      <div class="window">
                          <div class="popup">
-                             <div class="row" style="margin: 0; bottom: 0;">
-                                 <div class="popup_left col-6">
-                                     <div style="text-align: left; margin-top: 10px; margin-left: 10px;margin-bottom: 20px;">
-                                         <h1 class="display-2" style=" color: #dbab34">예매하기</h1>
-                                         <div class="popup_left">
-                                         	<img src=<%=show.getPoster() %> alt="image" style="width: 400; height: 500; margin-left:120px;">
-                                         </div>
-                                         <div class="popup_left_detail">
-                                             <h2 style="color: #d9e2f2"><%=show.getPrfnm() %></h2>
-                                             <h4 style="color: #d9e2f2"><%=show.getFcltynm() %></h4>
-                                             <h4 style="color: #d9e2f2"><%=show.getPrfpdfrom() %> &nbsp;&nbsp; ~ &nbsp;&nbsp; <%=show.getPrfpdto() %></h4>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="popup_right col-6">
-                                     <div class="ticketing">
-                                         <div class="ticketing_body">
-                                             <span class="popup_date">날짜선택<i class="fi-calendar ps-1"></i></span>
-                                             <div class="popup_count">인원선택</div>
-                                             <div class="row">
-                                                 <div class="col-2" style="text-align: right;">
-                                                 </div>
-                                             </div>
-                                             <div class="popup_seat">좌석선택</div>
-                                             <div class="row">
-                                                 <div class="col-2" style="text-align: right;">
-                                                 </div>
-                                             </div>
-                                         </div>
-                                         <hr> 
-
-                                         <div class="ticketing_result">
-                                             <div>관람일 :&nbsp;<span ></span></div>
-                                             <div>인원 :&nbsp;<span ></span></div>
-                                             <div>좌석 :&nbsp;<span ></span></div>
-                                             
-                                             <div class="popup_price">
-                                                 <span class="final_price">0</span> <span>원</span>
-                                             </div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div>
+                             <div class="row ticResult11111" style="margin: 0; bottom: 0;">
+                                
+                                 <div class="popup_left col-6"><div style="text-align: left; margin-top: 10px; margin-left: 10px;margin-bottom: 20px;">
+                                         <h1 class="display-2" style=" color: #dbab34">예매완료</h1>
+                                         <div class="popup_left"><img src=<%=show.getPoster() %> alt="image" style="width: 400; height: 500; margin-left:120px;"></div>
+                                         <div class="popup_left_detail"><h2 style="color: #d9e2f2"><%=show.getPrfnm() %></h2><h4 style="color: #d9e2f2"><%=show.getFcltynm() %></h4>
+                                             <h4 style="color: #d9e2f2"><%=show.getPrfpdfrom() %> &nbsp;&nbsp; ~ &nbsp;&nbsp; <%=show.getPrfpdto() %></h4></div></div></div>
+                                 	<div class="popup_right col-6"><div class="ticketing"><div class="ticketing_body">
+                                         	<img alt="" src=""></div><hr> 
+                                         <form action="<%=path%>/ticketing/view" method="POST">
+                                         	<div class="ticketing_result"><div>관람일 :&nbsp;<input name="viewDate" style="border:0 solid black" readonly></div><div>인원 :&nbsp;<input name="count" style="border:0 solid black" readonly></div>
+                                             <div>좌석 :&nbsp;<input name="seat" style="border:0 solid black" readonly></div><input type="hidden" name="showId" value="<%=show.getShow_id()%>">
+                                             <div class="popup_price"><span>원</span></div>
+                                             <input class="btn btn-outline-accent rounded ms-5" type="submit" onclick="location.href='<%=path%>/ticketing/view'" style="width:130px;height:60px;background-color:#201627" value="예매확인">
+                                             </div></div></form></div>
+                                     
+                                </div>
                              </div>
                          </div>
                      </div>
                 </div>
-            </div>
-        </div>
-        
+			</div>        
 
         <!-- Page header-->
         <section class="container pt-5 mt-5" style="margin-bottom: 20px;">
             <!-- Breadcrumb-->
             <div class="d-sm-flex align-items-center justify-content-between mb-0">
                 <span class="show_titie"><%=show.getPrfnm() %><span class="badge bg-accent" style="font-size: 20px; margin-left: 10px;"><%=show.getGenrenm() %></span></span>
-                <div class="text-nowrap">
-                    <button class="btn btn-icon btn-light-primary btn shadow-sm rounded-circle" type="button" data-bs-toggle="tooltip" title="찜하기"><i class="fi-heart"></i></button>
+                <div class="text-nowrap like-button">
+                    <% if (loginUser != null) { %>
+                    	<% if (likeCheck == 1) { %>
+                    		<button class="btn btn-icon btn-light-primary btn shadow-sm rounded-circle" onclick="likeShowMinus('<%=show.getShow_id() %>')" type="button" data-bs-toggle="tooltip" title="찜하기"><i class="fi-heart-filled"></i></button>
+                    	<% } else {%>
+                    		<button class="btn btn-icon btn-light-primary btn shadow-sm rounded-circle" onclick="likeShowPlus('<%=show.getShow_id() %>')" type="button" data-bs-toggle="tooltip" title="찜하기"><i class="fi-heart"></i></button>
+                    	<% } %>
+                    <% } %>
                     <div class="dropdown d-inline-block" data-bs-toggle="tooltip" title="공유하기">
                         <button class="btn btn-icon btn-light-primary btn shadow-sm rounded-circle ms-2" type="button" data-bs-toggle="dropdown"><i class="fi-share"></i></button>
                         <div class="dropdown-menu dropdown-menu-end my-1">
@@ -333,7 +313,7 @@
                         <div class="background">
                             <div class="window">
                                 <div class="popup">
-                                    <div class="row" style="margin: 0; bottom: 0;">
+                                    <div class="row ticResult" style="margin: 0; bottom: 0;">
                                         <div class="popup_left col-6">
                                             <div style="text-align: left; margin-top: 10px; margin-left: 10px;margin-bottom: 20px;">
                                                 <h1 class="display-2" style=" color: #dbab34">예매하기</h1>
@@ -347,6 +327,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                         <div class="popup_right col-6">
                                             <div class="ticketing">
                                                 <div class="ticketing_body">
@@ -391,21 +372,17 @@
                                                     </div>
                                                 </div>
                                                 <hr> 
-
                                                 <div class="ticketing_result">
                                                     <div>관람일 :&nbsp;<span id="viewDataPicker"></span></div>
                                                     <div>인원 :&nbsp;<span id="viewCnt"></span></div>
-                                                    <div>좌석 :&nbsp;<span id="viewSeat"></span></div>
-                                                    
+                                                   	<div>좌석 :&nbsp;<span id="viewSeat"></span></div>
                                                     <div class="popup_price">
                                                         <span class="final_price" id="total-price">0</span> <span>원</span>
                                                     </div>
-
-
                                                     <div class="ticketing_check">선택하신 정보가 맞으시다면,</div>
-                                                    <div style="margin-left: 30px;">
-                                                    <a href="#modal-ticket" data-bs-toggle="modal" id="show" data-bs-dismiss="modal" onclick="ticketView('<%=show.getShow_id()%>')">
-                                                    	<button class="btn btn-outline-accent rounded ms-5" style="width:130px;height:60px;background-color:#201627" id="ticketing">
+                                                    <div class="deleteTic" style="margin-left: 30px;">
+                                                    <a onclick="ticketView('<%=show.getShow_id()%>'); return false;" href="javascript:void(0)">
+                                                    	<button class="btn btn-outline-accent rounded ms-5" onclick="deleteTic();" style="width:130px;height:60px;background-color:#201627" id="ticketing">
                                                             <div style="color: #d9e2f2; font-size: 20px;">예매하기</div>
                                                     	</button>
                                                     </a>
@@ -416,76 +393,33 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
 <!--                         </form>  -->      
 
-
-
-						<div class="background">
-                            <div class="window">
-                                <div class="popup">
-                                    <div class="row" style="margin: 0; bottom: 0;">
-                                        <div class="popup_left col-6">
-                                            <div style="text-align: left; margin-top: 10px; margin-left: 10px;margin-bottom: 20px;">
-                                                <h1 class="display-2" style=" color: #dbab34">예매하기</h1>
-                                                <div class="popup_left">
-                                                	<img src=<%=show.getPoster() %> alt="image" style="width: 400; height: 500; margin-left:120px;">
-                                                </div>
-                                                <div class="popup_left_detail">
-                                                    <h2 style="color: #d9e2f2"><%=show.getPrfnm() %></h2>
-                                                    <h4 style="color: #d9e2f2"><%=show.getFcltynm() %></h4>
-                                                    <h4 style="color: #d9e2f2"><%=show.getPrfpdfrom() %> &nbsp;&nbsp; ~ &nbsp;&nbsp; <%=show.getPrfpdto() %></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="popup_right col-6">
-                                            <div class="ticketing">
-                                                <div class="ticketing_body">
-                                                    <span class="popup_date">날짜선택<i class="fi-calendar ps-1"></i></span>
-                                                    <div class="popup_count">인원선택</div>
-                                                    <div class="row">
-                                                        <div class="col-2" style="text-align: right;">
-                                                        </div>
-                                                    </div>
-                                                    <div class="popup_seat">좌석선택</div>
-                                                    <div class="row">
-                                                        <div class="col-2" style="text-align: right;">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr> 
-
-                                                <div class="ticketing_result">
-                                                    <div>관람일 :&nbsp;<span id="viewDataPicker"></span></div>
-                                                    <div>인원 :&nbsp;<span id="viewCnt"></span></div>
-                                                    <div>좌석 :&nbsp;<span id="viewSeat"></span></div>
-                                                    
-                                                    <div class="popup_price">
-                                                        <span class="final_price" id="total-price">0</span> <span>원</span>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-						
-
-
-
-
-
-
- 
 		             </div>
                 </div>
             </div>
+            
             <script>
+            	
+            
+            
+            	function deleteTic() {
+            		str = "";
+            		
+            		str += '<button class="btn btn-outline-accent rounded ms-5" style="width:130px;height:60px;background-color:#201627" onclick="closeClick();">'
+            		str += '                                                         <div style="color: #d9e2f2; font-size: 20px;">취소하기</div>   '
+            		str += '                                                    </button>                                                           '
+            		
+            		
+            		$('.deleteTic').html(str);
+            	}
+            	
             	function ticketView(showId) {
             		var date = document.getElementById("viewDataPicker").innerText;
             		var people = document.getElementById("viewCnt").innerText;
@@ -503,31 +437,29 @@
             				var tic = JSON.parse(list);
             				console.log(tic);
             				
-            				var str = "";
+            				var str = "";      
             				
-            				/* str += '<div>'+ tic[0].date +'</div>';
-            				str += '<div>'+ tic[0].seat +'</div>';
-            				str += '<div>'+ tic[0].fcltynm +'</div>';
-            				str += '<div>'+ tic[0].show_id +'</div>';
-            				str += '<div>'+ tic[0].user_id +'</div>';
-            				str += '<div>'+ tic[0].price +'</div>';
-            				str += '<div>'+ tic[0].count +'</div>';
-            				str += '<div>'+ tic[0].pfrnm +'</div>'; */
+            				var url1 = "<%=path%>/myTicketing";
+            				                        
             				
-            				str +=  '<div class="mb-3">                                                                               '
-            				str +=  '    <label class="form-label" for="review-name">아이디 <span class="text-danger">'+ tic[0].date +'</span></label>'
-            				str +=  '    <div class="invalid-feedback">아이디를 입력해주세요.</div>                                   '
-            				str +=  '</div>                                                                                           '
-            				str +=  '<div class="mb-3">                                                                               '
-            				str +=  '    <label class="form-label" for="review-rating">별점 <span class="text-danger">'+ tic[0].seat +'</span></label>'
-            				str +=  '    <div class="invalid-feedback">별점을 선택해주세요.</div>                                     '
-            				str +=  '</div>                                                                                           '
-            				str +=  '<div class="mb-4">                                                                               '
-            				str +=  '    <label class="form-label" for="review-text">관람후기 <span class="text-danger">' +tic[0].fcltynm  +'</span></label>'
-            				str +=  '    <div class="invalid-feedback">관람후기를 등록해주세요</div>                                  '
-            				str +=  '</div>                                                                                           '
+            				$.each(tic, (i, obj) => {
+            				str +=  '<div class="popup_left col-6"><div style="text-align: left; margin-top: 10px; margin-left: 10px;margin-bottom: 20px;">                                                                                       '
+            				str +=  '       <h1 class="display-2" style=" color: #dbab34">예매완료</h1>                                                                                                                                           '
+            				str +=  '       <div class="popup_left"><img src="'+obj.poster+'" alt="image" style="width: 400; height: 500; margin-left:120px;"></div>                                                                        '
+            				str +=  '       <div class="popup_left_detail"><h2 style="color: #d9e2f2">'+obj.prfnm+'</h2><h4 style="color: #d9e2f2">'+obj.fcltynm+'</h4>                                                           '
+            				str +=  '           <h4 style="color: #d9e2f2">'+obj.from  +'  ~  '+ obj.to+'</h4></div></div></div>                                                                   '
+            				str +=  '  <div class="popup_right col-6"><div class="ticketing"><div class="ticketing_body">                                                                                                                         '
+            				str +=  '       	<img alt="" src=""></div><hr>                                                                                                                                                                     '
+            				str +=  '       <form action="' + url1 +'" method="POST">                                                                                                                                                '
+            				str +=  '       	<div class="ticketing_result"><div>관람일 :&nbsp;<input name="viewDate" style="border:0 solid black" value="'+ obj.date +'" readonly></div><div>인원 :&nbsp;<input name="count" style="border:0 solid black" value="'+ obj.count +'명" readonly></div>'
+            				str +=  '           <div>좌석 :&nbsp;<input name="seat" style="border:0 solid black" value="'+ obj.seat +'" readonly></div><input type="hidden" name="showId" value="'+obj.show_id+'">                                                '
+            				str +=  '           <div class="popup_price"><input name="price" style="border:0 solid black" value="'+ obj.price +'원" readonly></div>                                                                                                                  '
+            				str +=  '           <input class="btn btn-outline-accent rounded ms-5" type="submit" style="width:130px;height:60px;background-color:#201627" value="예매확인">    '
+            				str +=  '           </div></div></form></div>'
             				
-            				$('.needs-validation').html(str);
+            				});
+            				
+            				$('.ticResult').html(str);
 	         			},
 	         			
 	         			error: function(e) {
@@ -645,7 +577,7 @@
                                     <% } %>
                             </span>
                             </div><span style="font-size: 20px; margin-top: 10px; ">
-                            <%=revCount %>개							
+                            <%=total %>개							
                             </span>
                         </div>
                     </div>
@@ -728,6 +660,71 @@
         </section>
         
         <script>
+        function likeShowPlus(showId) {
+        	$.ajax({
+     			url: "<%=path%>/like/show",
+     			type: "POST",
+     			dataType: "text",
+     			data: { "showId" : showId , "like" : 1},
+     			progress: true,
+         	
+     			success: function(list) {
+    				var rev = JSON.parse(list);
+     				
+     				str = "";
+					$.each(rev, (i, obj) => {
+						var showId = "'" + obj.showId + "'";
+						console.log(showId);
+						
+						str += '<button class="btn btn-icon btn-light-primary btn shadow-sm rounded-circle" onclick="likeShowMinus('+ showId +')" type="button" data-bs-toggle="tooltip" title="찜 취소하기"><i class="fi-heart-filled"></i></button>'
+         				str += '<div class="dropdown d-inline-block" data-bs-toggle="tooltip" title="공유하기">                                                                                  '
+         				str += '    <button class="btn btn-icon btn-light-primary btn shadow-sm rounded-circle ms-2" type="button" data-bs-toggle="dropdown"><i class="fi-share"></i></button>   '
+         				str += '    <div class="dropdown-menu dropdown-menu-end my-1">                                                                                                           '
+         				str += '        <button class="dropdown-item" type="button"><i class="fi-facebook fs-base opacity-75 me-2"></i>Facebook</button>                                         '
+         				str += '        <button class="dropdown-item" type="button"><i class="fi-twitter fs-base opacity-75 me-2"></i>Twitter</button>                                           '
+         				str += '        <button class="dropdown-item" type="button"><i class="fi-instagram fs-base opacity-75 me-2"></i>Instagram</button>                                       '
+         				str += '    </div>                                                                                                                                                       '
+         				str += '</div>                                                                                                                                                '
+					});                                                                                                                                                                          
+     				                                                                                                                                                                             
+     				$('.like-button').html(str);
+     			}
+        	});	
+        }
+        
+        function likeShowMinus(showId) {
+        	$.ajax({
+     			url: "<%=path%>/like/show",
+     			type: "POST",
+     			dataType: "text",
+     			data: { "showId" : showId , "like" : 0 },
+     			progress: true,
+         	
+     			success: function(list) {
+    				var rev = JSON.parse(list);
+     				console.log(rev[0].showId);
+     				
+     				str = "";
+					$.each(rev, (i, obj) => {
+						var showId = "'" + obj.showId + "'";
+						
+						str += '<button class="btn btn-icon btn-light-primary btn shadow-sm rounded-circle" onclick="likeShowPlus('+ showId +')" type="button" data-bs-toggle="tooltip" title="찜하기"><i class="fi-heart"></i></button>'
+         				str += '<div class="dropdown d-inline-block" data-bs-toggle="tooltip" title="공유하기">                                                                                  '
+         				str += '    <button class="btn btn-icon btn-light-primary btn shadow-sm rounded-circle ms-2" type="button" data-bs-toggle="dropdown"><i class="fi-share"></i></button>   '
+         				str += '    <div class="dropdown-menu dropdown-menu-end my-1">                                                                                                           '
+         				str += '        <button class="dropdown-item" type="button"><i class="fi-facebook fs-base opacity-75 me-2"></i>Facebook</button>                                         '
+         				str += '        <button class="dropdown-item" type="button"><i class="fi-twitter fs-base opacity-75 me-2"></i>Twitter</button>                                           '
+         				str += '        <button class="dropdown-item" type="button"><i class="fi-instagram fs-base opacity-75 me-2"></i>Instagram</button>                                       '
+         				str += '    </div>                                                                                                                                                       '
+         				str += '</div>                                                                                                                                                '
+					});                                                                                                                                                                          
+     				                                                                                                                                                                             
+     				$('.like-button').html(str);
+     			}
+        	});	
+        }
+        
+        
         function likePlus(revNo) {
         	$.ajax({
      			url: "<%=path%>/review/heart",
@@ -944,69 +941,6 @@
      		})
      	}
         </script>
-
-        <!-- Recently viewed-->
-        <section class="container pb-5 mb-lg-4 ">
-            <div class="d-flex align-items-center justify-content-between mb-4 pb-2 ">
-                <h2 class="h3 mb-0 ">최신 후기</h2><a class="btn btn-link fw-normal ms-sm-3 p-0 " href="city-guide-catalog.html ">더보기<i class="fi-arrow-long-right ms-2 "></i></a>
-            </div>
-            <div class="tns-carousel-wrapper tns-controls-outside-xxl tns-nav-outside mb-xxl-2 ">
-                <div class="tns-carousel-inner " data-carousel-options="{&quot;items&quot;: 3, &quot;gutter&quot;: 24, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1,&quot;nav&quot;:true},&quot;500&quot;:{&quot;items&quot;:2},&quot;850&quot;:{&quot;items&quot;:3},&quot;1400&quot;:{&quot;items&quot;:3,&quot;nav&quot;:false}}} ">
-                    <!-- Item-->
-                    <div>
-                        <div class="position-relative ">
-                            <div class="position-relative mb-3 ">
-                                <img class="rounded-3 " src="resources/images/child2.gif" alt="Article img " style="height: 400px; width: 300px;">
-                            </div>
-                            <h3 class=" mb-2 fs-lg "><a class="nav-link stretched-link " href="# ">Repose Hotel</a></h3>
-                            <ul class="list-inline mb-0 fs-xs ">
-                                <li class="list-inline-item pe-1 "><i class="fi-star-filled mt-n1 me-1 fs-base text-warning align-middle "></i><b>5.0</b><span class="text-muted ">&nbsp;(48)</span></li>
-                                <li class="list-inline-item pe-1 "><i class="fi-edit mt-n1 me-1 fs-base text-muted align-middle "></i>5</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Item-->
-                    <div>
-                        <div class="position-relative ">
-                            <div class="position-relative mb-3 ">
-                                <img class="rounded-3 " src="resources/images/child2.gif " alt="Article img " style="height: 400px; width: 300px; ">
-                            </div>
-                            <h3 class="mb-2 fs-lg "><a class="nav-link stretched-link " href="# ">Leisure Inn</a></h3>
-                            <ul class="list-inline mb-0 fs-xs ">
-                                <li class="list-inline-item pe-1 "><i class="fi-star-filled mt-n1 me-1 fs-base text-warning align-middle "></i><b>4.8</b><span class="text-muted ">&nbsp;(24)</span></li>
-                                <li class="list-inline-item pe-1 "><i class="fi-edit mt-n1 me-1 fs-base text-muted align-middle "></i>5</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Item-->
-                    <div>
-                        <div class="position-relative ">
-                            <div class="position-relative mb-3 ">
-                                <img class="rounded-3 " src="resources/images/poster2.jpg " alt="Article img " style="height: 400px; width: 300px;">
-                            </div>
-                            <h3 class="mb-2 fs-lg "><a class="nav-link stretched-link " href="# ">Soothe &amp; Stay</a></h3>
-                            <ul class="list-inline mb-0 fs-xs ">
-                                <li class="list-inline-item pe-1 "><i class="fi-star-filled mt-n1 me-1 fs-base text-warning align-middle "></i><b>4.9</b><span class="text-muted ">&nbsp;(43)</span></li>
-                                <li class="list-inline-item pe-1 "><i class="fi-edit mt-n1 me-1 fs-base text-muted align-middle "></i>5</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Item-->
-                    <div>
-                        <div class="position-relative ">
-                            <div class="position-relative mb-3 ">
-                                <img class="rounded-3 " src="resources/images/child.jpg " alt="Article img " style="height: 400px; width: 300px;">
-                            </div>
-                            <h3 class="mb-2 fs-lg "><a class="nav-link stretched-link " href="# ">Merry Berry Motel</a></h3>
-                            <ul class="list-inline mb-0 fs-xs ">
-                                <li class="list-inline-item pe-1 "><i class="fi-star-filled mt-n1 me-1 fs-base text-warning align-middle "></i><b>4.5</b><span class="text-muted ">&nbsp;(13)</span></li>
-                                <li class="list-inline-item pe-1 "><i class="fi-credit-card mt-n1 me-1 fs-base text-muted align-middle "></i>$$</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
     
     <%@include file="/views/common/footer.jsp"%>

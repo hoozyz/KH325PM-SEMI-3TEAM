@@ -370,7 +370,7 @@
                                 <li><a class="dropdown-item" href="<%=path%>/musicMain?category=오페라&rad_date=1개월">오페라</a></li>
                             </ul>
                         </li>
-                        <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/hallList" role="button" aria-expanded="false" id="NSR">공연장</a></a>
+                        <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/hallMain" role="button" aria-expanded="false" id="NSR">공연장</a></a>
                         <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/rankList" role="button" aria-expanded="false" id="NSR">랭킹</a></a>
                         <li class="nav-item dropdown ps-3"><a class="nav-link dropdown" href="<%=path %>/board/news" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="NSR">게시판</a>
                             <ul class="dropdown-menu">

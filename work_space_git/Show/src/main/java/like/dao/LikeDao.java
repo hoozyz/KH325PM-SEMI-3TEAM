@@ -68,8 +68,27 @@ public class LikeDao {
 		return result;
 	}
 	
-	// 찜삭제
-	public int deleteLike(Connection conn, int likeNo) {
+	// 찜삭제 id로
+	public int deleteById(Connection conn, String showId, String userId) {
+		PreparedStatement pstmt = null;
+		String query = "DELETE FROM TBL_LIKE WHERE show_id=? AND user_id=?";
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, showId); 
+			pstmt.setString(2, userId); 
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	// 찜삭제 no
+	public int deleteByNo(Connection conn, int likeNo) {
 		PreparedStatement pstmt = null;
 		String query = "DELETE FROM TBL_LIKE WHERE like_no=?";
 		int result = 0;
@@ -82,6 +101,30 @@ public class LikeDao {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
+		}
+		return result;
+	}
+
+	public int likeCheck(Connection conn, String showId, String userId) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "select count(*) from tbl_like where show_id = ? and user_id=?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, showId); 
+			pstmt.setString(2, userId); 
+			rs = pstmt.executeQuery(); 
+			
+			if(rs.next()) {
+				result = rs.getInt(1); // 0 or 1
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
 		}
 		return result;
 	}

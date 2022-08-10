@@ -45,6 +45,34 @@ public class ReviewWriteServlet extends HttpServlet {
 		int revCount = revService.getRevCount(showId);
 		PageInfo pageInfo = new PageInfo(page, 5, revCount, 5);
 
+		String userId = req.getParameter("revId");
+		String starStr = req.getParameter("revStar");
+		int star = Integer.parseInt(String.valueOf(starStr.charAt(0)));
+		String content = req.getParameter("revContent");
+
+		Show show = showService.findShowById(showId);
+		Review rev = new Review("", showId, userId, content, show.getPrfnm(), show.getPrfpdfrom(), show.getPrfpdto(), star, 0, "");
+
+		// 별점
+		if (revService.getStar(showId) != null) {
+			String stars = revService.getStar(showId);
+			if (stars.length() == 1) {
+				show.setShow_star(stars + ".0");
+			} else {
+				show.setShow_star(stars);
+			}
+		} else {
+			show.setShow_star("0");
+		}
+		
+		if (userId == null || star == 0 || content == null) {
+			req.setAttribute("msg", "모든 내용을 작성해주세요.");
+			req.getRequestDispatcher("/views/show/showDetail.jsp").forward(req, resp);
+			return;
+		}
+
+		int result = revService.save(rev);
+		
 		int count1 = revService.getCount1(showId);
 		int count2 = revService.getCount2(showId);
 		int count3 = revService.getCount3(showId);
@@ -58,34 +86,10 @@ public class ReviewWriteServlet extends HttpServlet {
 		req.setAttribute("count5", count5);
 		req.setAttribute("revCount", revCount);
 
-		String userId = req.getParameter("revId");
-		String starStr = req.getParameter("revStar");
-		int star = Integer.parseInt(String.valueOf(starStr.charAt(0)));
-		String content = req.getParameter("revContent");
-
-		Show show = showService.findShowById(showId);
-		Review rev = new Review("", showId, userId, content, show.getPrfnm(), show.getPrfpdfrom(), show.getPrfpdto(),
-				star, 0, "");
-
-		// 별점
-		String stars = revService.getStar(showId);
-		if (stars.length() == 1) {
-			show.setShow_star(stars + ".0");
-		} else {
-			show.setShow_star(stars);
-		}
-
-		if (userId == null || star == 0 || content == null) {
-			req.setAttribute("msg", "모든 내용을 작성해주세요.");
-			req.getRequestDispatcher("/views/show/showDetail.jsp").forward(req, resp);
-			return;
-		}
-
-		int result = revService.save(rev);
-
 		List<Review> revList = new ArrayList<>();
 		revList = revService.findReviewByShowId(showId);
 		req.setAttribute("pageInfo", pageInfo);
+		
 		if (result > 0) {
 			req.setAttribute("revList", revList);
 			req.setAttribute("show", show);
