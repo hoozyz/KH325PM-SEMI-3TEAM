@@ -187,21 +187,27 @@
                     <!-- 공지사항 3개 -->
                     <tr style="background-color: #c1c1c1; width: 100%; height: 70px; border-bottom: 1px solid lightgray;">
                     	<td class="td-no"></td>
-                    	<td class="td-title">공지사항1</td>
+                    	<td class="td-title">
+                    	<a href="https://www.nocutnews.co.kr/news/5798033" style= "text-decoration : none;">해상왕 장보고 삶, 뮤지컬로 만든다…'오션스' 쇼케이스</a>
+                    	</td>
                     	<td class="td-writer">관리자</td>
                     	<td class="td-date"></td>
                     	<td class="td-count"></td>
                     </tr>
                     <tr style="background-color: #c1c1c1; width: 100%; height: 70px; border-bottom: 1px solid lightgray;">
                     	<td class="td-no"></td>
-                    	<td class="td-title">공지사항2</td>
+                    	<td class="td-title">
+                    	<a href="https://www.segye.com/newsView/20220807511675?OutUrl=naver" style= "text-decoration : none;">남자들을 위한 80㎝ 부츠?…2년 만에 돌아온 쇼뮤지컬 ‘킹키부츠’</a>
+                    	</td>
                     	<td class="td-writer">관리자</td>
                     	<td class="td-date"></td>
                     	<td class="td-count"></td>
                     </tr>
                     <tr style="background-color: #c1c1c1; width: 100%; height: 70px; border-bottom: 1px solid lightgray;">
                     	<td class="td-no"></td>
-                    	<td class="td-title">공지사항3</td>
+                    	<td class="td-title">
+                    	<a href="https://www.yna.co.kr/view/AKR20220805142700005?input=1195m" style= "text-decoration : none;">'160년이 지나도 살아있는 고전의 힘…연극 '레 미제라블'</a>
+                    	</td>
                     	<td class="td-writer">관리자</td>
                     	<td class="td-date"></td>
                     	<td class="td-count"></td>

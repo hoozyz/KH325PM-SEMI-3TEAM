@@ -17,9 +17,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Finder | City Guide | Single Place - Reviews</title>
-
-
+    <title>SCENE</title>
     <!-- Viewport-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon and Touch Icons-->
@@ -198,6 +196,12 @@
                                 <div class="mt-4 mt-sm-5">계정이 없으신가요? <a href="#signup-modal" data-bs-toggle="modal" data-bs-dismiss="modal">회원가입</a></div>
                             </div>
                             <div class="col-md-6 px-4 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5">
+                            	<a style="width: 100%;height: 50px;margin-bottom: 15px;" href="javascript:void(0);" onclick="kakaoLogin();"><img src="<%=path %>/resources/images/kakao_login_medium_wide.png" style="margin-bottom:30px; width:370px;" /></a>
+                                <div class="d-flex align-items-center py-3 mb-3">
+                                    <hr class="w-100">
+                                    <div class="px-3">Or</div>
+                                    <hr class="w-100">
+                                </div>
                                 <form class="needs-validation" action="<%=path %>/login" method="POST" novalidate>
                                     <div class="mb-4">
                                         <label class="form-label mb-2" for="signin-email">아이디</label>
@@ -300,10 +304,15 @@
                 <a class="btn btn-sm text-primary d-none d-lg-block order-lg-3" href="#signin-modal" data-bs-toggle="modal"><i class="fi-user me-2"></i>로그인</a>
                 <a class="btn btn-sm text-primary d-none d-lg-block order-lg-3" href="#signup-modal" data-bs-toggle="modal"><i class="fi-user me-2"></i>회원가입</a>
                 <% } else {%>
-               		 <% if (loginUser != null && loginUser.getRole().equals("ROLE_USER")) { %>
-               		 <button class="btn btn-sm text-primary d none d-lg-block order-lg-3" onclick="location.href='<%=path %>/myInfo'" data-bs-toggle="modal">마이페이지</button>
-                	 <% } %>
-                	 <button class="btn btn-sm text-primary d-none d-lg-block order-lg-3" onclick="location.href='<%=path %>/logout'" data-bs-toggle="modal">로그아웃</button>
+               		 <% if (loginUser != null && loginUser.getRole().equals("ROLE_ADMIN")) { %>
+                	 <button class="btn btn-sm text-primary d-none d-lg-block order-lg-3" onclick="location.href='<%=path %>/logout'" data-bs-toggle="modal"><i class="fi-user me-2"></i>로그아웃</button>
+                	 <% } else if (loginUser != null && loginUser.getName().equals("ROLE_USER")) {%>
+               		 <button class="btn btn-sm text-primary d none d-lg-block order-lg-3" onclick="location.href='<%=path %>/myInfo'" data-bs-toggle="modal"><i class="fi-user me-2"></i>마이페이지</button>
+                	 <button class="btn btn-sm text-primary d-none d-lg-block order-lg-3" onclick="location.href='<%=path %>/logout'" data-bs-toggle="modal"><i class="fi-user me-2"></i>로그아웃</button>
+                	 <% } else {%>
+               		 <button class="btn btn-sm text-primary d none d-lg-block order-lg-3" onclick="location.href='<%=path %>/myInfo'" data-bs-toggle="modal"><i class="fi-user me-2"></i>마이페이지</button>
+                	 <button class="btn btn-sm text-primary d-none d-lg-block order-lg-3" onclick="kakaoLogout();" data-bs-toggle="modal"><i class="fi-user me-2"></i>로그아웃</button>
+                	<% } %>
                 <% } %>
                 <div class="collapse navbar-collapse order-lg-2 justify-content-center" id="navbarNav">
                     <ul class="navbar-nav navbar-nav-scroll" style="max-height: 35rem;">

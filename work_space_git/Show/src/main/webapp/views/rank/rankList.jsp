@@ -97,9 +97,8 @@
                                             <th scope="col">랭킹</th>
                                             <th scope="col" colspan="2">공연명</th>
                                             <th scope="col">기간</th>
-                                            <th scope="col">연령</th>
-                                            <th scope="col">장소</th>
-                                            <th scope="col">예매하기</th>
+                                            <th scope="col" colspan="2">장소</th>
+                                            <th scope="col">상세보기</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -116,11 +115,10 @@
                                             </th>
                                             <th><%=rankList.get(i).getPrfnm() %></th>
                                             <th><%=rankList.get(i).getPrfpd() %></th>
-                                            <th>연령</th>
-                                            <th><%=rankList.get(i).getPrfplcnm() %></th>
+                                            <th colspan="2"><%=rankList.get(i).getPrfplcnm() %></th>
                                             <th>
                                                 <div class="atag">
-                                                    <a class="btn btn-outline-primary rounded" href="<%=path %>/showDetail?showId=<%=rankList.get(i).getShow_id() %>" data-bs-toggle="modal">예매 하기</a>
+                                                    <a class="btn btn-outline-primary rounded" href="<%=path %>/showDetail?showId=<%=rankList.get(i).getShow_id() %>" data-bs-toggle="modal">상세보기</a>
                                                 </div>
                                             </th>
                                         </tr>

@@ -33,6 +33,6 @@ public class ShowController {
 		ShowController sc = new ShowController();
 		
 //		sc.initShow(); // 전체 파싱
-		sc.showIdParse("PF189859"); // 안에 showid 적으면 파싱
+		sc.showIdParse("PF186855"); // 안에 showid 적으면 파싱
 	}
 }

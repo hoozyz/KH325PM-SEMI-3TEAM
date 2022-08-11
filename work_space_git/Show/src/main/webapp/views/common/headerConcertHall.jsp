@@ -260,6 +260,12 @@
                                 <div class="mt-4 mt-sm-5">계정이 없으신가요? <a href="#signup-modal" data-bs-toggle="modal" data-bs-dismiss="modal">회원가입</a></div>
                             </div>
                             <div class="col-md-6 px-4 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5">
+                            	<a style="width: 100%;height: 50px;margin-bottom: 15px;" href="javascript:void(0);" onclick="kakaoLogin();"><img src="<%=path %>/resources/images/kakao_login_medium_wide.png" style="margin-bottom:30px; width:370px;" /></a>
+                                <div class="d-flex align-items-center py-3 mb-3">
+                                    <hr class="w-100">
+                                    <div class="px-3">Or</div>
+                                    <hr class="w-100">
+                                </div>
                                 <form class="needs-validation" action="<%=path %>/login" method="POST" novalidate>
                                     <div class="mb-4">
                                         <label class="form-label mb-2" for="signin-email">아이디</label>
@@ -362,34 +368,37 @@
                 <a class="btn btn-sm text-primary d-none d-lg-block order-lg-3" href="#signin-modal" data-bs-toggle="modal"><i class="fi-user me-2"></i>로그인</a>
                 <a class="btn btn-sm text-primary d-none d-lg-block order-lg-3" href="#signup-modal" data-bs-toggle="modal"><i class="fi-user me-2"></i>회원가입</a>
                 <% } else {%>
-               		 <% if (loginUser != null && loginUser.getRole().equals("ROLE_USER") == false) { %>
-                	 <button class="btn btn-sm text-primary d-none d-lg-block order-lg-3" onclick="location.href='<%=path %>/admin'" data-bs-toggle="modal">소식 관리페이지</button>
+               		 <% if (loginUser != null && loginUser.getRole().equals("ROLE_ADMIN")) { %>
+                	 <button class="btn btn-sm text-primary d-none d-lg-block order-lg-3" onclick="location.href='<%=path %>/logout'" data-bs-toggle="modal"><i class="fi-user me-2"></i>로그아웃</button>
+                	 <% } else if (loginUser != null && loginUser.getName().equals("ROLE_USER")) {%>
+               		 <button class="btn btn-sm text-primary d none d-lg-block order-lg-3" onclick="location.href='<%=path %>/myInfo'" data-bs-toggle="modal"><i class="fi-user me-2"></i>마이페이지</button>
+                	 <button class="btn btn-sm text-primary d-none d-lg-block order-lg-3" onclick="location.href='<%=path %>/logout'" data-bs-toggle="modal"><i class="fi-user me-2"></i>로그아웃</button>
                 	 <% } else {%>
-               		 <button class="btn btn-sm text-primary d none d-lg-block order-lg-3" onclick="location.href='<%=path %>/myInfo'" data-bs-toggle="modal">마이페이지</button>
-                	 <% } %>
-                	 <button class="btn btn-sm text-primary d-none d-lg-block order-lg-3" onclick="location.href='<%=path %>/logout'" data-bs-toggle="modal">로그아웃</button>
+               		 <button class="btn btn-sm text-primary d none d-lg-block order-lg-3" onclick="location.href='<%=path %>/myInfo'" data-bs-toggle="modal"><i class="fi-user me-2"></i>마이페이지</button>
+                	 <button class="btn btn-sm text-primary d-none d-lg-block order-lg-3" onclick="kakaoLogout();" data-bs-toggle="modal"><i class="fi-user me-2"></i>로그아웃</button>
+                	<% } %>
                 <% } %>
                 <div class="collapse navbar-collapse order-lg-2 justify-content-center" id="navbarNav">
                     <ul class="navbar-nav navbar-nav-scroll" style="max-height: 35rem;">
                         <!-- Menu items-->
                         <li class="nav-item dropdown px-3 "><a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="NSR">공연</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="<%=path%>/showSearch?category=연극&rad_date=1개월">연극</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/showSearch?category=뮤지컬&rad_date=1개월">뮤지컬</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/showSearch?category=무용&rad_date=1개월">무용</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/showSearch?category=복합&rad_date=1개월">복합</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/showMain?category=연극&rad_date=1개월">연극</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/showMain?category=뮤지컬&rad_date=1개월">뮤지컬</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/showMain?category=무용&rad_date=1개월">무용</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/showMain?category=복합&rad_date=1개월">복합</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown pe-1"><a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="NSR">음악</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="<%=path%>/musicSearch?category=클래식&rad_date=1개월">클래식</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/musicSearch?category=국악&rad_date=1개월">국악</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/musicSearch?category=오페라&rad_date=1개월">오페라</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/musicMain?category=클래식&rad_date=1개월">클래식</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/musicMain?category=국악&rad_date=1개월">국악</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/musicMain?category=오페라&rad_date=1개월">오페라</a></li>
                             </ul>
                         </li>
-                        <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/hall" role="button" aria-expanded="false" id="NSR">공연장</a></a>
-                        <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/rank" role="button" aria-expanded="false" id="NSR">랭킹</a></a>
-                        <li class="nav-item dropdown ps-3"><a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="NSR">게시판</a>
+                        <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/hallMain" role="button" aria-expanded="false" id="NSR">공연장</a></a>
+                        <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/rankList" role="button" aria-expanded="false" id="NSR">랭킹</a></a>
+                        <li class="nav-item dropdown ps-3"><a class="nav-link dropdown" href="<%=path %>/board/news" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="NSR">게시판</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="<%=path%>/news">소식</a></li>
                                 <li><a class="dropdown-item" href="<%=path%>/board/list">자유</a></li>

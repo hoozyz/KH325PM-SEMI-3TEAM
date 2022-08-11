@@ -43,6 +43,69 @@
     <a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon fi-chevron-up">   </i></a>
     <!-- Vendor scrits: js libraries and plugins-->
     
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    
+<script>
+Kakao.init('8cddaf5bb7b88f487cf47627b52b649b'); //발급받은 키 중 javascript키를 사용해준다.
+Kakao.isInitialized();
+//카카오로그인
+function kakaoLogin() {
+    Kakao.Auth.login({
+      success: function (response) {
+       	Kakao.Auth.setAccessToken(response.access_token);
+       	console.log(Kakao.Auth.getAccessToken())
+        Kakao.API.request({
+          url: '/v2/user/me',
+          success: function (response) {
+        	  var id = response.id;
+        	  
+        	  $.ajax({
+        		  url: "<%=request.getContextPath()%>/kakao",
+       			  type: "POST",
+       			  dataType: "text",
+       			  data: { "userId" : id },
+       			  progress: true,
+                	  
+                  success: function(user) {
+                	  $("#logout").attr("onclick", "kakaoLogout()");
+                	  location.href= "http://localhost/Show/";
+                  }
+        	  })
+          },
+          fail: function (error) {
+            console.log(error)
+          },
+        })
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+  }
+  
+//카카오로그아웃  
+function kakaoLogout() {
+     Kakao.API.request({
+     url: '/v1/user/unlink',
+     success: function (response) {
+    	 $.ajax({
+   		  url: "<%=request.getContextPath()%>/logout",
+  			  type: "POST",
+  			  dataType: "text",
+  			  progress: true,
+           	  
+             success: function(user) {
+             }
+   	  	})
+      	location.href= "http://localhost/Show/";
+       },
+       fail: function (error) {
+         console.log(error)
+       },
+     })
+  }  
+</script>
+    
     <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/simplebar.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/smooth-scroll.polyfills.min.js"></script>

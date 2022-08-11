@@ -34,8 +34,13 @@ public class ShowDetailServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		User user = (User) session.getAttribute("loginUser");
-		String userId = user.getUser_id();
+		User user = null;
+		String userId = null;
+		if(session.getAttribute("loginUser") != null) {
+			user = (User) session.getAttribute("loginUser");
+			userId = user.getUser_id();
+		}
+		
 		String showId = (String) req.getParameter("showId");
 		Show show = showService.findShowById(showId);
 		Set<String> set = null;
@@ -44,7 +49,11 @@ public class ShowDetailServlet extends HttpServlet {
 
 		List<String> priceList = new ArrayList<>();
 		
-		int likeCheck = likeService.likeCheck(showId, userId);
+		int likeCheck = 0;
+		if(userId != null) {
+			likeCheck = likeService.likeCheck(showId, userId);
+		}
+		
 		req.setAttribute("likeCheck", likeCheck);
 
 		if (show.getPcseguidance().equals("전석무료")) {
