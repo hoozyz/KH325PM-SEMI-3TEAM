@@ -3,6 +3,12 @@
     color: #767676;
 }
 
+
+* {
+  font-family: 'NanumSquareRound', sans-serif
+}
+
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
@@ -33,6 +39,7 @@ tbody {
 th,
 td {
     vertical-align: middle;
+     font-family: 'NanumSquareRound', sans-serif;
 }
 
 btn {
@@ -48,13 +55,12 @@ btn {
     font-size: 50px;
 }
 
-.btn_lst {
-    bottom: 0;
-}
 
 .detailTopMid {
     float: left;
-    font-size: 25px
+    font-size: 50px;
+    margin-bottom: 10px;
+    font-weight:700;
 }
 
 .detailTopMid a {
@@ -62,6 +68,7 @@ btn {
 }
 
 .btn_lst {
+	font-size:20px;
     float: right;
 }
 
@@ -138,4 +145,9 @@ ul.tabs li.on {
     margin-left: 3%;
     margin-right: 3%;
     margin-bottom: 5%;
+}
+.rankHead {
+	font-size:20px;
+	font-weight:700;
+
 }

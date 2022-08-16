@@ -37,15 +37,12 @@ public class LikeShowServlet extends HttpServlet {
 		Show show = showService.findShowById(showId);
 
 		Like like = new Like(0, userId, showId, show.getPrfnm(), show.getPoster(), show.getFcltynm(), "");
-		System.out.println(showId);
-		System.out.println(userId);
 		
 		int result = 0;
 		if(Integer.parseInt(req.getParameter("like")) == 1) {
 			result = likeService.save(like);
 		} else {
 			result = likeService.deleteById(showId, userId);
-			System.out.println(result);
 		}
 
 		if (result > 0) {

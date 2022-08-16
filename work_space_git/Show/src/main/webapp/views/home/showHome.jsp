@@ -4,20 +4,20 @@
 
 <!-- https://cors-anywhere.herokuapp.com/corsdemo <- 사이트 들어가서 demo server 클릭해야함 cors에러 해결 -->
 
-<%@include file="/views/common/header.jsp"%>
+<%@include file="/views/common/mainHeader.jsp"%>
 
 <!-- Page content-->
         <!-- Hero-->
         <main>
-       <section class="container-fluid py-5 mt-5 mb-5" style="height:470px; background-image: url(resources/images/heroBg.png)">
-            <section class="container py-0 mt-0 mb-3">
+       <section class="container-fluid py-5 mt-5 mb-5" style="height:470px; background-image: url(<%=path%>/resources/images/heroBg.png)">
+            <section class="container py-0 pt-3 mt-0 mb-3">
                 <div class="row align-items-center mt-md-2 ms-5">
-                    <div class="col-lg-7 order-lg-2 mb-lg-0 mb-4 pb-2 pb-lg-0"><img class="d-block mx-auto" src="resources/images/heroPoster.png" width="450" alt="Hero image"></div>
-                    <div class="col-lg-5 order-lg-1 pe-lg-0">
-                        <div style="padding-left : 40px;">
-                            <h1 class="display-3 mb-2 me-lg-n5 text-lg-start text-center mb-2" style="font-size: 40pt; font-weight:normal">지금 바로,</h1>
-                            <h1 class="display-3 mb-2 me-lg-n5 text-lg-start text-center mb-2" style="font-size: 40pt; font-weight:normal">원하는 <span class=" type text-info1" style=" box-shadow: inset 0 -20px 0 #59f7ca;">공연</span></h1>
-                            <h1 class="display-3 mb-2 me-lg-n5 text-lg-start text-center mb-2" style="font-size: 40pt; font-weight:normal"> 검색하세요!</h1>
+                    <div class="col-lg-7 order-lg-2 mb-lg-0 mb-4 pb-2 pb-lg-0"><img class="d-block mx-auto" src="<%=path%>/resources/images/heroPoster.png" width="450" alt="Hero image"></div>
+                    <div class="col-lg-5 order-lg-1 pe-lg-0 pb-5">
+                        <div style="padding-left : 40px; padding-bottom:15px;">
+                            <h1 class="display-3 mb-2 me-lg-n5 text-lg-start text-center mb-2" style="font-size: 45pt; font-weight:normal">지금 바로,</h1>
+                            <h1 class="display-3 mb-2 me-lg-n5 text-lg-start text-center mb-2" style="font-size: 45pt; font-weight:normal">원하는 <span class=" type text-info1" style=" box-shadow: inset 0 -20px 0 #59f7ca;">공연</span></h1>
+                            <h1 class="display-3 mb-2 me-lg-n5 text-lg-start text-center mb-2" style="font-size: 45pt; font-weight:normal"> 검색하세요!</h1>
 
                             <!-- type.js -->
                             <script type="text/javascript" src="resources/js/typed.js"></script>
@@ -39,16 +39,16 @@
 
                         <!-- Search form-->
                         <div class="me-lg-n5">
-                            <form class="form-group d-block d-md-flex position-relative rounded-md-pill me-lg-n5" action="<%=path %>/showSearch" method="GET">
+                            <form class="form-group d-block d-md-flex position-relative rounded-md-pill me-lg-n5" action="<%=path %>/showSearch" method="GET" >
                                 <div class="input-group input-group-lg border-end-md"><span class="input-group-text text-muted rounded-pill ps-3"><i class="fi-search"></i></span>
-                                    <input class="form-control" name="keyword" type="text" placeholder="무엇을 찾으시나요?">
+                                    <input class="form-control" name="keyword" type="text" placeholder="무엇을 찾으시나요?" style="font-size:20px;">
                                 </div>
                                 <hr class="d-md-none my-2">
                                 <div class="d-sm-flex">
                                     <div class="dropdown w-100 mb-sm-0 mb-3" data-bs-toggle="select">
-                                        <button class="btn btn-link btn-lg dropdown-toggle ps-2 ps-sm-3" type="button" data-bs-toggle="dropdown" ><i class="fi-list me-2"></i><span class="dropdown-toggle-label">카테고리</span></button>
+                                        <button class="btn btn-link btn-lg dropdown-toggle ps-2 ps-sm-3" type="button" data-bs-toggle="dropdown" style="font-size:20px;" ><i class="fi-list me-2"></i><span class="dropdown-toggle-label">카테고리</span></button>
                                         <input type="hidden" name="category">
-                                        <ul class="dropdown-menu">
+                                        <ul class="dropdown-menu" style="font-size:20px;">
                                             <li><a class="dropdown-item" href="#"><i class="fi-museum fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">공연</span></a></li>
                                             <li><a class="dropdown-item" href="#"><i class="fi-music  opacity-60 me-2"></i><span class="dropdown-item-label">음악</span></a></li>
                                             <li><a class="dropdown-item" href="#"><i class="fi-dots-horisontal fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">기타</span></a></li>
@@ -67,9 +67,9 @@
         <section class="container" style="margin-bottom: 10px;">
             <div class="d-sm-flex justify-content-between mb-2">
                 <div>
-                    <h2 style="display:inline">실시간 </h2>
-                    <h2 style="display:inline; color: #dbab34; ">랭킹</h2>
-                    <h6 style=" display:inline; margin-left : 10px; ">기간별 인기작품을 만나보세요!</h6>
+                    <h2 style="display:inline; font-size:50px;">실시간 </h2>
+                    <h2 style="display:inline; color: #dbab34; font-size:50px; ">랭킹</h2>
+                    <h6 style=" display:inline; margin-left:10px; font-size:30px; font-weight:bold;">기간별 인기작품을 만나보세요!</h6>
                 </div>
 
                 <!-- <div class="col-md-8 mb-3">
@@ -77,22 +77,22 @@
                     <h2 style="font-size: 40px; color: #dbab34; display:inline;">랭킹</h2>
                     <h6 style=" display:inline; margin-left : 10px; ">기간별 인기작품을 만나보세요!</h6>
                 </div> -->
-                <a class="btn btn-link fw-normal ms-sm-3 p-0" href="<%=path %>/rankList" style="margin-top: 15px;">더보기<i class="fi-arrow-long-right ms-1"></i></a>
+                <a class="btn btn-link fw-normal ms-sm-3 p-0" href="<%=path %>/rankList" style="margin-top: 15px; font-size:20px;">더보기<i class="fi-arrow-long-right ms-1"></i></a>
             </div>
             <div style="width: 1200px; margin: 0 auto; display:inline-block; height: 35px;">
                 <div style="position: relative; margin-bottom: 0px; display:inline-block; height: 35px;">
                     <ul class="period-ul" style="padding-left: 5px;">
                         <li class="on">
-                            <a href="#n" id="day" class="on">일간</a>
+                            <a href="#n" id="day" class="on" style=font-size:20px;>일간</a>
                         </li>
                         <li class>
-                            <a href="#n" id="week" class>주간</a>
+                            <a href="#n" id="week" class style=font-size:20px;>주간</a>
                         </li>
                         <li class>
-                            <a href="#n" id="month" class>월간</a>
+                            <a href="#n" id="month" class style=font-size:20px;>월간</a>
                         </li>
                     </ul>
-                    <p id="datestr" style="margin-left: 20px; float:left; margin-bottom: 5px; margin-top: 2px;"></p>
+                    <p id="datestr" style="margin-left: 20px; float:left; margin-bottom: 5px; margin-top: 2px; font-size:20px;"></p>
                 </div>
             </div>
             <div class="swiper-container">
@@ -266,62 +266,63 @@
         <!--@@@@@@@@@@ 전국 공연장 @@@@@@@@@@-->
         <section class="container mb-sm-4 mb-3 pb-lg-4">
             <div class="col-md-8 mb-3" style="width: 1300px;">
-                <h2 style="display:inline">전국 </h2>
-                <h2 style="display:inline; color: #0B398E; ">공연장</h2>
-                <h6 style=" display:inline; margin-left : 10px; ">전국 주요 공연장을 빠르게 찾아보세요!</h6>
-                <a class="btn btn-link fw-normal ms-sm-3 p-0" href="<%=path %>/hallMain" style="margin-top: 20px; float:right;">더보기<i class="fi-arrow-long-right ms-1"></i></a>
+                <h2 style="display:inline; font-size:50px;">전국 </h2>
+                <h2 style="display:inline; color: #0B398E; font-size:50px;">공연장</h2>
+                <h6 style=" display:inline; margin-left:10px; font-size:30px; font-weight:bold;">전국 주요 공연장을 빠르게 찾아보세요!</h6>
+                <a class="btn btn-link fw-normal ms-sm-3 p-0" href="<%=path %>/hallMain" style="margin-top: 20px; float:right; font-size:20px;">더보기<i class="fi-arrow-long-right ms-1"></i></a>
             </div>
             <!-- No image-->
             <div class="card border-0 shadow-sm">
-                <div class="card-header p-0 b-0" style="border:0; text-align:center;">
+                <div class="card-header p-0 b-0" style="border:0; text-align:center;  font-family: 'NanumSquareRound', 'sans-serif'; font-size:20pt;">
                     <ul class="nav nav-tabs p-0 m-0 b-0" role="tablist">
-                        <li class="col m-0" style="border-radius:0;"><a class="nav-link pb-1 active" href="#sejong" data-bs-toggle="tab" role="tab" aria-controls="sejong" aria-selected="true" style="border-radius:0;">세종문화회관</a></li>
-                        <li class="col m-0"><a class="nav-link pb-1" href="#lotte" data-bs-toggle="tab" role="tab" aria-controls="lotte" aria-selected="false" style="border-radius:0;">롯데콘서트홀</a></li>
-                        <li class="col m-0"><a class="nav-link pb-1" href="#daejeon" data-bs-toggle="tab" role="tab" aria-controls="daejeon" aria-selected="false" style="border-radius:0;">대전예술의전당</a></li>
-                        <li class="col m-0"><a class="nav-link pb-1" href="#pohang" data-bs-toggle="tab" role="tab" aria-controls="kumho" aria-selected="false" style="border-radius:0;">포항문화예술회관</a></li>
-                        <li class="col m-0"><a class="nav-link pb-1" href="#busan" data-bs-toggle="tab" role="tab" aria-controls="busan" aria-selected="false" style="border-radius:0;">부산문화회관</a></li>
+                        <li class="col m-0" style="border-radius:0;"><a class="nav-link pb-1 active" href="#sejong" data-bs-toggle="tab" role="tab" aria-controls="sejong" aria-selected="true" style="border-radius:0; font-weight: 600;">세종문화회관</a></li>
+                        <li class="col m-0"><a class="nav-link pb-1" href="#lotte" data-bs-toggle="tab" role="tab" aria-controls="lotte" aria-selected="false" style="border-radius:0; font-weight: 600;">롯데콘서트홀</a></li>
+                        <li class="col m-0"><a class="nav-link pb-1" href="#daejeon" data-bs-toggle="tab" role="tab" aria-controls="daejeon" aria-selected="false" style="border-radius:0; font-weight: 600;">대전예술의전당</a></li>
+                        <li class="col m-0"><a class="nav-link pb-1" href="#pohang" data-bs-toggle="tab" role="tab" aria-controls="kumho" aria-selected="false" style="border-radius:0; font-weight: 600;">포항문화예술회관</a></li>
+                        <li class="col m-0"><a class="nav-link pb-1" href="#busan" data-bs-toggle="tab" role="tab" aria-controls="busan" aria-selected="false" style="border-radius:0; font-weight: 600;">부산문화회관</a></li>
                     </ul>
                 </div>
-                <div class="card-body pt-4 pb-0" style="background-image: url(resources/images/stadium-logo/stadium_bg1.png);">
+                <div class="card-body pt-4 pb-0" style="background-image: url(<%=path%>/resources/images/stadium-logo/stadium_bg1.png); height:430px;">
                     <div class="tab-content">
-                        <div class="tab-pane fade row active show" id="sejong" role="tabpanel" style="background-image: url(resources/images/stadium-logo/stadium-bg6.png)">
+                        <div class="tab-pane fade row active show" id="sejong" role="tabpanel" style="background-image: url(<%=path%>/resources/images/stadium-logo/stadium-bg6.png)">
                             <div class="card py-5 px-0" style="max-width: 15rem; border: none; float: left; background:none;">
                                 <div class="card-body" style="text-align: center; ">
-                                    <img src="resources/images/stadium-logo/sejong_ci.png" style="width:70%;">
+                                    <img src="<%=path %>/resources/images/stadium-logo/sejong_ci.png" style="width:70%;">
                                     <br>
                                     <br>
-                                    <p class="card-text fs-xs m-0 p-0">문화로 더 새롭게,</p>
-                                    <p class="card-text fs-xs m-0 p-0">예술로 더 풍요롭게,</p>
-                                    <p class="card-text fs-xs m-0 p-0">세종문화회관</p>
+                                    <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">문화로 더 새롭게,</p>
+                                    <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">예술로 더 풍요롭게,</p>
+                                    <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">세종문화회관</p>
+									<p><button class="btn btn-outline-info mt-2 fs-sm px-0 py-0" type="button" style="width:70px; height:30px;">더보기</button></p>
                                 </div>
                             </div>
 
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" id="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195255'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195255_220727_094226.jpg">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">해리 포터와 아즈카반의 죄수™ 인 콘서트</p>
-                                    <p class="card-text fs-sm m-0 p-0">2022.10.07 ~ 2022.10.09</p>
+                                <div class="card-body py-0" id="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='/Show/showDetail?showId=PF195255'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195255_220727_094226.jpg" style="height:304px;">
+                                    <p class="card-text pt-1 m-0" style="font-weight: bold; font-size:15pt;">해리 포터와 아즈카반의 죄수™ 인 콘서트</p>
+                                    <p class="card-text fs-ms m-0 p-0">2022.10.07 ~ 2022.10.09</p>
                                 </div>
                             </div>
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195271'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195271_220727_102535.jpg">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">로미오와 줄리엣</p>
-                                    <p class="card-text fs-sm m-0 p-0">2022.09.22 ~ 2022.09.25</p>
+                                <div class="card-body py-0" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195271'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195271_220727_102535.jpg" style="height:304px;">
+                                    <p class="card-text pt-1 pb-2 m-0" style="font-weight: bold; font-size:15pt;">로미오와 줄리엣</p><br>
+                                    <p class="card-text fs-ms m-0 p-0">2022.09.22 ~ 2022.09.25</p>
                                 </div>
                             </div>
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" style="text- align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF189859'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF189859_220421_102833.gif">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">웃는 남자</p>
-                                    <p class="card-text fs-sm m-0 p-0">2022.06.10 ~ 2022.08.22</p>
+                                <div class="card-body py-0" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF189859'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF189859_220421_102833.gif" style="height:304px;">
+                                    <p class="card-text pt-1 pb-2 m-0" style="font-weight: bold; font-size:15pt;">웃는 남자</p><br>
+                                    <p class="card-text fs-ms m-0 p-0">2022.06.10 ~ 2022.08.22</p>
                                 </div>
                             </div>
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195697'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195697_220803_132014.gif">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">국립현대무용단 무용X기술 Part.1, 넌댄스 댄스</p>
-                                    <p class="card-text fs-sm m-0 p-0">2022.09.16 ~ 2022.09.18</p>
+                                <div class="card-body py-0" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195697'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195697_220803_132014.gif" style="height:304px;">
+                                    <p class="card-text pt-1 m-0" style="font-weight: bold; font-size:15pt;">국립현대무용단 무용X기술 Part.1, 넌댄스 댄스</p>
+                                    <p class="card-text fs-ms m-0 p-0">2022.09.16 ~ 2022.09.18</p>
                                 </div>
                             </div>
 
@@ -329,42 +330,43 @@
                         <div class="tab-pane fade row" id="lotte" role="tabpanel">
                             <div class="card py-5 px-0" style="max-width: 15rem; border: none; float: left; background:none;">
                                 <div class="card-body" style="text-align: center; ">
-                                    <img src="resources/images/stadium-logo/lotte_ci.png" style="width:70%;">
+                                    <img src="<%=path %>/resources/images/stadium-logo/lotte_ci.png" style="width:70%;">
                                     <br>
                                     <br>
-                                    <p class="card-text fs-xs m-0 p-0">문화로 더 새롭게,</p>
-                                    <p class="card-text fs-xs m-0 p-0">예술로 더 풍요롭게,</p>
-                                    <p class="card-text fs-xs m-0 p-0">롯데콘서트홀</p>
+                                    <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">문화로 더 새롭게,</p>
+                                    <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">예술로 더 풍요롭게,</p>
+                                    <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">롯데콘서트홀</p>
+                                    <p><button class="btn btn-outline-info mt-2 fs-sm px-0 py-0" type="button" style="width:70px; height:30px;">더보기</button></p>
                                 </div>
                             </div>
 
 
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195450'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195450_220729_140658.gif">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">더 시네마 & 클래식 2.0 with 또모</p>
-                                    <p class="card-text fs-sm m-0 p-0">2022.09.11 ~ 2022.09.11</p>
+                               <div class="card-body py-0" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195450'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195450_220729_140658.gif" style="height:304px;">
+                                    <p class="card-text pt-1 m-0" style="font-weight: bold; font-size:15pt;">더 시네마 & 클래식 2.0 with 또모</p>
+                                    <p class="card-text fs-ms m-0 p-0">2022.09.11 ~ 2022.09.11</p>
                                 </div>
                             </div>
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195832'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195832_220805_122742.jpg">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">W필하모닉오케스트라, 말러 교향곡 4번</p>
-                                    <p class="card-text fs-sm m-0 p-0">2022.09.19 ~ 2022.09.19</p>
+                                <div class="card-body py-0" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195832'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195832_220805_122742.jpg" style="height:304px;">
+                                    <p class="card-text pt-1 m-0" style="font-weight: bold; font-size:15pt;">W필하모닉오케스트라, 말러 교향곡 4번</p>
+                                    <p class="card-text fs-ms m-0 p-0">2022.09.19 ~ 2022.09.19</p>
                                 </div>
                             </div>
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195845'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195845_220808_095945.jpg">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">제4회 명앙상블 정기연주회</p>
-                                    <p class="card-text fs-sm m-0 p-0">2022.09.15 ~ 2022.09.15</p>
+                                <div class="card-body py-0" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195845'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195845_220808_095945.jpg" style="height:304px;">
+                                    <p class="card-text pt-1 m-0" style="font-weight: bold; font-size:15pt;">제4회 명앙상블 정기연주회</p>
+                                    <p class="card-text fs-ms m-0 p-0">2022.09.15 ~ 2022.09.15</p>
                                 </div>
                             </div>
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195299'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195299_220727_121833.gif">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">서울모테트합창단의 하이든 천지창조</p>
-                                    <p class="card-text fs-sm m-0 p-0">2022.09.27 ~ 2022.09.27</p>
+                                <div class="card-body py-0" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195299'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195299_220727_121833.gif" style="height:304px;">
+                                    <p class="card-text pt-1 m-0" style="font-weight: bold; font-size:15pt;">서울모테트합창단의 하이든 천지창조</p>
+                                    <p class="card-text fs-ms m-0 p-0">2022.09.27 ~ 2022.09.27</p>
                                 </div>
                             </div>
 
@@ -374,42 +376,43 @@
                         <div class="tab-pane fade row" id="daejeon" role="tabpanel" style="background-image: url(resources/images/stadium-logo/stadium-bg6.png)">
                             <div class="card py-5 px-0" style="max-width: 15rem; border: none; float: left; background:none;">
                                 <div class="card-body" style="text-align: center; ">
-                                    <img src="resources/images/stadium-logo/daejeon_ci.png" style="width:70%;">
+                                    <img src="<%=path %>/resources/images/stadium-logo/daejeon_ci.png" style="width:70%;">
                                     <br>
                                     <br>
-                                    <p class="card-text fs-xs m-0 p-0">문화로 더 새롭게,</p>
-                                    <p class="card-text fs-xs m-0 p-0">예술로 더 풍요롭게,</p>
-                                    <p class="card-text fs-xs m-0 p-0">대전예술의전당</p>
+                                    <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">문화로 더 새롭게,</p>
+                                    <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">예술로 더 풍요롭게,</p>
+                                    <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">대전예술의전당</p>
+                                    <p><button class="btn btn-outline-info mt-2 fs-sm px-0 py-0" type="button" style="width:70px; height:30px;">더보기</button></p>
                                 </div>
                             </div>
 
 
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195919'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195919_220809_100657.gif">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">히사이시 조 영화음악 콘서트 [대전(앵콜)]</p>
-                                    <p class="card-text fs-sm m-0 p-0">2022.09.25 ~ 2022.09.25</p>
+                                <div class="card-body py-0" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195919'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195919_220809_100657.gif" style="height:304px;">
+                                    <p class="card-text pt-1 m-0" style="font-weight: bold; font-size:15pt;">히사이시 조 영화음악 콘서트 [대전(앵콜)]</p>
+                                    <p class="card-text fs-ms m-0 p-0">2022.09.25 ~ 2022.09.25</p>
                                 </div>
                             </div>
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF194710'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF194710_220715_133842.gif">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">살아있는 자를 수선하기 [대전]</p>
-                                    <p class="card-text fs-sm m-0 p-0">2022.09.23 ~ 2022.09.24</p>
+                                <div class="card-body py-0" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF194710'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF194710_220715_133842.gif" style="height:304px;">
+                                    <p class="card-text pt-1 m-0" style="font-weight: bold; font-size:15pt;">살아있는 자를 수선하기 [대전]</p>
+                                    <p class="card-text fs-ms m-0 p-0">2022.09.23 ~ 2022.09.24</p>
                                 </div>
                             </div>
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF196011'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF196011_220810_104714.jpg">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">제8회 앙상블 피아노소리 정기연주회</p>
-                                    <p class="card-text fs-sm m-0 p-0">2022.09.08 ~ 2022.09.08</p>
+                                <div class="card-body py-0" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF196011'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF196011_220810_104714.jpg" style="height:304px;">
+                                    <p class="card-text pt-1 m-0" style="font-weight: bold; font-size:15pt;">제8회 앙상블 피아노소리 정기연주회</p>
+                                    <p class="card-text fs-ms m-0 p-0">2022.09.08 ~ 2022.09.08</p>
                                 </div>
                             </div>
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF193236'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF193236_220622_101135.jpg">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">아침을 여는 클래식, 피아니스트 김태형 & 김규연 (9월)</p>
-                                    <p class="card-text fs-sm m-0 p-0">2022.09.13 ~ 2022.09.13</p>
+                                <div class="card-body py-0" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF193236'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF193236_220622_101135.jpg" style="height:304px;">
+                                    <p class="card-text pt-1 m-0" style="font-weight: bold; font-size:15pt;">아침을 여는 클래식, 피아니스트 김태형 & 김규연 (9월)</p>
+                                    <p class="card-text fs-ms m-0 p-0">2022.09.13 ~ 2022.09.13</p>
                                 </div>
                             </div>
 
@@ -419,42 +422,43 @@
                         <div class="tab-pane fade row" id="pohang" role="tabpanel" style="background-image: url(resources/images/stadium-logo/stadium-bg6.png)">
                             <div class="card py-5 px-0" style="max-width: 15rem; border: none; float: left; background:none;">
                                 <div class="card-body" style="text-align: center; ">
-                                    <img src="resources/images/stadium-logo/pohang_ci.png" style="width:70%;">
+                                    <img src="<%=path %>/resources/images/stadium-logo/pohang_ci.png" style="width:70%;">
                                     <br>
                                     <br>
-                                    <p class="card-text fs-xs m-0 p-0">문화로 더 새롭게,</p>
-                                    <p class="card-text fs-xs m-0 p-0">예술로 더 풍요롭게,</p>
-                                    <p class="card-text fs-xs m-0 p-0">포항문화예술회관</p>
+                                    <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">문화로 더 새롭게,</p>
+                                    <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">예술로 더 풍요롭게,</p>
+                                    <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">포항문화예술회관</p>
+                                    <p><button class="btn btn-outline-info mt-2 fs-sm px-0 py-0" type="button" style="width:70px; height:30px;">더보기</button></p>
                                 </div>
                             </div>
 
 
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF193005'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF193005_220617_123639.jpg">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">알피 [포항]</p>
-                                    <p class="card-text fs-sm m-0 p-0">2022.07.16 ~ 2022.07.17</p>
+                                <div class="card-body py-0" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF193005'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF193005_220617_123639.jpg" style="height:304px;">
+                                    <p class="card-text pt-1 pb-2 m-0" style="font-weight: bold; font-size:15pt;">알피 [포항]</p><br>
+                                    <p class="card-text fs-ms m-0 p-0">2022.07.16 ~ 2022.07.17</p>
                                 </div>
                             </div>
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF192378'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF192378_220608_102725.jpg">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">제115회 포항시립합창단 정기연주회</p>
-                                    <p class="card-text fs-sm m-0 p-0">2022.07.07 ~ 2022.07.07</p>
+                                <div class="card-body py-0" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF192378'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF192378_220608_102725.jpg" style="height:304px;">
+                                    <p class="card-text pt-1 m-0" style="font-weight: bold; font-size:15pt;">제115회 포항시립합창단 정기연주회</p>
+                                    <p class="card-text fs-ms m-0 p-0">2022.07.07 ~ 2022.07.07</p>
                                 </div>
                             </div>
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195777'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195777_220805_100450.jpg">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">제191회 포항시립교향악단 정기연주회</p>
-                                    <p class="card-text fs-sm m-0 p-0">2022.09.01 ~ 2022.09.01</p>
+                                <div class="card-body py-0" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195777'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195777_220805_100450.jpg" style="height:304px;">
+                                    <p class="card-text pt-1 m-0" style="font-weight: bold; font-size:15pt;">제191회 포항시립교향악단 정기연주회</p>
+                                    <p class="card-text fs-ms m-0 p-0">2022.09.01 ~ 2022.09.01</p>
                                 </div>
                             </div>
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF194119'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF194119_220706_095004.jpg">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">타악판타지 통: 공 · 기 · 결 [포항]</p>
-                                    <p class="card-text fs-sm m-0 p-0">2022.08.06 ~ 2022.08.06</p>
+                                <div class="card-body py-0" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF194119'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF194119_220706_095004.jpg" style="height:304px;">
+                                    <p class="card-text pt-1 m-0" style="font-weight: bold; font-size:15pt;">타악판타지 통: 공 · 기 · 결 [포항]</p>
+                                    <p class="card-text fs-ms m-0 p-0">2022.08.06 ~ 2022.08.06</p>
                                 </div>
                             </div>
 
@@ -462,42 +466,43 @@
                         <div class="tab-pane fade row" id="busan" role="tabpanel" style="background-image: url(resources/images/stadium-logo/stadium-bg6.png)">
                             <div class="card py-5 px-0" style="max-width: 15rem; border: none; float: left; background:none;">
                                 <div class="card-body" style="text-align: center; ">
-                                    <img src="resources/images/stadium-logo/busan_ci.png " style="width:70%; ">
+                                    <img src="<%=path %>/resources/images/stadium-logo/busan_ci.png " style="width:70%; ">
                                     <br>
                                     <br>
-                                    <p class="card-text fs-xs m-0 p-0">문화로 더 새롭게,</p>
-                                    <p class="card-text fs-xs m-0 p-0">예술로 더 풍요롭게,</p>
-                                    <p class="card-text fs-xs m-0 p-0">부산문화회관</p>
+                                  	<p class="card-text fs-lg m-0 p-0" style="font-weight:600;">문화로 더 새롭게,</p>
+                                    <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">예술로 더 풍요롭게,</p>
+                                    <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">부산문화회관</p>
+                                    <p><button class="btn btn-outline-info mt-2 fs-sm px-0 py-0" type="button" style="width:70px; height:30px;">더보기</button></p>
                                 </div>
                             </div>
 
 
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF190881'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF190881_220511_101419.jpg">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">그때도 오늘 [부산]</p>
-                                    <p class="card-text fs-sm m-0 p-0">2022.09.23 ~ 2022.09.24</p>
+                                <div class="card-body py-0" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF190881'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF190881_220511_101419.jpg" style="height:304px;">
+                                    <p class="card-text pt-1 pb-2 m-0" style="font-weight: bold; font-size:15pt;">그때도 오늘 [부산]</p><br>
+                                    <p class="card-text fs-ms m-0 p-0">2022.09.23 ~ 2022.09.24</p>
                                 </div>
                             </div>
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195224'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195224_220726_141354.jpg">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">부산시립교향악단 기획음악회, 심포니야夜</p>
-                                    <p class="card-text fs-sm m-0 p-0">2022.09.22 ~ 2022.09.22</p>
+                                <div class="card-body py-0" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195224'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195224_220726_141354.jpg" style="height:304px;">
+                                    <p class="card-text pt-1 m-0" style="font-weight: bold; font-size:15pt;">부산시립교향악단 기획음악회, 심포니야夜</p>
+                                    <p class="card-text fs-ms m-0 p-0">2022.09.22 ~ 2022.09.22</p>
                                 </div>
                             </div>
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF190869'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF190869_220511_095105.png">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">에코백</p>
-                                    <p class="card-text fs-sm m-0 p-0">2022.09.15 ~ 2022.10.09</p>
+                                <div class="card-body py-0" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF190869'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF190869_220511_095105.png" style="height:304px;">
+                                    <p class="card-text pt-1 pb-2 m-0" style="font-weight: bold; font-size:15pt;">에코백</p><br>
+                                    <p class="card-text fs-ms m-0 p-0">2022.09.15 ~ 2022.10.09</p>
                                 </div>
                             </div>
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
-                                <div class="card-body" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195681'">
-                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195681_220803_124202.jpg">
-                                    <p class="card-text fs-ms pt-1 m-0" style="font-weight: bold;">퀸엘리자베스 국제 콩쿠르 위너스 콘서트 [부산]</p>
-                                    <p class="card-text fs-sm m-0 p-0">2022.09.14 ~ 2022.09.14</p>
+                                <div class="card-body py-0" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195681'">
+                                    <img class="card shadow-lg border-0 w-100 border-0 hover-animate" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF195681_220803_124202.jpg" style="height:304px;">
+                                    <p class="card-text pt-1 m-0" style="font-weight: bold; font-size:15pt;">퀸엘리자베스 국제 콩쿠르 위너스 콘서트 [부산]</p>
+                                    <p class="card-text fs-ms m-0 p-0">2022.09.14 ~ 2022.09.14</p>
                                 </div>
                             </div>
                         </div>
@@ -507,170 +512,26 @@
         </section>
         <!--@@@@@@@@@@ 전국 공연장 끝 @@@@@@@@@@-->
 
-
-        <!-- What’s new-->
-        <section class="container mt-n3 mt-md-0 mb-2 pb-lg-2">
-            <!-- Carousel-->
-            <div class="row">
-                <div class="tns-carousel-wrapper col-md-4">
-
-                    <div class="mb-3">
-                        <h2 style="display:inline;">공연중인</h2>
-                        <h2 style="display:inline; color: #dbab34; ">수상작</h2>
-                    </div>
-                    <div class="tns-carousel-inner" data-carousel-options="{&quot;mode&quot;: &quot;gallery&quot;, &quot;nav&quot;: false, &quot;controlsContainer&quot;: &quot;#carousel-controls&quot;}">
-                        <!-- 수상작1-->
-                        <div>
-                            <div class="row">
-                                <div class="col-md-6 mb-md-0 mb-2"><img class="position-relative rounded-3 zindex-5" src="resources/images/poster2.jpg" alt="Article image"></div>
-                                <div class="col-md-6">
-                                    <h3 class="h4 from-top">마타하리</h3>
-                                    <ul class="list-unstyled delay-2 from-end">
-                                        <li class="mb-1 fs-sm"><i class="fi-map-pin text-muted me-2 fs-base"></i>Ollenhauer Str. 29, 10118</li>
-                                        <li class="mb-1 fs-sm"><i class="fi-clock text-muted me-2 fs-base"></i>9:00 – 23:00</li>
-                                        <li class="mb-1 fs-sm"><i class="fi-wallet text-muted me-2 fs-base"></i>$$</li>
-                                    </ul>
-                                    <p class="pb-2 delay-3 from-end d-none d-lg-block">Blandit lorem dictum invelit.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 수상작2-->
-                        <div>
-                            <div class="row">
-                                <div class="col-md-6 mb-md-0 mb-2"><img class="position-relative rounded-3 zindex-5" src="resources/images/poster3.jpg" alt="Article image"></div>
-                                <div class="col-md-6">
-                                    <h3 class="h4 from-top">번지점프를 하다</h3>
-                                    <ul class="list-unstyled delay-2 from-end">
-                                        <li class="mb-1 fs-sm"><i class="fi-map-pin text-muted me-2 fs-base"></i>Ollenhauer Str. 29, 10118</li>
-                                        <li class="mb-1 fs-sm"><i class="fi-clock text-muted me-2 fs-base"></i>9:00 – 23:00</li>
-                                        <li class="mb-1 fs-sm"><i class="fi-wallet text-muted me-2 fs-base"></i>$$</li>
-                                    </ul>
-                                    <p class="pb-2 delay-3 from-end d-none d-lg-block">Blandit lorem dictum in velit. Et nisi at faucibus mauris pretium enim.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="tns-carousel-wrapper col-md-4">
-                    <div class="mb-3">
-                        <h2 style="display:inline; color: #ab69dd; ">아동</h2>
-                        <h2 style="display:inline;">공연</h2>
-                    </div>
-                    <div class="tns-carousel-inner" data-carousel-options="{&quot;mode&quot;: &quot;gallery&quot;, &quot;nav&quot;: false, &quot;controlsContainer&quot;: &quot;#carousel-controls&quot;}">
-                        <!-- 수상작1-->
-                        <div>
-                            <div class="row">
-                                <div class="col-md-6 mb-md-0 mb-2"><img class="position-relative rounded-3 zindex-5" src="resources/images/child.jpg" alt="Article image"></div>
-                                <div class="col-md-6">
-                                    <h3 class="h4 from-top">아기 돼지 삼형제</h3>
-                                    <ul class="list-unstyled delay-2 from-end">
-                                        <li class="mb-1 fs-sm"><i class="fi-map-pin text-muted me-2 fs-base"></i>Ollenhauer Str. 29, 10118</li>
-                                        <li class="mb-1 fs-sm"><i class="fi-clock text-muted me-2 fs-base"></i>9:00 – 23:00</li>
-                                        <li class="mb-1 fs-sm"><i class="fi-wallet text-muted me-2 fs-base"></i>$$</li>
-                                    </ul>
-                                    <p class="pb-2 delay-3 from-end d-none d-lg-block">Blandit lorem dictum in velit.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 수상작2-->
-                        <div>
-                            <div class="row">
-                                <div class="col-md-6 mb-md-0 mb-2"><img class="position-relative rounded-3 zindex-5" src="resources/images/child2.gif" alt="Article image"></div>
-                                <div class="col-md-6">
-                                    <h3 class="h4 from-top">우디를 도와줘</h3>
-                                    <ul class="list-unstyled delay-2 from-end">
-                                        <li class="mb-1 fs-sm"><i class="fi-map-pin text-muted me-2 fs-base"></i>Ollenhauer Str. 29, 10118</li>
-                                        <li class="mb-1 fs-sm"><i class="fi-clock text-muted me-2 fs-base"></i>9:00 – 23:00</li>
-                                        <li class="mb-1 fs-sm"><i class="fi-wallet text-muted me-2 fs-base"></i>$$</li>
-                                    </ul>
-                                    <p class="pb-2 delay-3 from-end d-none d-lg-block">Blandit lorem dictum in velit. Et nisi at faucibus mauris pretium enim.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="tns-carousel-wrapper col-md-4">
-
-                    <div class="mb-3">
-                        <h2 style="display:inline">관람</h2>
-                        <h2 style="display:inline; color: #0B398E; ">후기</h2>
-                    </div>
-                    <div class="tns-carousel-inner" data-carousel-options="{&quot;mode&quot;: &quot;gallery&quot;, &quot;nav&quot;: false, &quot;controlsContainer&quot;: &quot;#carousel-controls&quot;}">
-                        <!-- 수상작1-->
-                        <div>
-                            <div class="row">
-                                <div class="col-md-6 mb-md-0 mb-2"><img class="position-relative rounded-3 zindex-5" src="resources/images/poster2.jpg" alt="Article image"></div>
-                                <div class="col-md-6">
-                                    <h3 class="h4 from-top">마타하리</h3>
-                                    <ul class="list-unstyled delay-2 from-end">
-                                        <li class="mb-1 fs-sm"><i class="fi-map-pin text-muted me-2 fs-base"></i>Ollenhauer Str. 29, 10118</li>
-                                        <li class="mb-1 fs-sm"><i class="fi-clock text-muted me-2 fs-base"></i>9:00 – 23:00</li>
-                                        <li class="mb-1 fs-sm"><i class="fi-wallet text-muted me-2 fs-base"></i>$$</li>
-                                    </ul>
-                                    <p class="pb-2 delay-3 from-end d-none d-lg-block">Blandit lorem dictum in velit.</p>
-                                    <div class="delay-4 scale-up"><a class="btn btn-primary rounded-pill" href="city-guide-single.html">더보기<i class="fi-chevron-right fs-sm ms-2"></i></a></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 수상작2-->
-                        <div>
-                            <div class="row">
-                                <div class="col-md-6 mb-md-0 mb-2"><img class="position-relative rounded-3 zindex-5" src="resources/images/poster3.jpg" alt="Article image"></div>
-                                <div class="col-md-6">
-                                    <h3 class="h4 from-top">번지점프를 하다</h3>
-                                    <ul class="list-unstyled delay-2 from-end">
-                                        <li class="mb-1 fs-sm"><i class="fi-map-pin text-muted me-2 fs-base"></i>Ollenhauer Str. 29, 10118</li>
-                                        <li class="mb-1 fs-sm"><i class="fi-clock text-muted me-2 fs-base"></i>9:00 – 23:00</li>
-                                        <li class="mb-1 fs-sm"><i class="fi-wallet text-muted me-2 fs-base"></i>$$</li>
-                                    </ul>
-                                    <p class="pb-2 delay-3 from-end d-none d-lg-block">Blandit lorem dictum in velit.</p>
-                                    <div class="delay-4 scale-down"><a class="btn btn-primary rounded-pill" href="city-guide-single.html">더보기<i class="fi-chevron-right fs-sm ms-2"></i></a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Carousel custom controls -->
-            <div class="tns-carousel-controls pt-2 mt-4" id="carousel-controls">
-                <button class="me-3" type="button"><i class="fi-chevron-left fs-xs"></i></button>
-                <button type="button"><i class="fi-chevron-right fs-xs"></i></button>
-            </div>
-        </section>
-
-
-        <!-- <div class="mb-3">
-            <h2 style="display:inline">관람</h2>
-            <h2 style="display:inline; color: #0B398E; ">후기</h2>
-        </div>
-        <h2 class="h3 mb-sm-0" style="color: #0B398E;">공연 소식</h2> -->
-
-        <!-- Blog: Latest posts-->
+		<!-- Blog: Latest posts-->
         <section class="container my-2 py-lg-4">
             <div class="d-sm-flex align-items-center justify-content-center mb-3">
                 <h2 style="color: #0B398E;">공연 소식</h2><a class="btn btn-link fw-normal ms-sm-3 p-0" href="<%=path%>/news">더보기<i class="fi-arrow-long-right ms-2"></i></a>
             </div>
             <!-- Carousel-->
-            <div class="tns-carousel-wrapper tns-nav-outside mb-md-2">
-                <div class="tns-carousel-inner d-block" data-carousel-options="{&quot;controls&quot;: false, &quot;gutter&quot;: 24, &quot;autoHeight&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1,&quot;nav&quot;:true},&quot;500&quot;:{&quot;items&quot;:2},&quot;850&quot;:{&quot;items&quot;:3},&quot;1200&quot;:{&quot;items&quot;:3}}}">
-                    <!-- Item-->
-                    <article style="height: 350px;">
-                        <a class="d-block mb-3" href="https://www.segye.com/newsView/20220807511675?OutUrl=naver"><img class="rounded-3" src="<%=path%>/resources/images/news/big2.png" style="height:200px;" alt="Post image"></a>
+            <div class="tns-carousel-wrapper tns-nav-outside mb-md-2 homeNews">
+                    <div style="display:inline-block">
+                    	<!-- Item-->
+                    <article style="height: 350px; float: left; margin-right: 21px; width: 416px;">
+                        <a class="d-block mb-3" href="https://www.segye.com/newsView/20220807511675?OutUrl=naver"><img class="rounded-3" src="<%=path%>/resources/images/news/big2.png" style="width: 416px; height: 200px;" style="height:200px;" alt="Post image"></a>
                         <h3 class="fs-base pt-1"><a class="nav-link" href="https://www.segye.com/newsView/20220807511675?OutUrl=naver">남자들을 위한 80㎝ 부츠?…2년 만에 돌아온 쇼뮤지컬 ‘킹키부츠’</a></h3>
                         <a class="d-flex align-items-center text-decoration-none" href="#"><img class="rounded-circle" src="resources/img/avatars/16.png" width="44" alt="Avatar">
-                            <div class="ps-2">
-                                <h6 class="fs-sm text-nav lh-base mb-1">이강은 기자</h6>
+                            <div class="ps-2"><h6 class="fs-sm text-nav lh-base mb-1">관리자</h6>
                                 <div class="d-flex text-body fs-xs"><span class="me-2 pe-1"><i class="fi-calendar-alt opacity-70 mt-n1 me-1 align-middle"></i>2022-08-08</span></div>
-                            </div>
-                        </a>
+                            </div></a>
                     </article>
                     <!-- Item-->
-                    <article style="height: 350px;">
-                        <a class="d-block mb-3" href="https://www.nocutnews.co.kr/news/5798033"><img class="rounded-3" src="<%=path%>/resources/images/news/big1.png" alt="Post image"></a>
+                   	<article style="height: 350px; float: left; margin-right: 21px; width: 416px;">
+                        <a class="d-block mb-3" href="https://www.nocutnews.co.kr/news/5798033"><img class="rounded-3" src="<%=path%>/resources/images/news/big1.png" style="width: 416px; height: 200px;" alt="Post image"></a>
                         <h3 class="fs-base pt-1" style="margin-bottom: 32px;"><a class="nav-link" href="https://www.nocutnews.co.kr/news/5798033">해상왕 장보고 삶, 뮤지컬로 만든다…'오션스' 쇼케이스</a></h3>
                         <a class="d-flex align-items-center text-decoration-none" href="#"><img class="rounded-circle" src="resources/img/avatars/18.png" width="44" alt="Avatar">
                             <div class="ps-2">
@@ -680,7 +541,7 @@
                         </a>
                     </article>
                     <!-- Item-->
-                    <article style="height: 350px;">
+                    <article style="height: 350px; float: left; width: 416px;">
                         <a class="d-block mb-3" href="https://www.yna.co.kr/view/AKR20220805142700005?input=1195m"><img class="rounded-3" src="<%=path%>/resources/images/news/small2.png" style="width:416px; height: 200px;" alt="Post image"></a>
                         <h3 class="fs-base pt-1" style="margin-bottom: 32px;"><a class="nav-link" href="https://www.yna.co.kr/view/AKR20220805142700005?input=1195m">'160년이 지나도 살아있는 고전의 힘…연극 '레 미제라블'</a></h3>
                         <a class="d-flex align-items-center text-decoration-none" href="#"><img class="rounded-circle" src="resources/img/avatars/17.png" width="44" alt="Avatar">
@@ -689,9 +550,9 @@
                                 <div class="d-flex text-body fs-xs"><span class="me-2 pe-1"><i class="fi-calendar-alt opacity-70 mt-n1 me-1 align-middle"></i>2022-08-05</span></div>
                             </div>
                         </a>
-                    </article>
+                    </article> 
+                    </div>
                 </div>
-            </div>
         </section>
     </main>
     
@@ -799,6 +660,50 @@
                             i++;
                         })
                     }
+                })
+                
+                 // 홈페이지 뉴스 3개 파싱
+                $.ajax({
+                	url: "<%=path%>/news",
+         			type: "POST",
+         			dataType: "text",
+         			progress: true,
+                
+         			success: function(list) {
+         				var news = JSON.parse(list);
+         				console.log(news);
+         				
+         				var str = "";
+         				
+         				str += '<div style="display:inline-block">'
+         				
+         				$.each(news, (i, obj) => {
+         					if(i == 2) {
+         						str += '  <article style="height: 350px; float: left; width:416px;">                                                                                                                                                                          '
+	                 			str += '  <a class="d-block mb-3" href="'+ obj.link +'"><img class="rounded-3" src="'+ obj.poster +'" style="width: 416px; height:200px;" alt="Post image"></a>'
+	                 			str += '  <h3 class="fs-base pt-1"><a class="nav-link" style="height: 42px;" href="'+ obj.link +'">'+ obj.title +'</a></h3>                      '
+	                 			str += '  <a class="d-flex align-items-center text-decoration-none" href="#"><img class="rounded-circle" src="resources/img/avatars/16.png" width="44" alt="Avatar">                                                '
+	                 			str += '    <div class="ps-2"><h6 class="fs-sm text-nav lh-base mb-1">관리자</h6>                                                                                                                                   '
+	                 			str += '        <div class="d-flex text-body fs-xs"><span class="me-2 pe-1"><i class="fi-calendar-alt opacity-70 mt-n1 me-1 align-middle"></i>'+ obj.date +'</span></div>                                               '
+	                 			str += '    </div></a>                                                                                                                                                                                              '
+	                 			str += ' </article>  '
+         					} else {
+         						str += '  <article style="height: 350px; float: left; margin-right: 21px; width: 416px;">                                                                                                                                                                          '
+	                 			str += '  <a class="d-block mb-3" href="'+ obj.link +'"><img class="rounded-3" src="'+ obj.poster +'" style="width: 416px; height:200px;" alt="Post image"></a>'
+	                 			str += '  <h3 class="fs-base pt-1"><a class="nav-link" style="height: 42px;" href="'+ obj.link +'">'+ obj.title +'</a></h3>                      '
+	                 			str += '  <a class="d-flex align-items-center text-decoration-none" href="#"><img class="rounded-circle" src="resources/img/avatars/16.png" width="44" alt="Avatar">                                                '
+	                 			str += '    <div class="ps-2"><h6 class="fs-sm text-nav lh-base mb-1">관리자</h6>                                                                                                                                   '
+	                 			str += '        <div class="d-flex text-body fs-xs"><span class="me-2 pe-1"><i class="fi-calendar-alt opacity-70 mt-n1 me-1 align-middle"></i>'+ obj.date +'</span></div>                                               '
+	                 			str += '    </div></a>                                                                                                                                                                                              '
+	                 			str += ' </article>  '
+         					}
+         				});
+         				
+         				str += '</div>'
+         				
+         				$('.homeNews').html(str);
+         			}
+                
                 })
 
                 // 실시간 랭킹 jquery

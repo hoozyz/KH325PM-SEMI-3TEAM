@@ -5,12 +5,10 @@ import static common.JDBCTemplate.close;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.List;
 
 import vo.Rank;
-import vo.Show;
 
 public class RankDAO {
 	String query;

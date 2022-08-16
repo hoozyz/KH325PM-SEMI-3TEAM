@@ -80,8 +80,6 @@ public class TicketingViewServlet extends HttpServlet{
 			
 			objArr.add(obj);
 			
-			System.out.println(objArr.toJSONString());
-			
 			PrintWriter out = resp.getWriter();
 			out.println(objArr.toJSONString());
 			out.flush();

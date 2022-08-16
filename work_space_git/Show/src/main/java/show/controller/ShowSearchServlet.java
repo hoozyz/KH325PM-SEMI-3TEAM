@@ -89,7 +89,6 @@ public class ShowSearchServlet extends HttpServlet{
 				keyword = req.getParameter("keyword");
 				category = req.getParameter("category");
 				showList = showService.findByKeyword(keyword, category, startDate, endDate);
-				System.out.println(showList);
 				req.setAttribute("startDate", startDate);
 				req.setAttribute("endDate", endDate);
 				req.setAttribute("rad_date", rad_date);

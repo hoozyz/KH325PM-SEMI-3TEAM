@@ -54,7 +54,7 @@
                         <div class="dropdown w-50 w-lg-100" data-bs-toggle="select">
                             <button class="btn btn-link" type="button" data-bs-toggle="dropdown"><i class="fi-map-pin me-2"></i><span class="dropdown-toggle-label">지역</span></button>
                             <input type="hidden" name="local">
-                            <ul class="dropdown-menu dropdown-menu-dark my-3">
+                            <ul class="dropdown-menu dropdown-menu-dark my-3"> 
                                 <li><a class="dropdown-item" href="#"><span class="dropdown-item-label">서울</span></a></li>
                                 <li><a class="dropdown-item" href="#"><span class="dropdown-item-label">경기</span></a></li>
                                 <li><a class="dropdown-item" href="#"><span class="dropdown-item-label">부산</span></a></li>
@@ -103,15 +103,28 @@
                             	<div class="card h-100 border-0 shadow">
                                 <div class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url(<%=path %><%= imgList.get(i) %>); min-height: 200px;">
                                     <div class="card-img-overlay-bottom z-index-20">
-                                    	<a class="tile-link" href="<%=path%>/hallDetail?hallId=<%=list.get(i).getHall_id()%>"></a>
-                                        <h4 class="text-white text-shadow"><%=list.get(i).getFcltynm() %></h4>
-                                    </div>
+                                    	<a class="tile-link" href="<%=path%>/hallDetail?hallId=<%=list.get(i).getHall_id()%>"></a>	
+                                    	<% if(list.get(i).getFcltynm().length() <= 8) { %>
+                                         <div class="searchFont"> <%=list.get(i).getFcltynm()%> </div>
+                                         <% } %>                 
+                                         <% if(list.get(i).getFcltynm().length() >= 9 && list.get(i).getFcltynm().length() <= 15) { %>
+                                         <div class="searchFont-m"> <%=list.get(i).getFcltynm()%> </div>
+                                         <% } %> 
+                                         <% if(list.get(i).getFcltynm().length() >= 16) { %>
+                                         <div class="searchFont-s"> <%=list.get(i).getFcltynm()%> </div>
+                                         <% } %>             
+									</div>
                                     <div class="card-img-overlay-top justify-content-between align-items-center">
                                         <a class="card-fav-icon position-relative z-index-40" onclick="goMap('<%=list.get(i).getLa() %>', '<%=list.get(i).getLo() %>', '<%=list.get(i).getFcltynm() %>')" href="javascript:void(0);" style="float: right; border: none; background: none; cursor: pointer; z-index: 100;"><i class="fi-map-pin fs-5"></i></a>
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <p class="text-sm text-muted mb-3"><%=list.get(i).getAdres() %></p>
+                                
+                                <% if (list.get(i).getAdres().length() < 35 ) { %>
+                                    <div class="AdresFont"> <%=list.get(i).getAdres() %> </div>
+                                     <% } else {  %> 
+                                     <div class="AdresFont-m"> <%=list.get(i).getAdres() %> </div>
+                                      <% } %> 
                                     <p class="text-sm text-muted text-uppercase mb-1">
                                         <a href="#" class="text-dark"></a>
                                 </div>
@@ -119,9 +132,11 @@
                        			 </div>
                     	<% } %>
                     	</div>              
-                   <% } %>
-                 
+                   <% } %>           
                 </div>
+                
+                
+                
                 <div class="col-lg-6">
                     <div id="map" style="width:100%;height:1130px;"></div>
                     <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=1c1e51b427ea6bc49c8cd6877c234c7f"></script>           
@@ -138,7 +153,7 @@
 					var map = new kakao.maps.Map(
 							container,
 							options);
-	
+					
 					function goMap(
 							la,
 							lo,
@@ -153,38 +168,39 @@
 					// 지도의 확대 레벨
 					};
 	
+	
 					var map = new kakao.maps.Map(
 							mapContainer,
 							mapOption);
+					
+					
+					var imageSrc = document.getElementById("mark").src,   
+				    imageSize = new kakao.maps.Size(64, 69), 
+				    imageOption = {offset: new kakao.maps.Point(27, 69)}; 
+					
+					
+					var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+					markerPosition = new kakao.maps.LatLng(la,lo);
 	
-					// 마커가 표시될 위치입니다 
-					var markerPosition = new kakao.maps.LatLng(
-							la,
-							lo);
+					var marker = new kakao.maps.Marker({
+						position : markerPosition,
+						image : markerImage // 
+					});
+
+					marker.setMap(map);
 	
-					// 마커를 생성합니다
-					var marker = new kakao.maps.Marker(
-							{
-								position : markerPosition
-							});
-	
-					// 마커가 지도 위에 표시되도록 설정합니다
-					marker
-							.setMap(map);
-	
-					var iwContent = '<div style="padding:5px;"><h6>'+ name +'</h6><a href="https://map.kakao.com/link/map/'+ name +',' +la+','+lo +'" style="color:blue" target="_blank">큰지도보기<br></a> <a href="https://map.kakao.com/link/to/'+ name +',' +la+','+lo +'" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+					var iwContent = '<div style="padding:5px;"><h6>'+ name +'</h6> <a href="https://map.kakao.com/link/map/'+ name +',' +la+','+lo +'" style="color:#0A6EFF" target="_blank">큰지도보기<br></a> <a href="https://map.kakao.com/link/to/'+ name +',' +la+','+lo +'" style="color:#0A6EFF" target="_blank">길찾기</a></div>',
 					iwPosition = new kakao.maps.LatLng(
 							la,
-							lo); //인포윈도우 표시 위치입니다
-	
-					// 인포윈도우를 생성합니다
+							lo); 
+
+					
 					var infowindow = new kakao.maps.InfoWindow(
 							{
 								position : iwPosition,
 								content : iwContent
 							});
 	
-					// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
 					infowindow
 							.open(
 									map,

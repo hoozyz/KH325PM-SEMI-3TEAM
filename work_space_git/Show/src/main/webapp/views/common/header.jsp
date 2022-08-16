@@ -114,6 +114,7 @@
             }
         }
         
+        
     </style>
     <!-- Page loading scripts-->
     <script>
@@ -205,6 +206,10 @@
             font-family: 'NanumSquareRound', sans-serif;
             font-size: 30px;
             font-weight: 800;
+        }
+        *{
+          font-family: 'NanumSquareRound', sans-serif;
+          font-weight: 300;
         }
     </style>
     
@@ -394,7 +399,7 @@
                         <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/rankList" role="button" aria-expanded="false" id="NSR">랭킹</a></a>
                         <li class="nav-item dropdown ps-3"><a class="nav-link dropdown" href="<%=path %>/board/news" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="NSR">게시판</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="<%=path%>/news">소식</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/news?check=0">소식</a></li> <!-- check는 소식페이지는 파싱안하게 0으로 보냄 -->
                                 <li><a class="dropdown-item" href="<%=path%>/board/list">자유</a></li>
                             </ul>
                         </li>

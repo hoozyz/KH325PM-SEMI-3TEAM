@@ -42,7 +42,6 @@ public class BoardViewServlet extends HttpServlet{
 		
 		Board board = new Board();
 		board = service.findBoardByNo(boardNo, true);
-		System.out.println(board);
 		JSONObject obj = new JSONObject();
 		JSONArray objArr = new JSONArray();
 		obj.put("board_no", board.getBoard_no());

@@ -21,8 +21,6 @@ public class HomeSearchServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String keyword = req.getParameter("keyword");
 		String category = req.getParameter("category");
-		System.out.println(keyword);
-		System.out.println(category);
 		
 		if(category == null || keyword == null) {
 			req.setAttribute("msg", "항목을 다 작성해주세요.");

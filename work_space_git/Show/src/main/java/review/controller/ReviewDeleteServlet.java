@@ -20,8 +20,6 @@ public class ReviewDeleteServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int revNo =  Integer.parseInt(req.getParameter("revNo"));
 		
-		System.out.println(revNo);
-		
 		// 예매내역 삭제
 		int result = service.delete(revNo);
 		

@@ -25,8 +25,6 @@ public class UserMyTicketingServlet extends HttpServlet {
 		HttpSession session = req.getSession(true);
 		User user = (User) session.getAttribute("loginUser");
 		String userId = user.getUser_id();
-		System.out.println(user);
-		System.out.println(userId);
 
 		// 나의 예매목록 가져오기
 		List<Ticketing> ticList = service.findTicketById(userId);

@@ -28,7 +28,6 @@ private static final long serialVersionUID = 1L;
 
 		// 나의 찜목록 가져오기
 		List<Like> likeList = service.findLikeById(userId);
-		System.out.println();
 		
 		if (likeList != null) {
 			String msg = (String) req.getAttribute("msg");

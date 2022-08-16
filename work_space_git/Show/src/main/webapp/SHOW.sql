@@ -20,20 +20,20 @@ DROP TABLE TBL_RANK CASCADE CONSTRAINTS;
 DROP TABLE TBL_BOARD CASCADE CONSTRAINTS;
 DROP TABLE TBL_GENRERANK CASCADE CONSTRAINTS;
 
-INSERT INTO TBL_USER VALUES('admin','1234','AA','AA','AA','AA','ROLL_ADMIN');
+INSERT INTO TBL_USER VALUES('admin','1234','AA','AA','AA','AA','ROLE_ADMIN');
 
--- 리뷰 테스트
-INSERT INTO TBL_REVIEW VALUES(SEQ_REV_NO.nextval, 'ID1','test1','좋아요1','공연명1', '2022.07.01','2022.07.25','4.0',55,SYSDATE);
-INSERT INTO TBL_REVIEW VALUES(SEQ_REV_NO.nextval, 'ID2','test1','좋아요2','공연명2', '2022.07.11','2022.08.25','3.0',35,SYSDATE);
-
--- 찜 테스트
-INSERT INTO TBL_LIKE VALUES(SEQ_LIKE_NO.nextval, 'test1','ID1','공연명1', '포스터1','공연장명1',SYSDATE);
-INSERT INTO TBL_LIKE VALUES(SEQ_LIKE_NO.nextval, 'test1','ID2','공연명2', '포스터2','공연장명2',SYSDATE);
-
--- 예매 테스트
-INSERT INTO TBL_TICKETING VALUES(SEQ_TIC_NO.nextval, 'ID1','test1','공연명1','2022.08.01', '2022.07.01','공연장명1', 3,50000, '15:30');
-INSERT INTO TBL_TICKETING VALUES(SEQ_TIC_NO.nextval, 'ID2','test1','공연명2','2022.09.01', '2022.08.01','공연장명2', 5,80000, '17:00');
-commit;
+-- 자유게시판 테스트
+BEGIN
+    FOR N IN 1..115
+    LOOP
+        INSERT INTO TBL_BOARD VALUES(SEQ_BOARD_NO.NEXTVAL,'id', '작성자', '게시글 '||SEQ_BOARD_NO.CURRVAL , '게시글 테스트입니다.'||SEQ_BOARD_NO.CURRVAL, SEQ_BOARD_NO.CURRVAL, SYSDATE, SYSDATE);
+    END LOOP;
+    
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN ROLLBACK;
+END;
+/
 
 DROP SEQUENCE SEQ_REV_NO;
 DROP SEQUENCE SEQ_LIKE_NO;
@@ -49,11 +49,11 @@ CREATE SEQUENCE SEQ_TIC_NO;
 
 CREATE TABLE TBL_USER (
 	user_id	VARCHAR2(1000)		NOT NULL,
-	pw	        VARCHAR2(1000)		NOT NULL,
-	name    	VARCHAR2(1000)		NOT NULL,
-	phone   	VARCHAR2(1000)		NOT NULL,
-	email	    VARCHAR2(1000)		NOT NULL,
-	addr    	VARCHAR2(4000)		NOT NULL,
+	pw	        VARCHAR2(1000)		NULL,
+	name    	VARCHAR2(1000)		NULL,
+	phone   	VARCHAR2(1000)		NULL,
+	email	    VARCHAR2(1000)		NULL,
+	addr    	VARCHAR2(4000)		NULL,
 	role	    VARCHAR2(100)	DEFAULT  'ROLE_USER' 	NOT NULL
 );
 
@@ -76,7 +76,7 @@ CREATE TABLE TBL_REVIEW (
 	prfnm	VARCHAR2(100)		NULL,
 	prfpdfrom	VARCHAR2(100)		NULL,
 	prfpdto	VARCHAR2(100)		NULL,
-	rev_star	NUMBER(10)	DEFAULT 1	NULL,
+	rev_star	NUMBER(10) 	DEFAULT 5	NULL,
 	rev_like	NUMBER(10)	 DEFAULT 0	NULL,
 	rev_date	DATE	DEFAULT SYSDATE	NULL
 );
@@ -95,7 +95,7 @@ CREATE TABLE TBL_SHOW (
 	prfruntime	VARCHAR2(1000)		NULL,
 	prfage	VARCHAR2(1000)		NULL,
 	entrpsnm	VARCHAR2(1000)		NULL,
-	pcseguidance	VARCHAR2(1000)		NULL,
+	pcseguidance	VARCHAR2(1000) DEFAULT '전석무료'		NULL,
 	dtguidance	VARCHAR2(1000)		NULL,
 	awards	VARCHAR2(1000)		NULL,
     	show_star	VARCHAR2(100) DEFAULT 0	 NULL
@@ -106,8 +106,8 @@ CREATE TABLE TBL_LIKE (
 	user_id	VARCHAR2(100)		NOT NULL,
 	show_id	VARCHAR2(100)		NOT NULL,
 	prfnm	VARCHAR2(100)		NULL,
-    poster VARCHAR2(1000) NULL,
-    fcltynm VARCHAR2(1000)		NULL,
+    	poster VARCHAR2(1000) NULL,
+    	fcltynm VARCHAR2(1000)		NULL,
 	like_date	DATE	DEFAULT SYSDATE	NULL
 );
 
@@ -120,8 +120,7 @@ CREATE TABLE TBL_TICKETING (
 	ticket_date	VARCHAR2(1000)		NULL,
 	fcltynm	VARCHAR2(1000)		NULL,
 	ticket_count	NUMBER(10)		NULL,
-	price	NUMBER(10)		NULL,
-	view_time VARCHAR2(100) NULL
+	price	NUMBER(10)		NULL
 );
 
 CREATE TABLE TBL_NEWS (
@@ -129,7 +128,8 @@ CREATE TABLE TBL_NEWS (
 	title	 VARCHAR2(1000)		NULL,
     	cont	VARCHAR2(4000)		NULL,
 	news_date	VARCHAR2(1000)		NULL,
-    	poster VARCHAR2(1000) NULL
+    	poster VARCHAR2(1000) NULL,
+        link VARCHAR2(1000) NULL
 );
 
 CREATE TABLE TBL_RANK (
@@ -151,12 +151,12 @@ CREATE TABLE TBL_RANK (
 CREATE TABLE TBL_BOARD (
 	board_no	NUMBER(10)		NOT NULL,
 	user_id	VARCHAR2(100)		NOT NULL,
-	name VARCHAR2(100) NULL,
-    	title	VARCHAR2(1000)		NULL,
+    name  VARCHAR2(100) NULL,
+    title	VARCHAR2(1000)		NULL,
 	cont	VARCHAR2(4000)		NULL,
 	readcount	NUMBER(10)	 DEFAULT 0	NULL,
 	create_date	 DATE	DEFAULT SYSDATE	NULL,
-    	modify_date	DATE	DEFAULT SYSDATE	NULL
+    modify_date	DATE	DEFAULT SYSDATE	NULL
 );
 
 CREATE TABLE TBL_GENRERANK (
@@ -295,10 +295,10 @@ WHERE NUM <= 3;
 
 ---- 공연 메인페이지 -> 공연 검색 페이지
 -- 공연 검색창 -> 키워드, 카테고리, 기간 받기. -> 시작일이 기간 사이에 있는 공연들
-/*
-SELECT poster, prfnm, prfpdfrom, prfpdto, fcltynm FROM tbl_show WHERE prfnm LIKE ? AND genrenm = ? 
-AND prfpdfrom BETWEEN TO_DATE('2022.06.22', 'YYYY.MM.DD') AND TO_DATE('2022.07.22', 'YYYY.MM.DD');
-*/
+
+SELECT poster, prfnm, prfpdfrom, prfpdto, fcltynm FROM tbl_show WHERE genrenm = '뮤지컬' 
+AND prfpdfrom BETWEEN TO_DATE('2022.06.22', 'YYYY.MM.DD') AND TO_DATE('2022.06.28', 'YYYY.MM.DD');
+
 
 
 -------------- 공연 상세정보페이지 
@@ -452,127 +452,127 @@ SELECT * FROM tbl_rank WHERE date_range = 'month' AND date = ?;
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum, date FROM TBL_GENRERANK 
 WHERE cate='뮤지컬' AND date_range='day' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 
 -- 뮤지컬(주간)
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum FROM TBL_GENRERANK 
 WHERE cate='뮤지컬' AND date_range='week' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 
 -- 뮤지컬(월간)
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum FROM TBL_GENRERANK 
 WHERE cate='뮤지컬' AND date_range='month' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 
 -- 연극(일간)
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum FROM TBL_GENRERANK 
 WHERE cate='연극' AND date_range='day' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 
 -- 연극(주간)
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum FROM TBL_GENRERANK 
 WHERE cate='연극' AND date_range='week' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 
 -- 연극(월간)
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum FROM TBL_GENRERANK 
 WHERE cate='연극' AND date_range='month' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 
 -- 무용(일간)
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum FROM TBL_GENRERANK 
 WHERE cate='무용' AND date_range='day' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 
 -- 무용(주간)
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum FROM TBL_GENRERANK 
 WHERE cate='무용' AND date_range='week' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 
 -- 무용(월간)
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum FROM TBL_GENRERANK 
 WHERE cate='무용' AND date_range='month' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 
 -- 클래식(일간)
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum FROM TBL_GENRERANK 
 WHERE cate='클래식' AND date_range='day' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 
 -- 클래식(주간)
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum FROM TBL_GENRERANK 
 WHERE cate='클래식' AND date_range='week' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 
 -- 클래식(월간)
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum FROM TBL_GENRERANK 
 WHERE cate='클래식' AND date_range='month' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 
 -- 오페라(일간)
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum FROM TBL_GENRERANK 
 WHERE cate='오페라' AND date_range='day' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 
 -- 오페라(주간)
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum FROM TBL_GENRERANK 
 WHERE cate='오페라' AND date_range='week' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 
 -- 오페라(월간)
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum FROM TBL_GENRERANK 
 WHERE cate='오페라' AND date_range='month' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 
 -- 국악(일간)
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum FROM TBL_GENRERANK 
 WHERE cate='국악' AND date_range='day' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 
 -- 국악(주간)
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum FROM TBL_GENRERANK 
 WHERE cate='국악' AND date_range='week' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 
 -- 국악(월간)
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum FROM TBL_GENRERANK 
 WHERE cate='국악' AND date_range='month' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 
 -- 복합(일간)
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum FROM TBL_GENRERANK 
 WHERE cate='복합' AND date_range='day' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 
 -- 복합(주간)
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum FROM TBL_GENRERANK 
 WHERE cate='복합' AND date_range='week' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 
 -- 복합(월간)
 SELECT * FROM 
 (SELECT poster, prfnm, prfplcnm, prfpd, rnum FROM TBL_GENRERANK 
 WHERE cate='복합' AND date_range='month' ORDER BY rnum) 
-WHERE date = ? AND ROWNUM BETWEEN 1 AND 10;
+WHERE genrerank_date = ? AND ROWNUM BETWEEN 1 AND 10;
 */
 
 
@@ -603,6 +603,28 @@ SELECT * FROM
 (SELECT * FROM TBL_BOARD ORDER BY board_no DESC))
 WHERE NUM BETWEEN 1 AND 10;
 */
+
+-- 게시글 검색
+/*
+SELECT *  FROM
+(SELECT ROWNUM NUM, board_no, user_id, title, cont, readcount FROM
+(SELECT * FROM TBL_BOARD 
+WHERE 1 = 1
+AND user_id LIKE ?
+AND title LIKE ?
+AND cont LIKE ?))
+WHERE NUM BETWEEN 1 AND 10;
+*/
+
+-- 검색 결과 개수
+/*
+SELECT COUNT(*) FROM TBL_BOARD 
+WHERE 1 = 1
+AND user_id LIKE ?
+AND title LIKE ?
+AND cont LIKE ?;
+*/
+
 
 ----------------- 예매페이지
 -- 가격, 요일 가져오기 -> 요일, 시간, 가격 파싱 

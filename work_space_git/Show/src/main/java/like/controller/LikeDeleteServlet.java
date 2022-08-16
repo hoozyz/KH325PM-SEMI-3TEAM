@@ -20,8 +20,6 @@ public class LikeDeleteServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int likeNo =  Integer.parseInt(req.getParameter("likeNo"));
 		
-		System.out.println(likeNo);
-		
 		// 예매내역 삭제
 		int result = service.deleteByNo(likeNo);
 		

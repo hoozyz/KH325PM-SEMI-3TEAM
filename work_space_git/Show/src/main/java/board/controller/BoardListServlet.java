@@ -88,8 +88,6 @@ public class BoardListServlet extends HttpServlet{
 				arrayObj.add(obj);
 			}
 			
-			System.out.println(arrayObj.toJSONString());
-			
 			PrintWriter out = resp.getWriter();
 			out.println(arrayObj.toJSONString());
 			out.flush();

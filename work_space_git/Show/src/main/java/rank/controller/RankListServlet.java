@@ -54,14 +54,6 @@ public class RankListServlet extends HttpServlet{
 			if(rankList == null) { // 데이터 없을때 전전날꺼 랭킹
 				date = AddDate(date, 0, -1);
 				rankList = service.findRankByCategory(category, range , date);
-				
-				req.setAttribute("loginUser", user);
-				req.setAttribute("range", range);
-				req.setAttribute("rankList", rankList);
-				req.setAttribute("today", todayFormat);
-				req.setAttribute("category", category);
-				req.getRequestDispatcher("/views/rank/rankList.jsp").forward(req, resp);
-				return;
 			}
 			
 			req.setAttribute("loginUser", user);

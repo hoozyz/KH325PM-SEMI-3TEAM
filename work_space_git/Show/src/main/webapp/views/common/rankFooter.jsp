@@ -81,7 +81,6 @@ function kakaoLogin() {
        			  progress: true,
                 	  
                   success: function(user) {
-                	  $("#logout").attr("onclick", "kakaoLogout()");
                 	  location.href= "http://localhost/Show/";
                   }
         	  })

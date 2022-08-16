@@ -28,7 +28,6 @@ public class HallDetailServlet extends HttpServlet{
 		Hall hall = service.selectHallById(hallId);
 		
 		List<Show> showList = new ArrayList<>();
-		System.out.println(hallId);
 		showList = showService.getShowView(hallId);
 		
 		System.out.println(showList);

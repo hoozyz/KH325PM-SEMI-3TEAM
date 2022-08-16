@@ -38,6 +38,7 @@
 	}
 	 
 %>
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/rank.css"/>
 	<%@ include file="/views/common/rankHeader.jsp"%>
 
 
@@ -45,7 +46,7 @@
         <section class="container" style="margin-top: 150px; margin-bottom: 20px;">
             <div class="d-sm-flex align-items-center justify-content-between mb-2 pb-sm-2 mt-5">
                 <span>
-                    <h1 class="display-5">RANKING</h1>
+                    <h1 class="display-3">RANKING</h1>
                 </span>
             </div>
 
@@ -53,13 +54,20 @@
 
                 <!-- 탭 메뉴 상단 시작 -->
                 <ul class="tabs">
-                    <li class="on" data-tab="tab-1" id="tab1"><a href="<%=path %>/rankList?category=뮤지컬" class>뮤지컬</a></li>
-                    <li class data-tab="tab-2" id="tab2"><a href="<%=path %>/rankList?category=연극" class>연극</a></li>
-                    <li class data-tab="tab-3" id="tab3"><a href="<%=path %>/rankList?category=무용" class>무용</a></li>
-                    <li class data-tab="tab-4" id="tab4"><a href="<%=path %>/rankList?category=오페라" class>오페라</a></li>
-                    <li class data-tab="tab-5" id="tab5"><a href="<%=path %>/rankList?category=클래식" class>클래식</a></li>
-                    <li class data-tab="tab-6" id="tab6"><a href="<%=path %>/rankList?category=국악" class>국악</a></li>
-                    <li class data-tab="tab-7" id="tab7"><a href="<%=path %>/rankList?category=복합" class>복합</a></li>
+                    <li class="on" data-tab="tab-1" id="tab1"><a href="<%=path %>/rankList?category=뮤지컬"
+                    style="font-size: 30px;font-family: 'NanumSquareRound', sans-serif;font-weight: 800;">뮤지컬</a></li>
+                    <li class data-tab="tab-2" id="tab2"><a href="<%=path %>/rankList?category=연극" 
+                    style="font-size: 30px;font-family: 'NanumSquareRound', sans-serif;font-weight: 800;">연극</a></li>
+                    <li class data-tab="tab-3" id="tab3"><a href="<%=path %>/rankList?category=무용"
+                    style="font-size: 30px;font-family: 'NanumSquareRound', sans-serif;font-weight: 800;">무용</a></li>
+                    <li class data-tab="tab-4" id="tab4"><a href="<%=path %>/rankList?category=오페라"
+                    style="font-size: 30px;font-family: 'NanumSquareRound', sans-serif;font-weight: 800;">오페라</a></li>
+                    <li class data-tab="tab-5" id="tab5"><a href="<%=path %>/rankList?category=클래식"
+                    style="font-size: 30px;font-family: 'NanumSquareRound', sans-serif;font-weight: 800;">클래식</a></li>
+                    <li class data-tab="tab-6" id="tab6"><a href="<%=path %>/rankList?category=국악"
+                    style="font-size: 30px;font-family: 'NanumSquareRound', sans-serif;font-weight: 800;">국악</a></li>
+                    <li class data-tab="tab-7" id="tab7"><a href="<%=path %>/rankList?category=복합"
+                    style="font-size: 30px;font-family: 'NanumSquareRound', sans-serif;font-weight: 800;">복합</a></li>
                 </ul>
                 <!-- 탭 메뉴 상단 끝 -->
                 <!-- 탭 메뉴 내용 시작 -->
@@ -68,10 +76,8 @@
                         <div class="rank_bx">
                             <!-- 인터파크 -->
                             <div class="rankTop">
-                                <div class="detailTopMid">
-                                    <h2> <b><%=today %>일</b>&nbsp;<b></b></a></h2>
-                                </div>
-                                <span class="btn_lst">
+                                <div class="detailTopMid"><%=today%>일&nbsp;</div>
+                                <span class="btn_lst" >
                                     <!-- [D] 활성화시 a에 .on 추가-->
                                    	<a href="<%=path %>/rankList?range=day&category=<%=category %>" class id="day">일간</a>
                                     <span class="bar">l</span>
@@ -84,21 +90,21 @@
                             <div class="basic_tbl rank_tbl">
                                 <table class="table">
                                     <colgroup>
-                                        <col style="width:80px">
+                                        <col style="width:80px; font-family: 'NanumSquareRound', sans-serif; font-size: 20px; ">
                                         <col style="width:180px;">
-                                        <col style="width:370px;">
-                                        <col style="width:120px;">
-                                        <col style="width:130px">
+                                        <col style="width:330px;">
+                                        <col style="width:140px;">
+                                        <col style="width:150px">
                                         <col style="width:110px">
                                         <col style="width:160px">
                                     </colgroup>
                                     <thead>
                                         <tr>
-                                            <th scope="col">랭킹</th>
-                                            <th scope="col" colspan="2">공연명</th>
-                                            <th scope="col">기간</th>
-                                            <th scope="col" colspan="2">장소</th>
-                                            <th scope="col">상세보기</th>
+                                            <th class ="rankHead" scope="col">랭킹</th>
+                                            <th class ="rankHead" scope="col" colspan="2">공연명</th>
+                                            <th class ="rankHead" scope="col">기간</th>
+                                            <th class ="rankHead" scope="col" colspan="2">장소</th>
+                                            <th class ="rankHead" scope="col">상세보기</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -113,9 +119,9 @@
                                             <th class="img_box">
                                                 <a class="detail_link" href="javascript:;"><img src="http://www.kopis.or.kr<%=rankList.get(i).getPoster()%>" width="180px" height="350px" alt="공연 포스터"></a>
                                             </th>
-                                            <th><%=rankList.get(i).getPrfnm() %></th>
-                                            <th><%=rankList.get(i).getPrfpd() %></th>
-                                            <th colspan="2"><%=rankList.get(i).getPrfplcnm() %></th>
+                                            <th style="font-size: 20px;"><%=rankList.get(i).getPrfnm() %></th>
+                                              <th style="font-size: 20px;"><%=rankList.get(i).getPrfpd() %></th>
+                                            <th colspan="2" style="font-size: 20px;"><%=rankList.get(i).getPrfplcnm() %></th>
                                             <th>
                                                 <div class="atag">
                                                     <a class="btn btn-outline-primary rounded" href="<%=path %>/showDetail?showId=<%=rankList.get(i).getShow_id() %>" data-bs-toggle="modal">상세보기</a>

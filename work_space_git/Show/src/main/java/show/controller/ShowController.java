@@ -32,7 +32,7 @@ public class ShowController {
 	public static void main(String[] args) {
 		ShowController sc = new ShowController();
 		
-//		sc.initShow(); // 전체 파싱
-		sc.showIdParse("PF186855"); // 안에 showid 적으면 파싱
+		sc.initShow(); // 전체 파싱
+//		sc.showIdParse("PF186855"); // 안에 showid 적으면 파싱
 	}
 }

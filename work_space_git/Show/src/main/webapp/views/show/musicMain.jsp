@@ -96,9 +96,10 @@
         
         .title1 {
             font-family: 'NanumSquareRound', sans-serif;
-            font-size: 35pt;
+            font-size: 50px;
             font-weight: 800;
             color: #201627;
+            text-align:left;
         }
     </style>
     
@@ -118,7 +119,7 @@
         <!--@@@ hero End @@@-->
         
         <!--@@@ search @@@-->
-        <section class="container py-1 mt-1 mb-1 ">
+        <section class="container mt-1 ">
             <form class="form-group d-block d-md-flex py-0 mb-3 rounded-md-pill" style="width:85%;float:left;" method="GET" action="<%=path %>/showSearch">
                 <div class="input-group input-group-lg border-end-md">
                      <!--calendar-->
@@ -159,12 +160,13 @@
 	            <input type="radio" name="rad_date" id="rad_week" value="rad_week" onclick="radDate('week')">1주
 	            <input type="radio" name="rad_date" id="rad_month" value="rad_month" onclick="radDate('month')" checked>1개월
         	</div>
+        	
         </section>
         <!--@@@ search End @@@-->
         
         <!-- @@@@ 추천작 @@@@ -->
          <!-- Upcoming events-->
-        <section class="container mb-2 pb-lg-3 ">
+        <section class="container">
             <div class="d-md-flex align-items-center justify-content-between " style="width: 100%; ">
                 <p class="title1">
                     <span class="title1" style="color: #A468D7;font-size: 130%; ">scene</span>의 추천작
@@ -195,15 +197,14 @@
                         </div>
                     </div>
                 </div>
+                    <div class="title1" sytle="margin-top: 20px;margin-bottom: 0px;">오픈 임박 공연 </div>
         </section>
         <!-- @@@@ 추천작 끝 @@@@ -->
 
         <!-- @@@ 오픈임박공연 @@@ -->
-       <section class="container mb-2 pb-lg-3">
+       <section class="container-fluid mb-2 pb-lg-3" style="max-width: 2200;">
             <div display="inline-block; " style="vertical-align:bottom;align-self: center; width: 100%;">
                 <p>
-                    <p class="title1">오픈 임박 공연</pstyle=>
-                    </p>
             </div>
             <!-- Carousel-->
             <div class="tns-carousel-wrapper tns-controls-outside-xxl tns-nav-outside tns-center tns-latest ">
@@ -247,10 +248,8 @@
             <div class="tns-carousel-wrapper tns-controls-outside-xxl tns-nav-outside " style="margin-left: 5%;margin-right: 5%; ">
 
                 <!-- Sorting-->
-                <div class="d-flex flex-sm-row flex-column align-items-sm-center align-items-stretch my-2 ">
-                    <hr class="d-none d-sm-block w-100 mx-4 ">
-
-                    <div class="d-none d-sm-flex align-items-center flex-shrink-0 text-muted "><i class="fi-check-circle me-2 "></i><span class="fs-sm mt-n1 ">148 results</span></div>
+                <div class="align-items-sm-center align-items-stretch my-2 " style="height: 20px;">
+                    <div style="float: right;"><i class="fi-check-circle me-2 "></i><span class="fs-sm mt-n1 ">100 results</span></div>
                 </div>
                 <!-- Item-->
                 <!-- @@@ Card-1 @@@ -->

@@ -24,9 +24,6 @@ public class HallSearchServlet extends HttpServlet{
 		String keyword = req.getParameter("keyword");
 		String local = req.getParameter("local");
 		
-		System.out.println(keyword);
-		System.out.println(local);
-		
 		List<Hall> list = new ArrayList<>();
 
 		list = service.selectHall(local, keyword);

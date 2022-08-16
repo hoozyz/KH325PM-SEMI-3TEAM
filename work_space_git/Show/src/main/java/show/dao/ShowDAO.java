@@ -12,7 +12,7 @@ import board.controller.PageInfo;
 import vo.Board;
 import vo.Like;
 import vo.Show;
-import vo.news;
+import vo.News;
 
 public class ShowDAO {
 	String query;
@@ -292,7 +292,6 @@ public class ShowDAO {
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				System.out.println("-------------------");
 				Show show = new Show();
 				show.setShow_id(rs.getString("show_id"));
 				show.setPrfnm(rs.getString("prfnm"));

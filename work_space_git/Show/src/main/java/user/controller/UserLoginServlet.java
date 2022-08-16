@@ -19,17 +19,13 @@ public class UserLoginServlet extends HttpServlet{
 	
 	private UserService service = new UserService();
 	
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.sendRedirect(req.getContextPath()+"/"); // get 요청 튕겨내기!
-	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String userId = req.getParameter("userId");
-		String userPwd = req.getParameter("userPw");
+		String userPw = req.getParameter("userPw");
 		
-		User loginUser = service.login(userId, userPwd);
+		User loginUser = service.login(userId, userPw);
 		
 		if(loginUser != null) { // 로그인 성공한 경우
 			HttpSession session = req.getSession();
@@ -39,6 +35,11 @@ public class UserLoginServlet extends HttpServlet{
 			req.setAttribute("msg", "사용자의 아이디나 비밀번호가 맞지 않습니다.");
 			req.getRequestDispatcher("/").forward(req, resp);
 		}
+	}
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.sendRedirect(req.getContextPath()+"/"); // get 요청 튕겨내기!
 	}
 }
 

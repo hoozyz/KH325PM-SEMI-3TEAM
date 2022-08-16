@@ -1,29 +1,31 @@
 package vo;
 
-public class news {
+public class News {
 	private int news_num;
 	private String title;
 	private String cont;
 	private String date;
 	private String poster;
+	private String link;
 
-	public news() {
+	public News() {
 		super();
 	}
 
-	public news(int news_num, String title, String cont, String date, String poster) {
+	public News(int news_num, String title, String cont, String date, String poster, String link) {
 		super();
 		this.news_num = news_num;
 		this.title = title;
 		this.cont = cont;
 		this.date = date;
 		this.poster = poster;
+		this.link = link;
 	}
 
 	@Override
 	public String toString() {
-		return "news [news_num=" + news_num + ", title=" + title + ", cont=" + cont + ", date=" + date + ", poster="
-				+ poster + "]";
+		return "News [news_num=" + news_num + ", title=" + title + ", cont=" + cont + ", date=" + date + ", poster="
+				+ poster + ", link=" + link + "]";
 	}
 
 	public int getNews_num() {
@@ -64,6 +66,14 @@ public class news {
 
 	public void setPoster(String poster) {
 		this.poster = poster;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
 	}
 
 }

@@ -20,7 +20,6 @@ public class UserCheckidServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String userId = req.getParameter("userId");
 		boolean isDuplicated = service.isDuplicated(userId);
-		System.out.println("중복확인 ID : " + userId + ", 결과 : " + isDuplicated);
 		
 		if(isDuplicated == true) { // 사용중
 			resp.getWriter().append("used");

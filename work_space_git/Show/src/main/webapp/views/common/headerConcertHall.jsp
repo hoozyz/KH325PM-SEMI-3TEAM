@@ -120,14 +120,15 @@
             
         }
         
-        a.card-img-top > span {
+         a.card-img-top > span {
             display: none;
-            width: 250px;
-            height: 700px;
+            width: 450px;
+            height: 625px;
             position: absolute;
             bottom: 50%;
             right: 35%;
             z-index: 1;
+            box-shadow: 15px 15px 20px rgb(0,0,0,0.4);
                 
         }
         
@@ -147,6 +148,9 @@
             };
         })();
     </script>
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="<%=path %>/resources/css/directory/theme.min.css">
+    
     <!-- 제이쿼리 -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     
@@ -155,8 +159,6 @@
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="<%=path %>/resources/css/swiper.css" id="theme-stylesheet">
     
-    <!-- Main Theme Styles + Bootstrap-->
-    <link rel="stylesheet" media="screen" href="<%=path %>/resources/css/directory/theme.min.css">
     
 
     <!-- Google fonts - Poppins-->
@@ -194,44 +196,128 @@
 
     <!-- @@@@@@@@@@@@@@@헤더부분@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 
-    <!-- 구글 폰트 -->
-
+        <!-- 구글 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gugi&family=Jua&display=swap" rel="stylesheet">
     <!-- 나눔스퀘어라운지 -->
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+	<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
 
 
-    <style>
-        h1 {
-            font-family: 'Gugi', cursive;
-        }
-        
-        h2 {
-            font-family: 'NanumSquareRound', sans-serif;
-            font-weight: 800;
-        }
-        
-        h6 {
-            font-family: 'NanumSquareRound', sans-serif;
-            font-weight: 300;
-            ;
-        }
-        
-        #NSR {
-            font-family: 'NanumSquareRound', sans-serif;
-            font-size: 30px;
-            font-weight: 800;
-        }
-    </style>
-   
-	
-	<script type="text/javascript" src="<%=path %>/resources/js/simplebar.min.js"></script>
+
+<style>
+h1 {
+	font-family: 'Gugi', cursive;
+}
+
+h2 {
+	font-family: 'NanumSquareAcr', sans-serif;
+	font-weight: 800;
+}
+
+h4 {
+	font-family: 'NanumSquareAcr', sans-serif;
+	font-weight: 900;
+	color: #dcdcdc;
+}
+
+h5 {
+	font-family: 'NanumSquareRound', sans-serif;
+	font-weight: 800;
+}
+
+h6 {
+	font-family: 'NanumSquareRound', sans-serif;
+	font-weight: 600;
+}
+
+.searchFont {
+	font-family: 'NanumSquareAcr', sans-serif;
+	font-size: 25px;
+	font-weight: 900;
+	color: #ffffff;
+}
+
+.searchFont-m {
+	font-family: 'NanumSquareAcr', sans-serif;
+	font-weight: 900;
+	font-size: 17px;
+	color: #ffffff;
+}
+
+.searchFont-s {
+	font-family: 'NanumSquareAcr', sans-serif;
+	font-weight: 900;
+	font-size: 14px;
+	color: #ffffff;
+}
+
+.detailFont {
+	font-family: 'Gugi', cursive;
+	font-size: 45px;
+	font-weight: 600;
+	text-align: center;
+	color: #000000;
+	line-height: 50px;
+}
+
+.detailFont-m {
+	font-family: 'Gugi', cursive;
+	font-size: 26px;
+	font-weight: 600;
+	text-align: center;
+	color: #000000;
+	line-height: 50px;
+}
+
+.PrfcastFont {
+	font-family: 'NanumSquareRound', sans-serif;
+	font-weight: 500;
+	font-size: 13px;
+	color: #8c8c8c;
+}
+
+.daysFont {
+	font-family: 'NanumSquareRound', sans-serif;
+	font-weight: 500;
+	font-size: 9px;
+	color: #8c8c8c;
+}
+
+.AdresFont {
+	font-family: 'NanumSquareRound', sans-serif;
+	font-size: 15px;
+	color: #8c8c8c;
+}
+
+.AdresFont-m {
+	font-family: 'NanumSquareRound', sans-serif;
+	font-size: 13px;
+	color: #8c8c8c;
+}
+
+.ContactsFont {
+	font-family: 'NanumSquareRound', sans-serif;
+	font-size: 17px;
+	color: #8c8c8c;
+}
+
+#NSR {
+	font-family: 'NanumSquareRound', sans-serif;
+	font-size: 30px;
+	font-weight: 800;
+}
+
+
+</style>
+
+
+<script type="text/javascript" src="<%=path %>/resources/js/simplebar.min.js"></script>
     <script type="text/javascript" src="<%=path %>/resources/js/smooth-scroll.polyfills.min.js"></script>
-    <script type="text/javascript" src="<%=path %>/resources/js/tiny-slider.js"></script>
-    <script type="text/javascript" src="<%=path %>/resources/js/flatpickr.min.js"></script>
+    <script type="text/javascript" src="<%=path%>/resources/js/tiny-slider.js"></script>
+    <script type="text/javascript" src="<%=path%>/resources/js/flatpickr.min.js"></script>
     
      <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -400,7 +486,7 @@
                         <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/rankList" role="button" aria-expanded="false" id="NSR">랭킹</a></a>
                         <li class="nav-item dropdown ps-3"><a class="nav-link dropdown" href="<%=path %>/board/news" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="NSR">게시판</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="<%=path%>/news">소식</a></li>
+                                <li><a class="dropdown-item" href="<%=path%>/news?check=0">소식</a></li> <!-- check는 소식페이지는 파싱안하게 0으로 보냄 -->
                                 <li><a class="dropdown-item" href="<%=path%>/board/list">자유</a></li>
                             </ul>
                         </li>
@@ -410,5 +496,7 @@
             </div>
         </header>
         <!-- @@@@@@@@헤더끝@@@@@@@@@@@@@@@@@@@ -->
-
+        
+        <!-- kakao mpa marker -->
+	<img id="mark"  style="width: 0px; height: 0px;" src="resources/images/marker/mark.png"/>
 	</main>

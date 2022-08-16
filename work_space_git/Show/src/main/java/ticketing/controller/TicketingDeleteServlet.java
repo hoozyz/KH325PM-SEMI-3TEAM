@@ -23,8 +23,6 @@ public class TicketingDeleteServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int ticNo =  Integer.parseInt(req.getParameter("ticNo"));
 		
-		System.out.println(ticNo);
-		
 		// 예매내역 삭제
 		int result = service.delete(ticNo);
 		
