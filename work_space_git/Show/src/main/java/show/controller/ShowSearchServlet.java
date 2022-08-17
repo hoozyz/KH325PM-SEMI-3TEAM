@@ -29,6 +29,12 @@ public class ShowSearchServlet extends HttpServlet{
 			String rad_date = "";
 			List<Show> showList = new ArrayList<Show>();
 			
+			if(category.equals("기타")) {
+				req.setAttribute("keyword", keyword);
+				req.getRequestDispatcher("/hall/search").forward(req, resp);
+				return;
+			}
+			
 			if(req.getParameter("rad_date") == null) {
 				rad_date = "1개월";
 			} else {
@@ -89,6 +95,10 @@ public class ShowSearchServlet extends HttpServlet{
 				keyword = req.getParameter("keyword");
 				category = req.getParameter("category");
 				showList = showService.findByKeyword(keyword, category, startDate, endDate);
+				System.out.println(keyword);
+				System.out.println(category);
+				System.out.println(showList);
+				
 				req.setAttribute("startDate", startDate);
 				req.setAttribute("endDate", endDate);
 				req.setAttribute("rad_date", rad_date);
@@ -102,6 +112,7 @@ public class ShowSearchServlet extends HttpServlet{
 			
 			if(category.equals("공연")) {
 				showList = showService.findByHome(keyword, category);
+				System.out.println(showList);
 				req.setAttribute("showList", showList);
 				req.setAttribute("keyword", keyword);
 				req.setAttribute("category", category);
@@ -114,8 +125,7 @@ public class ShowSearchServlet extends HttpServlet{
 				req.setAttribute("category", category);
 				req.getRequestDispatcher("/views/show/musicSearch.jsp").forward(req, resp);
 				return;
-			}
-			
+			} 
 		} catch (Exception e) {
 			e.printStackTrace();
 			req.setAttribute("msg", "오류입니다.");

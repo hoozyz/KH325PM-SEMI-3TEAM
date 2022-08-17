@@ -76,6 +76,8 @@
         .cat {
             text-decoration-line: none;
             color: #D9E2F2;
+            font-family: 'Gugi', cursive;
+            font-size: 20pt;
         }
         
         .hero_category {
@@ -95,6 +97,16 @@
             font-weight: 800;
             color: #201627;
         }
+        .text-dark{
+            font-family: 'NanumSquareRound', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+        }
+         h4{
+       	 font-weight: 500;
+       	 line-height: 0.75;
+       	 
+       	 }
     </style>
  <!-- Page content-->
         <!--@@@@@@@@@ hero @@@@@@@@@-->
@@ -120,8 +132,8 @@
                         <!--calendar-->
                         <div class="mb-3" style="max-width: 30rem;">
                             <div class="input-group" style="padding-top: 15px;"><span class="input-group-text"><i class="fi-calendar"></i></span>
-	                            <input class="form-control date-picker startDate" type="text" name="startDate"placeholder="From date" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
-	                            <input class="form-control date-picker endDate" type="text" name="endDate" placeholder="To date" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
+	                            <input class="form-control date-picker startDate" type="text" name="startDate"placeholder="시작 날짜" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
+	                            <input class="form-control date-picker endDate" type="text" name="endDate" placeholder="마감 날짜" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
                         	</div>
                         </div>
                         <!-- calendar End-->
@@ -140,7 +152,8 @@
                                 <li><a class="dropdown-item" href="#"><i class="fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">오페라</span></a></li>
                             </ul>
                         </div>
-                        <input class="btn btn-warning btn-lg rounded-pill w-100 w-md-auto ms-sm-3" type="submit" value="검색" style="background-color:#DBAB34;"/>
+                         <input class="btn btn-info btn-lg rounded-pill w-100 w-md-auto ms-sm-3" type="submit" value="검색" style="background-color:#0B398E; border:none;"/>
+                        
                     </div>
                 </form>
 	            <div class="position-relative py-4" style="width:15%;height:80px;float:right; padding-left: 3%;">
@@ -184,7 +197,7 @@
             <div class="card card-flush card-stretched-vertical " style="margin-bottom: 30px; ">
                 <div class="row ">
                     <div class="col-sm-3 ">
-                        <img class="card-img " src="<%=showList.get(i).getPoster() %>" alt="Image Description " id="music_id_5 " name="music_id_5 " style="width:200px; ">
+                        <img class="card-img " src="<%=showList.get(i).getPoster() %>" alt="Image Description " id="music_id_5 " name="music_id_5 " style="width:200px; min-height : 282px; ">
                     </div>
                     <!-- End Col -->
 
@@ -194,7 +207,7 @@
                         <div class="card-body row " style="height:100%; ">
                         
                             <div>
-                                <div style="width: 50%;float:left; ">
+                                <div style="width: 80%;float:left; ">
                                     <span class="badge bg-faded-primary "><%=showList.get(i).getGenrenm() %></span>
                                     <h3 class="card-title " style="margin-top: 1%;margin-bottom: 1%; ">
                                         <a class="text-dark " href="./blog-article.html " id="title_1 " name="title_1 " style="text-decoration: none; "><%=showList.get(i).getPrfnm() %></a>
@@ -202,16 +215,19 @@
                                 </div>
                             </div>
 
-                            <div class="musicInfo">
+                            <%-- <div class="musicInfo">
                                 <p id="cost_1 " name="cost_1 " style="margin-bottom: 1%; "><%=showList.get(i).getPrfpdfrom() %>&nbsp~&nbsp<%=showList.get(i).getPrfpdto() %></p>
                                 <div><a href="# " id="hall_info_1 " name="hall_info_1 " style="color: black;text-decoration: none; "><%=showList.get(i).getFcltynm() %></a></div>
-                            </div>
+                             
+                                <a style="text-align: right; " class="btn btn-translucent-info rounded-pill px-3 " href="<%=path %>/showDetail?showId=<%=showList.get(i).getShow_id() %> " id="detail_1 " name="detail_1 ">공연 보러가기</a>
+                            </div> --%>
+                            
+                            <div class="musicInfo">
+                                    <p id="cost_2 " name="cost_2 "><h4><%=showList.get(i).getPrfpdfrom() %>&nbsp;&nbsp; ~ &nbsp;&nbsp;  <%=showList.get(i).getPrfpdfrom() %></h4></p>
+                                    <div><h4><%=showList.get(i).getFcltynm() %>
+                                    <a style="float: right;" class="btn btn-translucent-info rounded-pill px-3 " href="<%=path %>/showDetail?showId=<%=showList.get(i).getShow_id() %>" id="detail_2 " name="detail_2 ">공연 보러가기</a></h4></div>
+                                </div>
 
-                            <!-- Card Footer -->
-                            <div class="card-footer " style="text-align: right; ">
-                                <a class="btn btn-translucent-info rounded-pill px-3 " href="<%=path %>/showDetail?showId=<%=showList.get(i).getShow_id() %> " id="detail_1 " name="detail_1 ">공연 보러가기</a>
-                            </div>
-                            <!-- End Card Footer -->
                         </div>
                         
                         <!-- End Card Body -->
@@ -226,7 +242,7 @@
         	$(document).ready(function() {
         		// 기간 on 변경
         		var rad_date = '${rad_date}';
-        		$("'input:radio[name=rad_date]'").attr("checked", false);	// 선택	
+        		$("'input:radio[name=rad_date]'").attr("checked", false);	// 선택
         		$("'input:radio[name=rad_date]:input[value='rad_" + rad_date + "']").attr("checked", true);	// 선택
         	});
         	

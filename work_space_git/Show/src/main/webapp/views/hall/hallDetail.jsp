@@ -17,29 +17,32 @@
 	int count = 7;
 %>
 
-<section class="container mt-5 mb-4 pt-5">
+<section class="container mt-5 mb-5 pt-5" style="color:#201627;">
 	<!-- Breadcrumb-->
+	<div class="my-2" style="font-family: 'NanumSquareRound', sans-serif; font-size:45pt; font-weight:800;">
+	<<%=hall.getFcltynm()%>>
+	</div>
 	<div class="row gy-9 pt-lg-1">
-		<div class="col-lg-7 p-3">
+		<div class="col-lg-7">
 			<section class="">
-				<div class="row g-2 g-md-3" style="min-width: 60rem;">
+				<div class="row g-2 g-md-1" style="min-width: 60rem;">
 					<div class="col-9">
-						<a class="gallery-item rounded rounded-md-3"><img
-							src="resources/images/concert-hall/000007.jpg"></a>
+						<a class="gallery-item rounded-md-2" style="border:none;"><img
+							src="resources/images/concert-hall/gangdong2.jpg"></a>
 					</div>
-					<div class="col-12">
+					<div class="col-12" style="margin-top: 8px;">
 						<div class="row">
-							<div class="col-3">
-								<a class="gallery-item rounded-1 rounded-md-2"><img
-									src="resources/images/concert-hall/001.jpg"></a>
+							<div class="col-3" style="padding-right: 3px;">
+								<a class="gallery-item rounded-1 rounded-md-2" style="border:none;"><img
+									src="resources/images/concert-hall/gangdong1.jpg" style="height:120px;"></a>
 							</div>
-							<div class="col-3">
-								<a class="gallery-item rounded-1 rounded-md-2"><img
-									src="resources/images/concert-hall/002.jpg"></a>
+							<div class="col-3" style="padding-right: 6px; padding-left: 6px;">
+								<a class="gallery-item rounded-1 rounded-md-2" style="border:none;"><img
+									src="resources/images/concert-hall/gangdong3.jpg" style="height:120px;"></a>
 							</div>
-							<div class="col-3">
-								<a class="gallery-item rounded-1 rounded-md-2"><img
-									src="resources/images/concert-hall/003.jpg"></a>
+							<div class="col-3" style="padding-left: 3px;padding-right: 6px;">
+								<a class="gallery-item rounded-1 rounded-md-2" style="border:none;"><img
+									src="resources/images/concert-hall/gangdong4.jpg" style="height:120px;"></a>
 							</div>
 						</div>
 					</div>
@@ -47,44 +50,35 @@
 			</section>
 		</div>
 
-		<div class="col-lg-5">
-			<div class="card mb-4 p-2 shadow-sm">
-				<div class="card-body">
-					<!-- Place info-->
-					<div class="d-flex align-items-start mb-3 pb-2 border-bottom">
-						<img src="resources/images/concert-hall/concertHallDetailLogo.png"
-							width="60" alt="Thumbnail">
-								<% if (hall.getFcltynm().length() < 9 ) { %>
-						<div class="detailFont" style="width: 600px;"><%=hall.getFcltynm()%></div>
-						<% } else { %>
-						<div class="detailFont-m" style="width: 600px; height: 150px;"><%=hall.getFcltynm()%></div>	
-						<% } %>
-						
-					</div>
+		<div class="col-lg-5 p-0">
+			<div class="mb-2">
+				<div class="card-body p-2 pt-0">
+					
 					<!-- Place contacts-->
-					<div class="mb-1 pb-4 border-bottom">
+					<div>
 						<h4 class="h5 mb-2">Contacts:</h4>
-						<ul class="nav flex-column">
-							<li class="nav-item mb-2"><a
-								class="nav-link p-0 fw-normal d-flex align-items-start"><i
+						<ul class="nav flex-column" style="font-size:16pt;">
+							<li class="nav-item mb-1"><a
+								class="nav-link p-0 fw-bold d-flex align-items-start" style="color:#201627; font-family: 'NanumSquareRound', sans-serif;"><i
 									class="fi-map-pin mt-1 me-2 align-middle opacity-70"></i>
 									<%=hall.getAdres()%>&nbsp;&nbsp; </a></li>
-							<li class="nav-item mb-2"><a
-								class="nav-link d-inline-block p-0 fw-normal d-inline-flex align-items-start">
+							<li class="nav-item"><a
+								class="nav-link d-inline-block p-0 fw-bold d-inline-flex align-items-start" style="color:#201627; font-family: 'NanumSquareRound', sans-serif;">
 									<i class="fi-phone mt-1 me-2 align-middle opacity-70"></i><%=hall.getTelno()%>
 									&nbsp;&nbsp;
 							</a></li>
-							<li class="nav-item mb-2"><a
-								class="nav-link p-0 fw-normal d-flex align-items-start"
+							<li class="nav-item"><a
+								class="nav-link p-0 fw-bold d-flex align-items-start" style="color:#201627; font-family: 'NanumSquareRound', sans-serif;"
 								href="<%=hall.getRelateurl()%>"><i
 									class="fi-globe mt-1 me-2 align-middle opacity-60"></i><%=hall.getRelateurl()%>
 									&nbsp;&nbsp;</a></li>
 						</ul>
 					</div>
 				</div>
+				</div>
 				
 				<!--Map-->
-				<div id="map" style="width: 500px; height: 250px;"></div>
+				<div id="map" style="width: 550px; height: 455px; border-radius:2%;"></div>
 				<script type="text/javascript"
 					src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=1c1e51b427ea6bc49c8cd6877c234c7f"></script>
 				<script>
@@ -124,13 +118,13 @@
 					// 마커가 지도 위에 표시되도록 설정합니다
 					marker.setMap(map);
 				</script>
-			</div>
+			
 		</div>
 		</aside>
 	</div>
 </section>
 <section class="container mb-5 pb-2 pt-4 pb-lg-4">
-	<h2 class="pt-2">전체 공연</h2>
+	<p style="font-family: 'NanumSquareRound', sans-serif; font-size:40pt; color:#201627; font-weight:700;margin-bottom: 5px;"><span style="color: #0B398E; font-size:43pt; font-weight:800;"><%=hall.getFcltynm()%></span>에서 상연중인 공연</p>
 	<div class="row">
 		<div class="pb-2 mt-2">
 			<!-- Item-->
@@ -140,7 +134,8 @@
 			<% } %>
 			<% for (int i = 0; i < count; i++) { %>
 			<article
-				class="card border-0 shadow-sm card-hover card-horizontal mb-4">
+				class="card border-0 shadow-sm card-hover card-horizontal mb-4"  onclick="location.href='<%=path%>/showDetail?showId=<%=showList.get(i).getShow_id()%>'"
+				 style="cursor:pointer; color:#201627;">
 				<a class="card-img-top"
 					style="background-image: url(<%=showList.get(i).getPoster()%>);">
 
@@ -149,22 +144,18 @@
 					width: 450px; heigth: 700px; background-size: cover; background-position: center;"></span>
 				</a>
 
-				<div class="card-body">
+				<div class="card-body px-4" style="padding:15px;">
+				<div class="badge bg-faded-primary mb-1" style="font-size:12pt;"><%=showList.get(i).getGenrenm()%></div>
 					<a class="fs-xs text-uppercase text-decoration-none"
 						href="<%=path%>/showDetail?showId=<%=showList.get(i).getShow_id()%>"></a>
-					<h5>
-						<a class="nav-link"
-							href="<%=path%>/showDetail?showId=<%=showList.get(i).getShow_id()%>"><%=showList.get(i).getPrfnm() %></a>
+					<h5 class="mb-1" style="font-size:23pt;"><%=showList.get(i).getPrfnm() %>
 					</h5>
-					<p class="fs-sm text-muted">
-					<div class=PrfcastFont>
-						출연진 :
+					<div class="PrfcastFont" style="font-size:17pt; height:17pt; color:#201627; margin-bottom: 40px;">
+						
 						<%=showList.get(i).getPrfcast() %>
 					</div>
-					</p>
-					<br>
-					<div class=daystFont>
-						기간:&ensp;
+
+					<div class="daystFont" style="font-size:19pt;">
 						<%=showList.get(i).getPrfpdfrom() %>
 						~
 						<%=showList.get(i).getPrfpdto()%>

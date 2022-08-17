@@ -21,8 +21,18 @@ public class HallSearchServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String keyword = req.getParameter("keyword");
-		String local = req.getParameter("local");
+		String keyword = "";
+		String local = "";
+		
+		if(req.getAttribute("keyword") != null) { // 홈페이지 검색
+			keyword = (String) req.getAttribute("keyword");
+		} else {
+			keyword = req.getParameter("keyword");
+		}
+		
+		if(req.getParameter("local") != null) {
+			local = req.getParameter("local");
+		}
 		
 		List<Hall> list = new ArrayList<>();
 

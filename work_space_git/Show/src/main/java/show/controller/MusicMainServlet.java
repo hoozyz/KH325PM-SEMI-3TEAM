@@ -75,6 +75,7 @@ public class MusicMainServlet extends HttpServlet {
 					String prfpdto = showList.get(i).getPrfpdto();
 					String genrenm = showList.get(i).getGenrenm();
 					String poster = showList.get(i).getPoster();
+					String fcltynm = showList.get(i).getFcltynm();
 					
 					JSONObject obj = new JSONObject();
 					obj.put("show_id", show_id);
@@ -84,6 +85,7 @@ public class MusicMainServlet extends HttpServlet {
 					obj.put("prfpdto", prfpdto);
 					obj.put("genrenm", genrenm);
 					obj.put("poster", poster);
+					obj.put("fcltynm", fcltynm);
 					
 					int maxPage = pageInfo.getMaxPage();
 					int startPage = pageInfo.getStartPage();

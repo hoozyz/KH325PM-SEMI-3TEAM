@@ -49,6 +49,16 @@
 	
 	int count = 12;
 %>
+
+
+    <!-- 구글 폰트 -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&family=Jua&display=swap" rel="stylesheet">
+    <!-- 나눔스퀘어라운지 -->
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
     
     <style>
 	    .board-page>a {
@@ -81,6 +91,8 @@
         .cat {
             text-decoration-line: none;
             color: #D9E2F2;
+            font-family: 'Gugi', cursive;
+            font-size: 20pt;
         }
         
         .hero_category {
@@ -101,6 +113,26 @@
             color: #201627;
             text-align:left;
         }
+        
+        .card-title{
+         font-family: 'NanumSquareRound', sans-serif;
+         font-size : 32px;
+        }
+        .text-dark {
+        font-weight: 700;
+        }
+        
+        *{
+         font-family: 'NanumSquareRound', sans-serif;
+         font-weight: 300;
+        }
+        
+       	 h4{
+       	 font-weight: 500;
+       	 line-height: 0.75;
+       	 
+       	 }
+        
     </style>
     
     <!--@@@@@@@@@ hero @@@@@@@@@-->
@@ -125,8 +157,8 @@
                      <!--calendar-->
                 <div class="mb-3" style="max-width: 30rem;">
                     <div class="input-group" style="padding-top: 15px;"><span class="input-group-text"><i class="fi-calendar"></i></span>
-                        <input class="form-control date-picker startDate" type="text" name="startDate"placeholder="From date" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
-                        <input class="form-control date-picker endDate" type="text" name="endDate" placeholder="To date" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
+                        <input class="form-control date-picker startDate" type="text" name="startDate"placeholder="시작 날짜" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
+                        <input class="form-control date-picker endDate" type="text" name="endDate" placeholder="마감 날짜" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
                     </div>
                 </div>
                 <!-- calendar End-->
@@ -152,7 +184,7 @@
                             <li><a class="dropdown-item" href="#"><i class="fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">오페라</span></a></li>
                         </ul>
                     </div>
-                   	<input class="btn btn-primary btn-lg rounded-pill w-100 w-md-auto ms-sm-3" type="submit" value="검색" style="background-color:#DBAB34;"/>
+                   	 <input class="btn btn-info btn-lg rounded-pill w-100 w-md-auto ms-sm-3" type="submit" value="검색" style="background-color:#0B398E; border:none;"/>
                 </div>
             </form>
             <div class="position-relative" style="width:15%;height:80px;float:right; padding-top: 3%; padding-left: 3%;">
@@ -170,7 +202,7 @@
             <div class="d-md-flex align-items-center justify-content-between " style="width: 100%; ">
                 <p class="title1">
                     <span class="title1" style="color: #A468D7;font-size: 130%; ">scene</span>의 추천작
-                    <span class="mt-4 " style="font-size: 15pt;">
+                    <span class="mt-4 " style="font-size: 30px; font-weight:700">
                         scene이 추천하는 작품을 만나보세요!
                     </span>
                 </p>
@@ -245,37 +277,35 @@
                 <p class="title1">전체 음악공연</p>
             </div>
 
-            <div class="tns-carousel-wrapper tns-controls-outside-xxl tns-nav-outside " style="margin-left: 5%;margin-right: 5%; ">
+            <div class="tns-carousel-wrapper tns-controls-outside-xxl tns-nav-outside ">
 
                 <!-- Sorting-->
                 <div class="align-items-sm-center align-items-stretch my-2 " style="height: 20px;">
-                    <div style="float: right;"><i class="fi-check-circle me-2 "></i><span class="fs-sm mt-n1 ">100 results</span></div>
+                    <div style="float: right;"><i class="fi-check-circle me-2 "></i><span class="fs-sm mt-n1 ">총 101 건</span></div>
                 </div>
                 <!-- Item-->
                 <!-- @@@ Card-1 @@@ -->
                 	<div class="card card-flush card-stretched-vertical allMusic" style="margin-bottom: 30px; ">
                 	<% if (showList != null) { %>
                 	<% for (int i = 0; i < showList.size(); i++) { %>
-                    <div class="row ">
+                    <div class="row my-1" style="height: 283px;">
                         <div class="col-sm-3 ">
-                            <img class="card-img " src="<%=showList.get(i).getPoster() %>" alt="Image Description " id="music_id_2" name="music_id_2 " style="width:200px; ">
+                            <img class="card-img " src="<%=showList.get(i).getPoster() %>" alt="Image Description " id="music_id_2" name="music_id_2 " style="width:200px; height:283px;">
                         </div>
                         <div class="col-sm-9 ">
                             <div class="card-body row " style="height:100%; ">
                                 <div>
-                                    <div style="width: 50%;float:left; ">
+                                    <div style="width: 80%;float:left; ">
                                         <span class="badge bg-faded-primary "><%=category %></span>
                                         <h3 class="card-title " style="margin-top: 1%;margin-bottom: 1%; ">
-                                            <a class="text-dark " href="./blog-article.html " id="title_2 " name="title_2 " style="text-decoration: none; "><%=showList.get(i).getPrfnm() %></a>
+                                            <a class="text-dark " href="./blog-article.html " id="title_2 " name="title_2 " style="text-decoration: none;"><%=showList.get(i).getPrfnm() %></a>
                                         </h3>
                                     </div>
                                 </div>
                                 <div class="musicInfo">
-                                    <p id="cost_2 " name="cost_2 " style="margin-bottom: 1%; "><%=showList.get(i).getPrfpdfrom() %>&nbsp;&nbsp; ~ &nbsp;&nbsp;  <%=showList.get(i).getPrfpdfrom() %></p>
-                                    <div><a href="<%=path %>/" id="hall_info_2 " name="hall_info_2 " style="color: black;text-decoration: none; ">공연장 가기</a></div>
-                                </div>
-                                <div class="card-footer " style="text-align: right; ">
-                                    <a class="btn btn-translucent-info rounded-pill px-3 " href="<%=path %>/showDetail?showId=<%=showList.get(i).getShow_id() %>" id="detail_2 " name="detail_2 ">공연 보러가기</a>
+                                    <p id="cost_2 " name="cost_2 "><h4><%=showList.get(i).getPrfpdfrom() %>&nbsp;&nbsp; ~ &nbsp;&nbsp;  <%=showList.get(i).getPrfpdfrom() %></h4></p>
+                                    <div><h4><%=showList.get(i).getFcltynm() %>
+                                    <a style="float: right;" class="btn btn-translucent-info rounded-pill px-3 " href="<%=path %>/showDetail?showId=<%=showList.get(i).getShow_id() %>" id="detail_2 " name="detail_2 ">공연 보러가기</a></h4></div>
                                 </div>
                             </div>
                         </div>
@@ -317,17 +347,17 @@
          			
          			var url2 = "<%=path%>/showDetail?showId=";
          			var url3 = "<%=path%>/hallDetail?hallId=";
-         			console.log(data[0].poster)
+         			console.log(data)
          			
          			$.each(data, (i, obj) => {
-         				str += '<div class="row ">'
+         				str += '<div class="row my-1" style="height: 283px;">'
          			    str += '<div class="col-sm-3 ">'
-         			    str += '    <img class="card-img" src="'+ obj.poster +'" alt="Image Description " id="music_id_2" name="music_id_2 " style="width:200px; ">'
+         			    str += '    <img class="card-img" src="'+ obj.poster +'" alt="Image Description " id="music_id_2" name="music_id_2 " style="width:200px; height:283px;">'
          			    str += '</div>'
          			    str += '<div class="col-sm-9 ">'
          			    str += '    <div class="card-body row " style="height:100%; ">'         				
          			    str += '        <div>'
-         				str += '            <div style="width: 50%;float:left; ">'
+         				str += '            <div style="width: 80%;float:left; ">'
          				str += '                <span class="badge bg-faded-primary ">'+obj.genrenm+'</span>'
          				str += '                <h3 class="card-title " style="margin-top: 1%;margin-bottom: 1%; ">'
          				str += '                    <a class="text-dark " href="'+ url2 + obj.show_id +'" id="title_2 " name="title_2 " style="text-decoration: none; ">'+ obj.prfnm +'</a>'
@@ -335,11 +365,9 @@
          				str += '            </div>'
          				str += '        </div>'
          				str += '        <div class="musicInfo">'
-         				str += '            <p id="cost_2 " name="cost_2 " style="margin-bottom: 1%; ">'+ obj.prfpdfrom +" ~ " + obj.prfpdto +'</p>'
-         				str += '            <div><a href="'+ url3 + obj.hall_id +'" name="hall_info_2 " style="color: black;text-decoration: none; ">공연장 가기</a></div>'
-         				str += '        </div>'
-         				str += '        <div class="card-footer " style="text-align: right; ">'
-         				str += '            <a class="btn btn-translucent-info rounded-pill px-3 " href="'+ url2 + obj.show_id +'" id="detail_2 " name="detail_2 ">공연 보러가기</a>'
+         				str += '            <p id="cost_2 " name="cost_2 "><h4>'+ obj.prfpdfrom +" ~ " + obj.prfpdto +'</h4></p>'
+         				str += '            <div><h4>'+ obj.fcltynm +'	'
+         				str += '           <a style="float: right;" class="btn btn-translucent-info rounded-pill px-3 " href="'+ url2 + obj.show_id +'" id="detail_2 " name="detail_2 ">공연 보러가기</a></h4></div></div>'
          				str += '        </div>'
          				str += '    </div>'
          				str += '</div>'

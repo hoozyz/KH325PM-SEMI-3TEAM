@@ -78,7 +78,7 @@
 	int count = 5;
 %>    
 
-<style>
+	<style>
 	.board tr {
         cursor: pointer;
     }
@@ -434,13 +434,7 @@
             				
             				var url1 = "<%=path%>/myTicketing";
             				
-            				    
-            				
-            				
             				$.each(tic, (i, obj) => {
-            					
-            				
-                                 
                                     
                             str +=  '<div class="background show"><div class="window"> <div class="popup"> <div class="row">											 '           
             				str +=  '<div class="popup_left col-6"><div style="text-align: left; margin-top: 10px; margin-left: 10px;margin-bottom: 20px;">              '
@@ -646,7 +640,8 @@
                     
                     <div class="board-bottom" style="width:1300px; margin: 0 auto; padding-top: 15px;">
                 	<div class="board-page" style="text-align: center;">
-		                <% for (int j = pageInfo.getStartPage(); j <= pageInfo.getEndPage(); j++) { %>
+		                <% if (revList != null) { %>
+		                	<% for (int j = pageInfo.getStartPage(); j <= pageInfo.getEndPage(); j++) { %>
 		                	<% if (j == pageInfo.getCurrentPage()) { %>
 		                		<a class="page-on" id="page(<%=j %>)" onclick="goPage(<%=j %>); return false;"><%=j %></a>
 		                	<% } else {%>
@@ -655,6 +650,7 @@
 		                <% } %>
 		                <a class="page-next" onclick="goPage(<%=pageInfo.getNextPage() %>); return false;"><i class="fi-chevron-right align-middle"></i></a>
 		                <a class="page-end" onclick="goPage(<%=pageInfo.getMaxPage() %>); return false;"><i class="fi-chevrons-right align-middle"></i></a>
+		                <% } %>
 		            </div>    
 		            </div>
 		            <br><hr>

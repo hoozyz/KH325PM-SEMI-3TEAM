@@ -56,6 +56,8 @@
         .cat {
             text-decoration-line: none;
             color: #D9E2F2;
+            font-family: 'Gugi', cursive;
+            font-size: 20pt;
         }
         
         .hero_category {
@@ -77,6 +79,21 @@
         .card-rank-img-top {
         	height: 260px;
         }
+        .card-text {
+           	font-family: 'NanumSquareRound', sans-serif;
+	        overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+
+             
+        }
+        *{
+        font-family: 'NanumSquareRound', sans-serif;
+        }
+        
+        
+        
+        
     </Style> 
 	
 	<!--@@@@@@@@@ hero @@@@@@@@@-->
@@ -138,8 +155,8 @@
                 <!--calendar-->
                 <div class="mb-3" style="max-width: 30rem;">
                     <div class="input-group" style="padding-top: 15px;"><span class="input-group-text"><i class="fi-calendar"></i></span>
-                        <input class="form-control date-picker startDate" type="text" name="startDate"placeholder="From date" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
-                        <input class="form-control date-picker endDate" type="text" name="endDate" placeholder="To date" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
+                        <input class="form-control date-picker startDate" type="text" name="startDate"placeholder="시작 날짜" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
+                        <input class="form-control date-picker endDate" type="text" name="endDate" placeholder="마감 날짜" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
                     </div>
                 </div>
                 <!-- calendar End-->
@@ -166,7 +183,7 @@
                         <li><a class="dropdown-item" href="#"><i class="fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">복합</span></a></li>
                     </ul>
                 </div>
-                <input class="btn btn-primary btn-lg rounded-pill w-100 w-md-auto ms-sm-3" type="submit" value="검색" style="background-color:#0B398E; border:none;"/>
+                <input class="btn btn-info btn-lg rounded-pill w-100 w-md-auto ms-sm-3" type="submit" value="검색" style="background-color:#0B398E; border:none;"/>
             </div>
         </form>
         <div class="position-relative" style="width:15%;height:80px;float:right; padding-top: 3%; padding-left: 3%; font-size:15px;">
@@ -224,7 +241,7 @@
                     <div class="content-overlay start-0 top-0 d-flex align-items-center justify-content-center w-100 h-100 p-3">
                         <button type="button" class="btn btn-outline-warning" style="width:200px; height:80px; font-size:20pt;">상세보기</button>
                     </div>
-                    <div class="badge me-3" style="float:left; width:60px; height:60px; border-radius:0; background-color:#FDBC31; font-size:25pt; font-weight:bold; padding-left: 10px; color:#201627;">1위</div>
+                    <div class="badge me-3" style="float:left; width:60px; height:60px; border-radius:0; background-color:#FDBC31; font-size:25pt; font-weight:bold; padding-left: 5px; color:#201627;">1위</div>
                 </div>
                 <div class="card-body text-center" style="text-align: center; py-0;padding-top: 10px; height:80px;">
                     <h3 class="mb-0 text-nav py-0">웃는 남자</h3>
@@ -281,7 +298,7 @@
                     <div class="card" style="height:430px;"><img class="card-img-top" style="height:327px;" src="<%=showList.get(0).getPoster() %>" alt="Card image">
                         <div class="card-body" style="height: 100px; padding: 10px; color: black;">
                             <div class="card-text fs-lg fw-bold" style="margin-bottom: 10px;"><%=showList.get(0).getPrfnm() %></div>
-                            <div class="card-text fs-sm"><%=showList.get(0).getFcltynm() %></div>
+                            <div class="card-text fs"><%=showList.get(0).getFcltynm() %></div>
                             <div class="card-text fs-sm"><%=showList.get(0).getPrfpdfrom() %>&nbsp;&nbsp; ~ &nbsp;&nbsp;<%=showList.get(0).getPrfpdto() %></div>
                         </div>
                     </div>

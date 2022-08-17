@@ -15,19 +15,40 @@
 	}
 %>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&family=Jua&display=swap" rel="stylesheet">
+    <!-- 나눔스퀘어라운지 -->
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+
 <style>
 
+	a {
+   	text-decoration: none;
+   	color: black;
+   }   
 	a:hover {
 		text-decoration: underline;
-		color: #DBAB34;
+		color:#0B398E ;
 	}
-	
+   
+   h1 {
+         font-family: 'Gugi', cursive;
+         font-weight: 800;
+         color: black;
+         font-size:50px;
+         margin-bottom: 30px;
+
+   }  
+   
+   
 </style>
 
 
 <!-- @@@ 윗부분 @@@ -->
 <section class="container" style="padding-top:100px;">
-	<p style="font-size: 50pt;">소식게시판</p>
+	<h1>소식게시판</h1>
 	<!-- Card_Main_left -->
 	<div class="card-flush card-stretched-vertical"
 		style="float: left; width: 50%; padding-right: 1%;">

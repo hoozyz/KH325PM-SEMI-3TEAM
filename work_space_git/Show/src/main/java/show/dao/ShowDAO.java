@@ -245,9 +245,9 @@ public class ShowDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String query = "SELECT show_id, hall_id, prfnm, prfpdfrom, prfpdto, genrenm, poster FROM \r\n"
-				+ "(SELECT show_id, hall_id, prfnm, prfpdfrom, prfpdto, genrenm, poster, ROWNUM NUM FROM \r\n"
-				+ "(SELECT show_id, hall_id, prfnm, prfpdfrom, prfpdto, genrenm, poster \r\n"
+		String query = "SELECT show_id, hall_id, prfnm, prfpdfrom, prfpdto, genrenm, fcltynm, poster FROM \r\n"
+				+ "(SELECT show_id, hall_id, prfnm, prfpdfrom, prfpdto, genrenm, poster, fcltynm, ROWNUM NUM FROM \r\n"
+				+ "(SELECT show_id, hall_id, prfnm, prfpdfrom, prfpdto, genrenm, fcltynm, poster \r\n"
 				+ "FROM TBL_SHOW where genrenm = ? ORDER BY show_id DESC)) WHERE NUM BETWEEN ? and ?";
 
 		try {
@@ -266,6 +266,7 @@ public class ShowDAO {
 				show.setPrfpdto(rs.getString("prfpdto"));
 				show.setGenrenm(rs.getString("genrenm"));
 				show.setPoster(rs.getString("poster"));
+				show.setFcltynm(rs.getString("fcltynm"));
 				list.add(show);
 			}
 			return list;

@@ -90,11 +90,29 @@
     	border-bottom: 1px solid lightgray; height: 70px;
     }
     
+    
+    
     h1 {
-            font-family: 'NanumSquareRound', sans-serif;
+             font-family: 'Gugi', cursive;
             font-weight: 800;
             color: black;
-        }
+            font-size:50px;
+   }
+   a {
+   	text-decoration: none;
+   	color: black;
+   }     
+   
+   a:hover{
+   text-decoration: none;
+   	color: black;
+   }
+   *{
+       font-family: 'NanumSquareRound', sans-serif;
+       font-weight: 500;
+   
+   }
+   
 </style>
 
 <!-- 글쓰기 팝업-->
@@ -188,7 +206,7 @@
                     <tr style="background-color: #c1c1c1; width: 100%; height: 70px; border-bottom: 1px solid lightgray;">
                     	<td class="td-no"></td>
                     	<td class="td-title">
-                    	<a href="https://www.nocutnews.co.kr/news/5798033" style= "text-decoration : none;">해상왕 장보고 삶, 뮤지컬로 만든다…'오션스' 쇼케이스</a>
+                    	<a href="https://www.nocutnews.co.kr/news/5798033" style= " font-weight:700;">해상왕 장보고 삶, 뮤지컬로 만든다…'오션스' 쇼케이스</a>
                     	</td>
                     	<td class="td-writer">관리자</td>
                     	<td class="td-date"></td>
@@ -197,7 +215,7 @@
                     <tr style="background-color: #c1c1c1; width: 100%; height: 70px; border-bottom: 1px solid lightgray;">
                     	<td class="td-no"></td>
                     	<td class="td-title">
-                    	<a href="https://www.segye.com/newsView/20220807511675?OutUrl=naver" style= "text-decoration : none;">남자들을 위한 80㎝ 부츠?…2년 만에 돌아온 쇼뮤지컬 ‘킹키부츠’</a>
+                    	<a href="https://www.segye.com/newsView/20220807511675?OutUrl=naver" style= "font-weight:700;">남자들을 위한 80㎝ 부츠?…2년 만에 돌아온 쇼뮤지컬 ‘킹키부츠’</a>
                     	</td>
                     	<td class="td-writer">관리자</td>
                     	<td class="td-date"></td>
@@ -206,7 +224,7 @@
                     <tr style="background-color: #c1c1c1; width: 100%; height: 70px; border-bottom: 1px solid lightgray;">
                     	<td class="td-no"></td>
                     	<td class="td-title">
-                    	<a href="https://www.yna.co.kr/view/AKR20220805142700005?input=1195m" style= "text-decoration : none;">'160년이 지나도 살아있는 고전의 힘…연극 '레 미제라블'</a>
+                    	<a href="https://www.yna.co.kr/view/AKR20220805142700005?input=1195m" style= "none;font-weight:700;">'160년이 지나도 살아있는 고전의 힘…연극 '레 미제라블'</a>
                     	</td>
                     	<td class="td-writer">관리자</td>
                     	<td class="td-date"></td>

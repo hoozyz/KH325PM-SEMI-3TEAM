@@ -269,7 +269,7 @@
                 <h2 style="display:inline; font-size:50px;">전국 </h2>
                 <h2 style="display:inline; color: #0B398E; font-size:50px;">공연장</h2>
                 <h6 style=" display:inline; margin-left:10px; font-size:30px; font-weight:bold;">전국 주요 공연장을 빠르게 찾아보세요!</h6>
-                <a class="btn btn-link fw-normal ms-sm-3 p-0" href="<%=path %>/hallMain" style="margin-top: 20px; float:right; font-size:20px;">더보기<i class="fi-arrow-long-right ms-1"></i></a>
+             	<a class="btn btn-link fw-normal ms-sm-3 p-0" href="<%=path %>/hallMain" style="margin-top: 20px; float:right; font-size:20px;">더보기<i class="fi-arrow-long-right ms-1"></i></a>
             </div>
             <!-- No image-->
             <div class="card border-0 shadow-sm">
@@ -514,8 +514,17 @@
 
 		<!-- Blog: Latest posts-->
         <section class="container my-2 py-lg-4">
-            <div class="d-sm-flex align-items-center justify-content-center mb-3">
-                <h2 style="color: #0B398E;">공연 소식</h2><a class="btn btn-link fw-normal ms-sm-3 p-0" href="<%=path%>/news">더보기<i class="fi-arrow-long-right ms-2"></i></a>
+        
+            
+        
+        
+        
+            <div class="d-sm-flex align-items-center justify-content-between mb-4 pb-2">
+            <span>
+		           <h2 style="display:inline; font-size:50px;">공연 </h2><h2 style="display:inline; color: #ab69dd; font-size:50px;">소식</h2>
+		           <h6 style=" display:inline; margin-left:10px; font-size:30px; font-weight:bold;">최신 공연소식 한눈에 접해보세요!</h6>
+            </span>
+            	<a class="btn btn-link fw-normal ms-sm-3 p-0" href="<%=path%>/news" style="margin-top: 20px; float:right; font-size:20px;">더보기<i class="fi-arrow-long-right ms-1"></i></a>
             </div>
             <!-- Carousel-->
             <div class="tns-carousel-wrapper tns-nav-outside mb-md-2 homeNews">
@@ -523,7 +532,7 @@
                     	<!-- Item-->
                     <article style="height: 350px; float: left; margin-right: 21px; width: 416px;">
                         <a class="d-block mb-3" href="https://www.segye.com/newsView/20220807511675?OutUrl=naver"><img class="rounded-3" src="<%=path%>/resources/images/news/big2.png" style="width: 416px; height: 200px;" style="height:200px;" alt="Post image"></a>
-                        <h3 class="fs-base pt-1"><a class="nav-link" href="https://www.segye.com/newsView/20220807511675?OutUrl=naver">남자들을 위한 80㎝ 부츠?…2년 만에 돌아온 쇼뮤지컬 ‘킹키부츠’</a></h3>
+                        <h3 class="fs-base pt-1"><a class="nav-link fs-6" href="https://www.segye.com/newsView/20220807511675?OutUrl=naver">남자들을 위한 80㎝ 부츠?…2년 만에 돌아온 쇼뮤지컬 ‘킹키부츠’</a></h3>
                         <a class="d-flex align-items-center text-decoration-none" href="#"><img class="rounded-circle" src="resources/img/avatars/16.png" width="44" alt="Avatar">
                             <div class="ps-2"><h6 class="fs-sm text-nav lh-base mb-1">관리자</h6>
                                 <div class="d-flex text-body fs-xs"><span class="me-2 pe-1"><i class="fi-calendar-alt opacity-70 mt-n1 me-1 align-middle"></i>2022-08-08</span></div>
@@ -532,7 +541,7 @@
                     <!-- Item-->
                    	<article style="height: 350px; float: left; margin-right: 21px; width: 416px;">
                         <a class="d-block mb-3" href="https://www.nocutnews.co.kr/news/5798033"><img class="rounded-3" src="<%=path%>/resources/images/news/big1.png" style="width: 416px; height: 200px;" alt="Post image"></a>
-                        <h3 class="fs-base pt-1" style="margin-bottom: 32px;"><a class="nav-link" href="https://www.nocutnews.co.kr/news/5798033">해상왕 장보고 삶, 뮤지컬로 만든다…'오션스' 쇼케이스</a></h3>
+                        <h3 class="fs-base pt-1" style="margin-bottom: 32px;"><a class="nav-link fs-6" href="https://www.nocutnews.co.kr/news/5798033">해상왕 장보고 삶, 뮤지컬로 만든다…'오션스' 쇼케이스</a></h3>
                         <a class="d-flex align-items-center text-decoration-none" href="#"><img class="rounded-circle" src="resources/img/avatars/18.png" width="44" alt="Avatar">
                             <div class="ps-2">
                                 <h6 class="fs-sm text-nav lh-base mb-1">문수경 기자</h6>
@@ -543,7 +552,7 @@
                     <!-- Item-->
                     <article style="height: 350px; float: left; width: 416px;">
                         <a class="d-block mb-3" href="https://www.yna.co.kr/view/AKR20220805142700005?input=1195m"><img class="rounded-3" src="<%=path%>/resources/images/news/small2.png" style="width:416px; height: 200px;" alt="Post image"></a>
-                        <h3 class="fs-base pt-1" style="margin-bottom: 32px;"><a class="nav-link" href="https://www.yna.co.kr/view/AKR20220805142700005?input=1195m">'160년이 지나도 살아있는 고전의 힘…연극 '레 미제라블'</a></h3>
+                        <h3 class="fs-base pt-1 display-3" style="margin-bottom: 32px;"><a class="nav-link fs-6 " href="https://www.yna.co.kr/view/AKR20220805142700005?input=1195m">'160년이 지나도 살아있는 고전의 힘…연극 '레 미제라블'</a></h3>
                         <a class="d-flex align-items-center text-decoration-none" href="#"><img class="rounded-circle" src="resources/img/avatars/17.png" width="44" alt="Avatar">
                             <div class="ps-2">
                                 <h6 class="fs-sm text-nav lh-base mb-1">임지우 기자</h6>
@@ -681,8 +690,8 @@
          					if(i == 2) {
          						str += '  <article style="height: 350px; float: left; width:416px;">                                                                                                                                                                          '
 	                 			str += '  <a class="d-block mb-3" href="'+ obj.link +'"><img class="rounded-3" src="'+ obj.poster +'" style="width: 416px; height:200px;" alt="Post image"></a>'
-	                 			str += '  <h3 class="fs-base pt-1"><a class="nav-link" style="height: 42px;" href="'+ obj.link +'">'+ obj.title +'</a></h3>                      '
-	                 			str += '  <a class="d-flex align-items-center text-decoration-none" href="#"><img class="rounded-circle" src="resources/img/avatars/16.png" width="44" alt="Avatar">                                                '
+	                 			str += '  <h3 class="fs-base pt-1"><a class="nav-link fs-6" style="height: 42px;" href="'+ obj.link +'">'+ obj.title +'</a></h3>                      '
+	                 			str += '  <a class="d-flex align-items-center text-decoration-none" href="#"><img class="rounded-circle" src="resources/img/avatars/15.png" width="44" alt="Avatar">                                                '
 	                 			str += '    <div class="ps-2"><h6 class="fs-sm text-nav lh-base mb-1">관리자</h6>                                                                                                                                   '
 	                 			str += '        <div class="d-flex text-body fs-xs"><span class="me-2 pe-1"><i class="fi-calendar-alt opacity-70 mt-n1 me-1 align-middle"></i>'+ obj.date +'</span></div>                                               '
 	                 			str += '    </div></a>                                                                                                                                                                                              '
@@ -690,7 +699,7 @@
          					} else {
          						str += '  <article style="height: 350px; float: left; margin-right: 21px; width: 416px;">                                                                                                                                                                          '
 	                 			str += '  <a class="d-block mb-3" href="'+ obj.link +'"><img class="rounded-3" src="'+ obj.poster +'" style="width: 416px; height:200px;" alt="Post image"></a>'
-	                 			str += '  <h3 class="fs-base pt-1"><a class="nav-link" style="height: 42px;" href="'+ obj.link +'">'+ obj.title +'</a></h3>                      '
+	                 			str += '  <h3 class="fs-base pt-1"><a class="nav-link  fs-6" style="height: 42px;" href="'+ obj.link +'">'+ obj.title +'</a></h3>                      '
 	                 			str += '  <a class="d-flex align-items-center text-decoration-none" href="#"><img class="rounded-circle" src="resources/img/avatars/16.png" width="44" alt="Avatar">                                                '
 	                 			str += '    <div class="ps-2"><h6 class="fs-sm text-nav lh-base mb-1">관리자</h6>                                                                                                                                   '
 	                 			str += '        <div class="d-flex text-body fs-xs"><span class="me-2 pe-1"><i class="fi-calendar-alt opacity-70 mt-n1 me-1 align-middle"></i>'+ obj.date +'</span></div>                                               '
