@@ -106,11 +106,12 @@
     
     .info_tit {
         /* 상세설명 */
-        font-weight: 700;
         font-family: 'NanumSquareRound', sans-serif;
         margin-bottom: 10px;
         color: black;
-         font-size: 18px;
+        
+        font-weight: 700;
+         font-size: 21px;
     }
     
     .info_txt {
@@ -118,6 +119,9 @@
         margin-bottom: 10px;
         font-family: 'NanumSquareRound', sans-serif;
         margin-left: 15px;
+        
+        font-weight: 500;
+        font-size: 20px;
     }
     
     .show_titie {

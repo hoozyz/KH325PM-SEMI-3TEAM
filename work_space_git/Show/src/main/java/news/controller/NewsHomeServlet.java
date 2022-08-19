@@ -1,6 +1,7 @@
 package news.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,11 +16,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import news.service.NewsService;
 import vo.News;
 
-@WebServlet(name = "news", urlPatterns = "/news")
-public class NewsServlet extends HttpServlet {
+@WebServlet(name = "newsHome", urlPatterns = "/newsHome")
+public class NewsHomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	NewsService service = new NewsService();
@@ -94,10 +98,31 @@ public class NewsServlet extends HttpServlet {
 			newsCheck = service.receive(list);
 			
 			if (newsCheck > 0) {
-				list = service.findNews(); // 7개 파싱
-				
-				req.setAttribute("list", list);
-				req.getRequestDispatcher("/views/news/news.jsp").forward(req, resp);
+				list = service.findNewsHome(); // 3개만 파싱
+
+				JSONArray arrayObj = new JSONArray();
+
+				for (int i = 0; i < list.size(); i++) {
+
+					String poster = list.get(i).getPoster();
+					String date = list.get(i).getDate();
+					String link = list.get(i).getLink();
+					String title = list.get(i).getTitle();
+
+					JSONObject obj = new JSONObject();
+					obj.put("poster", poster);
+					obj.put("date", date);
+					obj.put("link", link);
+					obj.put("title", title);
+
+					arrayObj.add(obj);
+
+				}
+
+				PrintWriter out = resp.getWriter();
+				out.println(arrayObj.toJSONString());
+				out.flush();
+				out.close();
 				return;
 			} else {
 				req.setAttribute("msg", "소식을 불러오지 못했습니다.");

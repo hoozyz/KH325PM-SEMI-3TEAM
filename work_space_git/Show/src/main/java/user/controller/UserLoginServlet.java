@@ -18,7 +18,6 @@ public class UserLoginServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
 	private UserService service = new UserService();
-	
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,10 +29,10 @@ public class UserLoginServlet extends HttpServlet{
 		if(loginUser != null) { // 로그인 성공한 경우
 			HttpSession session = req.getSession();
 			session.setAttribute("loginUser", loginUser); // 세션에 loginUser 정보 저장 
+			System.out.println(loginUser.getRole());
 			resp.sendRedirect(req.getContextPath() + "/"); 
 		}else { // 로그인 실패한 경우
-			req.setAttribute("msg", "사용자의 아이디나 비밀번호가 맞지 않습니다.");
-			req.getRequestDispatcher("/").forward(req, resp);
+			resp.sendRedirect(req.getContextPath() + "/");
 		}
 	}
 	

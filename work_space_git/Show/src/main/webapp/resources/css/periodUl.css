@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+.period-ul {
+     float: left;
+     margin-right: 12px;
+     list-style: none;
+     margin: 0;
+ }
+ 
+ .period-ul>li {
+     float: left;
+     list-style: none;
+     margin: 0;
+ }
+ 
+ .period-ul>li>a.on {
+ 	 font-family: 'NanumSquareRound', sans-serif;
+ 	 font-weight: 900;
+     padding: 5px 14px;
+     font-size: 25px;
+     line-height: 20px;
+     margin: 0;
+     color: #201627;
+ }
+ 
+ .period-ul>li>a {
+     display: block;
+     padding: 0 14px;
+     font-family: 'NanumSquareRound', sans-serif;
+     margin: 5px 0;
+     border-right: 1px solid #505050;
+     font-size: 25px;
+     line-height: 20px;
+     color: #201627;
+     text-decoration-line: none;
+ }
+ 
+ .period-ul>li>a:-webkit-any-link {
+     cursor: pointer;
+ }

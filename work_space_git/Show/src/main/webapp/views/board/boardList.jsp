@@ -113,6 +113,26 @@
    
    }
    
+   .td-writer{
+   text-align:center;
+   }
+   
+   .td-no{
+   text-align:center;
+   }
+   
+   .td-date{
+   text-align:center;
+   }
+   
+   .td-count{
+   text-align:center;
+   }
+   
+   .td-title a{
+   margin-left: 10px;
+   }
+   
 </style>
 
 <!-- 글쓰기 팝업-->
@@ -185,8 +205,16 @@
                 </div>
             </div>
         </div>
-        
-        <form method="GET" action="<%=path%>/board/list" style="margin-top: 200px;">
+        <div class="position-absolute top-0 start-0 w-100 bg-dark" style="height: 398px;"></div>
+         <div class="container content-overlay mt-5 mb-md-4 py-5">
+         <nav class="mb-3 mb-md-4 pt-md-5" aria-label="Breadcrumb">
+          <ol class="breadcrumb breadcrumb-light">
+            <li class="breadcrumb-item"><a href="<%=path%>/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="<%=path%>/board/list">자유게시판</a></li>
+          </ol>
+        </nav>
+         <div class="bg-light shadow-sm rounded-3 p-4 p-md-5 mb-2">
+        <form method="GET" action="<%=path%>/board/list"">
         	<input type="hidden" id="pageNo" name="pageNo" val="" />
         	<section>
             <div style="width: 1300px; margin: auto; margin-bottom:30px;">
@@ -194,8 +222,8 @@
             </div>
 
             <div>
-                <table class="board" style="width:1300px; text-align: center; margin-top: 30px; margin: 0 auto; border-top: 1px solid black;">
-                    <tr style="border-bottom: 1px solid lightgray; height: 50px;">
+                <table class="board" style="width:1200px; margin-top: 30px; margin: 0 auto; border-top: 1px solid black;">
+                    <tr style="border-bottom: 1px solid lightgray; height: 50px; text-align:center;">
                         <th style="width:8%; border-right: 1px solid lightgray">번호</th>
                         <th style="border-right: 1px solid lightgray">제목</th>
                         <th style="width:10%; border-right: 1px solid lightgray">작성자</th>
@@ -206,7 +234,8 @@
                     <tr style="background-color: #c1c1c1; width: 100%; height: 70px; border-bottom: 1px solid lightgray;">
                     	<td class="td-no"></td>
                     	<td class="td-title">
-                    	<a href="https://www.nocutnews.co.kr/news/5798033" style= " font-weight:700;">해상왕 장보고 삶, 뮤지컬로 만든다…'오션스' 쇼케이스</a>
+                    	<span style="color:#AB69DD; font-weight:800; margin-right:6px; margin-left:10px;">뉴스</span>
+                    	<a href="https://www.nocutnews.co.kr/news/5798033" style= " font-weight:700;">"해상왕 장보고 삶, 뮤지컬로 만든다…'오션스' 쇼케이스"</a>
                     	</td>
                     	<td class="td-writer">관리자</td>
                     	<td class="td-date"></td>
@@ -215,7 +244,8 @@
                     <tr style="background-color: #c1c1c1; width: 100%; height: 70px; border-bottom: 1px solid lightgray;">
                     	<td class="td-no"></td>
                     	<td class="td-title">
-                    	<a href="https://www.segye.com/newsView/20220807511675?OutUrl=naver" style= "font-weight:700;">남자들을 위한 80㎝ 부츠?…2년 만에 돌아온 쇼뮤지컬 ‘킹키부츠’</a>
+                    	<span style="color:#AB69DD; font-weight:800; margin-right:6px; margin-left:10px;">뉴스</span>
+                    	<a href="https://www.segye.com/newsView/20220807511675?OutUrl=naver" style= "font-weight:700;">"남자들을 위한 80㎝ 부츠?…2년 만에 돌아온 쇼뮤지컬 ‘킹키부츠’"</a>
                     	</td>
                     	<td class="td-writer">관리자</td>
                     	<td class="td-date"></td>
@@ -224,7 +254,8 @@
                     <tr style="background-color: #c1c1c1; width: 100%; height: 70px; border-bottom: 1px solid lightgray;">
                     	<td class="td-no"></td>
                     	<td class="td-title">
-                    	<a href="https://www.yna.co.kr/view/AKR20220805142700005?input=1195m" style= "none;font-weight:700;">'160년이 지나도 살아있는 고전의 힘…연극 '레 미제라블'</a>
+                    	<span style="color:#AB69DD; font-weight:800; margin-right:6px; margin-left:10px;">뉴스</span>
+                    	<a href="https://www.yna.co.kr/view/AKR20220805142700005?input=1195m" style= "none;font-weight:700;">"'160년이 지나도 살아있는 고전의 힘…연극 '레 미제라블'"</a>
                     	</td>
                     	<td class="td-writer">관리자</td>
                     	<td class="td-date"></td>
@@ -248,11 +279,11 @@
                 </table>
             </div>
             <% if(loginUser != null) { %>
-            	<div class="board-write" style="padding-top: 20px; height: 60px; margin: 0 auto; width: 1300px;">
+            	<div class="board-write" style="padding-top: 20px; height: 60px; margin: 0 auto; width: 1200px;">
                 	<a href="#write-modal" data-bs-toggle="modal" data-bs-dismiss="modal" style="float: right;">글쓰기</a>
             	</div>
             <% } else { %>
-            		<div class="board-write" style="padding-top: 20px; height: 60px; margin: 0 auto; width: 1300px;">
+            		<div class="board-write" style="padding-top: 20px; height: 60px; margin: 0 auto; width: 1200px;">
                 	<a href="#signin-modal" data-bs-toggle="modal" data-bs-dismiss="modal" style="float: right;">글쓰기</a>
             	</div>
             <% } %>
@@ -271,6 +302,8 @@
             </div>
         </section>
         </form>
+        </div>
+        </div>
         
         <!-- 자유게시판 끝 -->  
         

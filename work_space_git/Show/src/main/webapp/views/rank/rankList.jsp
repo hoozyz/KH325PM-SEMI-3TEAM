@@ -43,7 +43,16 @@
 
 
         <!-- Page header-->
-        <section class="container" style="margin-top: 150px; margin-bottom: 20px;">
+        <div class="position-absolute top-0 start-0 w-100 bg-dark" style="height: 398px;"></div>
+         <div class="container content-overlay mt-5 mb-md-4 py-5">
+         <nav class="mb-3 mb-md-4 pt-md-5" aria-label="Breadcrumb">
+          <ol class="breadcrumb breadcrumb-light">
+            <li class="breadcrumb-item"><a href="<%=path%>/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="<%=path%>/rankList">RANKING</a></li>
+          </ol>
+        </nav>
+         <div class="bg-light shadow-sm rounded-3 p-4 pt-2 p-md-5 pt-md-3 mb-2">
+        <section class="container" style=" margin-bottom: 20px;">
             <div class="d-sm-flex align-items-center justify-content-between mb-2 pb-sm-2 mt-5">
                 <span>
                     <h1 class="display-3">RANKING</h1>
@@ -77,14 +86,17 @@
                             <!-- 인터파크 -->
                             <div class="rankTop">
                                 <div class="detailTopMid"><%=today%>일&nbsp;</div>
-                                <span class="btn_lst" >
-                                    <!-- [D] 활성화시 a에 .on 추가-->
-                                   	<a href="<%=path %>/rankList?range=day&category=<%=category %>" class id="day">일간</a>
-                                    <span class="bar">l</span>
-                                	<a href="<%=path %>/rankList?range=week&category=<%=category %>" class id="week">주간</a>
-                                	<span class="bar">l</span>
-                                	<a href="<%=path %>/rankList?range=month&category=<%=category %>" class id="month">월간</a>
-                                </span>
+                                <ul class="period-ul" style="padding-left: 5px;width: 255px;margin-top: 30px;margin-left: 10px;">
+                       				<li class="on">
+                       		     		<a href="<%=path %>/rankList?range=day&category=<%=category %>" class id="day">일간</a>
+                       				</li>
+                       				<li class>
+                       			     	<a href="<%=path %>/rankList?range=week&category=<%=category %>" class id="week">주간</a>
+                        			</li>
+                        			<li class>
+                        			    <a href="<%=path %>/rankList?range=month&category=<%=category %>" class id="month">월간</a>
+                       				</li>
+                   			 	</ul>
                             </div>
 
                             <div class="basic_tbl rank_tbl">
@@ -137,6 +149,8 @@
                 </div>
             </div>
         </section>
+        </div>
+        </div>
         </main>
         
         <script>
@@ -172,16 +186,14 @@
         		
         		$('#tab' + num).addClass('on');
         		
-        		
-        		
         		// 기간 on 변경
         		var range = '${range}';
         		
-        		$('.btn-lst a').removeClass('on');
+        		$('.period-ul li').removeClass('on');
+        		$('.period-ul li a').removeClass('on');
         		
+        		$('#' + range).parent().addClass('on');
         		$('#' + range).addClass('on');
-        		
-        		
         	})
         </script>
         

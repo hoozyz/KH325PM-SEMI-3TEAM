@@ -92,7 +92,7 @@ public class ApiManager {
 	public List<Show> showApi(String startDate, String endDate) {
 		List<Show> list = new ArrayList<>();
 		try {
-			int page = 5;
+			int page = 17;
 			while (true) {
 				String url1 = "http://kopis.or.kr/openApi/restful/pblprfr?service=b3e488556abe4df29d325f391436027c&rows=500&stdate="
 				+ startDate + "&eddate=" + endDate + "&cpage=" + page;
@@ -171,7 +171,7 @@ public class ApiManager {
 					}
 				}
 				page++;
-				if (page > 8) {
+				if (page > 20) {
 					System.out.println("파싱 성공!!");
 					break;
 				}

@@ -24,6 +24,18 @@
 
 <%@ include file="/views/common/header.jsp"%>
 
+<style>
+		p{
+			font-weight:400;
+		
+		}		
+
+
+</style>
+
+
+
+
 <main>
 	<div class="position-absolute top-0 start-0 w-100 bg-dark" style="height: 398px;"></div>
 	<div class="container content-overlay mt-5 mb-md-4 py-5">
@@ -81,8 +93,8 @@
                    <div class="d-flex align-items-center mb-3">
                    <span class="fs-sm text-dark opacity-80 px-1"><%=ticList.get(i).getTic_no() %></span>
                    <span class="badge bg-faded-info rounded-pill fs-sm ms-auto"><%=ticList.get(i).getTicket_viewdate() %></span></div>
-                  <h3 class="h6 card-title mb-2">
-                  <a class="text-nav text-decoration-none" href="<%=path%>/show?showId=<%=ticList.get(i).getShow_id()%>"><%=ticList.get(i).getPrfnm() %></a>
+                  <h3 class="h4 card-title mb-2" >
+                  <a class="text-nav text-decoration-none fw-bold" href="<%=path%>/show?showId=<%=ticList.get(i).getShow_id()%>"><%=ticList.get(i).getPrfnm() %></a>
                   <input type="button" data-bs-toggle="tooltip" class="btn btn-icon btn-light text-primary rounded-circle shadow-sm " onclick="deleteTicketing(<%=ticList.get(i	).getTic_no()%>);" style="float:right;" value="삭제">
                   </h3>
                   <p class="fs-sm mb-0">관람일 : <%=ticList.get(i).getTicket_viewdate() %> <br><br>

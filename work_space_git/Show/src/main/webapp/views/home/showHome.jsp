@@ -673,7 +673,7 @@
                 
                  // 홈페이지 뉴스 3개 파싱
                 $.ajax({
-                	url: "<%=path%>/news",
+                	url: "<%=path%>/newsHome",
          			type: "POST",
          			dataType: "text",
          			progress: true,

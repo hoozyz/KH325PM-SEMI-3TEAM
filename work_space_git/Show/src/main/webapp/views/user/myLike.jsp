@@ -23,7 +23,15 @@
 %>
 
 <%@ include file="/views/common/header.jsp"%>
+<style>
+		.text-nowrap{
+			font-weight:300;
+		
+		}		
 
+	
+
+</style>
 <main>
 	<div class="position-absolute top-0 start-0 w-100 bg-dark"
 		style="height: 398px;"></div>
@@ -73,7 +81,7 @@
 				<div class="col-md-3 mb-4 pb-3 pb-md-0">
 					<div style="max-width: 13rem;">
 						<ul class="list-unstyled fs-sm pb-1 pb-md-3">
-							<li><a class="nav-link fw-normal d-flex align-items-center px-0 py-1" href="#"><i class="fi-file opacity-70 me-2"></i> <span>찜 개수</span><span class="text-muted ms-auto">0</span></a></li>
+							<li><a class="nav-link fw-normal d-flex align-items-center px-0 py-1" href="#"><i class="fi-file opacity-70 me-2"></i> <span style="font-size:18px">찜 개수</span><span style="font-size:18px" class="text ms-auto">0 개</span></a></li>
 							</ul>
 					</div>
 				</div>
@@ -82,7 +90,7 @@
 				<div class="col-md-3 mb-4 pb-3 pb-md-0">
 					<div style="max-width: 13rem;">
 						<ul class="list-unstyled fs-sm pb-1 pb-md-3">
-							<li><a class="nav-link fw-normal d-flex align-items-center px-0 py-1" href="#"><i class="fi-file opacity-70 me-2"></i> <span>찜 개수</span><span class="text-muted ms-auto"><%=likeList.size() %></span></a></li>
+							<li><a class="nav-link fw-normal d-flex align-items-center px-0 py-1" href="#"><i class="fi-file opacity-70 me-2"></i> <span style="font-size:18px">찜 개수</span><span style="font-size:18px;"  class="text ms-auto"><%=likeList.size() %>개</span></a></li>
 							</ul>
 					</div>
 				</div>
@@ -96,7 +104,7 @@
 									<img class="d-none d-sm-block" src="<%=likeList.get(i-1).getPoster()%>" width="100">
 									<div class="ps-sm-3">
 										<h3 class="h6 card-title pb-1 mb-2">
-											<a class="text-nav text-decoration-none" href="<%=path%>/showDetail?showId=<%=likeList.get(i-1).getShow_id()%>"><%=likeList.get(i-1).getPrfnm()%></a>
+											<a class="text-nav text-decoration-none fw-bold" href="<%=path%>/showDetail?showId=<%=likeList.get(i-1).getShow_id()%>"><%=likeList.get(i-1).getPrfnm()%></a>
 										</h3>
 										<div class="fs-sm">
 											<div class="text-nowrap mb-2">
@@ -118,7 +126,7 @@
 									<img class="d-none d-sm-block" src="<%=likeList.get(i-1).getPoster()%>" width="100">
 									<div class="ps-sm-3">
 										<h3 class="h6 card-title pb-1 mb-2">
-											<a class="stretched-link text-nav text-decoration-none" href="<%=path%>/showDetail?showId=<%=likeList.get(i-1).getShow_id()%>"><%=likeList.get(i-1).getPrfnm()%></a>
+											<a class="stretched-link text-nav text-decoration-none fw-bold" href="<%=path%>/showDetail?showId=<%=likeList.get(i-1).getShow_id()%>"><%=likeList.get(i-1).getPrfnm()%></a>
 										</h3>
 										<div class="fs-sm">
 											<div class="text-nowrap mb-2">

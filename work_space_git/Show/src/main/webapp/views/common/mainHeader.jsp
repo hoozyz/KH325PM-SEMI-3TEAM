@@ -370,7 +370,7 @@
                 <% } else {%>
                		 <% if (loginUser != null && loginUser.getRole().equals("ROLE_ADMIN")) { %>
                 	 <button class="btn btn-sm text-primary d-none d-lg-block order-lg-3" onclick="location.href='<%=path %>/logout'" data-bs-toggle="modal"><i class="fi-user me-2"></i>로그아웃</button>
-                	 <% } else if (loginUser != null && loginUser.getName().equals("ROLE_USER")) {%>
+                	 <% } else if (loginUser != null && loginUser.getRole().equals("ROLE_USER")) {%>
                		 <button class="btn btn-sm text-primary d none d-lg-block order-lg-3" onclick="location.href='<%=path %>/myInfo'" data-bs-toggle="modal"><i class="fi-user me-2"></i>마이페이지</button>
                 	 <button class="btn btn-sm text-primary d-none d-lg-block order-lg-3" onclick="location.href='<%=path %>/logout'" data-bs-toggle="modal"><i class="fi-user me-2"></i>로그아웃</button>
                 	 <% } else {%>

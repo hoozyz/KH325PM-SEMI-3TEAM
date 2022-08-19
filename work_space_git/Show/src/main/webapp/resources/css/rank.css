@@ -1,153 +1,174 @@
 #header_tbl {
-    background: #f0f0f0;
-    color: #767676;
+	background: #f0f0f0;
+	color: #767676;
 }
-
 
 * {
-  font-family: 'NanumSquareRound', sans-serif
+	font-family: 'NanumSquareRound', sans-serif
 }
 
-
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
 thead {
-    vertical-align: middle;
-    border-color: inherit;
-    background: #f0f0f0;
-    color: #767676;
-    text-align: center;
+	vertical-align: middle;
+	border-color: inherit;
+	background: #f0f0f0;
+	color: #767676;
+	text-align: center;
 }
 
 tbody {
-    display: table-row-group;
-    vertical-align: middle;
-    border-color: inherit;
-    border-top-color: inherit;
-    border-right-color: inherit;
-    border-bottom-color: inherit;
-    border-left-color: inherit;
+	display: table-row-group;
+	vertical-align: middle;
+	border-color: inherit;
+	border-top-color: inherit;
+	border-right-color: inherit;
+	border-bottom-color: inherit;
+	border-left-color: inherit;
 }
 
 .rank_tbl {
-    margin-top: 15px;
+	margin-top: 15px;
 }
 
-th,
-td {
-    vertical-align: middle;
-     font-family: 'NanumSquareRound', sans-serif;
+.rankTop {
+	height: 75px;
+}
+
+th, td {
+	vertical-align: middle;
+	font-family: 'NanumSquareRound', sans-serif;
 }
 
 btn {
-    justify-items: center
+	justify-items: center
 }
 
 .atag {
-    text-align: center;
+	text-align: center;
 }
 
 .rankNumber {
-    text-align: center;
-    font-size: 50px;
+	text-align: center;
+	font-size: 50px;
 }
 
-
 .detailTopMid {
-    float: left;
-    font-size: 50px;
-    margin-bottom: 10px;
-    font-weight:700;
+	float: left;
+	font-size: 50px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	font-weight: 700;
 }
 
 .detailTopMid a {
-    text-decoration: none;
+	text-decoration: none;
 }
-
-.btn_lst {
-	font-size:20px;
-    float: right;
-}
-
-.btn_lst a {
-    text-decoration: none;
-    color: gray;
-}
-
-.btn_lst a.on,
-.fi-chevron-down {
-    color: #fd5631;
-}
-
 
 /* ///////////////// */
-
 ul.tabs {
-    margin: 0px;
-    padding: 0px;
-    list-style: none;
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
 }
 
 ul.tabs li {
-    display: inline-block;
-    background: #ffff;
-    color: white;
-    padding: 10px 15px;
-    cursor: pointer;
+	display: inline-block;
+	background: #ffff;
+	color: white;
+	padding: 10px 15px;
+	cursor: pointer;
 }
 
 ul.tabs li.on {
-    background: #d3d3d3;
-    color: #222;
+	background: #d3d3d3;
+	color: #222;
 }
 
 .tab-content {
-    display: none;
-    padding: 12px;
+	display: none;
+	padding: 12px;
 }
 
 .tab-content.on {
-    display: inherit;
+	display: inherit;
 }
-
 
 /* @@@@@@@@@@@@@@@@@@@@@@@@ */
 
-
 /*tab css*/
-
 .rank_contain {
-    border: solid 1px #d3d3d3;
+	border: solid 1px #d3d3d3;
 }
 
-.rank_contain ul {
-    display: flex;
+.tabs {
+	display: flex;
 }
 
-.rank_contain ul li {
-    flex: 1;
+.tabs li {
+	flex: 1;
 }
 
-.rank_contain ul li a {
-    display: block;
-    height: 60px;
-    font-size: 20px;
-    text-decoration: none;
-    color: #242424;
-    line-height: 60px;
-    text-align: center;
+.tabs li a {
+	display: block;
+	height: 60px;
+	font-size: 20px;
+	text-decoration: none;
+	color: #242424;
+	line-height: 60px;
+	text-align: center;
 }
 
 .rankBody {
-    margin-left: 3%;
-    margin-right: 3%;
-    margin-bottom: 5%;
+	margin-left: 3%;
+	margin-right: 3%;
+	margin-bottom: 5%;
 }
-.rankHead {
-	font-size:20px;
-	font-weight:700;
 
+.rankHead {
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.period-ul {
+	float: right;
+	margin-right: 12px;
+	list-style: none;
+	margin: 0;
+}
+
+.period-ul>li {
+	float: left;
+	list-style: none;
+	margin: 0;
+}
+
+.period-ul>li>a.on {
+	font-family: 'NanumSquareRound', sans-serif;
+	font-weight: 900;
+	padding: 5px 14px;
+	font-size: 25px;
+	line-height: 20px;
+	border-right: 1px solid #505050 35px;
+	margin: 0;
+	color: #201627;
+}
+
+.period-ul>li>a {
+	display: block;
+	padding: 0 14px;
+	font-family: 'NanumSquareRound', sans-serif;
+	margin: 5px 0;
+	border-right: 1px solid #505050;
+	font-size: 25px;
+	line-height: 20px;
+	color: #201627;
+	text-decoration-line: none;
+}
+
+.period-ul>li>a:-webkit-any-link {
+	cursor: pointer;
 }

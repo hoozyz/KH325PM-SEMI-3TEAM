@@ -150,13 +150,14 @@
         </div>
     
     <section class="container py-1 mt-1 mb-1 ">
-        <form class="form-group d-block d-md-flex rounded-md-pill" style="width:85%;float:left;" method="GET" action="<%=path%>/showSearch">
+        <form class="form-group d-block d-md-flex rounded-md-pill" style="width:85%;float:left; height:60pt;" method="GET" action="<%=path%>/showSearch">
             <div class="input-group input-group-lg border-end-md">
                 <!--calendar-->
-                <div class="mb-3" style="max-width: 30rem;">
-                    <div class="input-group" style="padding-top: 15px;"><span class="input-group-text"><i class="fi-calendar"></i></span>
-                        <input class="form-control date-picker startDate" type="text" name="startDate"placeholder="시작 날짜" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
-                        <input class="form-control date-picker endDate" type="text" name="endDate" placeholder="마감 날짜" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
+                <div class="mb-7">
+                    <div class="input-group"><span class="input-group-text"><i class="fi-calendar"></i></span>
+                        <input class="form-control date-picker startDate" type="text" name="startDate"placeholder="&nbsp;&nbsp;&nbsp;시작 날짜" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
+                        <span style="font-size: 45px;color: #7E6ECD; font-weight: 500;"> ~ </span>
+                        <input class="form-control date-picker endDate" type="text" name="endDate" placeholder="&nbsp;&nbsp;&nbsp;마감 날짜" data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
                     </div>
                 </div>
                 <!-- calendar End-->
@@ -167,7 +168,7 @@
             <hr class="d-md-none my-2">
             <div class="d-sm-flex">
                 <div class="dropdown w-100 mb-sm-0 mb-3" data-bs-toggle="select">
-                    <button class="btn btn-link btn-lg dropdown-toggle ps-2 ps-sm-3" name="category" type="button" data-bs-toggle="dropdown" ><i class="fi-list me-2"></i>
+                    <button class="btn btn-link btn-lg dropdown-toggle ps-2 ps-sm-3" name="category" type="button" data-bs-toggle="dropdown" style="font-size:26px;"><i class="fi-list me-2"></i>
                     <span class="dropdown-toggle-label">
                     <%if (category != null) { %>
                     	<%=category%>
@@ -176,7 +177,7 @@
                     <% } %>
                     </span></button>
                     <input type="hidden" name="category">
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu" style="font-size:23px;">
                         <li><a class="dropdown-item" href="#"><i class="fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">연극</span></a></li>
                         <li><a class="dropdown-item" href="#"><i class="fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">뮤지컬</span></a></li>
                         <li><a class="dropdown-item" href="#"><i class="fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">무용</span></a></li>
@@ -186,11 +187,19 @@
                 <input class="btn btn-info btn-lg rounded-pill w-100 w-md-auto ms-sm-3" type="submit" value="검색" style="background-color:#0B398E; border:none;"/>
             </div>
         </form>
-        <div class="position-relative" style="width:15%;height:80px;float:right; padding-top: 3%; padding-left: 3%; font-size:15px;">
-            <input type="radio" name="rad_date" id="rad_day" value="rad_day" onclick="radDate('day')">오늘
-            <input type="radio" name="rad_date" id="rad_week" value="rad_week" onclick="radDate('week')">1주
-            <input type="radio" name="rad_date" id="rad_month" value="rad_month" onclick="radDate('month')" checked>1개월
-        </div>
+        	<div class="position-relative" style="position: relative; display:inline-block; width:15%;height:80px;float:right;">
+                    <ul class="period-ul" style="padding-left: 5px;width: 255px;margin-top: 30px;margin-left: 10px;">
+                        <li class="on">
+                            <a href="#n" id="day" class="on">오늘</a>
+                        </li>
+                        <li class>
+                            <a href="#n" id="week" class >1주</a>
+                        </li>
+                        <li class>
+                            <a href="#n" id="month" class>1개월</a>
+                        </li>
+                    </ul>
+             </div>
     </section>
     <!--@@@ search End @@@-->
 
@@ -429,57 +438,59 @@
     </section>
     <!--@@@@@@@@@@@@@@@@@@@@ 전체 공연 body 끝 @@@@@@@@@@@@@@@@@@@@-->
     <script>
-        	$(document).ready(function() {
-        		// 기간 on 변경
-        		var rad_date = '${rad_date}';
-        		$("'input:radio[name=rad_date]'").attr("checked", false);	// 선택	
-        		$("'input:radio[name=rad_date]:input[value='rad_" + rad_date + "']").attr("checked", true);	// 선택
-        	});
-        	
-        	function radDate(range) {
-        		var endDay = new Date();
-        		var startDay = "";
-        		if(range == 'day') {
-        			startDay = new Date(endDay);
-        			startDay = dateFormat(startDay);
-        		}
-        		if(range == 'week') {
-        			startDay = lastWeek();
-        		}
-        		if(range == 'month') {
-        			startDay = lastMonth();
-        		}
-        		console.log(startDay);
-        		console.log(dateFormat(endDay));
-        		
-        		$('.input-group .startDate').val(startDay);
-        		$('.input-group .endDate').val(dateFormat(endDay));
-
-        		
-        		function lastWeek() {
-                    var d = new Date(endDay);
-                    var day = d.getDate();
-                    d.setDate(day - 6);
-                    return dateFormat(d);
-                }
-
-                function lastMonth() {
-                    var d = new Date(endDay);
-                    var month = d.getMonth();
-                    var day = d.getDate();
-                    d.setMonth(month - 1);
-                    return dateFormat(d);
-                }
-                
-                function dateFormat(date) {
-                    var yyyy = date.getFullYear();
-                    var mm = date.getMonth() + 1;
-                    mm = mm >= 10 ? mm : "0" + mm;
-                    var dd = date.getDate();
-                    dd = dd >= 10 ? dd : "0" + dd;
-                    return yyyy + "-" + mm + "-" + dd;
-                }
-        	}
-        </script>        
+	    $('ul.period-ul li').find('a').click(function() {
+	        var on_id = $(this).attr('id');
+	
+	        // 클릭 시 버튼 바뀌는 jquery
+	        $('ul.period-ul li a').removeClass('on');
+	        $('ul.period-ul li').removeClass('on');
+	
+	        $(this).addClass('on');
+	        $("#" + on_id).addClass('on');
+	        
+	        var endDay = new Date();
+			var startDay = "";
+			if(on_id == 'day') {
+				startDay = new Date(endDay);
+				startDay = dateFormat(startDay);
+			}
+			if(on_id == 'week') {
+				startDay = lastWeek();
+			}
+			if(on_id == 'month') {
+				startDay = lastMonth();
+			}
+			console.log(startDay);
+			console.log(dateFormat(endDay));
+			
+			$('.input-group .startDate').val(startDay);
+			$('.input-group .endDate').val(dateFormat(endDay));
+	
+			
+			function lastWeek() {
+	            var d = new Date(endDay);
+	            var day = d.getDate();
+	            d.setDate(day - 6);
+	            return dateFormat(d);
+	        }
+	
+	        function lastMonth() {
+	            var d = new Date(endDay);
+	            var month = d.getMonth();
+	            var day = d.getDate();
+	            d.setMonth(month - 1);
+	            return dateFormat(d);
+	        }
+	        
+	        function dateFormat(date) {
+	            var yyyy = date.getFullYear();
+	            var mm = date.getMonth() + 1;
+	            mm = mm >= 10 ? mm : "0" + mm;
+	            var dd = date.getDate();
+	            dd = dd >= 10 ? dd : "0" + dd;
+	            return yyyy + "-" + mm + "-" + dd;
+	        }
+	    });
+	    </script>        
     
     <%@include file="/views/common/footer.jsp"%>
