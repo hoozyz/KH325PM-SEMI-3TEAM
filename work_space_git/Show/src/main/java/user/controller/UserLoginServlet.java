@@ -29,7 +29,6 @@ public class UserLoginServlet extends HttpServlet{
 		if(loginUser != null) { // 로그인 성공한 경우
 			HttpSession session = req.getSession();
 			session.setAttribute("loginUser", loginUser); // 세션에 loginUser 정보 저장 
-			System.out.println(loginUser.getRole());
 			resp.sendRedirect(req.getContextPath() + "/"); 
 		}else { // 로그인 실패한 경우
 			resp.sendRedirect(req.getContextPath() + "/");

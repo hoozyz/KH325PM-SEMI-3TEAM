@@ -30,7 +30,6 @@ public class HallMainServlet extends HttpServlet{
 		Hall hall5 = service.selectHallById("FC000127");
 		Hall hall6 = service.selectHallById("FC000178");
 		
-		
 		list.add(hall1);
 		list.add(hall2);
 		list.add(hall3);

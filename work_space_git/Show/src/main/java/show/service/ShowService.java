@@ -53,17 +53,17 @@ public class ShowService {
 		return showList;
 	}
 
-	public List<Show> findByCategory(String category, String startDate, String endDate) {
+	public List<Show> findByCategory(String category, String startDate, String endDate, PageInfo pageInfo) {
 		List<Show> showList = new ArrayList<>();
 
-		showList = dao.findByCategory(con, category, startDate, endDate);
+		showList = dao.findByCategory(con, category, startDate, endDate, pageInfo);
 
 		return showList;
 	}
 
 	public List<Show> comingSoon(String category) {
 		List<Show> openList = new ArrayList<>();
-		openList = dao.findByOpenDate(con, category);
+		openList = dao.comingSoon(con, category);
 
 		return openList;
 	}

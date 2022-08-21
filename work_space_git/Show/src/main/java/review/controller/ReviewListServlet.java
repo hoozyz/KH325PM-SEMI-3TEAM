@@ -49,7 +49,7 @@ public class ReviewListServlet extends HttpServlet {
 		pageInfo = new PageInfo(page, 5, revCount, 5);
 		revList = service.findAllByShowId(showId, pageInfo, sort);
 
-		for (int i = 0; i < revList.size(); i++) { // 게시판 글 수의 사이즈 만큼 담는다.
+		for (int i = 0; i < revList.size(); i++) { 
 
 			String user_id = revList.get(i).getUser_id();
 			int star = revList.get(i).getRev_star();
@@ -66,23 +66,25 @@ public class ReviewListServlet extends HttpServlet {
 			obj.put("like", like);
 			obj.put("revNo", revNo);
 
-			int maxPage = pageInfo.getMaxPage();
-			int startPage = pageInfo.getStartPage();
-			int endPage = pageInfo.getEndPage();
-			int currentPage = pageInfo.getCurrentPage();
-			int prevPage = pageInfo.getPrevPage();
-			int nextPage = pageInfo.getNextPage();
-			int startList = pageInfo.getStartList();
-			int endList = pageInfo.getEndList();
-
-			obj.put("maxPage", maxPage);
-			obj.put("startPage", startPage);
-			obj.put("endPage", endPage);
-			obj.put("currentPage", currentPage);
-			obj.put("prevPage", prevPage);
-			obj.put("nextPage", nextPage);
-			obj.put("startList", startList);
-			obj.put("endList", endList);
+			if(i == 0) {
+				int maxPage = pageInfo.getMaxPage();
+				int startPage = pageInfo.getStartPage();
+				int endPage = pageInfo.getEndPage();
+				int currentPage = pageInfo.getCurrentPage();
+				int prevPage = pageInfo.getPrevPage();
+				int nextPage = pageInfo.getNextPage();
+				int startList = pageInfo.getStartList();
+				int endList = pageInfo.getEndList();
+				
+				obj.put("maxPage", maxPage);
+				obj.put("startPage", startPage);
+				obj.put("endPage", endPage);
+				obj.put("currentPage", currentPage);
+				obj.put("prevPage", prevPage);
+				obj.put("nextPage", nextPage);
+				obj.put("startList", startList);
+				obj.put("endList", endList);
+			}
 
 			arrayObj.add(obj);
 		}

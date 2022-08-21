@@ -13,7 +13,7 @@ import vo.Board;
 
 public class BoardDao {
 
-	// 게시물의 리스트를 가져오는 메소드
+	// 게시글 전체 조회
 	public List<Board> findAll(Connection conn, PageInfo pageInfo) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -49,8 +49,7 @@ public class BoardDao {
 		return list;
 	}
 
-	// 게시물의 갯수를 가져오는 쿼리문
-	// 탐색 가능한 컨텐츠 : title, content, writer
+	// 게시글 총 개수
 	public int getBoardCount(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -73,7 +72,7 @@ public class BoardDao {
 		return result;
 	}
 
-	// 글쓰기 기능 완성
+	// 게시글 작성
 	public int insertBoard(Connection conn, Board board) {
 		PreparedStatement pstmt = null;
 		String query = "INSERT INTO TBL_BOARD VALUES(SEQ_BOARD_NO.NEXTVAL,?,?,?,?,DEFAULT,DEFAULT,DEFAULT)";
@@ -94,7 +93,7 @@ public class BoardDao {
 		return result;
 	}
 
-	// 상세 게시글을 조회
+	// 게시글 상세 조회
 	public Board findBoardByNo(Connection conn, int boardNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -126,7 +125,7 @@ public class BoardDao {
 		return board;
 	}
 
-	// 게시글 조회수 올려주는 쿼리
+	// 게시글 조회수 증가
 	public int updateReadCount(Connection conn, Board board) {
 		PreparedStatement pstmt = null;
 		String query = "UPDATE TBL_BOARD SET readcount = ? WHERE board_no = ?";
@@ -145,6 +144,7 @@ public class BoardDao {
 		return result;
 	}
 
+	// 게시글 삭제
 	public int delete(Connection conn, int boardNo) {
 		PreparedStatement pstmt = null;
 		String query = "DELETE FROM TBL_BOARD WHERE board_no = ?";

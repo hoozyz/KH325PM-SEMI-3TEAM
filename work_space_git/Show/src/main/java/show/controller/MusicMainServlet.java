@@ -2,11 +2,7 @@ package show.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -37,7 +33,7 @@ public class MusicMainServlet extends HttpServlet {
 			int page = 1;
 			int musicCnt = 100;
 			PageInfo pageInfo = null;
-			String category = "클래식";
+			String category = "";
 			pageInfo =  new PageInfo(page, 5, musicCnt, 5);
 			if(req.getParameter("category") != null) {
 				category = req.getParameter("category");
@@ -56,8 +52,6 @@ public class MusicMainServlet extends HttpServlet {
 			req.setAttribute("showList", showList);
 			req.setAttribute("openList", openList);
 			
-			
-
 			if(req.getParameter("pageNo") != null) {
 				
 				page =  Integer.parseInt(req.getParameter("pageNo"));
@@ -66,7 +60,7 @@ public class MusicMainServlet extends HttpServlet {
 				pageInfo =  new PageInfo(page, 5, musicCnt, 5);
 				showList = showService.selectShowByCategory(category, pageInfo);
 				
-				for(int i = 0; i < showList.size() ; i++) {                  //게시판 글 수의 사이즈 만큼 담는다.
+				for(int i = 0; i < showList.size() ; i++) {
 					
 					String show_id = showList.get(i).getShow_id();
 					String hall_id = showList.get(i).getThea_id();
@@ -87,23 +81,25 @@ public class MusicMainServlet extends HttpServlet {
 					obj.put("poster", poster);
 					obj.put("fcltynm", fcltynm);
 					
-					int maxPage = pageInfo.getMaxPage();
-					int startPage = pageInfo.getStartPage();
-					int endPage = pageInfo.getEndPage();
-					int currentPage = pageInfo.getCurrentPage();
-					int prevPage = pageInfo.getPrevPage();
-					int nextPage = pageInfo.getNextPage();
-					int startList = pageInfo.getStartList();
-					int endList = pageInfo.getEndList();
-					
-					obj.put("maxPage", maxPage);
-					obj.put("startPage", startPage);
-					obj.put("endPage", endPage);
-					obj.put("currentPage", currentPage);
-					obj.put("prevPage", prevPage);
-					obj.put("nextPage", nextPage);
-					obj.put("startList", startList);
-					obj.put("endList", endList);
+					if(i == 0) {
+						int maxPage = pageInfo.getMaxPage();
+						int startPage = pageInfo.getStartPage();
+						int endPage = pageInfo.getEndPage();
+						int currentPage = pageInfo.getCurrentPage();
+						int prevPage = pageInfo.getPrevPage();
+						int nextPage = pageInfo.getNextPage();
+						int startList = pageInfo.getStartList();
+						int endList = pageInfo.getEndList();
+						
+						obj.put("maxPage", maxPage);
+						obj.put("startPage", startPage);
+						obj.put("endPage", endPage);
+						obj.put("currentPage", currentPage);
+						obj.put("prevPage", prevPage);
+						obj.put("nextPage", nextPage);
+						obj.put("startList", startList);
+						obj.put("endList", endList);
+					}
 					
 					arrayObj.add(obj);
 				}

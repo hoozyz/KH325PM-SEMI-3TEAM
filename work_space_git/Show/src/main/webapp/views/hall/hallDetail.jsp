@@ -99,7 +99,7 @@
 					var map = new kakao.maps.Map(mapContainer, mapOption);
 
 					
-					var imageSrc = document.getElementById("mark").src,   
+					var imageSrc = "<%=path %>/resources/images/marker/marker.png",   
 				    imageSize = new kakao.maps.Size(64, 69), 
 				    imageOption = {offset: new kakao.maps.Point(27, 69)}; 
 					
@@ -128,7 +128,7 @@
 	<div class="row">
 		<div class="pb-2 mt-2">
 			<!-- Item-->
-			<% if (showList != null) { %>
+			<% if (!showList.isEmpty()) { %>
 			<% if (showList.size() < count) { %>
 			<% count = showList.size(); %>
 			<% } %>

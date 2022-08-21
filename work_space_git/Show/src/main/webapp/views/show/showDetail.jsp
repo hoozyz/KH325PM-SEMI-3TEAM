@@ -24,7 +24,11 @@
 		revList = null;
 	}		
 	
-	int likeCheck = (Integer) request.getAttribute("likeCheck");
+	int likeCheck = 0;
+	
+	if(request.getAttribute("likeCheck") != null) {
+		likeCheck = (Integer) request.getAttribute("likeCheck");
+	}
 	
 	List<String> slist = null;
 	List<String> priceList = null;
@@ -185,40 +189,6 @@
         </div>
         </form>
         
-        <!-- 예매결과 팝업 -->
-        	<div class="modal fade" id="modal-ticket" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                     <div class="window">
-                         <div class="popup" style="border-radius:4%">
-                             <div class="row ticResult11111" style="margin: 0; bottom: 0;">
-                                
-                                 <div class="popup_left col-6"><div style="text-align: left; border-radius:4%; margin-top: 40px;margin-left: 40px;margin-bottom: 40px;margin-right: 30px;">
-                                         <h1 class="display-2" style=" color: #dbab34; font-size:40pt;">예매완료</h1>
-                                         <div class="popup_left my-5" style="text-align:center;"><img src=<%=show.getPoster() %> alt="image" style="width: 300px;"></div>
-                                         <div class="popup_left_detail"><h2 style="color: #d9e2f2"><%=show.getPrfnm() %></h2><h4 style="color: #d9e2f2"><%=show.getFcltynm() %></h4>
-                                             <h4 style="color: #d9e2f2"><%=show.getPrfpdfrom() %> &nbsp;&nbsp; ~ &nbsp;&nbsp; <%=show.getPrfpdto() %></h4></div></div></div>
-                                 	<div class="popup_right col-6"><div class="ticketing"><div class="ticketing_body">
-                                 	<button class="btn-close position-absolute top-0 end-0 mt-3 me-3" type="button" id="Rclose" ></button>
-                                         	<img alt="" src=""></div><hr> 
-                                         <form action="<%=path%>/ticketing/view" method="POST">
-                                         	<div class="ticketing_result"><div>관람일 :&nbsp;<input name="viewDate" style="border:0 solid black" readonly></div><div>인원 :&nbsp;<input name="count" style="border:0 solid black" readonly></div>
-                                             <div>좌석 :&nbsp;<input name="seat" style="border:0 solid black" readonly></div><input type="hidden" name="showId" value="<%=show.getShow_id()%>">
-                                             <div class="popup_price"><span>원</span></div>
-                                             <input class="btn btn-outline-accent rounded ms-5 px-0" type="submit" onclick="location.href='<%=path%>/ticketing/view'" style="width:130px;height:60px;background-color:#201627; value="예매 내역 확인">
-                                             <div>
-                                             <p>[예매 취소 안내]예매 취소 시 주의사항</p>
-                                             <p>티켓 예매 후 7일 이내에 취소 시, 취소수수료가 없습니다.단, 예매 후 7일 이내라도 취소 시점이 공연일로부터 10일 이내라면 그에 해당하는 취소수수료가 부과됩니다.예매 당일 자정(12:00) 전에 취소할 경우 예매 수수료가 환불되며, 그 이후에는 환불되지 않습니다.예매티켓 취소는 아래 안내된 취소가능일 이내에만 할 수 있습니다.</p>
-                                             </div>
-                                             </div></div></form></div>
-                                     
-                                </div>
-                             </div>
-                         </div>
-                     </div>
-                </div>
-			</div>        
-
         <!-- Page header-->
         <section class="container pt-5 mt-5 mb-4" style="margin-bottom: 20px;">
             <!-- Breadcrumb-->
@@ -309,7 +279,7 @@
                 
                    <% if(loginUser != null) { %>
                    			 <div style="text-align: end; margin-right: 10px; margin-top: 40px;">
-                        <div class="btn btn rounded-pill ms-5"  id="show" data-bs-toggle="modal" data-bs-dismiss="modal" style="display: inline-block; width: 230px; height: 60px; background-color:#201627; border:none;">
+                        <div class="btn btn rounded-pill ms-5"  id="show" style="display: inline-block; width: 230px; height: 60px; background-color:#201627; border:none;">
                             <div style="font-size: 25pt; font-weight:800; color:#D9E2F2;">예매 하기</div>
                         </div>
                    <% } else {%>
@@ -320,19 +290,7 @@
                    <% } %>
                         </div>
                         
-<!--            		
-            				str +=  '<div class="popup_left_detail"><h2 style="color: #d9e2f2">'+obj.prfnm+'</h2><h4 style="color: #d9e2f2">'+obj.fcltynm+'</h4> 	      '
-            				str +=  '<h4 style="color: #d9e2f2">'+obj.from  +'&nbsp;&nbsp;~&nbsp;&nbsp;'+ obj.to+'</h4></div></div></div>                         	       '
-            				str +=  '<div class="popup_right col-6"><button class="btn-close position-absolute top-0 end-0 mt-3 me-3" type="button"  id="ajaxClose"></button><div class="ticketing" style= "padding-right: 20px; margin-top:60px;"><div class="ticketing_body">                                                                                                                         '
-            				str +=  '<div style=" text-align: center;">	<i class = "fi-check display-2"></i></div><br></i><h4 style="text-align: center;">예매가 성공적으로 완료되었습니다<h4></div> <hr><br>                                                                                                                                                                     '
-            				str +=  '<form action="' + url1 +'" method="POST">                                                                                                                                                '
-            				str +=  '<div class="ticketing_result" style="text-align: center;"><div>관람일 :&nbsp;<input name="viewDate" style="border:0 solid black" value="'+ obj.date +'" readonly></div><div style="padding-left: 26px;">인원 :&nbsp;<input name="count" style="border:0 solid black" value="'+ obj.count +'명" readonly></div>'
-            				str +=  '<div style="padding-left: 26px;">좌석 :&nbsp;<input name="seat" style="border:0 solid black" value="'+ obj.seat +'" readonly></div><input type="hidden" name="showId" value="'+obj.show_id+'">                                                '
-            				str +=  '<div style="padding-left: 26px;">가격 :&nbsp;<input name="price" style="border:0 solid black" value="'+ obj.price +'원" readonly></div>                                                                                                                 '
-            				str +=  '<div style=" text-align: center;"><input class="btn btn-outline-accent rounded px-0" type="submit" style="width:130px;height:60px;background-color:#201627; color: #d9e2f2; font-size:14pt; font-weight:800;" value="예매 내역 확인"></div>   				'
-            				str +=  '<br><div style><p style="font-size:13pt; font-weight:700; text-align:left; margin-bottom: 0px;">[예매 취소 안내]예매 취소 시 주의사항</p><p style="font-size:11pt; text-align:left;">티켓 예매 후 7일 이내에 취소 시, 취소수수료가 없습니다. 단, 예매 후 7일 이내라도 취소 시점이 공연일로부터 10일 이내라면 그에 해당하는 취소수수료가 부과됩니다.예매 당일 자정(12:00) 전에 취소할 경우 예매 수수료가 환불되며, 그 이후에는 환불되지 않습니다.예매티켓 취소는 아래 안내된 취소가능일 이내에만 할 수 있습니다.</p></div>' -->
                        <!-- 팝업시작 -->
-                      <%--   <form name="ticketingForm" action="<%=path%>/showDetail/Ticketing" method="POST"> --%>
                       <div class="ticketResult">
                         <div class="background">
                             <div class="window">
@@ -431,107 +389,6 @@
                 </div>
             </div>
             
-            <script>
-            
-            	function ticketView(showId) {
-            		var date = document.getElementById("viewDataPicker").innerText;
-            		var people = document.getElementById("viewCnt").innerText;
-            		var seat = document.getElementById("viewSeat").innerText;
-            		var total = document.getElementById("total-price").innerText;
-            		
-            		$.ajax({
-	         			url: "<%=path%>/ticketing/view",
-	         			type: "POST",
-	         			dataType: "text",
-	         			data: { "date" : date, "people" : people , "seat" : seat , "total" : total , "showId" : showId },
-	         			progress: true,
-	             	
-	         			success: function(list) {
-            				var tic = JSON.parse(list);
-            				console.log(tic);
-            				
-            				var str = "";      
-            				
-            				var url1 = "<%=path%>/myTicketing";
-            				
-            				$.each(tic, (i, obj) => {
-                                    
-                            str +=  '<div class="background show"><div class="window"> <div class="popup" style="border-radius:4%"> <div class="row">											 '           
-            				str +=  '<div class="popup_left col-6" style="border-radius:4%;"><div style="text-align: left; margin-top: 40px;margin-left: 40px;margin-bottom: 40px;margin-right: 30px;">              '
-            				str +=  '<h1 class="display-2" style=" color: #dbab34; font-size:40pt;">예매 완료</h1>																		  '
-            				str +=  '<div class="popup_left my-5" style="text-align:center;"><img src="'+obj.poster+'" alt="image" style="width: 300;"></div>            '
-            				str +=  '<div class="popup_left_detail"><h2 style="color: #d9e2f2">'+obj.prfnm+'</h2><h4 style="color: #d9e2f2">'+obj.fcltynm+'</h4> 	      '
-            				str +=  '<h4 style="color: #d9e2f2">'+obj.from  +'&nbsp;&nbsp;~&nbsp;&nbsp;'+ obj.to+'</h4></div></div></div>                         	       '
-            				str +=  '<div class="popup_right col-6"><button class="btn-close position-absolute top-0 end-0 mt-3 me-3" type="button"  id="ajaxClose"></button><div class="ticketing" style= "padding-right: 20px; margin-top:60px;"><div class="ticketing_body">                                                                                                                         '
-            				str +=  '<div style=" text-align: center;">	<i class = "fi-check display-2"></i></div><br></i><h4 style="text-align: center;">예매가 성공적으로 완료되었습니다<h4></div> <hr><br>                                                                                                                                                                     '
-            				str +=  '<form action="' + url1 +'" method="POST">                                                                                                                                                '
-            				str +=  '<div class="ticketing_result" style="text-align: center;"><div>관람일 :&nbsp;<input name="viewDate" style="border:0 solid black" value="'+ obj.date +'" readonly></div><div style="padding-left: 26px;">인원 :&nbsp;<input name="count" style="border:0 solid black" value="'+ obj.count +'명" readonly></div>'
-            				str +=  '<div style="padding-left: 26px;">좌석 :&nbsp;<input name="seat" style="border:0 solid black" value="'+ obj.seat +'" readonly></div><input type="hidden" name="showId" value="'+obj.show_id+'">                                                '
-            				str +=  '<div style="padding-left: 26px;">가격 :&nbsp;<input name="price" style="border:0 solid black" value="'+ obj.price +'원" readonly></div>                                                                                                                 '
-            				str +=  '<div style=" text-align: center;"><input class="btn btn-outline-accent rounded px-0" type="submit" style="width:130px;height:60px;background-color:#201627; color: #d9e2f2;" value="예매 내역 확인"></div>   				'
-            				str +=  '<br><br><div style><p style="font-size:13pt; font-weight:700; text-align:left; margin-bottom: 0px;">[예매 취소 안내]예매 취소 시 주의사항</p><p style="font-size:11pt; text-align:left;">티켓 예매 후 7일 이내에 취소 시, 취소수수료가 없습니다. 단, 예매 후 7일 이내라도 취소 시점이 공연일로부터 10일 이내라면 그에 해당하는 취소수수료가 부과됩니다.</p></div>'
-            				str +=  '</div></div></form></div>  </div></div></div></div>'
-            				
-            				});
-            				
-            				$('.ticketResult').html(str);
-	         			},
-	         			
-	         			error: function(e) {
-	         				console.log(e);			
-            			}
-            		});
-            	}
-            
-            
-                function show() {
-                    document.querySelector(".background").className = "background show";
-                };
-
-                function close() {
-                    document.querySelector(".background").className = "background";
-                };
-
-                document.querySelector("#show").addEventListener("click", show);
-                document.querySelector("#close").addEventListener("click", close);
-                document.querySelector("#pClose").addEventListener("click", close);
-                document.querySelector("#ajaxClose").addEventListener("click", close);
-                
-                
-                
-                /* <select id="selectSeat" onchange="changeSeat()" required> */
-                function changeSeat(){
-                	var seatSelect = document.getElementById("selectSeat").value;
-                	var headcnt = document.getElementById("headcnt").value;
-                	var datepicker = document.getElementById("datepicker").value;
-                	
-                	console.log(datepicker);
-                	var seat = "";
-                	var price = "";
-                	
-                	var total = "";
-                	
-                    var splitStr = seatSelect.split(' ');
-                    
-                    if(splitStr.length == 2) {
-                    	seat = splitStr[0];
-                    	price = splitStr[1].replace(",","").replace("원","");
-                    } else {
-                    	seat = splitStr[0] + "-" + splitStr[1];
-                    	price = splitStr[2].replace(",","").replace("원","");
-                    }
-                    
-                    total = parseInt(price) * parseInt(headcnt.replace("명",""));
-                    
-                    
-                	document.getElementById("viewDataPicker").innerHTML = datepicker;
-                	document.getElementById("viewCnt").innerHTML = headcnt;
-                	document.getElementById("viewSeat").innerHTML = seat;
-                	document.getElementById("total-price").innerHTML = total;
-                };
-            </script>
-            
-            
         </section>
         <!-- Page content-->
         <section class="container pb-5 mb-md-4 mt-5 ">
@@ -578,7 +435,7 @@
                         </div>
                         <!-- Score-->
                         <div class="col-sm-4 order-sm-2 order-1 mb-sm-0 mb-3 text-center ">
-                            <h5 class="display-2 mb-1 ">
+                            <h5 class="display-2 mb-1 showStar">
                             <% if (show.getShow_star() != null) { %>
                             	<%=show.getShow_star() %>
                             <% } else {%>
@@ -603,11 +460,11 @@
                     <!-- Add review btn + Reviews sort-->
                     <% if (loginUser != null) { %>
                     	<div class="d-flex flex-sm-row flex-column align-items-sm-center justify-content-between mb-4 pb-4 border-bottom ">
-                    	<a class="btn rounded-pill mb-sm-0 mb-3 "style=" color:#201627; border:2px solid #201627; font-size:17pt; font-weight:800; color:#201627;" href="#modal-review" data-bs-toggle="modal" data-bs-dismiss="modal">
+                    	<a class="btn rounded-pill mb-sm-0 mb-3 "style="color:#201627; border:2px solid #201627; font-size:17pt; font-weight:800; color:#201627;" href="#modal-review" data-bs-toggle="modal" data-bs-dismiss="modal">
                     	<i class="fi-edit mt-n1 me-2 align-middle "></i>후기 등록</a>
                     <% } else { %>
                     	<div class="d-flex flex-sm-row flex-column align-items-sm-center justify-content-between mb-4 pb-4 border-bottom ">
-                    	<a class="btn rounded-pill mb-sm-0 mb-3" style="background-color:#201627; color:#D9E2F2; border:2px solid #201627; font-size:17pt; font-weight:800; color:#201627;" href="#signin-modal" data-bs-toggle="modal" data-bs-dismiss="modal">
+                    	<a class="btn rounded-pill mb-sm-0 mb-3" style="color:#201627; border:2px solid #201627; font-size:17pt; font-weight:800; color:#201627;" href="#signin-modal" data-bs-toggle="modal" data-bs-dismiss="modal">
                     	<i class="fi-edit mt-n1 me-2 align-middle "></i>후기 등록</a>
                     <% } %>
                         <div class="d-flex align-items-center ms-sm-4 ">
@@ -623,7 +480,7 @@
                     
                     <!-- Review-->
                     <div class="mb-4 pb-4 border-bottom review-page">
-                    <% if (revList != null) { %>
+                    <% if (revList != null && !revList.isEmpty()) { %>
 	                    <% if (revList.size() < count) { %>
 	                    	<% count = revList.size(); %>
 	                    <% } %>
@@ -646,7 +503,7 @@
                         </div>
                         <p><%=revList.get(j).getRev_content() %></p>
                         <div class="d-flex align-items-center" id="revLike<%=revList.get(j).getRev_no()%>">
-                            <button class="heart" type="button" style="border: none;" onclick="likePlus(<%=revList.get(j).getRev_no()%>);"><i class="fi-heart"></i><span>(<%=revList.get(j).getRev_like() %>)</span></button>
+                            <button class="heart bg-white" type="button" style="border: none;" onclick="likePlus(<%=revList.get(j).getRev_no()%>);"><i class="fi-heart"></i><span>(<%=revList.get(j).getRev_like() %>)</span></button>
                         </div>
                         	<% if (j != count - 1) { %>
                         		<hr><br>
@@ -661,7 +518,7 @@
                     
                     <div class="board-bottom" style="width:1300px; margin: 0 auto; padding-top: 15px;">
                 	<div class="board-page" style="text-align: center;">
-		                <% if (revList != null) { %>
+		                <% if (!revList.isEmpty()) { %>
 		                	<% for (int j = pageInfo.getStartPage(); j <= pageInfo.getEndPage(); j++) { %>
 		                	<% if (j == pageInfo.getCurrentPage()) { %>
 		                		<a class="page-on" id="page(<%=j %>)" onclick="goPage(<%=j %>); return false;"><%=j %></a>
@@ -681,6 +538,103 @@
         </section>
         
         <script>
+        function ticketView(showId) {
+    		var date = document.getElementById("viewDataPicker").innerText;
+    		var people = document.getElementById("viewCnt").innerText;
+    		var seat = document.getElementById("viewSeat").innerText;
+    		var total = document.getElementById("total-price").innerText;
+    		
+    		$.ajax({
+     			url: "<%=path%>/ticketing/view",
+     			type: "POST",
+     			dataType: "text",
+     			data: { "date" : date, "people" : people , "seat" : seat , "total" : total , "showId" : showId },
+     			progress: true,
+         	
+     			success: function(list) {
+    				var tic = JSON.parse(list);
+    				console.log(tic);
+    				
+    				var str = "";      
+    				
+    				var url1 = "<%=path%>/myTicketing";
+    				
+    				$.each(tic, (i, obj) => {
+                            
+                    str +=  '<div class="background show"><div class="window"> <div class="popup" style="border-radius:4%"> <div class="row">											 '           
+    				str +=  '<div class="popup_left col-6" style="border-radius:4%;"><div style="text-align: left; margin-top: 40px;margin-left: 40px;margin-bottom: 40px;margin-right: 30px;">              '
+    				str +=  '<h1 class="display-2" style=" color: #dbab34; font-size:40pt;">예매 완료</h1>																		  '
+    				str +=  '<div class="popup_left my-5" style="text-align:center;"><img src="'+obj.poster+'" alt="image" style="width: 300;"></div>            '
+    				str +=  '<div class="popup_left_detail"><h2 style="color: #d9e2f2">'+obj.prfnm+'</h2><h4 style="color: #d9e2f2">'+obj.fcltynm+'</h4> 	      '
+    				str +=  '<h4 style="color: #d9e2f2">'+obj.from  +'&nbsp;&nbsp;~&nbsp;&nbsp;'+ obj.to+'</h4></div></div></div>                         	       '
+    				str +=  '<div class="popup_right col-6"><button class="btn-close position-absolute top-0 end-0 mt-3 me-3" type="button"  id="ajaxClose"></button><div class="ticketing" style= "padding-right: 20px; margin-top:60px;"><div class="ticketing_body">                                                                                                                         '
+    				str +=  '<div style=" text-align: center;">	<i class = "fi-check display-2"></i></div><br></i><h4 style="text-align: center;">예매가 성공적으로 완료되었습니다<h4></div> <hr><br>                                                                                                                                                                     '
+    				str +=  '<form action="' + url1 +'" method="POST">                                                                                                                                                '
+    				str +=  '<div class="ticketing_result" style="text-align: center;"><div>관람일 :&nbsp;<input name="viewDate" style="border:0 solid black" value="'+ obj.date +'" readonly></div><div style="padding-left: 26px;">인원 :&nbsp;<input name="count" style="border:0 solid black" value="'+ obj.count +'명" readonly></div>'
+    				str +=  '<div style="padding-left: 26px;">좌석 :&nbsp;<input name="seat" style="border:0 solid black" value="'+ obj.seat +'" readonly></div><input type="hidden" name="showId" value="'+obj.show_id+'">                                                '
+    				str +=  '<div style="padding-left: 26px;">가격 :&nbsp;<input name="price" style="border:0 solid black" value="'+ obj.price +'원" readonly></div>                                                                                                                 '
+    				str +=  '<div style=" text-align: center;"><input class="btn btn-outline-accent rounded px-0" type="submit" style="width:130px;height:60px;background-color:#201627; color: #d9e2f2;" value="예매 내역 확인"></div>   				'
+    				str +=  '<br><br><div style><p style="font-size:13pt; font-weight:700; text-align:left; margin-bottom: 0px;">[예매 취소 안내]예매 취소 시 주의사항</p><p style="font-size:11pt; text-align:left;">티켓 예매 후 7일 이내에 취소 시, 취소수수료가 없습니다. 단, 예매 후 7일 이내라도 취소 시점이 공연일로부터 10일 이내라면 그에 해당하는 취소수수료가 부과됩니다.</p></div>'
+    				str +=  '</div></div></form></div>  </div></div></div></div>'
+    				
+    				});
+    				
+    				$('.ticketResult').html(str);
+     			},
+     			
+     			error: function(e) {
+     				console.log(e);			
+    			}
+    		});
+    	}
+    
+    
+        function show() {
+            document.querySelector(".background").className = "background show";
+        };
+
+        function close() {
+            document.querySelector(".background").className = "background";
+        };
+
+        document.querySelector("#show").addEventListener("click", show);
+        document.querySelector("#close").addEventListener("click", close);
+        document.querySelector("#pClose").addEventListener("click", close);
+        document.querySelector("#ajaxClose").addEventListener("click", close);
+        
+        
+        
+        /* <select id="selectSeat" onchange="changeSeat()" required> */
+        function changeSeat(){
+        	var seatSelect = document.getElementById("selectSeat").value;
+        	var headcnt = document.getElementById("headcnt").value;
+        	var datepicker = document.getElementById("datepicker").value;
+        	
+        	console.log(datepicker);
+        	var seat = "";
+        	var price = "";
+        	
+        	var total = "";
+        	
+            var splitStr = seatSelect.split(' ');
+            
+            if(splitStr.length == 2) {
+            	seat = splitStr[0];
+            	price = splitStr[1].replace(",","").replace("원","");
+            } else {
+            	seat = splitStr[0] + "-" + splitStr[1];
+            	price = splitStr[2].replace(",","").replace("원","");
+            }
+            
+            total = parseInt(price) * parseInt(headcnt.replace("명",""));
+            
+            
+        	document.getElementById("viewDataPicker").innerHTML = datepicker;
+        	document.getElementById("viewCnt").innerHTML = headcnt;
+        	document.getElementById("viewSeat").innerHTML = seat;
+        	document.getElementById("total-price").innerHTML = total;
+        };
+        
         function likeShowPlus(showId) {
         	$.ajax({
      			url: "<%=path%>/like/show",
@@ -697,7 +651,7 @@
 						var showId = "'" + obj.showId + "'";
 						console.log(showId);
 						
-						str += '<button class="btn btn-icon btn-light-primary btn shadow-sm rounded-circle" onclick="likeShowMinus('+ showId +')" type="button" data-bs-toggle="tooltip" title="찜 취소하기"><i class="fi-heart-filled"></i></button>'
+						str += '<button class="btn btn-icon btn-light-primary btn shadow-sm rounded-circle" onclick="likeShowMinus('+ showId +')" type="button" data-bs-toggle="tooltip" title="찜 취소하기"><i class="fi-heart-filled bg-white"></i></button>'
          				str += '<div class="dropdown d-inline-block" data-bs-toggle="tooltip" title="공유하기">                                                                                  '
          				str += '    <button class="btn btn-icon btn-light-primary btn shadow-sm rounded-circle ms-2" type="button" data-bs-toggle="dropdown"><i class="fi-share"></i></button>   '
          				str += '    <div class="dropdown-menu dropdown-menu-end my-1">                                                                                                           '
@@ -761,7 +715,7 @@
      				
      				str = "";
 					$.each(rev, (i, obj) => {
-						str += '<button class="heart" type="button" style="border: none;" onclick="likeMinus('+ obj.no +');"><i class="fi-heart-filled"></i><span>('+ obj.like +')</span></button>'
+						str += '<button class="heart bg-white" type="button" style="border: none;" onclick="likeMinus('+ obj.no +');"><i class="fi-heart-filled"></i><span>('+ obj.like +')</span></button>'
          			});
      				
      				$('#revLike' + rev[0].no).html(str);
@@ -784,7 +738,7 @@
 	        		
 					str = "";
 					$.each(rev, (i, obj) => {
-						str += '<button class="heart" type="button" style="border: none;" onclick="likePlus('+ obj.no +');"><i class="fi-heart"></i><span>('+ obj.like +')</span></button>'
+						str += '<button class="heart bg-white" type="button" style="border: none;" onclick="likePlus('+ obj.no +');"><i class="fi-heart"></i><span>('+ obj.like +')</span></button>'
          			});
      				
      				$('#revLike' + rev[0].no).html(str);

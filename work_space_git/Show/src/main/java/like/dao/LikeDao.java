@@ -68,7 +68,7 @@ public class LikeDao {
 		return result;
 	}
 	
-	// 찜삭제 id로
+	// 찜삭제
 	public int deleteById(Connection conn, String showId, String userId) {
 		PreparedStatement pstmt = null;
 		String query = "DELETE FROM TBL_LIKE WHERE show_id=? AND user_id=?";
@@ -105,6 +105,7 @@ public class LikeDao {
 		return result;
 	}
 
+	// 찜 체크
 	public int likeCheck(Connection conn, String showId, String userId) {
 		int result = -1;
 		PreparedStatement pstmt = null;

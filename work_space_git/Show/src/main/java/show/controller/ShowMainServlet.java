@@ -1,7 +1,7 @@
 package show.controller;
 
 import java.io.IOException;
-import java.text.ParseException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import board.controller.PageInfo;
 import rank.service.RankService;
 import show.service.ShowService;
 import vo.Rank;
@@ -29,31 +33,96 @@ public class ShowMainServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			String category = req.getParameter("category");
+			String category = "";
 			String period = "1개월";
+			
+			int page = 1;
+			int showCnt = 100;
+			PageInfo pageInfo = null;
+			pageInfo =  new PageInfo(page, 5, showCnt, 10);
+			if(req.getParameter("category") != null) {
+				category = req.getParameter("category");
+			}
 
 			Date date = new Date();
 
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
-			String endDate = dateFormat.format(date);
-			String startDate = AddDate(endDate, -1, 0);
+			String startDate = dateFormat.format(date);
+			String endDate = AddDate(startDate, 1, 0); // 1개월 후
 			String dateRange = "month";
 			
 			List<Show> showList = new ArrayList<>();
 			List<Rank> rankList = new ArrayList<>();
+			
+			showList = showService.findByCategory(category, startDate, endDate, pageInfo);
+			
+			if(req.getParameter("pageNo") != null) {
+				page =  Integer.parseInt(req.getParameter("pageNo"));
+				
+				JSONArray arrayObj = new JSONArray();
+				pageInfo =  new PageInfo(page, 5, showCnt, 10);
+				showList = showService.findByCategory(category, startDate, endDate, pageInfo);  
+				
+				System.out.println(showList);
+				
+				for(int i = 0; i < showList.size() ; i++) {         
+					
+					String show_id = showList.get(i).getShow_id();
+					String prfnm = showList.get(i).getPrfnm();
+					String prfpdfrom = showList.get(i).getPrfpdfrom();
+					String prfpdto = showList.get(i).getPrfpdto();
+					String poster = showList.get(i).getPoster();
+					String fcltynm = showList.get(i).getFcltynm();
+					
+					JSONObject obj = new JSONObject();
+					obj.put("show_id", show_id);
+					obj.put("prfnm", prfnm);
+					obj.put("prfpdfrom", prfpdfrom);
+					obj.put("prfpdto", prfpdto);
+					obj.put("poster", poster);
+					obj.put("fcltynm", fcltynm);
+					
+					if(i == 0) {
+						int maxPage = pageInfo.getMaxPage();
+						int startPage = pageInfo.getStartPage();
+						int endPage = pageInfo.getEndPage();
+						int currentPage = pageInfo.getCurrentPage();
+						int prevPage = pageInfo.getPrevPage();
+						int nextPage = pageInfo.getNextPage();
+						int startList = pageInfo.getStartList();
+						int endList = pageInfo.getEndList();
+						
+						obj.put("maxPage", maxPage);
+						obj.put("startPage", startPage);
+						obj.put("endPage", endPage);
+						obj.put("currentPage", currentPage);
+						obj.put("prevPage", prevPage);
+						obj.put("nextPage", nextPage);
+						obj.put("startList", startList);
+						obj.put("endList", endList);
+					}
+					
+					arrayObj.add(obj);
+				}
+				
+				PrintWriter out = resp.getWriter();
+				out.println(arrayObj.toJSONString());
+				out.flush();
+				out.close();
+				return;
+			}
 
-			showList = showService.findByCategory(category, startDate, endDate);
-			rankList = rankService.findRankByCategory(category, dateRange, AddDate(endDate, 0, -1).replace(".", ""));
-
-			if (rankList == null) {
-				rankList = rankService.findRankByCategory(category, dateRange, AddDate(endDate, 0, -2).replace(".", ""));
+			rankList = rankService.findRankByCategory(category, dateRange, AddDate(startDate, 0, -1).replace(".", ""));
+			
+			if (rankList.isEmpty()) { // list null 체크 -> isEmpty()
+				rankList = rankService.findRankByCategory(category, dateRange, AddDate(startDate, 0, -2).replace(".", ""));
 			}
 
 			for (int i = 0; i < 5; i++) {
 				rankList.add(rankList.get(i));
 			}
 
-			if (showList == null) {
+			if (showList.isEmpty()) {
 				req.setAttribute("msg", "검색 결과가 없습니다.");
 				req.getRequestDispatcher("/views/show/showMain.jsp").forward(req, resp);
 				return;
@@ -63,6 +132,7 @@ public class ShowMainServlet extends HttpServlet {
 			req.setAttribute("period", period);
 			req.setAttribute("category", category);
 			req.setAttribute("showList", showList);
+			req.setAttribute("pageInfo", pageInfo);
 			req.getRequestDispatcher("/views/show/showMain.jsp").forward(req, resp);
 			return;
 			
@@ -86,110 +156,6 @@ public class ShowMainServlet extends HttpServlet {
 		cal.add(Calendar.DATE, day);
 
 		return dateFormat.format(cal.getTime());
-	}
-
-	private static String parseDate(String date) throws ParseException {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
-		Calendar cal = Calendar.getInstance();
-		String parseDate = "";
-		String[] strArr = new String[2];
-		if (date.contains("January")) {
-			date = date.replace("January ", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".01." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("Fubruary")) {
-			date = date.replace("Fubruary ", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".02." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("March")) {
-			date = date.replace("March ", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".03." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("April")) {
-			date = date.replace("April ", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".04." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("May")) {
-			date = date.replace("May ", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".05." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("June")) {
-			date = date.replace("June ", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".06." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("July")) {
-			date = date.replace("July ", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".07." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("August")) {
-			date = date.replace("August ", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".08." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("September")) {
-			date = date.replace("September ", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".09." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("October")) {
-			date = date.replace("October ", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".10." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("November")) {
-			date = date.replace("November ", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".11." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		if (date.contains("December")) {
-			date = date.replace("December ", "");
-			strArr = date.split(", ");
-			parseDate = strArr[1] + ".12." + strArr[0];
-			Date date1 = dateFormat.parse(parseDate);
-			cal.setTime(date1);
-			return dateFormat.format(cal.getTime());
-		}
-		return parseDate;
 	}
 
 	@Override

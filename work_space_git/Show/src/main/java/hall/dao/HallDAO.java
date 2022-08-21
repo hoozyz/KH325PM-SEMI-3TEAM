@@ -14,6 +14,7 @@ import vo.Hall;
 public class HallDAO {
 	String query;
 
+	
 	public int insert(Connection con, Hall hall) {
 
 		try {
@@ -40,6 +41,7 @@ public class HallDAO {
 		return -1;
 	}
 
+	// 공연장 검색
 	public List<Hall> selectHall(Connection conn, String local, String keyword) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -75,6 +77,7 @@ public class HallDAO {
 		return list;
 	}
 
+	// 공연장 상세정보
 	public Hall selectHallById(Connection con, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

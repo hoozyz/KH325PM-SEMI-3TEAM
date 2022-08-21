@@ -157,7 +157,7 @@
                                         <textarea class="form-control" style="height:320px; width:480px; word_wrap:break-word;" name="content" type="text" id="signin-content" placeholder="내용을 입력해주세요" required></textarea>
                                     </div>
                                     <div style="text-align: center;">
-                                        <input class="btn btn-primary btn-lg rounded-pill" style="width:60%" type="submit" value="게시글 작성">
+                                        <input class="btn  btn-lg rounded-pill" style="width:60%; color: #D9E2F2;background-color:#201627;" type="submit" value="게시글 작성">
                                     </div>
                                 </form>
                             </div>
@@ -262,7 +262,7 @@
                     	<td class="td-count"></td>
                     </tr>
                     <tbody class="board-data">
-                        <% if (boardList != null) { %>
+                        <% if (!boardList.isEmpty()) { %>
                         	<% for (int i = 0; i < boardList.size(); i++) { %>
                         		<tr style="width: 100%; height: 70px; background-color: #f1f1f1;">
 	                            <td class="td-no"><%=boardList.get(i).getBoard_no() %></td>
@@ -435,10 +435,10 @@
 	                     		str += '                <textarea class="form-control" style="height:220px; width: 100%;" name="content" type="text" value="">'+ content +'</textarea>'
 	                     		str += '         	</div>'
 	                     		str += '   <div>'
-	                     		str += '     <input class="btn btn-primary btn-lg rounded-pill" onclick="deleteBoard()" type="submit" value="삭제" style="float: right;margin-left: 15px;padding-left: 20px;padding-right: 20px;padding-top: 10px;padding-bottom: 10px;">'
+	                     		str += '     <input class="btn  btn-lg rounded-pill" onclick="deleteBoard()" type="submit" value="삭제" style="color: #D9E2F2;background-color:#201627; float: right; margin-left: 15px;padding-left: 20px;padding-right: 20px;padding-top: 10px;padding-bottom: 10px;">'
 	                     		str += '  		</div>'
 	                     		str += '    <div>'
-	                     		str += '    	<input class="btn btn-primary btn-lg rounded-pill" formaction="'+ url1 +'" type="submit" value="수정" style="float: right;margin-left: 15px;padding-left: 20px;padding-right: 20px;padding-top: 10px;padding-bottom: 10px;">'
+	                     		str += '    	<input class="btn btn-lg rounded-pill" formaction="'+ url1 +'" type="submit" value="수정" style="color: #D9E2F2;background-color:#201627; float: right;margin-left: 15px;padding-left: 20px;padding-right: 20px;padding-top: 10px;padding-bottom: 10px;">'
 	                     		str += '  </div>'
 	                     		str += '    </form>'
 	             			} else if (checkId == 'admin') {
@@ -452,7 +452,7 @@
 	     	                    str += '             <textarea class="form-control" style="height:220px; width: 100%;" name="content" type="text" value="" readonly>'+ content +'</textarea>'
 	     	                    str += '         </div>'
 	     	                    str += '   <div>'
-	    	                    str += '     <input class="btn btn-primary btn-lg rounded-pill" onclick="deleteBoard()" type="submit" value="삭제" style="float: right;margin-left: 15px;padding-left: 20px;padding-right: 20px;padding-top: 10px;padding-bottom: 10px;">'
+	     	                    	str += '     <input class="btn  btn-lg rounded-pill" onclick="deleteBoard()" type="submit" value="삭제" style="color: #D9E2F2;background-color:#201627; float: right; margin-left: 15px;padding-left: 20px;padding-right: 20px;padding-top: 10px;padding-bottom: 10px;">'
 	    	                    str += '  		</div>'
 	             			} else {
 	             				console.log('일반유저.');

@@ -7,9 +7,10 @@
     pageEncoding="UTF-8"%>
 
     <!-- style.default 우선순위로 인해 적용문제 발생. headerConcertHall로 해결 -->
-<%@include file="/views/common/headerConcertHall.jsp"%>
+	<%@include file="/views/common/headerConcertHall.jsp"%>
 
 <%
+
 	List<Hall> list = new ArrayList<>();
 	if(request.getAttribute("list") != null) {
 		list = (List<Hall>) request.getAttribute("list");
@@ -28,13 +29,43 @@
 	int count = 6;
 %>
 
+<<style>
+	.dropdown-item-label{
+	color: #201627;
+	font-family: 'NanumSquareRound', san-serif;
+	font-size: 25px;
+	}
+	
+	.dropdown-item-label:hover{
+	color:#AB69DD;
+	font-weight:800;
+	}
+	
+	.dropdown:hover{
+		color:#0B398E;
+		font-weight:800;
+	}
+	
+	.AdresFont{
+		font-size:21px;
+		font-weight:700;
+		color: #201627;
+	}
+
+	.AdresFont-m{
+		font-size:23px;
+		font-weight:700;
+		color: #201627;
+		
+	}
+</style>
 <main>
 
- <section class="container pt-5 my-5 pb-lg-1">
+ <section class="container pt-5 my-5 mb-0 pb-lg-1">
         <div class="row pt-0 pt-md-2 pt-lg-0">
             <div class="col-xl-7 col-lg-6 col-md-5 order-md-2 mb-4 mb-lg-3"><img src="<%=path %>/resources/images/concert-hall/00600.jpg" alt="Hero image"></div>
             <div class="col-xl-5 col-lg-6 col-md-7 order-md-1 pt-xl-5 pe-lg-0 mb-3 text-center">
-                <h1 class="display-4 mt-lg-7 mb-md-4 mb-3 pt-md-4 pb-lg-2">공연장 검색</h1>
+                <h1 class="display-4 mt-lg-7 mb-md-4 mb-3 pb-lg-2" style="font-size: 70px;">공연장 검색</h1>
             </div>
         </div>
     </section>
@@ -46,15 +77,15 @@
                 <div class="row align-items-center g-0 ms-n2">
                     <div class="col-lg-3 col-xl-8">
                         <div class="input-group input-group-lg border-end-lg border-black"><span class="input-group-text text-light rounded-pill opacity-50 ps-3"><i class="fi-search"></i></span>
-                            <input class="form-control" type="text" name="keyword" placeholder="Search Concert Hall...">
+                            <input class="form-control" type="text" name="keyword" placeholder="어떤 공연장을 찾고 있나요?" style="font-size:25px;">
                         </div>
                     </div>
                     <hr class="hr-light d-lg-none my-2">
                     <div class="col-lg-4 col-xl-4 d-flex align-items-center">
                         <div class="dropdown w-50 w-lg-100" data-bs-toggle="select">
-                            <button class="btn btn-link" type="button" data-bs-toggle="dropdown"><i class="fi-map-pin me-2"></i><span class="dropdown-toggle-label">지역</span></button>
+                            <button class="btn" type="button" data-bs-toggle="dropdown"><i class="fi-map-pin me-2"></i><span class="dropdown-toggle-label" style="font-size:23px; font-family:'NanumSquareRound', san-serif;">지역 선택</span></button>
                             <input type="hidden" name="local">
-                            <ul class="dropdown-menu dropdown-menu-dark my-3"> 
+                            <ul class="dropdown-menu my-3" style="text-align: center; width: 200px;"> 
                                 <li><a class="dropdown-item" href="#"><span class="dropdown-item-label">서울</span></a></li>
                                 <li><a class="dropdown-item" href="#"><span class="dropdown-item-label">경기</span></a></li>
                                 <li><a class="dropdown-item" href="#"><span class="dropdown-item-label">부산</span></a></li>
@@ -67,7 +98,7 @@
                                 <li><a class="dropdown-item" href="#"><span class="dropdown-item-label">제주</span></a></li>
                             </ul>
                         </div>
-                        <input class="btn btn-primary btn-lg w-50 w-lg-auto rounded-pill" type="submit" value="검색하기">
+                        <input class="btn btn-lg w-50 w-lg-auto rounded-pill" type="submit" value="검색" style="font-size:23px; background-color:#0B398E; color:#D9E2F2; font-family:'NanumSquareRound', san-serif;">
                     </div>
                 </div>
             </form>
@@ -83,7 +114,7 @@
                         <div class="me-3">
                             <p class="mb-3 mb-md-0">
                             <strong> 
-                            <% if (list != null) { %>
+                            <% if (!list.isEmpty()) { %>
                             	<%=list.size() %>	
                             <% } else {%>
                             	0
@@ -93,7 +124,7 @@
                         </div>
                     </div>   
                                     
-                   <% if(list != null) { %>
+                   <% if(!list.isEmpty()) { %>
                     	<div class="row">                  	
                     	<% if (list.size() < count) { %>
                     	<% count = list.size(); %>
@@ -118,7 +149,7 @@
                                         <a class="card-fav-icon position-relative z-index-40" onclick="goMap('<%=list.get(i).getLa() %>', '<%=list.get(i).getLo() %>', '<%=list.get(i).getFcltynm() %>')" href="javascript:void(0);" style="float: right; border: none; background: none; cursor: pointer; z-index: 100;"><i class="fi-map-pin fs-5"></i></a>
                                     </div>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body p-2" style="vertical-align: middle;">
                                 
                                 <% if (list.get(i).getAdres().length() < 35 ) { %>
                                     <div class="AdresFont"> <%=list.get(i).getAdres() %> </div>
@@ -139,7 +170,8 @@
                 
                 <div class="col-lg-6">
                     <div id="map" style="width:100%;height:1130px;"></div>
-                    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=1c1e51b427ea6bc49c8cd6877c234c7f"></script>           
+                    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=1c1e51b427ea6bc49c8cd6877c234c7f"></script>   
+                            
                     <script>
 					var container = document
 							.getElementById('map');
@@ -174,7 +206,7 @@
 							mapOption);
 					
 					
-					var imageSrc = document.getElementById("mark").src,   
+					var imageSrc = "<%=path %>/resources/images/marker/marker.png",   
 				    imageSize = new kakao.maps.Size(64, 69), 
 				    imageOption = {offset: new kakao.maps.Point(27, 69)}; 
 					

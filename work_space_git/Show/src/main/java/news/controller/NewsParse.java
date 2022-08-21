@@ -19,9 +19,9 @@ import org.json.simple.parser.JSONParser;
 
 public class NewsParse {
 
-	public String imageSearch(String clientId, String secret, String _url) { // 이미지 파싱 (검색어을 가지고)
+	public String imageSearch(String clientId, String secret, String _url) { 
 		HttpURLConnection con = null;
-		String imageUrl = "https://openapi.naver.com/v1/search/image?display=1&sort=sim&filter=medium&query="; // 이미지 1개만
+		String imageUrl = "https://openapi.naver.com/v1/search/image?display=1&sort=sim&filter=medium&query="; 
 		String result = "";
 
 		try {
@@ -103,7 +103,7 @@ public class NewsParse {
 
 			JSONArray items = (JSONArray) result.get("items");
 			List<Map<String, Object>> itemList = new ArrayList<>();
-			Thread.sleep(40); // 네이버 api 1초에 10건 제한으로 sleep 으로 코드 안끊기게
+			Thread.sleep(40);
 
 			for (int i = 0; i < items.size(); i++) {
 				JSONObject item = (JSONObject) items.get(i);

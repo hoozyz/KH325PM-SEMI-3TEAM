@@ -52,7 +52,7 @@ public class BoardListServlet extends HttpServlet{
 			pageInfo = new PageInfo(page, 5, boardCount, 10);
 			boardList = service.getBoardList(pageInfo);
 			
-			for(int i = 0; i < boardList.size() ; i++) {                  //게시판 글 수의 사이즈 만큼 담는다.
+			for(int i = 0; i < boardList.size() ; i++) {               
 				
 				String title = boardList.get(i).getTitle();
 				int readcount = boardList.get(i).getReadcount();
@@ -67,23 +67,25 @@ public class BoardListServlet extends HttpServlet{
 				obj.put("board_no", board_no);
 				obj.put("date", date);
 				
-				int maxPage = pageInfo.getMaxPage();
-				int startPage = pageInfo.getStartPage();
-				int endPage = pageInfo.getEndPage();
-				int currentPage = pageInfo.getCurrentPage();
-				int prevPage = pageInfo.getPrevPage();
-				int nextPage = pageInfo.getNextPage();
-				int startList = pageInfo.getStartList();
-				int endList = pageInfo.getEndList();
-				
-				obj.put("maxPage", maxPage);
-				obj.put("startPage", startPage);
-				obj.put("endPage", endPage);
-				obj.put("currentPage", currentPage);
-				obj.put("prevPage", prevPage);
-				obj.put("nextPage", nextPage);
-				obj.put("startList", startList);
-				obj.put("endList", endList);
+				if(i == 0) {
+					int maxPage = pageInfo.getMaxPage();
+					int startPage = pageInfo.getStartPage();
+					int endPage = pageInfo.getEndPage();
+					int currentPage = pageInfo.getCurrentPage();
+					int prevPage = pageInfo.getPrevPage();
+					int nextPage = pageInfo.getNextPage();
+					int startList = pageInfo.getStartList();
+					int endList = pageInfo.getEndList();
+					
+					obj.put("maxPage", maxPage);
+					obj.put("startPage", startPage);
+					obj.put("endPage", endPage);
+					obj.put("currentPage", currentPage);
+					obj.put("prevPage", prevPage);
+					obj.put("nextPage", nextPage);
+					obj.put("startList", startList);
+					obj.put("endList", endList);
+				}
 				
 				arrayObj.add(obj);
 			}

@@ -44,14 +44,14 @@ public class RankListServlet extends HttpServlet{
 			if(req.getParameter("category") != null && req.getParameter("category") != "뮤지컬") {
 				category = req.getParameter("category");
 			}
-			// day가 아닐때 -> default가 아니고 클릭했을때
+			
 			if(req.getParameter("range") != null) {
 				range = req.getParameter("range");
 			}
 			
 			List<Rank> rankList = service.findRankByCategory(category, range , date);
 			
-			if(rankList == null) { // 데이터 없을때 전전날꺼 랭킹
+			if(rankList.isEmpty()) {
 				date = AddDate(date, 0, -1);
 				rankList = service.findRankByCategory(category, range , date);
 			}

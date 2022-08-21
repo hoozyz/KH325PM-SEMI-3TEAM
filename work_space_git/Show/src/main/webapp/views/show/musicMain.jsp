@@ -157,28 +157,30 @@
                 <!--calendar-->
                 <div class="mb-8">
                     <div class="input-group"><span class="input-group-text"><i class="fi-calendar"></i></span>
-                        <input class="form-control date-picker startDate" type="text" name="startDate"placeholder="&nbsp;&nbsp;&nbsp;시작 날짜" style="font-size:23px; data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
+                        <input class="form-control date-picker startDate" type="text" name="startDate"placeholder="&nbsp;&nbsp;&nbsp;시작 날짜" style="font-size:21px; data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
                         <span style="font-size: 45px;color: #7E6ECD; font-weight: 500;"> ~ </span>
-                        <input class="form-control date-picker endDate" type="text" name="endDate" placeholder="&nbsp;&nbsp;&nbsp;마감 날짜" style="font-size:23px; data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
+                        <input class="form-control date-picker endDate" type="text" name="endDate" placeholder="&nbsp;&nbsp;&nbsp;마감 날짜" style="font-size:21px; data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
                     </div>
                 </div>
                 <!-- calendar End-->
             </div>
-            <div class="input-group input-group-lg border-end-md"><span class="input-group-text text-muted rounded-pill ps-3"><i class="fi-search"></i></span>
-                <input class="form-control" type="text" name="keyword" placeholder="어떤 공연을 찾고 있나요?" style="font-size:27px;" value="<%=keyword %>">
+            <div class="input-group input-group-lg border-end-md"><span class="input-group-text text-muted rounded-pill ps-3" style="font-size:25px;"><i class="fi-search"></i></span>
+                <input class="form-control" type="text" name="keyword" placeholder="어떤 공연을 찾고 있나요?" style="font-size:25px;">
             </div>
             <hr class="d-md-none my-2">
             <div class="d-sm-flex">
                 <div class="dropdown w-100 mb-sm-0 mb-3" data-bs-toggle="select">
-                    <button class="btn btn-link btn-lg dropdown-toggle ps-2 ps-sm-3" name="category" type="button" data-bs-toggle="dropdown" style="font-size:26px;"><i class="fi-list me-2"></i>
+                    <button class="btn btn-link btn-lg dropdown-toggle ps-2 ps-sm-3" type="button" data-bs-toggle="dropdown" style="font-size:26px;"><i class="fi-list me-2"></i>
                     <span class="dropdown-toggle-label">
                     <%if (category != null) { %>
                     	<%=category%>
+                    	</span></button>
+                    	<input type="hidden" name="category" value="<%=category%>">
                     <% } else {%>
                     	카테고리
+                   	 	</span></button>
+                    	<input type="hidden" name="category">
                     <% } %>
-                    </span></button>
-                    <input type="hidden" name="category">
                     <ul class="dropdown-menu" style="font-size:23px;">
                         <li><a class="dropdown-item" href="#"><i class="fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">클래식</span></a></li>
                         <li><a class="dropdown-item" href="#"><i class="fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">국악</span></a></li>
@@ -251,7 +253,7 @@
                 <div class="tns-carousel-inner " data-carousel-options="{&quot;items&quot;: 1, &quot;edgePadding&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;controls&quot;: false, &quot;gutter&quot;: 16},&quot;500&quot;:{&quot;controls&quot;:
                         true, &quot;gutter&quot;: 16}, &quot;768&quot;: {&quot;gutter&quot;: 24}}} ">
                     <!-- Item-->
-                    <% if (openList != null) { %>
+                    <% if (!openList.isEmpty()) { %>
                     	<% if (count > openList.size()) { %>
                     		<% count = openList.size(); %>
                     	<% } %>
@@ -259,7 +261,7 @@
                     		<div styLE="height: 350px;">
                         	<div class="card border-0 bg-size-cover pt-5 " style="background-image: url(<%=openList.get(i).getPoster()%>); height: 100%;">
                             <div class="d-none d-md-block " style="height: 13rem; "></div>
-                            <div class="card-body">
+                            <div class="card-body pe-0">
                                 <div class="d-md-flex justify-content-between align-items-end ">
                                     <div class="me-2 mb-4 mb-md-0 ">
                                     </div>
@@ -292,7 +294,7 @@
                 <hr class="d-none d-sm-block w-100 mx-4 ">
                 <div class="d-none d-sm-flex align-items-center flex-shrink-0 text-muted "><i class="fi-check-circle me-2 "></i>
                 <span class="fs-sm mt-n1 ">
-                <% if (showList != null) { %>
+                <% if (!showList.isEmpty()) { %>
             	총 <%= showList.size()%>건
 	            <% } else {%>
 	            	총 0건
@@ -303,44 +305,46 @@
                 <!-- Item-->
                 <!-- @@@ Card-1 @@@ -->
 
-                	<% if (showList != null) { %>
-                	<% for (int i = 0; i < showList.size(); i++) { %>
-                    <div class="card border-0 shadow-sm card-hover card-horizontal mb-4">
-                        <div class="col-sm-3 ">
-                            <img class="card-img " src="<%=showList.get(i).getPoster() %>" alt="Image Description " id="music_id_2" name="music_id_2 " style="width:300px; height:333px;">
-                        </div>
-                        <div class="col-sm-9 ">
-                            <div class="card-body row " style="height:100%; ">
-                                <div>
-                                    <div style="width: 80%;float:left; ">
-                                        <span class="badge bg-faded-primary "><%=category %></span>
-                                        <h3 class="card-title " style="margin-top: 1%;margin-bottom: 1%; ">
-                                            <a class="text-dark " href="./blog-article.html " id="title_2 " name="title_2 " style="text-decoration: none;"><%=showList.get(i).getPrfnm() %></a>
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="musicInfo">
-                                    <p id="cost_2 " name="cost_2 "><h4><%=showList.get(i).getPrfpdfrom() %>&nbsp;&nbsp; ~ &nbsp;&nbsp;  <%=showList.get(i).getPrfpdfrom() %></h4></p>
-                                    <div><h4><%=showList.get(i).getFcltynm() %>
-                                    <a style="float: right;" class="btn btn-translucent-info rounded-pill px-3 " href="<%=path %>/showDetail?showId=<%=showList.get(i).getShow_id() %>" id="detail_2 " name="detail_2 ">공연 보러가기</a></h4></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                	<% } %>
-              	<% } %>
+                	<div class="allMusic">
+                		<% if (!showList.isEmpty()) { %>
+	                	<% for (int i = 0; i < showList.size(); i++) { %>
+	                    <div class="card border-0 shadow-sm card-hover card-horizontal mb-4">
+	                        <div class="col-sm-3 ">
+	                            <img class="card-img " src="<%=showList.get(i).getPoster() %>" alt="Image Description " id="music_id_2" name="music_id_2 " style="width:300px; height:333px;">
+	                        </div>
+	                        <div class="col-sm-9 ">
+	                            <div class="card-body row " style="height:100%; ">
+	                                <div>
+	                                    <div style="width: 80%;float:left; ">
+	                                        <span class="badge bg-faded-primary "><%=category %></span>
+	                                        <h3 class="card-title " style="margin-top: 1%;margin-bottom: 1%; ">
+	                                            <a class="text-dark " href="./blog-article.html " id="title_2 " name="title_2 " style="text-decoration: none;"><%=showList.get(i).getPrfnm() %></a>
+	                                        </h3>
+	                                    </div>
+	                                </div>
+	                                <div class="musicInfo">
+	                                    <p id="cost_2 " name="cost_2 "><h4><%=showList.get(i).getPrfpdfrom() %>&nbsp;&nbsp; ~ &nbsp;&nbsp;  <%=showList.get(i).getPrfpdfrom() %></h4></p>
+	                                    <div><h4><%=showList.get(i).getFcltynm() %>
+	                                    <a style="float: right;" class="btn btn-translucent-info rounded-pill px-3 " href="<%=path %>/showDetail?showId=<%=showList.get(i).getShow_id() %>" id="detail_2 " name="detail_2 ">공연 보러가기</a></h4></div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                	<% } %>
+              			<% } %>
+                	</div>
 
                 <div class="board-bottom" style="width:1300px; margin: 0 auto; padding-top: 25px;">
                 <div class="board-page" style="text-align: center;">
 	                <% for (int i = pageInfo.getStartPage(); i <= pageInfo.getEndPage(); i++) { %>
 	                	<% if (i == pageInfo.getCurrentPage()) { %>
-	                		<a class="page-on" id="page(<%=i %>)" onclick="goPage(<%=i %>); return false;"><%=i %></a>
+	                		<a class="page-on" id="page(<%=i %>)" onclick="goPage(<%=i %>, '<%=category %>'); return false;"><%=i %></a>
 	                	<% } else {%>
-	                		<a class="page" id="page(<%=i %>)" onclick="goPage(<%=i %>); return false;"><%=i %></a>
+	                		<a class="page" id="page(<%=i %>)" onclick="goPage(<%=i %>, '<%=category %>'); return false;"><%=i %></a>
 	                	<% } %>
 	                <% } %>
-	                <a class="page-next" onclick="goPage(<%=pageInfo.getNextPage() %>); return false;"><i class="fi-chevron-right align-middle"></i></a>
-	                <a class="page-end" onclick="goPage(<%=pageInfo.getMaxPage() %>); return false;"><i class="fi-chevrons-right align-middle"></i></a>
+	                <a class="page-next" onclick="goPage(<%=pageInfo.getNextPage() %>, '<%=category %>'); return false;"><i class="fi-chevron-right align-middle"></i></a>
+	                <a class="page-end" onclick="goPage(<%=pageInfo.getMaxPage() %>, '<%=category %>'); return false;"><i class="fi-chevrons-right align-middle"></i></a>
                 </div>
             </div>
 
@@ -349,18 +353,19 @@
         <!-- @@@ 전체 음악공연 끝 @@@ -->
         
         <script>
-        function goPage(pageNo) {
+        function goPage(pageNo, category) {
      		$.ajax({
      			url: "<%=path%>/musicMain",
      			type: "POST",
      			dataType: "text",
-     			data: { "pageNo" : pageNo },
+     			data: { "pageNo" : pageNo , "category" : category },
      			progress: true,
      			
      			// 성공시
          		success: function(list) {
          			data = JSON.parse(list);
          			var str = "";
+         			var up = "'";
          			
          			var url2 = "<%=path%>/showDetail?showId=";
          			var url3 = "<%=path%>/hallDetail?hallId=";
@@ -408,21 +413,21 @@
          			var prevEndPage = endPage;
 
  	        		if(currentPage != 1) {
- 	            		str += '<a class="page-first" onclick="goPage(1); return false;"><i class="fi-chevrons-left align-middle"></i></a>';
- 	            		str += '<a class="page-prev" onclick="goPage('+ prevPage +'); return false;"><i class="fi-chevron-left align-middle"></i></a>';
+ 	            		str += '<a class="page-first" onclick="goPage(1'+ ',' + up + category + up + '); return false;"><i class="fi-chevrons-left align-middle"></i></a>';
+ 	            		str += '<a class="page-prev" onclick="goPage('+ prevPage + ',' + up + category + up + '); return false;"><i class="fi-chevron-left align-middle"></i></a>';
  	            	}
  	
  	            	for (var i = startPage; i <= endPage; i++) { // 페이지 5개마다 페이지 바뀜
  	            		if(i == currentPage) {
- 	            			str += '<a class="page-on" id="page('+ i +')" onclick="goPage('+ i +'); return false;">'+ i +'</a>';
+ 	            			str += '<a class="page-on" id="page('+ i +')" onclick="goPage('+ i + ',' + up + category + up + '); return false;">'+ i +'</a>';
  	            		} else {
- 	            			str += '<a class="page" id="page'+ i +'" onclick="goPage('+ i +'); return false;">'+ i +'</a>';
+ 	            			str += '<a class="page" id="page'+ i +'" onclick="goPage('+ i + ',' + up + category + up + '); return false;">'+ i +'</a>';
  	            		}
  	            	}
  	
  	            	if(currentPage != maxPage) {
- 	            		str += '<a class="page-next" onclick="goPage('+ nextPage +'); return false;"><i class="fi-chevron-right align-middle"></i></a>';
- 	            		str += '<a class="page-end" onclick="goPage('+ maxPage +'); return false;"><i class="fi-chevrons-right align-middle"></i></a>';
+ 	            		str += '<a class="page-next" onclick="goPage('+ nextPage + ',' + up + category + up + '); return false;"><i class="fi-chevron-right align-middle"></i></a>';
+ 	            		str += '<a class="page-end" onclick="goPage('+ maxPage + ',' + up + category + up + '); return false;"><i class="fi-chevrons-right align-middle"></i></a>';
  	            	}
          			
          			$('.board-page').html(str);
@@ -445,37 +450,35 @@
 	        $(this).addClass('on');
 	        $("#" + on_id).addClass('on');
 	        
-	        var endDay = new Date();
-			var startDay = "";
+	        var startDay = new Date();
+			var endDay = "";
 			if(on_id == 'day') {
-				startDay = new Date(endDay);
-				startDay = dateFormat(startDay);
+				endDay = new Date(startDay);
+				endDay = dateFormat(endDay);
 			}
 			if(on_id == 'week') {
-				startDay = lastWeek();
+				endDay = nextWeek();
 			}
 			if(on_id == 'month') {
-				startDay = lastMonth();
+				endDay = nextMonth();
 			}
-			console.log(startDay);
-			console.log(dateFormat(endDay));
 			
-			$('.input-group .startDate').val(startDay);
-			$('.input-group .endDate').val(dateFormat(endDay));
+			$('.input-group .startDate').val(dateFormat(startDay));
+			$('.input-group .endDate').val(endDay);
 	
 			
-			function lastWeek() {
-	            var d = new Date(endDay);
+			function nextWeek() {
+	            var d = new Date(startDay);
 	            var day = d.getDate();
-	            d.setDate(day - 6);
+	            d.setDate(day + 6);
 	            return dateFormat(d);
 	        }
 	
-	        function lastMonth() {
-	            var d = new Date(endDay);
+	        function nextMonth() {
+	            var d = new Date(startDay);
 	            var month = d.getMonth();
 	            var day = d.getDate();
-	            d.setMonth(month - 1);
+	            d.setMonth(month + 1);
 	            return dateFormat(d);
 	        }
 	        

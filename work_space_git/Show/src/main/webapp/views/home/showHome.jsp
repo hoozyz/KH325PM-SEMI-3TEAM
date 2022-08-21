@@ -16,7 +16,7 @@
                     <div class="col-lg-5 order-lg-1 pe-lg-0 pb-5">
                         <div style="padding-left : 40px; padding-bottom:15px;">
                             <h1 class="display-3 mb-2 me-lg-n5 text-lg-start text-center mb-2" style="font-size: 45pt; font-weight:normal">지금 바로,</h1>
-                            <h1 class="display-3 mb-2 me-lg-n5 text-lg-start text-center mb-2" style="font-size: 45pt; font-weight:normal">원하는 <span class=" type text-info1" style=" box-shadow: inset 0 -20px 0 #59f7ca;">공연</span></h1>
+                            <h1 class="display-3 mb-2 me-lg-n5 text-lg-start text-center mb-2" style="font-size: 45pt; font-weight:normal">원하는 <span class=" type text-info1" style=" box-shadow: inset 0 -20px 0 #59f7ca;">연극을</span></h1>
                             <h1 class="display-3 mb-2 me-lg-n5 text-lg-start text-center mb-2" style="font-size: 45pt; font-weight:normal"> 검색하세요!</h1>
 
                             <!-- type.js -->
@@ -24,9 +24,12 @@
                             <script>
                                 var typed = new Typed('.type', {
                                     strings: [
-                                        ' 공연을',
-                                        ' 음악을',
-                                        ' 공연장을'
+                                        ' 연극을',
+                                        ' 뮤지컬을',
+                                        ' 무용을',
+                                        ' 클래식을',
+                                        ' 국악을',
+                                        ' 오페라를',
                                     ],
                                     typeSpeed: 150,
                                     backSpeed: 150,
@@ -72,11 +75,6 @@
                     <h6 style=" display:inline; margin-left:10px; font-size:30px; font-weight:bold;">기간별 인기작품을 만나보세요!</h6>
                 </div>
 
-                <!-- <div class="col-md-8 mb-3">
-                    <h2 style="font-size: 40px; display:inline">실시간 </h2>
-                    <h2 style="font-size: 40px; color: #dbab34; display:inline;">랭킹</h2>
-                    <h6 style=" display:inline; margin-left : 10px; ">기간별 인기작품을 만나보세요!</h6>
-                </div> -->
                 <a class="btn btn-link fw-normal ms-sm-3 p-0" href="<%=path %>/rankList" style="margin-top: 15px; font-size:20px;">더보기<i class="fi-arrow-long-right ms-1"></i></a>
             </div>
             <div style="width: 1200px; margin: 0 auto; display:inline-block; height: 35px;">
@@ -293,7 +291,7 @@
                                     <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">문화로 더 새롭게,</p>
                                     <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">예술로 더 풍요롭게,</p>
                                     <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">세종문화회관</p>
-									<p><button class="btn btn-outline-info mt-2 fs-sm px-0 py-0" type="button" style="width:70px; height:30px;">더보기</button></p>
+                                    <p><button class="btn btn-outline-info mt-2 fs-sm px-0 py-0" type="button"   onclick="location.href='<%=path %>/hallDetail?hallId=FC000020'"style="width:70px; height:30px;">더보기</button></a></p>
                                 </div>
                             </div>
 
@@ -336,10 +334,9 @@
                                     <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">문화로 더 새롭게,</p>
                                     <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">예술로 더 풍요롭게,</p>
                                     <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">롯데콘서트홀</p>
-                                    <p><button class="btn btn-outline-info mt-2 fs-sm px-0 py-0" type="button" style="width:70px; height:30px;">더보기</button></p>
+                                    <p><button class="btn btn-outline-info mt-2 fs-sm px-0 py-0" type="button"   onclick="location.href='<%=path %>/hallDetail?hallId=FC001513'"style="width:70px; height:30px;">더보기</button></a></p>
                                 </div>
                             </div>
-
 
                             <div class="card p-0" style="max-width: 16rem; border: none; float: left; background:none;">
                                <div class="card-body py-0" style="text-align: center; cursor:pointer;" onclick="location.href='<%=path%>/showDetail?showId=PF195450'">
@@ -370,8 +367,6 @@
                                 </div>
                             </div>
 
-
-
                         </div>
                         <div class="tab-pane fade row" id="daejeon" role="tabpanel" style="background-image: url(resources/images/stadium-logo/stadium-bg6.png)">
                             <div class="card py-5 px-0" style="max-width: 15rem; border: none; float: left; background:none;">
@@ -382,7 +377,7 @@
                                     <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">문화로 더 새롭게,</p>
                                     <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">예술로 더 풍요롭게,</p>
                                     <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">대전예술의전당</p>
-                                    <p><button class="btn btn-outline-info mt-2 fs-sm px-0 py-0" type="button" style="width:70px; height:30px;">더보기</button></p>
+                                    <p><button class="btn btn-outline-info mt-2 fs-sm px-0 py-0" type="button"   onclick="location.href='<%=path %>/hallDetail?hallId=FC000076'"style="width:70px; height:30px;">더보기</button></a></p>
                                 </div>
                             </div>
 
@@ -415,8 +410,6 @@
                                     <p class="card-text fs-ms m-0 p-0">2022.09.13 ~ 2022.09.13</p>
                                 </div>
                             </div>
-
-
 
                         </div>
                         <div class="tab-pane fade row" id="pohang" role="tabpanel" style="background-image: url(resources/images/stadium-logo/stadium-bg6.png)">
@@ -472,7 +465,7 @@
                                   	<p class="card-text fs-lg m-0 p-0" style="font-weight:600;">문화로 더 새롭게,</p>
                                     <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">예술로 더 풍요롭게,</p>
                                     <p class="card-text fs-lg m-0 p-0" style="font-weight:600;">부산문화회관</p>
-                                    <p><button class="btn btn-outline-info mt-2 fs-sm px-0 py-0" type="button" style="width:70px; height:30px;">더보기</button></p>
+                              <p><button class="btn btn-outline-info mt-2 fs-sm px-0 py-0" type="button"   onclick="location.href='<%=path %>/hallDetail?hallId=FC000167'"style="width:70px; height:30px;">더보기</button></a></p>
                                 </div>
                             </div>
 
@@ -515,10 +508,6 @@
 		<!-- Blog: Latest posts-->
         <section class="container my-2 py-lg-4">
         
-            
-        
-        
-        
             <div class="d-sm-flex align-items-center justify-content-between mb-4 pb-2">
             <span>
 		           <h2 style="display:inline; font-size:50px;">공연 </h2><h2 style="display:inline; color: #ab69dd; font-size:50px;">소식</h2>
@@ -532,9 +521,10 @@
                     	<!-- Item-->
                     <article style="height: 350px; float: left; margin-right: 21px; width: 416px;">
                         <a class="d-block mb-3" href="https://www.segye.com/newsView/20220807511675?OutUrl=naver"><img class="rounded-3" src="<%=path%>/resources/images/news/big2.png" style="width: 416px; height: 200px;" style="height:200px;" alt="Post image"></a>
-                        <h3 class="fs-base pt-1"><a class="nav-link fs-6" href="https://www.segye.com/newsView/20220807511675?OutUrl=naver">남자들을 위한 80㎝ 부츠?…2년 만에 돌아온 쇼뮤지컬 ‘킹키부츠’</a></h3>
+                        <h3 class="fs-base pt-1"><a class="nav-link fs-6" href="https://www.segye.com/newsView/20220807511675?OutUrl=naver">남자들을 위한 80㎝ 부츠?…2년 만에 돌아온 쇼뮤지컬 ‘ 부츠’</a></h3>
                         <a class="d-flex align-items-center text-decoration-none" href="#"><img class="rounded-circle" src="resources/img/avatars/16.png" width="44" alt="Avatar">
-                            <div class="ps-2"><h6 class="fs-sm text-nav lh-base mb-1">관리자</h6>
+                            <div class="ps-2">
+                            	<h6 class="fs-sm text-nav lh-base mb-1">관리자</h6>
                                 <div class="d-flex text-body fs-xs"><span class="me-2 pe-1"><i class="fi-calendar-alt opacity-70 mt-n1 me-1 align-middle"></i>2022-08-08</span></div>
                             </div></a>
                     </article>
@@ -587,7 +577,7 @@
                 //자동 스크를링
                 autoplay: {
                     //시간 1000 이 1초
-                    delay: 3000,
+                    delay: 1000,
                     disableOnInteraction: false,
                 },
                 autoHeight: true,

@@ -13,6 +13,7 @@ import vo.Review;
 
 public class ReviewDao {
 	
+	// 공연당 리뷰 평점 평균
 	public String getStar(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -71,7 +72,7 @@ public class ReviewDao {
 		return revList;
 	}
 	
-	// 나의 리뷰 목록 조회
+	// 공연 리뷰 정렬별 조회(페이징)
 	public List<Review> findAllByShowId(Connection conn, String id, PageInfo pageInfo, String sort) {
 		List<Review> revList = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -176,6 +177,7 @@ public class ReviewDao {
 		return result;
 	}
 
+	// 리뷰 총 개수
 	public int getRevCount(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -199,11 +201,12 @@ public class ReviewDao {
 		return result;
 	}
 
+	// 공연 리뷰 전체 조회
 	public List<Review> findReviewByShowId(Connection conn, String id) {
 		List<Review> revList = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT * FROM TBL_REVIEW WHERE show_id = ?";
+		String query = "SELECT * FROM TBL_REVIEW WHERE show_id = ? ORDER BY rev_date DESC";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
@@ -233,6 +236,7 @@ public class ReviewDao {
 		return null;
 	}
 	
+	// 별점 1인 리뷰 개수
 	public int getCount1(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -348,6 +352,7 @@ public class ReviewDao {
 		return result;		
 	}
 
+	// 리뷰 좋아요 추가
 	public int plusLike(Connection conn, Review rev) {
 		PreparedStatement pstmt = null;
 		String query = "UPDATE TBL_REVIEW SET rev_like=? WHERE rev_no=?";
@@ -367,6 +372,7 @@ public class ReviewDao {
 		return result;
 	}
 
+	// 리뷰 좋아요 취소
 	public int minusLike(Connection conn, Review rev) {
 		PreparedStatement pstmt = null;
 		String query = "UPDATE TBL_REVIEW SET rev_like=? WHERE rev_no=?";
@@ -386,6 +392,7 @@ public class ReviewDao {
 		return result;
 	}
 
+	// 리뷰번호로 리뷰 조회
 	public Review findReviewByNo(Connection conn, int revNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

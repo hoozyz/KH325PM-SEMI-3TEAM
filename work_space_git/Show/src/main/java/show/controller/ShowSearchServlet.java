@@ -1,3 +1,4 @@
+
 package show.controller;
 
 import java.io.IOException;
@@ -45,33 +46,31 @@ public class ShowSearchServlet extends HttpServlet {
 				return;
 			}
 
-			if (req.getParameter("rad_date") != null && req.getParameter("rad_date").equals("") == false) {
+			if (req.getParameter("rad_date") != null && req.getParameter("rad_date").equals("") == false && !rad_date.equals("1개월")) {
 				rad_date = req.getParameter("rad_date");
 			}
 
 			Date date = new Date();
 
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
-			String endDate = dateFormat.format(date);
-			String startDate = "";
+			String startDate = dateFormat.format(date);
+			String endDate = "";
 
 			if (req.getParameter("startDate") != null && req.getParameter("startDate").equals("") == false) {
 				startDate = req.getParameter("startDate");
 				endDate = req.getParameter("endDate");
-				startDate = startDate.replace("-", ".").trim(); // 20220801
+				startDate = startDate.replace("-", ".").trim();
 				endDate = endDate.replace("-", ".").trim();
 			} else if (rad_date != null) {
 				if (rad_date.equals("오늘")) {
-					startDate = AddDate(startDate, 0, -1);
-					startDate = endDate;
+					endDate = startDate;
 				}
 				if (rad_date.equals("1주")) {
-					startDate = AddDate(endDate, 0, -7);
+					endDate = AddDate(startDate, 0, 6);
 
 				}
 				if (rad_date.equals("1개월")) {
-					startDate = AddDate(endDate, -1, 0);
-					endDate = AddDate(startDate, +1, -1);
+					endDate = AddDate(startDate, +1, 0);
 				}
 			}
 

@@ -92,50 +92,53 @@
        	 
        	 
     </Style> 
- <!--@@@@@@@@@ hero @@@@@@@@@-->
-    <section class="container-fluid pt-0 mt-5 mb-3" style="height: 350px; background-image: url(<%=path%>resources/images/performHeroBg.png);">
+	<!--@@@@@@@@@ hero @@@@@@@@@-->
+     <section class="container-fluid pt-0 mt-5 mb-3" style="height: 350px; background-image: url(<%=path%>/resources/images/performHeroBg.png);">
         <section class="container pt-0 mt-5 my-0 ">
             <div style="position:relative;">
-                <img src="<%=path%>/resources/img/myimg/perform1.png" alt="" style=" width:100%; position:relative;">
+                <img src="<%=path%>/resources/img/myimg/perform1.png" alt="" style=" width:100%; height:280px; position:relative;">
                 <div class="hero_category" style="position:absolute; top: 40%; left: 8%">
-                    <a class="cat" href="<%=path%>/showSearch?category=연극&rad_date=1개월&keyword=연극">연극&nbsp;</a>|
-                    <a class="cat" href="<%=path%>/showSearch?category=뮤지컬&rad_date=1개월keyword=뮤지컬">&nbsp;뮤지컬&nbsp;</a>|
-                    <a class="cat" href="<%=path%>/showSearch?category=무용&rad_date=1개월keyword=무용">&nbsp;무용&nbsp;</a>|
-                    <a class="cat" href="<%=path%>/showSearch?category=복합&rad_date=1개월keyword=복합">&nbsp;복합&nbsp;</a>
-                </div>
+               <a class="cat" href="<%=path%>/showSearch?category=연극&rad_date=1개월&keyword=연극">연극&nbsp;</a>|
+                    <a class="cat" href="<%=path%>/showSearch?category=뮤지컬&rad_date=1개월&keyword=뮤지컬">&nbsp;뮤지컬&nbsp;</a>|
+                    <a class="cat" href="<%=path%>/showSearch?category=무용&rad_date=1개월&keyword=무용">&nbsp;무용&nbsp;</a>|
+                    <a class="cat" href="<%=path%>/showSearch?category=복합&rad_date=1개월&keyword=복합">&nbsp;복합&nbsp;</a>
+            </div>
             </div>
         </section>
     </section>
-    <!--@@@ hero End @@@-->
+        <!--@@@ hero End @@@-->
 
-    <!--@@@ search @@@-->
+        <!--@@@ search @@@-->
     <section class="container py-1 mt-1 mb-1 ">
         <form class="form-group d-block d-md-flex rounded-md-pill" style="width:85%;float:left; height:60pt;" method="GET" action="<%=path%>/showSearch">
             <div class="input-group input-group-lg border-end-md">
                 <!--calendar-->
-                <div class="mb-7">
+                <div class="mb-8">
                     <div class="input-group"><span class="input-group-text"><i class="fi-calendar"></i></span>
-                        <input class="form-control date-picker startDate" type="text" name="startDate"placeholder="&nbsp;&nbsp;&nbsp;시작 날짜" style="font-size:26px; data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
+                        <input class="form-control date-picker startDate" type="text" name="startDate"placeholder="&nbsp;&nbsp;&nbsp;시작 날짜" style="font-size:21px; data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
                         <span style="font-size: 45px;color: #7E6ECD; font-weight: 500;"> ~ </span>
-                        <input class="form-control date-picker endDate" type="text" name="endDate" placeholder="&nbsp;&nbsp;&nbsp;마감 날짜" style="font-size:26px; data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
+                        <input class="form-control date-picker endDate" type="text" name="endDate" placeholder="&nbsp;&nbsp;&nbsp;마감 날짜" style="font-size:21px; data-datepicker-options="{&quot;altInput&quot;: true, &quot;altFormat&quot;: &quot;F j, Y&quot;, &quot;dateFormat&quot;: &quot;Y-m-d&quot;}">
                     </div>
                 </div>
                 <!-- calendar End-->
             </div>
-            <div class="input-group input-group-lg border-end-md"><span class="input-group-text text-muted rounded-pill ps-3"><i class="fi-search"></i></span>
-                <input class="form-control" type="text" name="keyword" placeholder="어떤 공연을 찾고 있나요?" style="font-size:27px;" value="<%=keyword %>">
+            <div class="input-group input-group-lg border-end-md"><span class="input-group-text text-muted rounded-pill ps-3" style="font-size:25px;"><i class="fi-search"></i></span>
+                <input class="form-control" type="text" name="keyword" placeholder="어떤 공연을 찾고 있나요?" style="font-size:25px;">
             </div>
             <hr class="d-md-none my-2">
             <div class="d-sm-flex">
                 <div class="dropdown w-100 mb-sm-0 mb-3" data-bs-toggle="select">
-                    <button class="btn btn-link btn-lg dropdown-toggle ps-2 ps-sm-3" name="category" type="button" data-bs-toggle="dropdown" style="font-size:26px;"><i class="fi-list me-2"></i>
+                    <button class="btn btn-link btn-lg dropdown-toggle ps-2 ps-sm-3" type="button" data-bs-toggle="dropdown" style="font-size:26px;"><i class="fi-list me-2"></i>
                     <span class="dropdown-toggle-label">
                     <%if (category != null) { %>
                     	<%=category%>
+                    	</span></button>
+                    	<input type="hidden" name="category" value="<%=category%>">
                     <% } else {%>
                     	카테고리
+                   	 	</span></button>
+                    	<input type="hidden" name="category">
                     <% } %>
-                    </span></button>
                     <input type="hidden" name="category">
                     <ul class="dropdown-menu" style="font-size:23px;">
                         <li><a class="dropdown-item" href="#"><i class="fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">연극</span></a></li>
@@ -144,7 +147,7 @@
                         <li><a class="dropdown-item" href="#"><i class="fs-lg opacity-60 me-2"></i><span class="dropdown-item-label">복합</span></a></li>
                     </ul>
                 </div>
-                <input class="btn btn-info btn-lg rounded-pill w-100 w-md-auto ms-sm-3" type="submit" value="검색" style="background-color:#0B398E; border:none;"/>
+                <input class="btn btn-info btn-lg rounded-pill w-100 w-md-auto ms-sm-3" type="submit" value="검색" style="background-color:#0B398E; border:none; font-size:27px;"/>
             </div>
         </form>
         	<div class="position-relative" style="position: relative; display:inline-block; width:15%;height:80px;float:right;">
@@ -163,7 +166,7 @@
     </section>
     <!--@@@ search End @@@-->
 
-    <section class="container py-1 mt-1 mb-1 ">
+    <section class="container py-1 mt-1 mb-1 my-3">
         <div display="inline-block;" style="text-align: center;background-color:#F2F2F2;margin-left: 3%;margin-right:3%;margin-bottom:0px;">
             <p style="font-size: 26pt;font-weight: bold;color: black;margin-bottom: 0px;">
                 '<span id="category_name" name="category_name"><%=keyword %></span>'에 대한 검색 결과입니다.
@@ -172,13 +175,13 @@
     </section>
 
     <!-- @@@ 검색결과 @@@ -->
-    <section class="container mb-sm-5 pb-lg-4 ">
+    <section class="container mb-sm-5 pb-lg-4 " style="min-height:1600px;">
         <!-- Sorting-->
 	<div class="d-flex flex-sm-row flex-column align-items-sm-center align-items-stretch my-4 ">
             <hr class="d-none d-sm-block w-100 mx-1 ">
 			<i class="fi-check-circle me-2 "></i><span class=container style="width: 8%">
 				<%
-				if (showList != null) {
+				if (!showList.isEmpty()) {
 				%> 총 <%=showList.size()%>건 <%
 				} else {
 				%> 총0건 <%
@@ -198,7 +201,7 @@
         <div class="card card-flush card-stretched-vertical shadow-sm" style="margin-bottom: 30px; ">
             <div class="row ">
                 <div class="col-sm-3 ">
-                    <img class="card-img " src="<%=showList.get(i).getPoster() %>" alt="Image Description " id="music_id_5 " name="music_id_5 " style="width:200px; ">
+                    <img class="card-img " src="<%=showList.get(i).getPoster() %>" alt="Image Description " id="music_id_5 " name="music_id_5 " style="width:200px; height:280px; ">
                 </div>
                 <!-- End Col -->
                        <div class="col-sm-9">
@@ -216,7 +219,7 @@
                             </div>
                             
                             <div class="musicInfo">
-                                    <p id="cost_1 " name="cost_1 "><h4><%=showList.get(i).getPrfpdfrom() %>&nbsp;&nbsp; ~ &nbsp;&nbsp;  <%=showList.get(i).getPrfpdfrom() %></h4></p>
+                                    <p id="cost_1 " name="cost_1 "><h4><%=showList.get(i).getPrfpdfrom() %>&nbsp;&nbsp; ~ &nbsp;&nbsp;  <%=showList.get(i).getPrfpdto() %></h4></p>
                                     <div><h4><%=showList.get(i).getFcltynm() %>
                                     <a style="float: right;" class="btn btn-translucent-info rounded-pill px-3 " href="<%=path %>/showDetail?showId=<%=showList.get(i).getShow_id() %>" id="detail_1" name="detail_1 ">공연 보러가기</a></h4></div>
                                 </div>
@@ -230,7 +233,7 @@
         </div>
         <% } %>
         <!-- @@@ Card-1 end @@@ -->
-
+</section>
 		<script>
 		$('ul.period-ul li').find('a').click(function() {
 	        var on_id = $(this).attr('id');
@@ -242,37 +245,35 @@
 	        $(this).addClass('on');
 	        $("#" + on_id).addClass('on');
 	        
-	        var endDay = new Date();
-			var startDay = "";
+	        var startDay = new Date();
+			var endDay = "";
 			if(on_id == 'day') {
-				startDay = new Date(endDay);
-				startDay = dateFormat(startDay);
+				endDay = new Date(startDay);
+				endDay = dateFormat(endDay);
 			}
 			if(on_id == 'week') {
-				startDay = lastWeek();
+				endDay = nextWeek();
 			}
 			if(on_id == 'month') {
-				startDay = lastMonth();
+				endDay = nextMonth();
 			}
-			console.log(startDay);
-			console.log(dateFormat(endDay));
 			
-			$('.input-group .startDate').val(startDay);
-			$('.input-group .endDate').val(dateFormat(endDay));
+			$('.input-group .startDate').val(dateFormat(startDay));
+			$('.input-group .endDate').val(endDay);
 	
 			
-			function lastWeek() {
-	            var d = new Date(endDay);
+			function nextWeek() {
+	            var d = new Date(startDay);
 	            var day = d.getDate();
-	            d.setDate(day - 6);
+	            d.setDate(day + 6);
 	            return dateFormat(d);
 	        }
 	
-	        function lastMonth() {
-	            var d = new Date(endDay);
+	        function nextMonth() {
+	            var d = new Date(startDay);
 	            var month = d.getMonth();
 	            var day = d.getDate();
-	            d.setMonth(month - 1);
+	            d.setMonth(month + 1);
 	            return dateFormat(d);
 	        }
 	        

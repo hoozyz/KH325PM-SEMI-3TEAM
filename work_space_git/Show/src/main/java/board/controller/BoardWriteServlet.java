@@ -46,11 +46,8 @@ public class BoardWriteServlet extends HttpServlet{
 		int result = service.save(board);
 		
 		boardCount = service.getBoardCount();
-		
 		pageInfo = new PageInfo(page, 5, boardCount, 10);
-		
 		boardList = service.getBoardList(pageInfo);
-		
 		
 		if(result > 0 && boardList != null) {
 			req.setAttribute("msg", "게시글 작성이 성공하였습니다.");

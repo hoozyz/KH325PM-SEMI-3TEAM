@@ -35,7 +35,8 @@ public class NewsDao {
 		return result;
 	}
 
-	public List<News> findNews(Connection con) { // 7개 랜덤 파싱 -> 이미지 있는 걸로
+	// 소식 7개 랜덤 조회
+	public List<News> findNews(Connection con) { 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<News> list = new ArrayList<>();
@@ -69,7 +70,8 @@ public class NewsDao {
 		return list;
 	}
 
-	public List<News> findNewsHome(Connection con) { // 7개 랜덤 파싱 -> 이미지 있는 걸로
+	// 홈페이지 소식 3개 랜덤 조회
+	public List<News> findNewsHome(Connection con) { 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<News> list = new ArrayList<>();
@@ -103,7 +105,7 @@ public class NewsDao {
 		return list;
 	}
 
-	
+	// 소식 전체 삭제 -> 실시간으로 다시 파싱
 	public int deleteAll(Connection con) {
 		PreparedStatement pstmt = null;
 		int result = 0;

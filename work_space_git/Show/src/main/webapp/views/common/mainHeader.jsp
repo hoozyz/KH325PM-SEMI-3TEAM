@@ -114,6 +114,20 @@
             }
         }
         
+        
+                
+        a.dropdown-it{
+        	font-size:23px;
+        	padding-left:10px;
+        	color:#201627;
+        }
+
+        a.dropdown-it:hover{
+        	font-size:23px;
+        	color:#AB69DD;
+        	font-weight:800;
+        }
+        
     </style>
     <!-- Page loading scripts-->
     <script>
@@ -250,63 +264,57 @@
     <!-- 로그인 안되어 있을 때 헤더 -->
         <!-- Sign In Modal-->
         <div class="modal fade" id="signin-modal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered p-2 my-0 mx-auto" style="max-width: 950px;">
-                <div class="modal-content">
-                    <div class="modal-body px-0 py-2 py-sm-0">
+            <div class="modal-dialog modal-dialog-centered p-2 my-0 mx-auto">
+                <div class="modal-content" style="width:500px;text-align:center;"">
+                    <div class="modal-body">
                         <button class="btn-close position-absolute top-0 end-0 mt-3 me-3" type="button" data-bs-dismiss="modal"></button>
-                        <div class="row mx-0 align-items-center">
-                            <div class="col-md-6 border-end-md p-4 p-sm-5">
-                                <h2 class="h3 mb-4 mb-sm-5">Hey there!<br>Welcome back.</h2><img class="d-block mx-auto" src="<%=path %>/resources/etc/signin.svg" width="344" alt="Illustartion">
-                                <div class="mt-4 mt-sm-5">계정이 없으신가요? <a href="#signup-modal" data-bs-toggle="modal" data-bs-dismiss="modal">회원가입</a></div>
+                            <div>
+                               <img class="d-block mx-auto" src="<%=path %>/resources/images/logo/pjlogo11.png" width="344" alt="Illustartion">
                             </div>
-                            <div class="col-md-6 px-4 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5">
-                            	<a style="width: 100%;height: 50px;margin-bottom: 15px;" href="javascript:void(0);" onclick="kakaoLogin();"><img src="<%=path %>/resources/images/kakao_login_medium_wide.png" style="margin-bottom:30px; width:370px;" /></a>
-                                <div class="d-flex align-items-center py-3 mb-3">
+                            <div>
+                                <form class="needs-validation" action="/Show/login" method="POST" novalidate="">
+                                    <div class="mb-4">
+                                   		<div class="d-flex align-items-center justify-content-between mb-1">
+                                       		<label class="form-label ms-3 mb-0" for="signin-email" style="font-size:20px;font-weight:700;font-family:'NanumSquareRound', sans-serif;">아이디</label>
+                                        </div>
+                                        <input class="form-control" type="text" name="userId" id="signin-id" placeholder="아이디를 입력해주세요." required="">
+                                    </div>
+                                    <div class="mb-5">
+                                        <div class="d-flex align-items-center justify-content-between mb-2">
+                                            <label class="form-label ms-3 mb-0" for="signin-password" style="font-size:20px;font-weight:700;font-family:'NanumSquareRound', sans-serif;">비밀번호</label>
+                                        </div>
+                                        <div class="password-toggle">
+                                            <input class="form-control" type="password" name="userPw" id="signin-password" placeholder="비밀번호를 입력해주세요" required="">
+                                            <label class="password-toggle-btn" aria-label="Show/hide password">
+				                          <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+				                        </label>
+                                        </div>
+                                    </div>
+                                    <input class="btn btn-lg rounded-pill w-100" style="background-color:#201627; color:#D9E2F2; font-weight:800; font-size:15pt;" type="submit" value="로그인">
+                                </form>
+                                <div class="d-flex align-items-center py-4">
                                     <hr class="w-100">
                                     <div class="px-3">Or</div>
                                     <hr class="w-100">
                                 </div>
-                                <form class="needs-validation" action="<%=path %>/login" method="POST" novalidate>
-                                    <div class="mb-4">
-                                        <label class="form-label mb-2" for="signin-email">아이디</label>
-                                        <input class="form-control" type="text" name="userId" id="signin-id" placeholder="아이디를 입력해주세요." required>
-                                    </div>
-                                    <div class="mb-4">
-                                        <div class="d-flex align-items-center justify-content-between mb-2">
-                                            <label class="form-label mb-0" for="signin-password">비밀번호</label>
-                                        </div>
-                                        <div class="password-toggle">
-                                            <input class="form-control" type="password" name="userPw" id="signin-password" placeholder="비밀번호를 입력해주세요" required>
-                                            <label class="password-toggle-btn" aria-label="Show/hide password">
-                          <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
-                        </label>
-                                        </div>
-                                    </div>
-                                    <input class="btn btn-primary btn-lg rounded-pill w-100" type="submit" value="로그인"></button>
-                                </form>
+                            	<a style="width: 150%;height: 50px;margin-bottom: 15px;" href="javascript:void(0);" onclick="kakaoLogin();"><img src="/Show/resources/images/kakao_login_medium_wide.png" style=" width:400px;"></a>
+                                <div class="mt-4 mt-sm-5">계정이 없으신가요? <a href="#signup-modal" data-bs-toggle="modal" data-bs-dismiss="modal">회원가입</a></div>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Sign Up Modal-->
+       <!-- Sign Up Modal-->
         <div class="modal fade" id="signup-modal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered p-2 my-0 mx-auto" style="max-width: 950px;">
+            <div class="modal-dialog modal-lg modal-dialog-centered p-2 my-0 mx-auto" style="max-width: 600px;">
                 <div class="modal-content">
                     <div class="modal-body px-0 py-2 py-sm-0">
                         <button class="btn-close position-absolute top-0 end-0 mt-3 me-3" type="button" data-bs-dismiss="modal"></button>
-                        <div class="row mx-0 align-items-center">
-                            <div class="col-md-6 border-end-md p-4 p-sm-5">
-                                <h2 class="h3 mb-4 mb-sm-5">Join SCENE.<br>Catch a great show</h2>
-                                <ul class="list-unstyled mb-4 mb-sm-5">
-                                    <li class="d-flex mb-2"><i class="fi-check-circle text-primary mt-1 me-2"></i><span>다양한 공연을 만나보세요.</span></li>
-                                    <li class="d-flex mb-2"><i class="fi-check-circle text-primary mt-1 me-2"></i><span>어느 곳에서나 예매가 가능합니다.</span></li>
-                                    <li class="d-flex mb-0"><i class="fi-check-circle text-primary mt-1 me-2"></i><span>수많은 리뷰도 있습니다.</span></li>
-                                </ul><img class="d-block mx-auto" src="<%=path %>/resources/etc/signup.svg" width="344" alt="Illustartion">
-                                <div class="mt-sm-4 pt-md-3">이미 계정이 있으신가요? <a href="#signin-modal" data-bs-toggle="modal" data-bs-dismiss="modal">로그인</a></div>
+                        <div class="mx-0 align-items-center">
+                            <div>
+                               <img class="d-block mx-auto" src="<%=path %>/resources/images/logo/pjlogo2.png" width="344" alt="Illustartion">
                             </div>
-                            <div class="col-md-6 px-4 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5">
+                            <div class="px-4 pb-4 px-sm-5 pb-sm-5">
                                 <form class="needs-validation" action="<%=path%>/user/enroll" method="POST" novalidate>
                                     <div class="mb-4">
                                         <label class="form-label" for="signup-name">이름</label>
@@ -348,7 +356,8 @@
                                     </div>
                                     <div class="form-check mb-4">
                                     </div>
-                                    <button class="btn btn-primary btn-lg rounded-pill w-100" type="submit">회원가입</button>
+                                    <button class="btn btn-lg rounded-pill w-100" style="background-color:#201627; color:#D9E2F2; font-weight:800; font-size:15pt;" type="submit">회원가입</button>
+                                <div class="mt-sm-4 pt-md-3">이미 계정이 있으신가요? <a href="#signin-modal" data-bs-toggle="modal" data-bs-dismiss="modal">로그인</a></div>
                                 </form>
                             </div>
                         </div>
@@ -357,51 +366,50 @@
             </div>
         </div>
 
-
         <!-- Navbar-->
         <header class="navbar navbar-expand-lg navbar-light fixed-top py-0" data-scroll-header style="background-color:#201627">
             <div class="container">
-                <a class="navbar-brand me-3 me-xl-4" href="<%=path %>/"><img class="d-block" src="<%=path %>/resources/images/logo/pjlogo3.png" width="200" alt="SCENE"></a>
+                <a class="navbar-brand me-3 me-xl-4" href="<%=path %>/"><img class="d-block" src="<%=path %>/resources/images/logo/pjlogo9.png" width="220" alt="SCENE"></a>
                 <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 				<% if (loginUser == null) { %>
 				<!-- 로그인 아닐 때 -->
-                <a class="btn btn-sm text-primary d-none d-lg-block order-lg-3" href="#signin-modal" data-bs-toggle="modal"><i class="fi-user me-2"></i>로그인</a>
-                <a class="btn btn-sm text-primary d-none d-lg-block order-lg-3" href="#signup-modal" data-bs-toggle="modal"><i class="fi-user me-2"></i>회원가입</a>
+                <a class="btn btn-sm d-none d-lg-block order-lg-3 mt-3" href="#signin-modal" data-bs-toggle="modal"style="color:#D4A6F7;font-size:20px"><i class="fi-user me-2"></i>로그인</a>
+                <a class="btn btn-sm d-none d-lg-block order-lg-3 mt-3" href="#signup-modal" data-bs-toggle="modal"style="color:#D4A6F7;font-size:20px"><i class="fi-user me-2"></i>회원가입</a>
                 <% } else {%>
                		 <% if (loginUser != null && loginUser.getRole().equals("ROLE_ADMIN")) { %>
-                	 <button class="btn btn-sm text-primary d-none d-lg-block order-lg-3" onclick="location.href='<%=path %>/logout'" data-bs-toggle="modal"><i class="fi-user me-2"></i>로그아웃</button>
+                	 <button class="btn btn-sm  d-none d-lg-block order-lg-3" onclick="location.href='<%=path %>/logout'" data-bs-toggle="modal" style="color:#D4A6F7;font-size:20px"><i class="fi-user me-2"></i>로그아웃</button>
                 	 <% } else if (loginUser != null && loginUser.getRole().equals("ROLE_USER")) {%>
-               		 <button class="btn btn-sm text-primary d none d-lg-block order-lg-3" onclick="location.href='<%=path %>/myInfo'" data-bs-toggle="modal"><i class="fi-user me-2"></i>마이페이지</button>
-                	 <button class="btn btn-sm text-primary d-none d-lg-block order-lg-3" onclick="location.href='<%=path %>/logout'" data-bs-toggle="modal"><i class="fi-user me-2"></i>로그아웃</button>
+               		 <button class="btn btn-sm  d none d-lg-block order-lg-3 mt-3" onclick="location.href='<%=path %>/myInfo'" data-bs-toggle="modal" style="color:#D4A6F7;font-size:20px"><i class="fi-user me-2"></i>마이페이지</button>
+                	 <button class="btn btn-sm  d-none d-lg-block order-lg-3 mt-3" onclick="location.href='<%=path %>/logout'" data-bs-toggle="modal" style="color:#D4A6F7;font-size:20px"><i class="fi-user me-2"></i>로그아웃</button>
                 	 <% } else {%>
-               		 <button class="btn btn-sm text-primary d none d-lg-block order-lg-3" onclick="location.href='<%=path %>/myInfo'" data-bs-toggle="modal"><i class="fi-user me-2"></i>마이페이지</button>
-                	 <button class="btn btn-sm text-primary d-none d-lg-block order-lg-3" onclick="kakaoLogout();" data-bs-toggle="modal"><i class="fi-user me-2"></i>로그아웃</button>
+               		 <button class="btn btn-sm  d none d-lg-block order-lg-3 mt-3" onclick="location.href='<%=path %>/myInfo'" data-bs-toggle="modal" style="color:#D4A6F7;font-size:20px"><i class="fi-user me-2"></i>마이페이지</button>
+                	 <button class="btn btn-sm  d-none d-lg-block order-lg-3 mt-3" onclick="kakaoLogout();" data-bs-toggle="modal" style="color:#D4A6F7;font-size:20px"><i class="fi-user me-2"></i>로그아웃</button>
                 	<% } %>
                 <% } %>
-                <div class="collapse navbar-collapse order-lg-2 justify-content-center" id="navbarNav">
+                <div class="collapse navbar-collapse order-lg-2 mt-3" id="navbarNav">
                     <ul class="navbar-nav navbar-nav-scroll" style="max-height: 35rem;">
                         <!-- Menu items-->
                         <li class="nav-item dropdown px-3 "><a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="NSR">공연</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="<%=path%>/showMain?category=연극&rad_date=1개월">연극</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/showMain?category=뮤지컬&rad_date=1개월">뮤지컬</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/showMain?category=무용&rad_date=1개월">무용</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/showMain?category=복합&rad_date=1개월">복합</a></li>
+                                <li><a class="dropdown-it" href="<%=path%>/showMain?category=연극&rad_date=1개월">연극</a></li>
+                                <li><a class="dropdown-it" href="<%=path%>/showMain?category=뮤지컬&rad_date=1개월">뮤지컬</a></li>
+                                <li><a class="dropdown-it" href="<%=path%>/showMain?category=무용&rad_date=1개월">무용</a></li>
+                                <li><a class="dropdown-it" href="<%=path%>/showMain?category=복합&rad_date=1개월">복합</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown pe-1"><a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="NSR">음악</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="<%=path%>/musicMain?category=클래식&rad_date=1개월">클래식</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/musicMain?category=국악&rad_date=1개월">국악</a></li>
-                                <li><a class="dropdown-item" href="<%=path%>/musicMain?category=오페라&rad_date=1개월">오페라</a></li>
+                                <li><a class="dropdown-it" href="<%=path%>/musicMain?category=클래식&rad_date=1개월">클래식</a></li>
+                                <li><a class="dropdown-it" href="<%=path%>/musicMain?category=국악&rad_date=1개월">국악</a></li>
+                                <li><a class="dropdown-it" href="<%=path%>/musicMain?category=오페라&rad_date=1개월">오페라</a></li>
                             </ul>
                         </li>
                         <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/hallMain" role="button" aria-expanded="false" id="NSR">공연장</a></a>
                         <a class="nav-item pe-3"><a class="nav-link" href="<%=path%>/rankList" role="button" aria-expanded="false" id="NSR">랭킹</a></a>
                         <li class="nav-item dropdown ps-3"><a class="nav-link dropdown" href="<%=path %>/news?check=0" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="NSR">게시판</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="<%=path%>/news?check=0">소식</a></li> <!-- check는 소식페이지는 파싱안하게 0으로 보냄 -->
-                                <li><a class="dropdown-item" href="<%=path%>/board/list">자유</a></li>
+                                <li><a class="dropdown-it" href="<%=path%>/news?check=0">소식</a></li> <!-- check는 소식페이지는 파싱안하게 0으로 보냄 -->
+                                <li><a class="dropdown-it" href="<%=path%>/board/list">자유</a></li>
                             </ul>
                         </li>
                         <li class="nav-item d-lg-none"><a class="nav-link" href="#signin-modal" data-bs-toggle="modal"><i class="fi-user me-2"></i>로그인</a></li>

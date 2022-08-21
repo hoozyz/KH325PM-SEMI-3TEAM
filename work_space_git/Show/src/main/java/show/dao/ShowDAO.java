@@ -50,6 +50,7 @@ public class ShowDAO {
 		return -1;
 	}
 
+	// 공연 정보 가져오기
 	public Show findShowById(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -88,6 +89,7 @@ public class ShowDAO {
 		return null;
 	}
 	
+	// 홈페이지 공연, 음악 검색
 	public List<Show> findByHome(Connection conn, String keyword, String category) {
 		List<Show> showList = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -132,7 +134,8 @@ public class ShowDAO {
 
 		return null;
 	}
-
+	
+	// 검색어만 있거나, 기간도 있을 때
 	public List<Show> findByKeyword(Connection conn, String keyword, String category, String startDate,
 			String endDate) {
 		List<Show> showList = new ArrayList<>();
@@ -171,19 +174,28 @@ public class ShowDAO {
 		return null;
 	}
 
-	public List<Show> findByCategory(Connection conn, String category, String startDate, String endDate) {
+	// 헤더에서 공연, 음악
+	public List<Show> findByCategory(Connection conn, String category, String startDate, String endDate, PageInfo pageInfo) {
 		List<Show> showList = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String query;
 
 		try {
-			query = "SELECT poster, prfnm, prfpdfrom, prfpdto, fcltynm, show_id FROM TBL_SHOW WHERE genrenm = ? AND prfpdfrom BETWEEN TO_DATE(?, 'YYYY.MM.DD') AND TO_DATE(?, 'YYYY.MM.DD')";
+			query = "SELECT * FROM \r\n"
+					+ "(SELECT poster, prfnm, prfpdfrom, prfpdto, fcltynm, show_id, ROWNUM NUM FROM\r\n"
+					+ "(SELECT poster, prfnm, prfpdfrom, prfpdto, fcltynm, show_id\r\n"
+					+ "FROM TBL_SHOW WHERE genrenm = ? AND prfpdfrom \r\n"
+					+ "BETWEEN TO_DATE(?, 'YYYY.MM.DD') AND TO_DATE(?, 'YYYY.MM.DD')\r\n"
+					+ "ORDER BY prfpdfrom ASC))\r\n"
+					+ "WHERE NUM BETWEEN ? AND ?";
 
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, category);
 			pstmt.setString(2, startDate);
 			pstmt.setString(3, endDate);
+			pstmt.setInt(4, pageInfo.getStartList());
+			pstmt.setInt(5, pageInfo.getEndList());
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -208,7 +220,8 @@ public class ShowDAO {
 		return null;
 	}
 	
-	public List<Show> findByOpenDate(Connection conn, String category){
+	// 오픈 예정 공연
+	public List<Show> comingSoon(Connection conn, String category){
 		List<Show> openList = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -240,7 +253,7 @@ public class ShowDAO {
 		return openList;
 	}
 
-	
+	// 음악메인 전체 공연(페이징)
 	public List<Show> selectShowByCategory(Connection conn,String category, PageInfo pageInfo) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -248,7 +261,7 @@ public class ShowDAO {
 		String query = "SELECT show_id, hall_id, prfnm, prfpdfrom, prfpdto, genrenm, fcltynm, poster FROM \r\n"
 				+ "(SELECT show_id, hall_id, prfnm, prfpdfrom, prfpdto, genrenm, poster, fcltynm, ROWNUM NUM FROM \r\n"
 				+ "(SELECT show_id, hall_id, prfnm, prfpdfrom, prfpdto, genrenm, fcltynm, poster \r\n"
-				+ "FROM TBL_SHOW where genrenm = ? ORDER BY show_id DESC)) WHERE NUM BETWEEN ? and ?";
+				+ "FROM TBL_SHOW where genrenm = ? ORDER BY prfpdfrom ASC)) WHERE NUM BETWEEN ? and ?";
 
 		try {
 			List<Show> list = new ArrayList<>();
@@ -279,8 +292,7 @@ public class ShowDAO {
 		return null;
 	}
 
-//	-- 전체 공연 -> 공연시작날이 최근
-//	SELECT * FROM (SELECT * FROM TBL_SHOW WHERE hall_id = ? ORDER BY prfpdfrom DESC);
+	// 전체 공연 최신순
 	public List<Show> getShowView(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

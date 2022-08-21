@@ -9,30 +9,26 @@
    </style>
  
    <!-- Footer 푸터 시작@@@@@@@@@@@@@@@@@@@@@@@@-->
-   <!-- Footer-->
-   <!-- Footer-->
+
     <footer class="footer pt-3 text-light" style="background-color: #201627;">
         <div class="container mb-4 py-4 pb-lg-5">
             <div class="row ">
                 <div class="col-4">
                     <a class="d-inline-block" href="#"><img src="<%=request.getContextPath() %>/resources/images/footer/footerImg.png" width="300" alt="Logo"></a>
-                    <div class="nav-link-light" style="font-size:20px; margin-right:80px;">공연 통합 검색 플랫폼 SCENE에 오신 것을 환영합니다</div>
+                    <div class="nav-link-light" style="font-size:20px; margin-right:80px;">공연 통합 검색 플랫폼,<br>SCENE에 오신 것을 환영합니다.<br> 지금 바로, 원하는 공연을 검색하세요!</div>
                 </div>
                 <!-- Links-->
-                <div class="col-2">
+                <div class="col-3">
                     <h3 class="fs-base text-light">MEMBER</h3>
                     <ul class="list-unstyled fs-sm">
-                        <li class="nav-link-light"> 김상현</li>
-                        <li class="nav-link-light"> 김영후</li>
-                        <li class="nav-link-light"> 김현민</li>
-                        <li class="nav-link-light"> 우순탁</li>
-                        <li class="nav-link-light"> 이정우</li>
-                        <li class="nav-link-light"> 정세은</li>
-                        <li class="nav-link-light"> 정우성</li>
+                        <li class="nav-link-light"> <span>김상현</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>김영후</span></li>
+                        <li class="nav-link-light"> <span>김현민</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>우순탁</span></li>
+                        <li class="nav-link-light"> <span>이정우</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>정세은</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>정우성</span></li>
+
                     </ul>
                 </div>
                 <!-- Links-->
-                <div class="col-lg-2">
+                <div class="col-3">
                     <h3 class="fs-base text-light">INSTITUTION</h3>
                     <ul class="list-unstyled fs-sm">
                         <li class="nav-link-light"> KH 정보교육원</li>
@@ -41,11 +37,11 @@
                     </ul>
                 </div>
                 <!-- Subscription form-->
-                <div class="col-4">
-                    <h3 class="h4 text-light">OPEN API</h3>
-                    <img src="<%=request.getContextPath() %>/resources/images/footer/kopis.png" width="100" alt="Logo">
-                    <img src="<%=request.getContextPath() %>/resources/images/footer/naver.png" width="100" alt="Logo">
-                    <img src="<%=request.getContextPath() %>/resources/images/footer/kakao.png" width="100" alt="Logo">
+                <div class="col-2">
+                    <h3 class="fs-base text-light">OPEN API</h3>
+                    <img src="<%=request.getContextPath() %>/resources/images/footer/kopis0.png" class="my-2" width="150" alt="Logo">
+                    <img src="<%=request.getContextPath() %>/resources/images/footer/naver0.png" class="my-2" width="150" alt="Logo">
+                    <img src="<%=request.getContextPath() %>/resources/images/footer/kakao.png" class="my-2" width="150" alt="Logo" style="height:43px;">
                 </div>
             </div>
         </div>

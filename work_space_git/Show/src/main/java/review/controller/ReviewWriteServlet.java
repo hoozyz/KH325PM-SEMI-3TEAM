@@ -53,7 +53,8 @@ public class ReviewWriteServlet extends HttpServlet {
 		Show show = showService.findShowById(showId);
 		Review rev = new Review("", showId, userId, content, show.getPrfnm(), show.getPrfpdfrom(), show.getPrfpdto(), star, 0, "");
 
-		// 별점
+		int result = revService.save(rev);
+		
 		if (revService.getStar(showId) != null) {
 			String stars = revService.getStar(showId);
 			if (stars.length() == 1) {
@@ -71,7 +72,6 @@ public class ReviewWriteServlet extends HttpServlet {
 			return;
 		}
 
-		int result = revService.save(rev);
 		
 		int count1 = revService.getCount1(showId);
 		int count2 = revService.getCount2(showId);

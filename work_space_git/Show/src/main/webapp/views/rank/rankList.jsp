@@ -129,14 +129,14 @@
                                                 <div class="rankNumber"><%=i+1 %></div>
                                             </th>
                                             <th class="img_box">
-                                                <a class="detail_link" href="javascript:;"><img src="http://www.kopis.or.kr<%=rankList.get(i).getPoster()%>" width="180px" height="350px" alt="공연 포스터"></a>
+                                                <a class="detail_link" href="javascript:void(0);"><img src="http://www.kopis.or.kr<%=rankList.get(i).getPoster()%>" width="180px" height="350px" alt="공연 포스터"></a>
                                             </th>
                                             <th style="font-size: 20px;"><%=rankList.get(i).getPrfnm() %></th>
                                               <th style="font-size: 20px;"><%=rankList.get(i).getPrfpd() %></th>
                                             <th colspan="2" style="font-size: 20px;"><%=rankList.get(i).getPrfplcnm() %></th>
                                             <th>
                                                 <div class="atag">
-                                                    <a class="btn btn-outline-primary rounded" href="<%=path %>/showDetail?showId=<%=rankList.get(i).getShow_id() %>" data-bs-toggle="modal">상세보기</a>
+                                                    <a class="btn btn-outline-primary rounded" href="<%=path %>/showDetail?showId=<%=rankList.get(i).getShow_id() %>">상세보기</a>
                                                 </div>
                                             </th>
                                         </tr>

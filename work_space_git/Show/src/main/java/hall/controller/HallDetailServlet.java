@@ -30,8 +30,6 @@ public class HallDetailServlet extends HttpServlet{
 		List<Show> showList = new ArrayList<>();
 		showList = showService.getShowView(hallId);
 		
-		System.out.println(showList);
-		
 		if (hall != null) {
 			req.setAttribute("hall", hall);
 			req.setAttribute("showList", showList);

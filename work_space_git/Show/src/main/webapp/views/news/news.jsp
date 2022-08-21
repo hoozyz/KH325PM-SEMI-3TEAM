@@ -23,26 +23,23 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 
 <style>
-
 	a {
    	text-decoration: none;
    	color: black;
-   }   
-	a:hover {
+    }   
+    
+	section a:hover {
 		text-decoration: underline;
 		color:#0B398E ;
 	}
    
-   h1 {
+   	h1 {
          font-family: 'Gugi', cursive;
          font-weight: 800;
          color: black;
          font-size:50px;
          margin-bottom: 30px;
-
    }  
-   
-   
 </style>
 
 
@@ -55,7 +52,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<img class="card" src="<%=list.get(0).getPoster() %>" style="width: 660px; height: 375px;"
-					alt="Image Description" id="news_img_1" name="news_img_1">
+					alt="Image Description" id="news_img_1">
 			</div>
 			<!-- End Col -->
 
@@ -63,12 +60,11 @@
 				<!-- Card Body -->
 				<div style="height: 100%;">
 					<div style="height: 70%;">
-							<a>
 						<h3 class="card-title" style="margin-top: 8px;">
-							<a href="<%=list.get(0).getLink() %>" id="news_title_1" name="news_title_1"><%=list.get(0).getTitle() %></a>
+							<a href="<%=list.get(0).getLink() %>" id="news_title_1"><%=list.get(0).getTitle() %></a>
 						</h3>
 
-						<p class="card-text"><a class="link-dark" href="https://www.nocutnews.co.kr/news/5798033"><%=list.get(0).getCont() %></a></p>
+						<p class="card-text"><a class="link-dark" href="https://www.nocutnews.co.kr/news/5798033"><%=list.get(0).getCont() %></p>
 					</div>
 
 					<!-- Card Footer -->
@@ -77,14 +73,14 @@
 							<div class="flex-shrink-0">
 								<a class="avatar avatar-circle"> <img class="avatar-img"
 									src="<%=path%>/resources/images/news/nlogo1.png" alt="Image Description"
-									id="news_author_img_1" name="news_author_img_1">
+									id="news_author_img_1">
 								</a>
 							</div>
 
 							<div class="flex-grow-1 ms-3">
 								<a class="card-link link-dark" id="news_author_1"
 									name="news_author_1">관리자</a>
-								<p class="card-text small" id="news_date_1" name="news_date_1"><%=list.get(0).getDate() %></p>
+								<p class="card-text small" id="news_date_1"><%=list.get(0).getDate() %></p>
 							</div>
 						</div>
 					</div>
@@ -103,7 +99,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<img class="card" src="<%=list.get(1).getPoster() %>" style="width: 660px; height: 375px;"
-					alt="Image Description" id="news_img_1" name="news_img_1">
+					alt="Image Description" id="news_img_1">
 			</div>
 			<!-- End Col -->
 
@@ -117,7 +113,7 @@
 								name="news_title_1"><%=list.get(1).getTitle() %></a>
 						</h3>
 
-						<p class="card-text"><a class="link-dark" href="<%=list.get(1).getLink() %>"><%=list.get(1).getCont() %></a></p>
+						<p class="card-text"><a class="link-dark" href="<%=list.get(1).getLink() %>"><%=list.get(1).getCont() %></p>
 					</div>
 
 					<!-- Card Footer -->
@@ -126,14 +122,14 @@
 							<div class="flex-shrink-0">
 								<a class="avatar avatar-circle"> <img class="avatar-img"
 									src="<%=path%>/resources/images/news/nlogo2.png" alt="Image Description"
-									id="news_author_img_1" name="news_author_img_1">
+									id="news_author_img_1">
 								</a>
 							</div>
 
 							<div class="flex-grow-1 ms-3">
 								<a class="card-link link-dark" id="news_author_1"
 									name="news_author_1">관리자</a>
-								<p class="card-text small" id="news_date_1" name="news_date_1"><%=list.get(1).getDate() %></p>
+								<p class="card-text small" id="news_date_1"><%=list.get(1).getDate() %></p>
 							</div>
 						</div>
 					</div>
@@ -161,7 +157,7 @@
 					<div class="row">
 						<div class="col-sm-5">
 							<img calss="card" src="<%=list.get(2).getPoster() %>"
-								style="width: 470px; height: 300px;" alt="Image Description" id="news_img_1" name="news_img_1">
+								style="width: 470px; height: 300px;" alt="Image Description" id="news_img_1">
 						</div>
 						<!-- End Col -->
 
@@ -172,7 +168,7 @@
 
 									<h3 class="card-title">
 										<a href="<%=list.get(2).getLink() %>"
-											id="news_title_1" name="news_title_1"><%=list.get(2).getTitle() %></a>
+											id="news_title_1"><%=list.get(2).getTitle() %></a>
 									</h3>
 
 									<p class="card-text"><a class="link-dark" href="<%=list.get(2).getLink() %>"><%=list.get(2).getCont() %></a></p>
@@ -184,16 +180,14 @@
 										<div class="flex-shrink-0">
 											<a class="avatar avatar-circle"> <img class="avatar-img"
 												src="<%=path%>/resources/images/news/nlogo3.png"
-												alt="Image Description" id="news_author_img_1"
-												name="news_author_img_1">
+												alt="Image Description" id="news_author_img_1">
 											</a>
 										</div>
 
 										<div class="flex-grow-1 ms-3">
 											<a class="card-link link-dark" id="news_author_1"
 												name="news_author_1">관리자</a>
-											<p class="card-text small" id="news_date_1"
-												name="news_date_1"><%=list.get(2).getDate() %></p>
+											<p class="card-text small" id="news_date_1"><%=list.get(2).getDate() %></p>
 										</div>
 									</div>
 								</div>
@@ -212,7 +206,7 @@
 					<div class="row">
 						<div class="col-sm-5">
 							<img calss="card" src="<%=list.get(3).getPoster() %>" style="width: 470px; height: 300px;"
-								alt="Image Description" id="news_img_2" name="news_img_2">
+								alt="Image Description" id="news_img_2">
 						</div>
 						<!-- End Col -->
 
@@ -223,7 +217,7 @@
 
 									<h3 class="card-title">
 										<a href="<%=list.get(3).getLink() %>"
-											id="news_title_2" name="news_title_2"><%=list.get(3).getTitle() %></a>
+											id="news_title_2"><%=list.get(3).getTitle() %></a>
 									</h3>
 
 									 <p class="card-text"><a class="link-dark" href="<%=list.get(3).getLink() %>"><%=list.get(3).getCont() %></a></p>
@@ -235,16 +229,14 @@
 										<div class="flex-shrink-0">
 											<a class="avatar avatar-circle"> <img class="avatar-img"
 												src="<%=path%>/resources/images/news/nlogo4.png"
-												alt="Image Description" id="news_author_img_1"
-												name="news_author_img_2">
+												alt="Image Description" id="news_author_img_1">
 											</a>
 										</div>
 
 										<div class="flex-grow-1 ms-3">
 											<a class="card-link link-dark" id="news_author_2"
 												name="news_author_2">관리자</a>
-											<p class="card-text small" id="news_date_2"
-												name="news_date_2"><%=list.get(3).getDate() %></p>
+											<p class="card-text small" id="news_date_2"><%=list.get(3).getDate() %></p>
 										</div>
 									</div>
 								</div>
@@ -263,7 +255,7 @@
 					<div class="row">
 						<div class="col-sm-5">
 							<img calss="card" src="<%=list.get(4).getPoster() %>" style="width: 470px; height: 300px;"
-								alt="Image Description" id="news_img_1" name="news_img_1">
+								alt="Image Description" id="news_img_1">
 						</div>
 						<!-- End Col -->
 
@@ -274,7 +266,7 @@
 
 									<h3 class="card-title">
 										<a href="<%=list.get(4).getLink() %>"
-											id="news_title_3" name="news_title_3"><%=list.get(4).getTitle() %></a>
+											id="news_title_3"><%=list.get(4).getTitle() %></a>
 									</h3>
 
 									<p class="card-text"><a class="link-dark" href="<%=list.get(4).getLink() %>"><%=list.get(4).getCont() %></a></p>
@@ -286,16 +278,14 @@
 										<div class="flex-shrink-0">
 											<a class="avatar avatar-circle"> <img class="avatar-img"
 												src="<%=path%>/resources/images/news/nlogo5.png"
-												alt="Image Description" id="news_author_img_3"
-												name="news_author_img_3">
+												alt="Image Description" id="news_author_img_3">
 											</a>
 										</div>
 
 										<div class="flex-grow-1 ms-3">
 											<a class="card-link link-dark" id="news_author_3"
 												name="news_author_3">관리자</a>
-											<p class="card-text small" id="news_date_3"
-												name="news_date_3"><%=list.get(4).getDate() %></p>
+											<p class="card-text small" id="news_date_3"><%=list.get(4).getDate() %></p>
 										</div>
 									</div>
 								</div>
@@ -314,7 +304,7 @@
 					<div class="row">
 						<div class="col-sm-5">
 							<img calss="card" src="<%=list.get(5).getPoster() %>" style="width: 470px; height: 300px;"
-								alt="Image Description" id="news_img_4" name="news_img_4">
+								alt="Image Description" id="news_img_4">
 						</div>
 						<!-- End Col -->
 
@@ -325,7 +315,7 @@
 
 									<h3 class="card-title">
 										<a href="<%=list.get(5).getLink() %>"
-											id="news_title_4" name="news_title_4"><%=list.get(5).getTitle() %></a>
+											id="news_title_4"><%=list.get(5).getTitle() %></a>
 									</h3>
 
 									<p class="card-text"><a class="link-dark" href="<%=list.get(5).getLink() %>"><%=list.get(5).getCont() %></a></p>
@@ -338,16 +328,14 @@
 										<div class="flex-shrink-0">
 											<a class="avatar avatar-circle"> <img class="avatar-img"
 												src="<%=path%>/resources/images/news/nlogo5.png"
-												alt="Image Description" id="news_author_img_4"
-												name="news_author_img_4">
+												alt="Image Description" id="news_author_img_4">
 											</a>
 										</div>
 
 										<div class="flex-grow-1 ms-3">
 											<a class="card-link link-dark" id="news_author_4"
 												name="news_author_4">관리자</a>
-											<p class="card-text small" id="news_date_4"
-												name="news_date_4"><%=list.get(5).getDate() %></p>
+											<p class="card-text small" id="news_date_4"><%=list.get(5).getDate() %></p>
 										</div>
 									</div>
 								</div>
@@ -366,7 +354,7 @@
 					<div class="row">
 						<div class="col-sm-5">
 							<img calss="card" src="<%=list.get(6).getPoster() %>" style="width: 470px; height: 300px;"
-								alt="Image Description" id="news_img_1" name="news_img_1">
+								alt="Image Description" id="news_img_1">
 						</div>
 						<!-- End Col -->
 
@@ -377,7 +365,7 @@
 
 									<h3 class="card-title">
 										<a href="<%=list.get(6).getLink() %>"
-											id="news_title_5" name="news_title_5"><%=list.get(6).getTitle() %></a>
+											id="news_title_5"><%=list.get(6).getTitle() %></a>
 									</h3>
 
 									<p class="card-text"><a class="link-dark" href="<%=list.get(6).getLink() %>"><%=list.get(6).getCont() %></a></p>
@@ -389,16 +377,14 @@
 										<div class="flex-shrink-0">
 											<a class="avatar avatar-circle"> <img class="avatar-img"
 												src="<%=path%>/resources/images/news/nlogo7.png"
-												alt="Image Description" id="news_author_img_1"
-												name="news_author_img_1">
+												alt="Image Description" id="news_author_img_1">
 											</a>
 										</div>
 
 										<div class="flex-grow-1 ms-3">
 											<a class="card-link link-dark" id="news_author_1"
 												name="news_author_1">관리자</a>
-											<p class="card-text small" id="news_date_1"
-												name="news_date_1"><%=list.get(6).getDate() %></p>
+											<p class="card-text small" id="news_date_1"><%=list.get(6).getDate() %></p>
 										</div>
 									</div>
 								</div>

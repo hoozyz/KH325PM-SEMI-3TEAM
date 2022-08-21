@@ -13,6 +13,7 @@ import vo.Rank;
 public class RankDAO {
 	String query;
 	
+	// 전체 랭킹 추가
 	public int insertRank(Connection con, Rank rank) {
 
 		try {
@@ -44,6 +45,7 @@ public class RankDAO {
 		return -1;
 	}
 	
+	// 장르별 랭킹 추가
 	public int insertGenreRank(Connection con, Rank rank) {
 
 		try {
@@ -75,6 +77,7 @@ public class RankDAO {
 		return -1;
 	}
 	
+	// 장르별 TOP10 조회
 	public List<Rank> findRankByCategory(Connection conn, String category, String dateRange, String endDate) {
 		List<Rank> rankList = new ArrayList<>();
 		PreparedStatement pstmt = null;

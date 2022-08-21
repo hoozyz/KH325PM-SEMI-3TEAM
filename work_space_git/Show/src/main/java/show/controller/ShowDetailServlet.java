@@ -73,7 +73,6 @@ public class ShowDetailServlet extends HttpServlet {
 			req.setAttribute("priceList", priceList);
 		}
 
-		// 별점
 		if (revService.getStar(showId) != null) {
 			String stars = revService.getStar(showId);
 			if (stars.length() == 1) {

@@ -28,14 +28,16 @@
 			font-weight:300;
 		
 		}		
-
+		a:hover{
+			color:#AB69DD;
+		}
 	
 
 </style>
 <main>
 	<div class="position-absolute top-0 start-0 w-100 bg-dark"
 		style="height: 398px;"></div>
-	<div class="container content-overlay mt-5 mb-md-4 py-5">
+	<div class="container content-overlay mb-md-4 py-5" style="margin-top:100px;">
 		<nav class="mb-3 mb-md-4 pt-md-3" aria-label="Breadcrumb">
 			<ol class="breadcrumb breadcrumb-light">
 				<li class="breadcrumb-item"><a href="<%=path%>/">Home</a></li>
@@ -43,12 +45,12 @@
 			</ol>
 		</nav>
 		<!-- Page card like wrapper-->
-		<div class="bg-light shadow-sm rounded-3 p-4 p-md-5 mb-2">
+		<div class="bg-light shadow-sm rounded-3 p-4 p-md-5 mb-2" style="min-height: 1000px;">
 			<!-- Account header-->
 			<div class="d-flex align-items-start justify-content-between pb-4 mb-2">
 				<div class="d-flex align-items-start">
 					<div class="position-relative flex-shrink-0">
-						<img class="rounded-circle" src="<%=path %>/resources/images/avatars.png" width="100" alt="Annette Black">
+						<img class="rounded-circle" src="<%=path %>/resources/images/avatar.png" width="100" alt="Annette Black">
 					</div>
 					<div class="ps-3 ps-sm-4">
 						<h3 class="h5"> &nbsp;&nbsp;&nbsp;<%=user.getName() %></h3>
@@ -58,16 +60,16 @@
 						</ul>
 					</div>
 				</div>
-				<a class="nav-link p-0 d-none d-md-block" href="<%=path %>/logout"><i class="fi-logout mt-n1 me-2"></i>로그 아웃</a>
+				<a class="nav-link p-0 d-none d-md-block" href="<%=path %>/logout" style="cursor:pointer;" ><i class="fi-logout mt-n1 me-2"></i>로그 아웃</a>
 			</div>
 			<a class="btn btn-outline-primary btn-lg rounded-pill w-100 d-md-none" href="#account-nav" data-bs-toggle="collapse"><i class="fi-align-justify me-2"></i>회원 정보</a>
 			<div class="collapse d-md-block" id="account-nav">
 				<ul class="nav nav-pills flex-column flex-md-row pt-3 pt-md-0 pb-md-4 border-bottom-md">
-              <li class="nav-item mb-md-0 me-md-2 pe-md-1"><a class="nav-link" onclick="location.href='<%=path %>/myInfo'"><i class="fi-settings mt-n1 me-2 fs-base"></i>나의 정보</a></li>
-              <li class="nav-item mb-md-0 me-md-2 pe-md-1"><a class="nav-link" onclick="location.href='<%=path %>/myReview'"><i class="fi-file mt-n1 me-2 fs-base"></i>나의 리뷰</a></li>
-              <li class="nav-item mb-md-0 me-md-2 pe-md-1"><a class="nav-link active" onclick="location.href='<%=path %>/myLike'" aria-current="page"><i class="fi-heart mt-n1 me-2 fs-base"></i>나의 찜</a></li>
-              <li class="nav-item mb-md-0"><a class="nav-link" onclick="location.href='<%=path %>/myTicketing'"><i class="fi-bell mt-n1 me-2 fs-base"></i>나의 예매내역</a></li>
-              <li class="nav-item d-md-none"><a class="nav-link" href="<%=path%>/user/delete"><i class="fi-logout mt-n1 me-2 fs-base"></i>회원 탈퇴</a></li>
+              <li class="nav-item mb-md-0 me-md-2 pe-md-1" style="cursor:pointer; " ><a class="nav-link" onclick="location.href='<%=path %>/myInfo'"><i class="fi-info-circle mt-n1 me-2 fs-base"></i>나의 정보</a></li>
+              <li class="nav-item mb-md-0 me-md-2 pe-md-1" style="cursor:pointer; " ><a class="nav-link" onclick="location.href='<%=path %>/myReview'"><i class="fi-file mt-n1 me-2 fs-base"></i>나의 리뷰</a></li>
+              <li class="nav-item mb-md-0 me-md-2 pe-md-1" style="cursor:pointer; " ><a class="nav-link active" style="color:#AB69DD;" onclick="location.href='<%=path %>/myLike'" aria-current="page"><i class="fi-heart mt-n1 me-2 fs-base"></i>나의 찜</a></li>
+              <li class="nav-item mb-md-0" style="cursor:pointer; " ><a class="nav-link" onclick="location.href='<%=path %>/myTicketing'"><i class="fi-cart mt-n1 me-2 fs-base"></i>나의 예매내역</a></li>
+              <li class="nav-item d-md-none"><a class="nav-link" href="<%=path%>/user/delete" ><i class="fi-logout mt-n1 me-2 fs-base"></i>회원 탈퇴</a></li>
             </ul>
 			</div>
 			<!-- Page title-->
@@ -77,7 +79,7 @@
 			</div>
 			<div class="row">
 				<!-- List of resumes-->
-				<% if(likeList == null) { %>
+				<% if(likeList.isEmpty()) { %>
 				<div class="col-md-3 mb-4 pb-3 pb-md-0">
 					<div style="max-width: 13rem;">
 						<ul class="list-unstyled fs-sm pb-1 pb-md-3">
